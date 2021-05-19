@@ -1,4 +1,4 @@
-# jarvis
+# Jarvis
  Competitive coding questions
 > This guide help you practice and understand the coding programming questions in a competitive interviews and exams
 
