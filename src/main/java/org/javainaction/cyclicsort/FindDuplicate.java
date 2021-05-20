@@ -1,7 +1,9 @@
 package org.javainaction.cyclicsort;
 
 /**
- * We are given an unsorted array containing ‘n+1’ numbers taken from the range 1 to ‘n’. The array has only one duplicate but it can be repeated multiple times. Find that duplicate number without using any extra space. You are, however, allowed to modify the input array.
+ * We are given an unsorted array containing ‘n+1’ numbers taken from the range 1 to ‘n’.
+ * The array has only one duplicate but it can be repeated multiple times.
+ * Find that duplicate number without using any extra space. You are, however, allowed to modify the input array.
  *
  * Example 1:
  *
@@ -29,7 +31,7 @@ public class FindDuplicate {
                 i++;
             }
         }
-        return -1;
+        return 0;
     }
 
     private static void swap(int[] arr, int i, int j) {
@@ -45,6 +47,10 @@ public class FindDuplicate {
      */
     public static int findDuplicate(int[] arr) {
         int slow = 0, fast = 0;
+        // The "tortoise and hare" step.  We start at the end of the array and try
+        // to find an intersection point in the cycle.
+        // Keep advancing 'slow' by one step and 'fast' by two steps until they
+        // meet inside the loop.
         do {
             slow = arr[slow];
             fast = arr[arr[fast]];
@@ -52,6 +58,9 @@ public class FindDuplicate {
                 && slow < arr.length
                 && fast < arr.length);
 
+        // Start up another pointer from the start of the array and march it forward
+        // until it hits the pointer inside the array
+        // if they meet there is a duplicate or else return 0 as it never met
         slow = 0;
         while (slow != fast
                 && slow < arr.length
@@ -63,10 +72,11 @@ public class FindDuplicate {
     }
 
     public static void main(String[] args) {
-        System.out.println(FindDuplicate.findNumber(new int[] { 1, 4, 4, 3, 2 }));
-        System.out.println(FindDuplicate.findNumber(new int[] { 2, 1, 3, 3, 5, 4 }));
-        System.out.println(FindDuplicate.findNumber(new int[] { 2, 4, 1, 4, 4 }));
-
+        System.out.println(findNumber(new int[] { 1, 4, 4, 3, 2 }));
+        System.out.println(findNumber(new int[] { 2, 1, 3, 3, 5, 4 }));
+        System.out.println(findNumber(new int[] { 2, 4, 1, 4, 4 }));
+        System.out.println(findNumber(new int[] { 2, 4, 1, 3, 5 }));
+        System.out.println("-------Tortoise and Hare method-------");
         System.out.println(findDuplicate(new int[] { 1, 4, 4, 3, 2 }));
         System.out.println(findDuplicate(new int[] { 2, 1, 3, 3, 5, 4 }));
         System.out.println(findDuplicate(new int[] { 2, 4, 1, 4, 4 }));

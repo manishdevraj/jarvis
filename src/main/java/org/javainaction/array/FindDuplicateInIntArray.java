@@ -19,7 +19,7 @@ public class FindDuplicateInIntArray {
     public static int firstDuplicateValue(int[] array) {
         for (int value : array) {
             int absValue = Math.abs(value);
-            if (array[absValue -1] < 0) return absValue;
+            if (array[absValue - 1] < 0) return absValue;
             array[absValue - 1] *= -1;
         }
         return -1;
@@ -27,7 +27,7 @@ public class FindDuplicateInIntArray {
 
     // O(n) time | O(n) space
     public static int _firstDuplicateValue(int[] array) {
-        Set<Integer> seen = new HashSet<Integer>();
+        Set<Integer> seen = new HashSet<>();
         for (int value : array) {
             if (seen.contains(value)) return value;
             seen.add(value);
