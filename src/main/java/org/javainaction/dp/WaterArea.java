@@ -25,6 +25,8 @@ public class WaterArea {
                 + " can store water area : " + waterAreaSpaceOne(new int[]{2, 1, 2}));
         System.out.println(Arrays.toString(new int[]{3, 0, 1, 3, 0, 5})
                 + " can store water area : " + waterAreaSpaceOne(new int[]{3, 0, 1, 3, 0, 5}));
+        System.out.println(Arrays.toString(new int[]{1, 8,6,2,5,4,8,3,7})
+                + " can store water area : " + waterAreaSpaceOne(new int[]{1,8,6,2,5,4,8,3,7}));
     }
 
     /**

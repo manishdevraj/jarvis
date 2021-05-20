@@ -19,7 +19,7 @@ public class LongestPeak {
 
     // O(n) time | O(1) space
     private static int longestPeak(int[] array) {
-        if (array == null && array.length == 0) return 0;
+        if (array == null || array.length == 0) return 0;
         int longestPeak = 0;
         int i = 1;
 
