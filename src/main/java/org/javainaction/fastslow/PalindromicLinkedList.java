@@ -38,21 +38,13 @@ public class PalindromicLinkedList {
         }
 
         ListNode headSecondHalf = reverseList(slow); // reverse the second half
-        ListNode copyHeadSecondHalf = headSecondHalf; // store the head of reversed part to revert back later
 
         while (head != null && headSecondHalf != null) {
-            if (head.value != headSecondHalf.value) {
-                //mismatch
-                break;
-            }
+            if (head.value != headSecondHalf.value) return false;
             head = head.next;
             headSecondHalf = headSecondHalf.next;
         }
-
-        reverseList(copyHeadSecondHalf); // revert the reverse of the second half
-        if (head == null || headSecondHalf == null) // if both halves match
-            return true;
-        return false;
+        return true;
     }
 
     private static ListNode reverseList(ListNode node) {

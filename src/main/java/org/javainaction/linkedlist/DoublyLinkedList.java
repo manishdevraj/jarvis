@@ -1,5 +1,16 @@
 package org.javainaction.linkedlist;
 
+/**
+ * Double linked list construction class with following methods
+ *
+ * setHead()
+ * setTail()
+ * insertBefore()
+ * insertAfter()
+ * insertAtPosition()
+ * remove()
+ * removeNodeWithValue()
+ */
 public class DoublyLinkedList {
     public Node head;
     public Node tail;
@@ -103,7 +114,5 @@ public class DoublyLinkedList {
         }
     }
 }
-
-// Do not edit the class below.
 
 

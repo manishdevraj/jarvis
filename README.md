@@ -43,6 +43,7 @@ E.g. could be -
 * Find two number sum, triplet sum, quadruplet sum with target sum or min/max value
 * Perform sub array sorted needed to sort entire array 
 * Calculate sorted squares of integers in a sorted array
+* Find maximum water that can be trapped between pillar in an array
 
 
 ### [[⬆]](#toc) <a name='fastandslow'>Fast and slow pointer problem</a>
