@@ -3,6 +3,17 @@ package org.javainaction.linkedlist;
 /**
  * Given a linked list with values in sorted order but with duplicate element
  * Remove duplicate nodes with O(1) space complexity by modifying linked list in-place without creating new element
+ *
+ * Example 1:
+ *
+ *
+ * Input: head = [1,2,3,3,4,4,5]
+ * Output: [1, 2, 3, 4, 5]
+ *
+ *  Example 2:
+ *
+ * Input: head = [1,1,1,2,3]
+ * Output: [1, 2, 3]
  */
 public class RemoveDuplicateFromLinkedList {
 
@@ -24,6 +35,8 @@ public class RemoveDuplicateFromLinkedList {
         }
         return linkedList;
     }
+
+
 
     public static void main(String[] args) {
         LinkedList head = new LinkedList(1);

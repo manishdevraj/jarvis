@@ -1,5 +1,9 @@
 package org.javainaction.linkedlist;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Given the head of a LinkedList and two positions ‘p’ and ‘q’, reverse the LinkedList from position ‘p’ to ‘q’.
  *
@@ -22,17 +26,9 @@ package org.javainaction.linkedlist;
  * head = reverse(head, n/2 + 2, n)
  * Please note the function call in the second step. We’re skipping two elements as we will be skipping the middle
  * element.
+ * @see ReverseEveryKAlternateElem
  */
 public class ReverseSubList {
-    static class ListNode {
-        int value = 0;
-        ListNode next;
-
-        ListNode(int value) {
-            this.value = value;
-        }
-    }
-
     public static ListNode reverse(ListNode head, int p, int q) {
         if (p == q) return head;
         // after skipping 'p-1' nodes, current will point to 'p'th node
@@ -70,17 +66,45 @@ public class ReverseSubList {
     }
 
     public static void main(String[] args) {
-        ListNode head = new ListNode(1);
-        head.next = new ListNode(2);
-        head.next.next = new ListNode(3);
-        head.next.next.next = new ListNode(4);
-        head.next.next.next.next = new ListNode(5);
+        ListNode head = createLinkedList(new int[]{1, 2, 3, 4, 5});
+        System.out.print(" {1, 2, 3, 4, 5} nodes of the reversed LinkedList are: " + ReverseSubList.reverse(head, 2, 4)) ;
+    }
 
-        ListNode result = ReverseSubList.reverse(head, 2, 4);
-        System.out.print("Nodes of the reversed LinkedList are: ");
-        while (result != null) {
-            System.out.print(result.value + " ");
-            result = result.next;
+    private static ListNode createLinkedList(int[] array) {
+        ListNode node;
+        ListNode prev = null;
+        ListNode head = null;
+        for (int value : array) {
+            node = new ListNode(value);
+            if (head == null) {
+                head = node;
+            }
+            if (prev != null) {
+                prev.next = node;
+            }
+            prev = node;
         }
+        return head;
+    }
+
+    static class ListNode {
+        int value = 0;
+        ListNode next;
+
+        ListNode(int value) {
+            this.value = value;
+        }
+
+        /*@Override
+        public String toString() {
+            List<Integer> result = new ArrayList<>();
+            result.add(value);
+            ListNode node = next;
+            while (node != null) {
+                result.add(node.value);
+                node = node.next;
+            }
+            return Arrays.toString(result.toArray());
+        }*/
     }
 }

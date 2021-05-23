@@ -5,9 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *
+ * Find if linked list forms a palindrome linked list
+ * {0, 1, 2, 2, 1, 0} forms a palindrome
  */
 public class PalindromicLinkedList {
+
     static class ListNode {
         int value = 0;
         ListNode next;
@@ -57,6 +59,8 @@ public class PalindromicLinkedList {
         }
         return prev;
     }
+
+
 
     public static void main(String[] args) {
         ListNode head = new ListNode(2);

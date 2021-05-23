@@ -1,14 +1,26 @@
 package org.javainaction.linkedlist;
 
-public class RotateList {
-    static class ListNode {
-        int value = 0;
-        ListNode next;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-        ListNode(int value) {
-            this.value = value;
-        }
-    }
+/**
+ * Given the head of a linked list, rotate the list to the right by k places.
+ *
+ * Example 1:
+ *
+ *
+ * Input: head = [1,2,3,4,5], k = 2
+ * Output: [4,5,1,2,3]
+ * Example 2:
+ *
+ *
+ * Input: head = [0,1,2], k = 4
+ * Output: [2,0,1]
+ *
+ */
+public class RotateList {
+
 
     public static ListNode rotate(ListNode head, int rotations) {
         if (head == null || head.next == null || rotations <= 0)
@@ -38,18 +50,45 @@ public class RotateList {
     }
 
     public static void main(String[] args) {
-        ListNode head = new ListNode(1);
-        head.next = new ListNode(2);
-        head.next.next = new ListNode(3);
-        head.next.next.next = new ListNode(4);
-        head.next.next.next.next = new ListNode(5);
-        head.next.next.next.next.next = new ListNode(6);
+        ListNode head = createLinkedList(new int[]{1, 2, 3, 4, 5, 6});
+        System.out.println("1, 2, 3, 4, 5, 6 after rotating by 3 : " + RotateList.rotate(head, 3));
+    }
 
-        ListNode result = RotateList.rotate(head, 3);
-        System.out.print("Nodes of the reversed LinkedList are: ");
-        while (result != null) {
-            System.out.print(result.value + " ");
-            result = result.next;
+    public static ListNode createLinkedList(int[] array) {
+        ListNode node;
+        ListNode prev = null;
+        ListNode head = null;
+        for (int value : array) {
+            node = new ListNode(value);
+            if (head == null) {
+                head = node;
+            }
+            if (prev != null) {
+                prev.next = node;
+            }
+            prev = node;
+        }
+        return head;
+    }
+
+    static class ListNode {
+        int value = 0;
+        ListNode next;
+
+        ListNode(int value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            List<Integer> result = new ArrayList<>();
+            result.add(value);
+            ListNode node = next;
+            while (node != null) {
+                result.add(node.value);
+                node = node.next;
+            }
+            return Arrays.toString(result.toArray());
         }
     }
 }

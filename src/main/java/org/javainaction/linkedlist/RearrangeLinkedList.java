@@ -1,21 +1,18 @@
 package org.javainaction.linkedlist;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * Write a program that takes in head of singly linked list and an integer k and rearranges linked list in place
+ * such that all values with less than K to the left of K and all values greater than K to the right of K value.
+ *
+ * {3, 0, 5, 2, 1, 4} with K = 3 would yeild
+ *
+ * {0, 2, 1, 3, 5, 4}
+ */
 public class RearrangeLinkedList {
-
-    public static void main(String[] args) {
-        RearrangeLinkedList.LinkedList head = new RearrangeLinkedList.LinkedList(3);
-        head.next = new RearrangeLinkedList.LinkedList (0);
-        head.next.next = new RearrangeLinkedList.LinkedList (5);
-        head.next.next.next = new RearrangeLinkedList.LinkedList (2);
-        head.next.next.next.next = new RearrangeLinkedList.LinkedList (1);
-        head.next.next.next.next.next = new RearrangeLinkedList.LinkedList (4);
-        head = rearrangeLinkedList(head, 3);
-        while (head != null) {
-            System.out.print(head.value + " ");
-            head = head.next;
-        }
-    }
-
 
     public static LinkedList rearrangeLinkedList(LinkedList head, int k) {
         LinkedList smallHead = null;
@@ -35,7 +32,7 @@ public class RearrangeLinkedList {
                 NodePair smallPair = growLinkedList(smallHead, smallTail, node);
                 smallHead = smallPair.head;
                 smallTail = smallPair.tail;
-            } else if (node.value > k) {
+            } else {
                 NodePair bigPair = growLinkedList(bigHead, bigTail, node);
                 bigHead = bigPair.head;
                 bigTail = bigPair.tail;
@@ -84,7 +81,30 @@ public class RearrangeLinkedList {
         }
 
     }
-    static class LinkedList {
+
+    public static void main(String[] args) {
+        LinkedList head = createLinkedList( new int[] {3, 0, 5, 2, 1, 4});
+        System.out.println("{3, 0, 5, 2, 1, 4} rearranging with 3 : " + rearrangeLinkedList(head, 3));
+    }
+
+    public static LinkedList createLinkedList(int[] array) {
+        LinkedList node;
+        LinkedList prev = null;
+        LinkedList head = null;
+        for (int value : array) {
+            node = new LinkedList(value);
+            if (head == null) {
+                head = node;
+            }
+            if (prev != null) {
+                prev.next = node;
+            }
+            prev = node;
+        }
+        return head;
+    }
+
+    private static class LinkedList {
         public int value;
         public LinkedList next;
 
@@ -92,7 +112,17 @@ public class RearrangeLinkedList {
             this.value = value;
             next = null;
         }
+
+        @Override
+        public String toString() {
+            List<Integer> result = new ArrayList<>();
+            result.add(value);
+            LinkedList node = next;
+            while (node != null) {
+                result.add(node.value);
+                node = node.next;
+            }
+            return Arrays.toString(result.toArray());
+        }
     }
-
-
 }
