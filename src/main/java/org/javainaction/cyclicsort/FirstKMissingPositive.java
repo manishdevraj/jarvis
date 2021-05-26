@@ -28,9 +28,7 @@ public class FirstKMissingPositive {
     public static List<Integer> findNumbers(int[] nums, int k) {
         int i = 0;
         while (i < nums.length) {
-            if (nums[i] <= nums.length
-                    && nums[i] > 0
-                    && nums[i] != nums[nums[i] - 1])
+            if (nums[i] > 0 && nums[i] <= nums.length && nums[i] != nums[nums[i] - 1])
                 swap(nums, i, nums[i] - 1);
             else
                 i++;
@@ -40,7 +38,7 @@ public class FirstKMissingPositive {
         Set<Integer> extraNumbers = new HashSet<>();
         // find the first number missing from its index, that will be our required number
         for (i = 0; i < nums.length && missingNumbers.size() < k; i++) {
-            if (nums[i] != i + 1 && k != 0) {
+            if (nums[i] != i + 1) {
                 missingNumbers.add(i + 1);
                 extraNumbers.add(nums[i]);
             }
@@ -66,13 +64,16 @@ public class FirstKMissingPositive {
 
     public static void main(String[] args) {
         List<Integer> missingNumbers = FirstKMissingPositive.findNumbers(new int[] { 3, -1, 4, 5, 5 }, 3);
-        System.out.println("Missing numbers: " + missingNumbers);
+        System.out.println("{ 3, -1, 4, 5, 5 } K=3 missing numbers: " + missingNumbers);
 
-        missingNumbers = FirstKMissingPositive.findNumbers(new int[] { 2, 3, 4 }, 3);
-        System.out.println("Missing numbers: " + missingNumbers);
+        missingNumbers = findNumbers(new int[] { 2, 3, 4 }, 3);
+        System.out.println("{ 2, 3, 4 } K=3 missing numbers: " + missingNumbers);
 
-        missingNumbers = FirstKMissingPositive.findNumbers(new int[] { -2, -3, 4 }, 2);
-        System.out.println("Missing numbers: " + missingNumbers);
+        missingNumbers = findNumbers(new int[] { -2, -3, 4 }, 2);
+        System.out.println("{ -2, -3, 4 } K=2 missing numbers: " + missingNumbers);
+
+        missingNumbers = findNumbers(new int[] {2, 3, 4, 7, 11 }, 5);
+        System.out.println("{2, 3, 4, 7, 11} K=5 missing numbers: " + missingNumbers);
     }
 
     public static int firstMissingPositive(int[] nums) {

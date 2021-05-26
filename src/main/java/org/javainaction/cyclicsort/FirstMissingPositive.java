@@ -41,9 +41,11 @@ public class FirstMissingPositive {
     }
 
     public static void main(String[] args) {
-        System.out.println(FirstMissingPositive.findNumber(new int[] { -3, 1, 5, 4, 2 }));
-        System.out.println(FirstMissingPositive.findNumber(new int[] { 3, -2, 0, 1, 2 }));
-        System.out.println(FirstMissingPositive.findNumber(new int[] { 3, 2, 5, 1 }));
+        System.out.println("{1, 2, 0} missing number is " +  findNumber(new int[] {1, 2, 0}));
+        System.out.println("{3, 4, -1, 1} missing number is " +  findNumber(new int[] {3, 4, -1, 1}));
+        System.out.println("{-3, 1, 5, 4, 2} missing number is " +  findNumber(new int[] { -3, 1, 5, 4, 2 }));
+        System.out.println("{3, -2, 0, 1, 2} missing number is " +  findNumber(new int[] { 3, -2, 0, 1, 2 }));
+        System.out.println("{3, 2, 5, 1} missing number is " +  findNumber(new int[] { 3, 2, 5, 1 }));
     }
 
 }
