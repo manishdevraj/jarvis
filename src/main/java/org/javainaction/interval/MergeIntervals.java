@@ -46,6 +46,7 @@ public class MergeIntervals {
 
         while (intervalItr.hasNext()) {
             interval = intervalItr.next();
+            //found an overlapping interval
             if (interval.start <= end) {
                 end = Math.max(end, interval.end);
             } else {

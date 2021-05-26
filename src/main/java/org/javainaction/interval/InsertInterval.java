@@ -1,6 +1,7 @@
 package org.javainaction.interval;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,6 +24,7 @@ import java.util.List;
  * Output: [[1,4], [5,7]]
  * Explanation: After insertion, since [1,4] overlaps with [2,3], we merged them into one [1,4].
  */
+
 public class InsertInterval {
 
     static class Interval {
@@ -32,6 +34,14 @@ public class InsertInterval {
         public Interval(int start, int end) {
             this.start = start;
             this.end = end;
+        }
+
+        @Override
+        public String toString() {
+            return "[" +
+                    "start=" + start +
+                    ", end=" + end +
+                    ']';
         }
     }
 
@@ -57,31 +67,79 @@ public class InsertInterval {
         return mergedIntervals;
     }
 
+    public static int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> mergedIntervals = new ArrayList<>();
+
+        if (intervals == null || intervals.length == 0) {
+            mergedIntervals.add(new int[]{newInterval[0], newInterval[1]});
+            return mergedIntervals.toArray(new int[0][]);
+        }
+
+        int i = 0;
+
+        if (intervals[i][0] > newInterval[1]) {
+            mergedIntervals.add(new int[]{newInterval[0], newInterval[1]});
+        }
+
+        while (i < intervals.length && intervals[i][1] < newInterval[0]) {
+            mergedIntervals.add(new int[]{intervals[i][0], intervals[i][1]});
+            i++;
+        }
+
+        int[] tempInterval = new int[]{Integer.MAX_VALUE, Integer.MIN_VALUE};
+        boolean found = false;
+        while (i < intervals.length && intervals[i][0] <= newInterval[1]) {
+            tempInterval[0] = Math.min(intervals[i][0], Math.min(newInterval[0], tempInterval[0]));
+            tempInterval[1] = Math.max(intervals[i][1], Math.max(newInterval[1], tempInterval[1]));
+            i++;
+            found = true;
+        }
+
+        if (found) {
+            mergedIntervals.add(new int[]{tempInterval[0], tempInterval[1]});
+        } else {
+            mergedIntervals.add(new int[]{newInterval[0], newInterval[1]});
+            return mergedIntervals.toArray(new int[0][]);
+        }
+
+
+        while (i < intervals.length){
+            mergedIntervals.add(new int[]{intervals[i][0], intervals[i][1]});
+            i++;
+        }
+
+        return mergedIntervals.toArray(new int[0][]);
+
+    }
+
     public static void main(String[] args) {
-        List<Interval> input = new ArrayList<Interval>();
-        input.add(new Interval(1, 3));
-        input.add(new Interval(5, 7));
-        input.add(new Interval(8, 12));
-        System.out.print("Intervals after inserting the new interval: ");
-        for (Interval interval : InsertInterval.insert(input, new Interval(4, 6)))
-            System.out.print("[" + interval.start + "," + interval.end + "] ");
-        System.out.println();
+        List<Interval> input = Arrays.asList(new Interval(1, 3), new Interval(5, 7), new Interval(8, 12));
+        System.out.println("{[1, 3], [5, 7], [8, 12]} after inserting the new interval [4, 6]: ");
+        InsertInterval.insert(input, new Interval(4, 6)).forEach(System.out::println);
 
-        input = new ArrayList<Interval>();
-        input.add(new Interval(1, 3));
-        input.add(new Interval(5, 7));
-        input.add(new Interval(8, 12));
-        System.out.print("Intervals after inserting the new interval: ");
-        for (Interval interval : InsertInterval.insert(input, new Interval(4, 10)))
-            System.out.print("[" + interval.start + "," + interval.end + "] ");
-        System.out.println();
+        input = Arrays.asList(new Interval(1, 3), new Interval(5, 7), new Interval(8, 12));
+        System.out.println("{[1, 3], [5, 7], [8, 12]} after inserting the new interval [4, 10]: ");
+        InsertInterval.insert(input, new Interval(4, 10)).forEach(System.out::println);
 
-        input = new ArrayList<Interval>();
-        input.add(new Interval(2, 3));
-        input.add(new Interval(5, 7));
-        System.out.print("Intervals after inserting the new interval: ");
-        for (Interval interval : InsertInterval.insert(input, new Interval(1, 4)))
-            System.out.print("[" + interval.start + "," + interval.end + "] ");
-        System.out.println();
+        input = Arrays.asList(new Interval(2, 3), new Interval(5, 7));
+        System.out.println("{[2, 3], [5, 7]} after inserting the new interval [1, 4]: ");
+        InsertInterval.insert(input, new Interval(1, 4)).forEach(System.out::println);
+
+        var interval = new int[][]{{1, 3}, {6, 9}};
+        System.out.println("{[1, 3], [6, 9]} after inserting the new interval [2, 5]: ");
+        var output = insert(interval, new int[]{2, 5});
+        System.out.println(Arrays.deepToString(output).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+
+        var interval2 = new int[][]{{1,2},{3,5},{6,7},{8,10},{12,16}};
+        System.out.println("{ {1,2}, {3,5}, {6,7}, {8,10}, {12,16} } after inserting the new interval [4, 8]: ");
+        output = insert(interval2, new int[]{4, 8});
+        System.out.println(Arrays.deepToString(output).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+
+        var interval3 = new int[][]{{1, 5}};
+        System.out.println("{[1, 5]} after inserting the new interval [6, 8]: ");
+        output = insert(interval3, new int[]{6, 8});
+        System.out.println(Arrays.deepToString(output).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+
+
     }
 }

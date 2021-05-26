@@ -30,15 +30,15 @@ public class IntervalsIntersection {
     }
 
     public static Interval[] merge(Interval[] arr1, Interval[] arr2) {
-        List<Interval> intervalsIntersection = new ArrayList<Interval>();
+        List<Interval> intervalsIntersection = new ArrayList<>();
         int i = 0;
         int j = 0;
         while (i < arr1.length && j < arr2.length) {
-            if (areIntersecting(arr1[i], arr2[j])) {
-                Interval intervalOne = arr1[i];
-                Interval intervalTwo = arr2[j];
-                int start = Math.max(intervalOne.start, intervalTwo.start);
-                int end = Math.min(intervalOne.end, intervalTwo.end);
+            Interval intervalOne = arr1[i];
+            Interval intervalTwo = arr2[j];
+            int start = Math.max(intervalOne.start, intervalTwo.start);
+            int end = Math.min(intervalOne.end, intervalTwo.end);
+            if (start <= end) {
                 intervalsIntersection.add(new Interval(start, end));
             }
 
@@ -46,14 +46,6 @@ public class IntervalsIntersection {
             else j++;
         }
         return intervalsIntersection.toArray(new Interval[intervalsIntersection.size()]);
-    }
-
-    public static boolean areIntersecting(Interval one, Interval two) {
-        if ((one.start >= two.start && one.start <= two.end)
-                || (two.start >= one.start && two.start <= one.end)) {
-            return true;
-        }
-        return false;
     }
 
     public static void main(String[] args) {

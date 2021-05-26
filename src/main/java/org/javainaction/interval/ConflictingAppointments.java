@@ -58,5 +58,9 @@ public class ConflictingAppointments {
         Interval[] intervals2 = { new Interval(4, 5), new Interval(2, 3), new Interval(3, 6) };
         result = ConflictingAppointments.canAttendAllAppointments(intervals2);
         System.out.println("Can attend all appointments: " + result);
+
+        Interval[] intervals3 = { new Interval(1, 2), new Interval(2, 3), new Interval(3, 4), new Interval(1, 2)};
+        result = ConflictingAppointments.canAttendAllAppointments(intervals3);
+        System.out.println("Can attend all appointments: " + result);
     }
 }

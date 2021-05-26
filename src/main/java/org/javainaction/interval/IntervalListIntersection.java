@@ -43,7 +43,7 @@ public class IntervalListIntersection {
 
         while (i < m && j < n) {
             // Let's check if A[i] intersects B[j].
-            // startMax - the startpoint of the intersection
+            // startMax - the start point of the intersection
             // endMin - the endpoint of the intersection
             int startMax = Math.max(A[i][0], B[j][0]);
             int endMin = Math.min(A[i][1], B[j][1]);

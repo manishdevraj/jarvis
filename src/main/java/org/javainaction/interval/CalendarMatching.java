@@ -5,17 +5,15 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.util.*;
 import java.text.*;
-import java.util.concurrent.*;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 
 class CalendarMatching {
     public static String pattern = "k:m";
-    public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
     public static NumberFormat numberFormat = new DecimalFormat("00");
 
-    public static void _main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException {
         List<StringMeeting> calendar1 = Arrays.asList(new StringMeeting("9:00", "10:30"),
                 new StringMeeting("12:00", "13:00"), new StringMeeting("16:00", "18:00"));
 

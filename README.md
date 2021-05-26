@@ -24,7 +24,7 @@
 - [ ] [Unbounded Knapsack](#unboundedknapsack)
 - [ ] [Topology sort](#topologysort)
 - [ ] [Tries](#tries)
-
+- [ ] [Greedy algorithms](#greedy)
 
 ### [[⬆]](#toc) <a name='slidingwindow'>Sliding window problem</a>
 
@@ -48,11 +48,25 @@ E.g. could be -
 
 ### [[⬆]](#toc) <a name='fastandslow'>Fast and slow pointer problem</a>
 
-Cyclic array or list. Find cycle or middle elements
+In these problem statements there usually a single linked list and we are required to find a cycle or cycle length 
+or middle of a linked list.
+
+* Happy number
+* Find a cycle in a linked list
+* Find if linked list is a palindrome or not
+
 
 ### [[⬆]](#toc) <a name='intervals'>Interval problem</a>
 
-Overlapping intervals, merge intervals (use min max heaps)
+Interval problems where we have an upper and lower bound of an interval and we need to find an overlapping or insert or 
+a non-overlapping intervals in a 2D array or pair in a single array
+
+It predominately uses min/max heaps to control the slots or at times needs to merge and flatten the intervals.
+
+* Find possible meeting time between two calendars
+* Minimum meeting rooms needed for a set of conferences
+* Find a free time between employees
+
 
 ### [[⬆]](#toc) <a name='cyclingsort'>Cycling sort problem</a>
 
@@ -60,7 +74,18 @@ Unsorted array in range 1…. n, find missing element
 
 ### [[⬆]](#toc) <a name='reverseinplace'>Reverse in place problem</a>
 
-Swap, rotate, alternate reverse etc around linked list.
+Set of problem statements where we are required to either merge or re-arrange a linked in certain way, 
+find duplicate or remove Nth value from end Or reverse linked list from middle or from two ranged index values.
+
+It heavily uses fast slow pointer technique but additional complexity arround reversing linked list and 
+maintaining links between nodes.
+
+* Add two numbers like arithmetic equation 
+* Merge two linked list
+* Swap node pairs or from certain indices
+* Reverse linked list from certain indices
+* Remove duplicates
+* Remove node from X location in linked list
 
 ### [[⬆]](#toc) <a name='bfs'>Breath first search problem</a>
 
@@ -131,3 +156,9 @@ Capacity, item and weight with unlimited quantity. Refer to DP Knapsack
 ### [[⬆]](#toc) <a name='topologysort'>Topology sort problem</a>
 
 Jobs and dependencies of the job. Linear ordering with dependencies. Order things when they are interdependent kind of problems.
+
+### [[⬆]](#toc) <a name='greedy'>Greedy algorithms</a>
+
+Algorithms with greedy approach and using data structure suitabe to get to the solution
+* Find a possible events that can be attended in a conference
+* Partition a pattern of string such that each partition has at most single character

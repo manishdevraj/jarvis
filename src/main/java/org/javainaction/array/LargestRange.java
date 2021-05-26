@@ -3,6 +3,16 @@ package org.javainaction.array;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Find a largest range possible in a given array.
+ *
+ * Return value wih two inputs {x, y} where x being start of the range and y being end of the range.
+ *
+ * It is not needed for a range to be sorted in an array.
+ *
+ * {2, 6} for a range of {2, 3, 4, 5, 6} but not necessarily in a sorted way
+ *
+ */
 public class LargestRange {
     // O(n) time | O(n) space
     public static int[] largestRange(int[] array) {
