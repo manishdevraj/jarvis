@@ -96,12 +96,12 @@ public class CircularArrayLoop {
     }
 
     public static void main(String[] args) {
-        System.out.println(CircularArrayLoop.loopExists(new int[] { 1, 2, -1, 2, 2 }));
-        System.out.println(CircularArrayLoop.loopExists(new int[] { 2, 2, -1, 2 }));
-        System.out.println(CircularArrayLoop.loopExists(new int[] { 2, 1, -1, -2 }));
-        System.out.println("{2,-1,1,2,2} has cycle : " + CircularArrayLoop.loopExists(new int[] { 2,-1,1,2,2 }));
-        System.out.println("{-1, 2} has cycle : " + CircularArrayLoop.loopExists(new int[] { -1, 2 }));
-        System.out.println("{-2, 1,-1,-2,-2} has cycle : " + CircularArrayLoop.loopExists(new int[] { -2,1,-1,-2,-2}));
+        System.out.println("{ 1, 2, -1, 2, 2 } has cycle " + loopExists(new int[] { 1, 2, -1, 2, 2 }));
+        System.out.println("{ 2, 2, -1, 2 } has cycle " + loopExists(new int[] { 2, 2, -1, 2 }));
+        System.out.println("{ 2, 1, -1, -2 } has cycle " + loopExists(new int[] { 2, 1, -1, -2 }));
+        System.out.println("{2,-1, 1, 2, 2} has cycle : " + loopExists(new int[] { 2,-1,1,2,2 }));
+        System.out.println("{-1, 2} has cycle : " + loopExists(new int[] { -1, 2 }));
+        System.out.println("{-2, 1,-1,-2,-2} has cycle : " + loopExists(new int[] { -2,1,-1,-2,-2}));
 
     }
 }
