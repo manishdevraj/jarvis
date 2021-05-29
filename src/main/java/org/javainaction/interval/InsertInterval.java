@@ -2,6 +2,7 @@ package org.javainaction.interval;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -68,47 +69,32 @@ public class InsertInterval {
     }
 
     public static int[][] insert(int[][] intervals, int[] newInterval) {
-        List<int[]> mergedIntervals = new ArrayList<>();
-
-        if (intervals == null || intervals.length == 0) {
-            mergedIntervals.add(new int[]{newInterval[0], newInterval[1]});
-            return mergedIntervals.toArray(new int[0][]);
-        }
-
+        List<int[]> result = new LinkedList<>();
         int i = 0;
-
-        if (intervals[i][0] > newInterval[1]) {
-            mergedIntervals.add(new int[]{newInterval[0], newInterval[1]});
-        }
-
-        while (i < intervals.length && intervals[i][1] < newInterval[0]) {
-            mergedIntervals.add(new int[]{intervals[i][0], intervals[i][1]});
+        // add all the intervals ending before newInterval starts
+        while (i < intervals.length && intervals[i][1] < newInterval[0]){
+            result.add(intervals[i]);
             i++;
         }
 
-        int[] tempInterval = new int[]{Integer.MAX_VALUE, Integer.MIN_VALUE};
-        boolean found = false;
+        // merge all overlapping intervals to one considering newInterval
         while (i < intervals.length && intervals[i][0] <= newInterval[1]) {
-            tempInterval[0] = Math.min(intervals[i][0], Math.min(newInterval[0], tempInterval[0]));
-            tempInterval[1] = Math.max(intervals[i][1], Math.max(newInterval[1], tempInterval[1]));
+            // we could mutate newInterval here also
+            newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+            newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
             i++;
-            found = true;
         }
 
-        if (found) {
-            mergedIntervals.add(new int[]{tempInterval[0], tempInterval[1]});
-        } else {
-            mergedIntervals.add(new int[]{newInterval[0], newInterval[1]});
-            return mergedIntervals.toArray(new int[0][]);
-        }
+        // add the union of intervals we got
+        result.add(newInterval);
 
-
+        // add all the rest
         while (i < intervals.length){
-            mergedIntervals.add(new int[]{intervals[i][0], intervals[i][1]});
+            result.add(intervals[i]);
             i++;
         }
 
-        return mergedIntervals.toArray(new int[0][]);
+        return result.toArray(new int[result.size()][]);
 
     }
 
