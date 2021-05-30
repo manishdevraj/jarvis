@@ -18,8 +18,7 @@ import java.util.stream.Collectors;
  * {3, 1, 2}
  * {3, 2, 1}
  * If a set has ‘n’ distinct elements it will have
- * n
- * !
+ *
  * n! permutations.
  *
  * Example 1:
@@ -36,6 +35,7 @@ public class Permutations {
         return permutations;
     }
 
+    //O(n*n!) time | O(n*n!) space
     public static void findAllPermutations (int i, List<Integer> array, List<List<Integer>> permutations) {
         if (array.size() - 1 == i) {
             permutations.add(new ArrayList<>(array));
@@ -52,6 +52,31 @@ public class Permutations {
         Integer temp = array.get(i);
         array.set(i, array.get(j));
         array.set(j, temp);
+    }
+
+    // Upper bound O(n^2 *n!) time | O(n*n!) space
+    // Roughly O(n*n!) time | O(n*n!) space
+    public static List<List<Integer>> getPermutations(List<Integer> array) {
+        List<List<Integer>> permutations = new ArrayList<>();
+        getPermutation(array, new ArrayList<Integer>(), permutations);
+        return permutations;
+    }
+
+    public static void getPermutation(List<Integer> array,
+                                      List<Integer> currentPermutations,
+                                      List<List<Integer>> permutations){
+        if (array.size() == 0 && currentPermutations.size() > 0) {
+            permutations.add(currentPermutations);
+        } else {
+            for(int i = 0; i < array.size(); i++){
+                List<Integer> newArray = new ArrayList<>(array);
+                newArray.remove(i);
+
+                List<Integer> newPermutation = new ArrayList<>(currentPermutations);
+                newPermutation.add(array.get(i));
+                getPermutation(newArray, newPermutation, permutations);
+            }
+        }
     }
 
     public static void main(String[] args) {

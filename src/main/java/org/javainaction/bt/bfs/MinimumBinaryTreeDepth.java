@@ -12,9 +12,24 @@ import java.util.Queue;
  * Similar Problems #
  * Problem 1: Given a binary tree, find its maximum depth (or height).
  *
- * Solution: We will follow a similar approach. Instead of returning as soon as we find a leaf node, we will keep
- * traversing for all the levels, incrementing maximumDepth each time we complete a level. Here is what the code will
- * look like:
+ * Given a binary tree, find its minimum depth.
+ *
+ * The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+ *
+ * Note: A leaf is a node with no children.
+ *
+ *
+ *
+ * Example 1:
+ *
+ *
+ * Input: root = [3,9,20,null,null,15,7]
+ * Output: 2
+ * Example 2:
+ *
+ * Input: root = [2,null,3,null,4,null,5,null,6]
+ * Output: 5
+ *
  */
 public class MinimumBinaryTreeDepth {
     static class TreeNode {
@@ -34,18 +49,16 @@ public class MinimumBinaryTreeDepth {
         int minDepth = 0;
         while (!queue.isEmpty()) {
             int levelSize = queue.size();
-            List<Integer> currentLevel = new ArrayList<>(levelSize);
             minDepth++;
             for (int i = 0; i < levelSize; i++) {
                 TreeNode current = queue.poll();
-                if (current.left == null && current.right == null) {
-                    return minDepth;
+                if (current != null) {
+                    if (current.left == null && current.right == null) {
+                        return minDepth;
+                    }
+                    if (current.left != null) queue.offer(current.left);
+                    if (current.right != null) queue.offer(current.right);
                 }
-
-                if (current.left != null)
-                    queue.add(current.left);
-                if (current.right != null)
-                    queue.add(current.right);
             }
         }
         return -1;

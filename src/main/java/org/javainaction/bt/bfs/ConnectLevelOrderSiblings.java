@@ -48,7 +48,6 @@ public class ConnectLevelOrderSiblings {
             TreeNode previous = null;
             for (int i = 0; i < levelSize; i++) {
                 TreeNode currentNode = queue.poll();
-
                 if (previous != null) {
                     previous.next = currentNode;
                 }
@@ -62,6 +61,24 @@ public class ConnectLevelOrderSiblings {
         }
     }
 
+    //O(n) time |  O(1) space
+    public static TreeNode connectDfs(TreeNode root) {
+        dfs(root);
+        return root;
+    }
+
+    private static void dfs(TreeNode curr) {
+        if (curr == null) return;
+        // point left child to right child of current node
+        if (curr.left != null && curr.right != null) curr.left.next = curr.right;
+        // point left child to parent's sibling's left child if we do not have right sibling
+        if (curr.left != null && curr.right == null && curr.next != null) curr.left.next = curr.next.left;
+        // point right child to parent's sibling's left child to cross tree side
+        if (curr.right != null && curr.next != null) curr.right.next = curr.next.left;
+        dfs(curr.left);
+        dfs(curr.right);
+    }
+
     public static void main(String[] args) {
         TreeNode root = new TreeNode(12);
         root.left = new TreeNode(7);
@@ -70,6 +87,40 @@ public class ConnectLevelOrderSiblings {
         root.right.left = new TreeNode(10);
         root.right.right = new TreeNode(5);
         ConnectLevelOrderSiblings.connect(root);
+        System.out.println("Level order traversal using 'next' pointer: ");
+        root.printLevelOrder();
+
+        root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(7);
+
+        ConnectLevelOrderSiblings.connect(root);
+        System.out.println("Level order traversal using 'next' pointer: ");
+        root.printLevelOrder();
+
+        root = new TreeNode(12);
+        root.left = new TreeNode(7);
+        root.right = new TreeNode(1);
+        root.left.left = new TreeNode(9);
+        root.right.left = new TreeNode(10);
+        root.right.right = new TreeNode(5);
+        ConnectLevelOrderSiblings.connectDfs(root);
+        System.out.println("Level order traversal using 'next' pointer: ");
+        root.printLevelOrder();
+
+        root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(7);
+
+        ConnectLevelOrderSiblings.connectDfs(root);
         System.out.println("Level order traversal using 'next' pointer: ");
         root.printLevelOrder();
     }

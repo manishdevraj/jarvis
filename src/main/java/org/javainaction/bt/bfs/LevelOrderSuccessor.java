@@ -6,6 +6,7 @@ import java.util.Queue;
 /**
  * Given a binary tree and a node, find the level order successor of the given node in the tree.
  * The level order successor is the node that appears right after the given node in the level order traversal.
+ *
  */
 public class LevelOrderSuccessor {
     static class TreeNode {
@@ -16,6 +17,15 @@ public class LevelOrderSuccessor {
         TreeNode(int x) {
             val = x;
         }
+
+        @Override
+        public String toString() {
+            return "TreeNode{" +
+                    "val=" + val +
+                    ", left=" + left +
+                    ", right=" + right +
+                    '}';
+        }
     }
 
     public static TreeNode findSuccessor(TreeNode root, int key) {
@@ -24,18 +34,22 @@ public class LevelOrderSuccessor {
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
+        TreeNode result = null;
         while (!queue.isEmpty()) {
             int levelSize = queue.size();
             for (int i = 0; i < levelSize; i++) {
                 TreeNode currentNode = queue.poll();
-                if (currentNode.left != null)
-                    queue.add(currentNode.left);
-                if (currentNode.right != null)
-                    queue.add(currentNode.right);
-                if (currentNode.val == key) break;
+                if (currentNode != null) {
+                    if (currentNode.val == key) {
+                        result = currentNode;
+                        break;
+                    }
+                    if (currentNode.left != null) queue.offer(currentNode.left);
+                    if (currentNode.right != null) queue.offer(currentNode.right);
+                }
             }
         }
-        return queue.peek();
+        return result;
     }
 
     public static void main(String[] args) {
@@ -45,11 +59,9 @@ public class LevelOrderSuccessor {
         root.left.left = new TreeNode(9);
         root.right.left = new TreeNode(10);
         root.right.right = new TreeNode(5);
-        TreeNode result = LevelOrderSuccessor.findSuccessor(root, 12);
-        if (result != null)
-            System.out.println(result.val + " ");
-        result = LevelOrderSuccessor.findSuccessor(root, 9);
-        if (result != null)
-            System.out.println(result.val + " ");
+        System.out.println(root);
+        System.out.println("Level order successor : " + findSuccessor(root, 12));
+
+        System.out.println("Level order successor : " + findSuccessor(root, 9));
     }
 }

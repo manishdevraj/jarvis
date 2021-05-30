@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * Given a binary tree, populate an array to represent its level-by-level traversal. You should populate the
- * values of all nodes of each level from left to right in separate sub-arrays.
- *
- * Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+ * Given the root of a binary tree, return the bottom-up level order traversal of its nodes' values. (i.e., from left to right, level by level from leaf to root).
  *
  *
  *
@@ -17,7 +14,7 @@ import java.util.Queue;
  *
  *
  * Input: root = [3,9,20,null,null,15,7]
- * Output: [[3],[9,20],[15,7]]
+ * Output: [[15,7],[9,20],[3]]
  * Example 2:
  *
  * Input: root = [1]
@@ -26,14 +23,8 @@ import java.util.Queue;
  *
  * Input: root = []
  * Output: []
- *
- *
- * Constraints:
- *
- * The number of nodes in the tree is in the range [0, 2000].
- * -1000 <= Node.val <= 1000
  */
-public class LevelOrderTraversal {
+public class LevelOrderTraversal2 {
     static class TreeNode {
         int val;
         TreeNode left;
@@ -67,19 +58,18 @@ public class LevelOrderTraversal {
                         queue.offer(current.right);
                 }
             }
-            result.add(currentLevel);
+            result.add(0, currentLevel);
         }
         return result;
     }
 
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(12);
-        root.left = new TreeNode(7);
-        root.right = new TreeNode(1);
-        root.left.left = new TreeNode(9);
-        root.right.left = new TreeNode(10);
-        root.right.right = new TreeNode(5);
-        List<List<Integer>> result = LevelOrderTraversal.traverse(root);
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+        List<List<Integer>> result = LevelOrderTraversal2.traverse(root);
         System.out.println("Level order traversal: " + result);
     }
 }
