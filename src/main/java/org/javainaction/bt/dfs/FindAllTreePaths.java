@@ -29,7 +29,7 @@ public class FindAllTreePaths {
 
     public static List<List<Integer>> findPaths(TreeNode root, int sum) {
         List<List<Integer>> allPaths = new ArrayList<>();
-        List<Integer> currentPath = new ArrayList<Integer>();
+        List<Integer> currentPath = new ArrayList<>();
         findPathsRecursive(root, sum, currentPath, allPaths);
         return allPaths;
     }

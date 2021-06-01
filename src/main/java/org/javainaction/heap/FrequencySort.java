@@ -28,8 +28,7 @@ public class FrequencySort {
         }
 
         PriorityQueue<Map.Entry<Character, Integer>> maxHeap = new PriorityQueue<>(
-                (a, b) -> (b.getValue() - a.getValue())
-        );
+                (a, b) -> b.getValue() - a.getValue());
 
         // add all characters to the max heap
         maxHeap.addAll(characterFrequencyMap.entrySet());

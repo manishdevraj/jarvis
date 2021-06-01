@@ -31,17 +31,9 @@ import java.util.function.BiFunction;
  * Input: points = [[3,3],[5,-1],[-2,4]], K = 2
  * Output: [[3,3],[-2,4]]
  * (The answer [[-2,4],[3,3]] would also be accepted.)
+ * @see KClosestPointsToOrigin
  */
 public class KClosestPointOrigin {
-    public static void main(String[] args) {
-        int[][] points = {{1, 3}, {-2, 2}};
-        int K = 1;
-        int[][] result = kClosestPoint(points, K);
-        for(int[] point : result) {
-            System.out.println("{ " + point[0] + " , " + point[1] + " }");
-        }
-    }
-
     public static int[][] kClosestPoint(int[][] points, int K){
         if(K == 0 || points.length == 0) return points;
         PriorityQueue<int[]> maxHeap = new PriorityQueue<>
@@ -58,5 +50,14 @@ public class KClosestPointOrigin {
         }
 
         return result;
+    }
+
+    public static void main(String[] args) {
+        int[][] points = {{1, 3}, {-2, 2}};
+        int K = 1;
+        int[][] result = kClosestPoint(points, K);
+        for(int[] point : result) {
+            System.out.println("{ " + point[0] + " , " + point[1] + " }");
+        }
     }
 }

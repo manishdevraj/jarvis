@@ -26,7 +26,7 @@ public class MergeKSortedLists {
     }
 
     public static ListNode merge(ListNode[] lists) {
-        PriorityQueue<ListNode> minHeap = new PriorityQueue<ListNode>((n1, n2) -> n1.value - n2.value);
+        PriorityQueue<ListNode> minHeap = new PriorityQueue<>((n1, n2) -> n1.value - n2.value);
 
         for (ListNode node : lists) {
             if (node != null)

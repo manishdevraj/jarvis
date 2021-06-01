@@ -20,6 +20,30 @@ import java.util.*;
  * Output: [5, 6, 9]
  */
 public class KClosestElements {
+
+    /**
+     *
+     * Sort with custom comparator
+     * O(Nlog(N) + klog(k)) time  | O(n) space
+     */
+    public static List<Integer> findClosestElementsSortComparator(int[] arr, int k, int x) {
+        // Convert from array to list first to make use of Collections.sort()
+        List<Integer> sortedArr = new ArrayList<>();
+        for (int num: arr) {
+            sortedArr.add(num);
+        }
+
+        // Sort using custom comparator
+        sortedArr.sort((num1, num2) -> Math.abs(num1 - x) - Math.abs(num2 - x));
+
+        // Only take k elements
+        sortedArr = sortedArr.subList(0, k);
+
+        // Sort again to have output in ascending order
+        Collections.sort(sortedArr);
+        return sortedArr;
+    }
+
     static class Entry {
         int key;
         int value;
@@ -30,45 +54,39 @@ public class KClosestElements {
         }
     }
 
-    public static List<Integer> findClosestElements(int[] arr, int K, Integer X) {
+    /**
+     *
+     * Binary search with min heap
+     * Find the middle from which we can expand both direction by K distance
+     * Find out absolute difference from low to high pointer and calculate top K elements
+     *
+     * Only issue is that if both side of the window has similar absolute difference then heap cannot guarantee the
+     * ordering and hence we may not have expected elements from in ascending order.
+     * Though technically they would still be with actual absolute difference expected. As shown below
+     *
+     * { 0,0,1,2,3,3,4,7,7,8 } 'K=3' closest numbers to 'X=5' are: [3, 4, 7]
+     * From indices 3 to 9, abs difference with X is
+     * {3, 2, 2, 1, 2, 2, 3} when we push this to heap we cannot guarantee if 2 from two 3's difference or 2 from
+     * two 7's
+     * difference is at the top output could be {3, 3, 4} or {3, 4, 7}
+     */
+    public static List<Integer> findClosestElementsBinarySearchHeap(int[] arr, int K, Integer X) {
         int index = binarySearch(arr, X);
         int low = index - K, high = index + K;
         low = Math.max(low, 0); // 'low' should not be less than zero
         high = Math.min(high, arr.length - 1); // 'high' should not be greater the size of the array
 
-        PriorityQueue<Entry> minHeap = new PriorityQueue<>((n1, n2) -> n1.key - n2.key);
+        PriorityQueue<Entry> minHeap = new PriorityQueue<>((n1, n2) -> Math.abs(n1.key - X) - Math.abs(n2.key - X));
         // add all candidate elements to the min heap, sorted by their absolute difference from 'X'
-        for (int i = low; i <= high; i++)
-            minHeap.add(new Entry(Math.abs(arr[i] - X), i));
+        for (int i = low; i <=high; i++)
+            minHeap.add(new Entry(arr[i], i));
 
         // we need the top 'K' elements having smallest difference from 'X'
         List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < K; i++)
+        for (int i = 0; i < K && !minHeap.isEmpty(); i++)
             result.add(arr[minHeap.poll().value]);
 
         Collections.sort(result);
-        return result;
-    }
-
-    public static List<Integer> findClosestElementsTwoPointers(int[] arr, int K, Integer X) {
-        List<Integer> result = new LinkedList<>();
-        int index = binarySearch(arr, X);
-        int leftPointer = index;
-        int rightPointer = index + 1;
-        for (int i = 0; i < K; i++) {
-            if (leftPointer >= 0 && rightPointer < arr.length) {
-                int diff1 = Math.abs(X - arr[leftPointer]);
-                int diff2 = Math.abs(X - arr[rightPointer]);
-                if (diff1 <= diff2)
-                    result.add(0, arr[leftPointer--]); // append in the beginning
-                else
-                    result.add(arr[rightPointer++]); // append at the end
-            } else if (leftPointer >= 0) {
-                result.add(0, arr[leftPointer--]);
-            } else if (rightPointer < arr.length) {
-                result.add(arr[rightPointer++]);
-            }
-        }
         return result;
     }
 
@@ -91,14 +109,92 @@ public class KClosestElements {
         return low;
     }
 
+    /**
+     * Binary Search To Find The Left Bound
+     *
+     *
+     */
+    public static List<Integer> findClosestElementsBinarySearchLeftBound(int[] arr, int K, Integer X) {
+        // Initialize binary search bounds
+        int left = 0;
+        int right = arr.length - K;
+
+        // Binary search against the criteria described
+        while (left < right) {
+            int mid = (left + right) / 2;
+            //check elements absolute difference and accordingly shift binary search
+            if (X - arr[mid] > arr[mid + K] - X) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        // get all first smallest difference elements
+        List<Integer> result = new ArrayList<>();
+        for (int i = left; i < left + K; i++) {
+            result.add(arr[i]);
+        }
+
+        return result;
+    }
+
+
+
     public static void main(String[] args) {
-        List<Integer> result = KClosestElements.findClosestElements(new int[] { 5, 6, 7, 8, 9 }, 3, 7);
-        System.out.println("'K' closest numbers to 'X' are: " + result);
+        System.out.println("--------------Sort comparator----------------");
+        System.out.println("{ 5, 6, 7, 8, 9 } 'K=3' closest numbers to 'X=7' are: "
+                + findClosestElementsSortComparator(new int[] { 5, 6, 7, 8, 9 }, 3, 7));
 
-        result = KClosestElements.findClosestElements(new int[] { 2, 4, 5, 6, 9 }, 3, 6);
-        System.out.println("'K' closest numbers to 'X' are: " + result);
+        System.out.println("{ 2, 4, 5, 6, 9 } 'K=3' closest numbers to 'X=6' are: "
+                + findClosestElementsSortComparator(new int[] { 2, 4, 5, 6, 9 }, 3, 6));
 
-        result = KClosestElements.findClosestElements(new int[] { 2, 4, 5, 6, 9 }, 3, 10);
-        System.out.println("'K' closest numbers to 'X' are: " + result);
+        System.out.println("{ 2, 4, 5, 6, 9 } 'K=3' closest numbers to 'X=10' are: "
+                + findClosestElementsSortComparator(new int[] { 2, 4, 5, 6, 9 }, 3, 10));
+
+        System.out.println("{ 1, 1, 1, 10, 10, 10 } 'K=1' closest numbers to 'X=9' are: "
+                + findClosestElementsSortComparator(new int[] { 1, 1, 1, 10, 10, 10 }, 1, 9));
+
+        System.out.println("{ 0,0,1,2,3,3,4,7,7,8 } 'K=3' closest numbers to 'X=5' are: "
+                + findClosestElementsSortComparator(new int[] {0, 0, 1, 2, 3, 3, 4, 7, 7, 8 }, 3, 5));
+
+        System.out.println("--------------------------------------------");
+
+        System.out.println("--------------Binary search left bounds----------------");
+        System.out.println("{ 5, 6, 7, 8, 9 } 'K=3' closest numbers to 'X=7' are: "
+                + findClosestElementsBinarySearchLeftBound(new int[] { 5, 6, 7, 8, 9 }, 3, 7));
+
+        System.out.println("{ 2, 4, 5, 6, 9 } 'K=3' closest numbers to 'X=6' are: "
+                + findClosestElementsBinarySearchLeftBound(new int[] { 2, 4, 5, 6, 9 }, 3, 6));
+
+        System.out.println("{ 2, 4, 5, 6, 9 } 'K=3' closest numbers to 'X=10' are: "
+                + findClosestElementsBinarySearchLeftBound(new int[] { 2, 4, 5, 6, 9 }, 3, 10));
+
+        System.out.println("{ 1, 1, 1, 10, 10, 10 } 'K=1' closest numbers to 'X=9' are: "
+                + findClosestElementsBinarySearchLeftBound(new int[] { 1, 1, 1, 10, 10, 10 }, 1, 9));
+
+        System.out.println("{ 0,0,1,2,3,3,4,7,7,8 } 'K=3' closest numbers to 'X=5' are: "
+                + findClosestElementsBinarySearchLeftBound(new int[] {0, 0, 1, 2, 3, 3, 4, 7, 7, 8 }, 3, 5));
+
+
+        System.out.println("--------------------------------------------");
+
+        System.out.println("--------------Binary search min heap----------------");
+
+        System.out.println("{ 5, 6, 7, 8, 9 } 'K=3' closest numbers to 'X=7' are: "
+                + findClosestElementsBinarySearchHeap(new int[] { 5, 6, 7, 8, 9 }, 3, 7));
+
+        System.out.println("{ 2, 4, 5, 6, 9 } 'K=3' closest numbers to 'X=6' are: "
+                + findClosestElementsBinarySearchHeap(new int[] { 2, 4, 5, 6, 9 }, 3, 6));
+
+        System.out.println("{ 2, 4, 5, 6, 9 } 'K=3' closest numbers to 'X=10' are: "
+                + findClosestElementsBinarySearchHeap(new int[] { 2, 4, 5, 6, 9 }, 3, 10));
+
+        System.out.println("{ 1, 1, 1, 10, 10, 10 } 'K=1' closest numbers to 'X=9' are: "
+                + findClosestElementsBinarySearchHeap(new int[] { 1, 1, 1, 10, 10, 10 }, 1, 9));
+
+        System.out.println("{ 0,0,1,2,3,3,4,7,7,8 } 'K=3' closest numbers to 'X=5' are: "
+                + findClosestElementsBinarySearchHeap(new int[] {0, 0, 1, 2, 3, 3, 4, 7, 7, 8 }, 3, 5));
+
     }
 }

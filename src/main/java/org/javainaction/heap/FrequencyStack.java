@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Design a class that simulates a Stack data structure, implementing the following two operations:
@@ -17,6 +18,25 @@ import java.util.PriorityQueue;
  * 1. pop() should return 2, as it is the most frequent number
  * 2. Next pop() should return 1
  * 3. Next pop() should return 2
+ *
+ * Input
+ * ["FreqStack", "push", "push", "push", "push", "push", "push", "pop", "pop", "pop", "pop"]
+ * [[], [5], [7], [5], [7], [4], [5], [], [], [], []]
+ * Output
+ * [null, null, null, null, null, null, null, 5, 7, 5, 4]
+ *
+ * Explanation
+ * FreqStack freqStack = new FreqStack();
+ * freqStack.push(5); // The stack is [5]
+ * freqStack.push(7); // The stack is [5,7]
+ * freqStack.push(5); // The stack is [5,7,5]
+ * freqStack.push(7); // The stack is [5,7,5,7]
+ * freqStack.push(4); // The stack is [5,7,5,7,4]
+ * freqStack.push(5); // The stack is [5,7,5,7,4,5]
+ * freqStack.pop();   // return 5, as 5 is the most frequent. The stack becomes [5,7,5,7,4].
+ * freqStack.pop();   // return 7, as 5 and 7 is the most frequent, but 7 is closest to the top. The stack becomes [5,7,5,4].
+ * freqStack.pop();   // return 5, as 5 is the most frequent. The stack becomes [5,7,4].
+ * freqStack.pop();   // return 4, as 4, 5 and 7 is the most frequent, but 4 is closest to the top. The stack becomes [5,7].
  */
 public class FrequencyStack {
     static class Element {
@@ -40,17 +60,17 @@ public class FrequencyStack {
         }
     }
 
-    int sequenceNumber = 0;
-    PriorityQueue<Element> maxHeap = new PriorityQueue<Element>(new ElementComparator());
+    AtomicInteger sequenceNumber = new AtomicInteger(0);
+    PriorityQueue<Element> maxHeap = new PriorityQueue<>(new ElementComparator());
     Map<Integer, Integer> frequencyMap = new HashMap<>();
 
     public void push(int num) {
         frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
-        maxHeap.offer(new Element(num, frequencyMap.get(num), sequenceNumber++));
+        maxHeap.offer(new Element(num, frequencyMap.get(num), sequenceNumber.getAndIncrement()));
     }
 
     public int pop() {
-        int num = maxHeap.poll().number;
+        int num = maxHeap.isEmpty() ? -1 : maxHeap.poll().number;
 
         // decrement the frequency or remove if this is the last number
         if (frequencyMap.get(num) > 1)

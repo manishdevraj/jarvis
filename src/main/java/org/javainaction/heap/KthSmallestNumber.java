@@ -27,18 +27,18 @@ import java.util.PriorityQueue;
  */
 public class KthSmallestNumber {
     public static int findKthSmallestNumber(int[] nums, int k) {
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>((n1, n2) -> n2 - n1);
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((n1, n2) -> n2 - n1);
         for (int i = 0; i < k; i++) {
             maxHeap.offer(nums[i]);
         }
 
-        for (int i = k; i < nums.length; i++) {
+        for (int i = k; i < nums.length && !maxHeap.isEmpty(); i++) {
             if (nums[i] < maxHeap.peek()){
                 maxHeap.poll();
                 maxHeap.offer(nums[i]);
             }
         }
-        return maxHeap.peek();
+        return maxHeap.isEmpty() ? -1 : maxHeap.peek();
     }
 
     public static void main(String[] args) {

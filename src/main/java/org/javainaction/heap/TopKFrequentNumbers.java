@@ -9,7 +9,7 @@ import java.util.*;
  *
  * Input: [1, 3, 5, 12, 11, 12, 11], K = 2
  * Output: [12, 11]
- * Explanation: Both '11' and '12' apeared twice.
+ * Explanation: Both '11' and '12' appeared twice.
  * Example 2:
  *
  * Input: [5, 12, 11, 3, 11], K = 2
@@ -19,32 +19,37 @@ import java.util.*;
 public class TopKFrequentNumbers {
     public static List<Integer> findTopKFrequentNumbers(int[] nums, int k) {
         Map<Integer, Integer> numFrequencyMap = new HashMap<>();
-        for (int n : nums) {
-            numFrequencyMap.put(n, numFrequencyMap.getOrDefault(0, n) + 1);
-        }
 
-        PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<>(
-                (a, b) -> (a.getValue() - b.getValue())
-        );
+        Arrays.stream(nums)
+                .forEach(n -> numFrequencyMap.put(n, numFrequencyMap.getOrDefault(n, 0) + 1));
+
+        PriorityQueue<Map.Entry<Integer, Integer>> heap = new PriorityQueue<>(
+                (a, b) -> (a.getValue() - b.getValue()));
 
         for (Map.Entry<Integer, Integer> entry : numFrequencyMap.entrySet()) {
-            minHeap.add(entry);
-            if (minHeap.size() > k) minHeap.poll();
+            heap.add(entry);
+            if (heap.size() > k) heap.poll();
         }
 
         List<Integer> topNumbers = new ArrayList<>(k);
-        while (!minHeap.isEmpty()){
-            topNumbers.add(minHeap.poll().getKey());
+        while (!heap.isEmpty()){
+            topNumbers.add(heap.poll().getKey());
         }
 
         return topNumbers;
     }
 
     public static void main(String[] args) {
-        List<Integer> result = TopKFrequentNumbers.findTopKFrequentNumbers(new int[] { 1, 3, 5, 12, 11, 12, 11 }, 2);
-        System.out.println("Here are the K frequent numbers: " + result);
+        System.out.println("{ 1, 3, 5, 12, 11, 12, 11 } are the K=2 frequent numbers: " +
+                findTopKFrequentNumbers(new int[] { 1, 3, 5, 12, 11, 12, 11 }, 2));
 
-        result = TopKFrequentNumbers.findTopKFrequentNumbers(new int[] { 5, 12, 11, 3, 11 }, 2);
-        System.out.println("Here are the K frequent numbers: " + result);
+        System.out.println("{ 1, 1, 1, 2, 2, 3 } are the K=2 frequent numbers: " +
+                findTopKFrequentNumbers(new int[] { 1, 1, 1, 2, 2, 3 }, 2));
+
+        System.out.println("{ 5, 12, 11, 3, 11 } are the K=2 frequent numbers: "
+                + findTopKFrequentNumbers(new int[] { 5, 12, 11, 3, 11 }, 2));
+
+        System.out.println("{ 3, 0, 1, 0 } are the K=1 frequent numbers: "
+                + findTopKFrequentNumbers(new int[] { 3, 0, 1, 0 }, 1));
     }
 }

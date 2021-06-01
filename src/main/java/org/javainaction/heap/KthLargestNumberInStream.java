@@ -33,7 +33,7 @@ public class KthLargestNumberInStream {
     public int add(int num) {
         minHeap.add(num);
         if (minHeap.size() > kthLargestNumber) minHeap.poll();
-        return (minHeap.isEmpty()) ? -1 : minHeap.peek();
+        return minHeap.isEmpty() ? -1 : minHeap.peek();
     }
 
     public static void main(String[] args) {

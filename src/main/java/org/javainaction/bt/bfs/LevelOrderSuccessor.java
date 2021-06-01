@@ -41,7 +41,7 @@ public class LevelOrderSuccessor {
                 TreeNode currentNode = queue.poll();
                 if (currentNode != null) {
                     if (currentNode.val == key) {
-                        result = currentNode;
+                        result = queue.peek() ;
                         break;
                     }
                     if (currentNode.left != null) queue.offer(currentNode.left);

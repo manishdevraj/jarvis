@@ -20,16 +20,16 @@ public class TreeDiameter {
 
     static int treeDiameter = 0;
     public static int findDiameter(TreeNode root) {
-        calculateHight(root);
+        calculateHeight(root);
         return treeDiameter;
     }
 
-    public static int calculateHight(TreeNode currentNode) {
+    public static int calculateHeight(TreeNode currentNode) {
         if (currentNode == null)
             return 0;
 
-        int leftTreeHeight = calculateHight(currentNode.left);
-        int rightTreeHeight = calculateHight(currentNode.right);
+        int leftTreeHeight = calculateHeight(currentNode.left);
+        int rightTreeHeight = calculateHeight(currentNode.right);
 
         // diameter at the current node will be equal to the height of left subtree +
         // the height of right sub-trees + '1' for the current node
@@ -38,7 +38,7 @@ public class TreeDiameter {
         // update the global tree diameter
         treeDiameter = Math.max(treeDiameter, diameter);
 
-        // height of the current node will be equal to the maximum of the hights of
+        // height of the current node will be equal to the maximum of the heights of
         // left or right subtrees plus '1' for the current node
         return Math.max(leftTreeHeight, rightTreeHeight) + 1;
     }
@@ -51,6 +51,7 @@ public class TreeDiameter {
         root.right.left = new TreeNode(5);
         root.right.right = new TreeNode(6);
         System.out.println("Tree Diameter: " + TreeDiameter.findDiameter(root));
+
         root.left.left = null;
         root.right.left.left = new TreeNode(7);
         root.right.left.right = new TreeNode(8);
