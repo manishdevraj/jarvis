@@ -1,4 +1,4 @@
-package org.javainaction.subsets;
+package org.javainaction.recursion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,8 +20,23 @@ import java.util.Map;
  * Input: 3
  * Output: 5
  * Explanation: There will be 5 unique BSTs that can store numbers from 1 to 5.
+ *
+ * Given an integer n, return the number of structurally unique BST's (binary search trees) which has exactly n nodes of unique values from 1 to n.
+ *
+ *
+ *
+ * Example 1:
+ *
+ *
+ * Input: n = 3
+ * Output: 5
+ * Example 2:
+ *
+ * Input: n = 1
+ * Output: 1
  */
 public class CountUniqueTrees {
+    // O(n^2) time | O(n) space
     public int countTrees(int n) {
         List<Integer> count = new ArrayList<>();
         count.add(1);
@@ -38,6 +53,7 @@ public class CountUniqueTrees {
         return count.get(n);
     }
 
+    // O(n^2) time | O(n) space
     static Map<Integer, Integer> map = new HashMap<>();
     public int countTreesRecursion(int n) {
         if (map.containsKey(n))

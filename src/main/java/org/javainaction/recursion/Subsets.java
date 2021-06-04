@@ -1,9 +1,7 @@
-package org.javainaction.subsets;
+package org.javainaction.recursion;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Given a set with distinct elements, find all of its distinct subsets.

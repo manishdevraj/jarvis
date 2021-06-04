@@ -1,4 +1,4 @@
-package org.javainaction.subsets;
+package org.javainaction.recursion;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,18 +69,16 @@ public class Permutations {
             permutations.add(currentPermutations);
         } else {
             for(int i = 0; i < array.size(); i++){
-                List<Integer> newArray = new ArrayList<>(array);
-                newArray.remove(i);
-
+                List<Integer> cloneArray = new ArrayList<>(array);
+                cloneArray.remove(i);
                 List<Integer> newPermutation = new ArrayList<>(currentPermutations);
                 newPermutation.add(array.get(i));
-                getPermutation(newArray, newPermutation, permutations);
+                getPermutation(cloneArray, newPermutation, permutations);
             }
         }
     }
 
     public static void main(String[] args) {
-        List<List<Integer>> result = Permutations.findPermutations(new int[] { 1, 3, 5 });
-        System.out.print("Here are all the permutations: " + result);
+        System.out.print("{ 1, 3, 5 } are all the permutations: " + findPermutations(new int[] { 1, 3, 5 }));
     }
 }

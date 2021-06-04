@@ -23,6 +23,8 @@ import java.util.*;
  * Jobs: [[1,4,2], [2,4,1], [3,6,5]]
  * Output: 8
  * Explanation: Maximum CPU load will be 8 as all jobs overlap during the time interval [3,4].
+ *
+ * @see org.javainaction.interval.MinimumMeetingRooms
  */
 public class MaximumCPULoad {
     static class Job {
@@ -60,13 +62,16 @@ public class MaximumCPULoad {
     }
 
     public static void main(String[] args) {
-        List<Job> input = new ArrayList<Job>(Arrays.asList(new Job(1, 4, 3), new Job(2, 5, 4), new Job(7, 9, 6)));
-        System.out.println("Maximum CPU load at any time: " + MaximumCPULoad.findMaxCPULoad(input));
+        System.out.println("Maximum CPU load at any time: "
+                + MaximumCPULoad.findMaxCPULoad(Arrays.asList(new Job(1, 4, 3),
+                new Job(2, 5, 4), new Job(7, 9, 6))));
 
-        input = new ArrayList<Job>(Arrays.asList(new Job(6, 7, 10), new Job(2, 4, 11), new Job(8, 12, 15)));
-        System.out.println("Maximum CPU load at any time: " + MaximumCPULoad.findMaxCPULoad(input));
+        System.out.println("Maximum CPU load at any time: " +
+                MaximumCPULoad.findMaxCPULoad(Arrays.asList(new Job(6, 7, 10),
+                        new Job(2, 4, 11), new Job(8, 12, 15))));
 
-        input = new ArrayList<Job>(Arrays.asList(new Job(1, 4, 2), new Job(2, 4, 1), new Job(3, 6, 5)));
-        System.out.println("Maximum CPU load at any time: " + MaximumCPULoad.findMaxCPULoad(input));
+        System.out.println("Maximum CPU load at any time: " +
+                MaximumCPULoad.findMaxCPULoad(Arrays.asList(new Job(1, 4, 2),
+                        new Job(2, 4, 1), new Job(3, 6, 5))));
     }
 }

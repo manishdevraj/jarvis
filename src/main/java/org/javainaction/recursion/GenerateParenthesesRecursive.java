@@ -1,11 +1,25 @@
-package org.javainaction.subsets;
+package org.javainaction.recursion;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+ *
+ *
+ *
+ * Example 1:
+ *
+ * Input: n = 3
+ * Output: ["((()))","(()())","(())()","()(())","()()()"]
+ * Example 2:
+ *
+ * Input: n = 1
+ * Output: ["()"]
+ */
 public class GenerateParenthesesRecursive {
     public static List<String> generateValidParentheses(int num) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         char[] parenthesesString = new char[2 * num];
         generateValidParenthesesRecursive(num, 0, 0, parenthesesString, 0, result);
         return result;
@@ -31,10 +45,9 @@ public class GenerateParenthesesRecursive {
     }
 
     public static void main(String[] args) {
-        List<String> result = GenerateParenthesesRecursive.generateValidParentheses(2);
-        System.out.println("All combinations of balanced parentheses are: " + result);
-
-        result = GenerateParenthesesRecursive.generateValidParentheses(3);
-        System.out.println("All combinations of balanced parentheses are: " + result);
+        System.out.println("All combinations of balanced parentheses for 2 are: "
+                + generateValidParentheses(2));
+        System.out.println("All combinations of balanced parentheses for 3 are: "
+                + generateValidParentheses(3));
     }
 }

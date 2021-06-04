@@ -10,10 +10,10 @@ import java.util.Arrays;
  */
 public class ArrayOfProducts {
     /**
-     * Approach 1 where we calculate product of each elements from i to end of array but time complexity woud le O(n^2)
+     * Approach 1 where we calculate product of each elements from i to end of array but time complexity would be O(n^2)
      *
      * Approach 2: we could build a product and divide the product by the number at index to get remaining product
-     * Challenge it, it will fail for number with zero with the devide by zero error.
+     * Challenge it, it will fail for number with zero with the divide by zero error.
      *
      * Approach 3: Move from left to right calculating running product from left it each element
      * Move from right to left to calculating running product for right to for each element.

@@ -33,6 +33,7 @@ import java.util.PriorityQueue;
  * Explanation: We will need one room for [2,3] and [3,5], and another room for [2,4] and [4,5].
  *
  * Here is a visual representation of Example 4:
+ * @see org.javainaction.heap.MaximumCPULoad
  */
 public class MinimumMeetingRooms {
     static class Meeting {

@@ -44,9 +44,7 @@ public class LargestPairs {
     public static void main(String[] args) {
         int[] l1 = new int[] { 9, 8, 2 };
         int[] l2 = new int[] { 6, 3, 1 };
-        List<int[]> result = LargestPairs.findKLargestPairs(l1, l2, 3);
-        System.out.print("Pairs with largest sum are: ");
-        for (int[] pair : result)
-            System.out.print("[" + pair[0] + ", " + pair[1] + "] ");
+        System.out.println("{ 9, 8, 2 } and { 6, 3, 1 } pairs with largest sum are: "
+                + LargestPairs.findKLargestPairs(l1, l2, 3));
     }
 }

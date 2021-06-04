@@ -1,4 +1,4 @@
-package org.javainaction.subsets;
+package org.javainaction.recursion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * Output: List containing root nodes of all structurally unique BSTs.
  * Explanation: Here are the 2 structurally unique BSTs storing all numbers from 1 to 2:
  */
-public class UniqueTree {
+public class UniqueBSTTree {
     static class TreeNode {
         int val;
         TreeNode left;
@@ -58,7 +58,7 @@ public class UniqueTree {
     }
 
     public static void main(String[] args) {
-        List<TreeNode> result = UniqueTree.findUniqueTrees(3);
+        List<TreeNode> result = UniqueBSTTree.findUniqueTrees(3);
         System.out.print("Total trees: " + result.size());
     }
 }
