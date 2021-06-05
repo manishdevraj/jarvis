@@ -15,21 +15,12 @@ package org.javainaction.dp.fibonacci;
  * Number of ways = 7
  * Explanation: Following are the seven ways we can climb : {1,1,1,1}, {1,1,2}, {1,2,1}, {2,1,1},
  * {2,2}, {1,3}, {3,1}
+ *
+ * @see org.javainaction.recursion.StaircaseTraversal
  */
 public class Staircase {
 
-    public static void main(String[] args) {
-        Staircase sc = new Staircase();
-        System.out.println(sc.countWaysMemoize(3));
-        System.out.println(sc.countWaysMemoize(4));
-        System.out.println(sc.countWaysMemoize(5));
-
-        System.out.println(sc.bottomUpCountWays(3));
-        System.out.println(sc.bottomUpCountWays(4));
-        System.out.println(sc.bottomUpCountWays(5));
-
-    }
-
+    //O(n)
     private int countWaysMemoize(int n) {
         int dp[] = new int[n+1];
         return countWaysMemoizeRecursive(dp, n);
@@ -46,6 +37,7 @@ public class Staircase {
         return dp[n];
     }
 
+    //O(n) time | O(1) space
     private int bottomUpCountWays(int n) {
         if (n < 2) return 1;
         if (n == 2) return 2;
@@ -57,5 +49,17 @@ public class Staircase {
             n3 = temp;
         }
         return n3;
+    }
+
+    public static void main(String[] args) {
+        Staircase sc = new Staircase();
+        System.out.println(sc.countWaysMemoize(3));
+        System.out.println(sc.countWaysMemoize(4));
+        System.out.println(sc.countWaysMemoize(5));
+
+        System.out.println(sc.bottomUpCountWays(3));
+        System.out.println(sc.bottomUpCountWays(4));
+        System.out.println(sc.bottomUpCountWays(5));
+
     }
 }

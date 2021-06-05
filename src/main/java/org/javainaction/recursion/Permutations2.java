@@ -27,6 +27,7 @@ public class Permutations2 {
     // Roughly O(n*n!) time | O(n*n!) space
     public static List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> permutations = new ArrayList<>();
+        Arrays.sort(nums);
         boolean[] visited = new boolean[nums.length];
         findAllUniquePermutation(nums, new ArrayList<>(), permutations, visited);
         return permutations;
