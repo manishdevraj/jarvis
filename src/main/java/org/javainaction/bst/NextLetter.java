@@ -1,4 +1,4 @@
-package org.javainaction.search;
+package org.javainaction.bst;
 
 /**
  * Given an array of lowercase letters sorted in ascending order, find the smallest letter in the given array greater
@@ -50,9 +50,9 @@ public class NextLetter {
     }
 
     public static void main(String[] args) {
-        System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'f'));
-        System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'b'));
-        System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'm'));
-        System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'h'));
+        System.out.println(searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'f'));
+        System.out.println(searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'b'));
+        System.out.println(searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'm'));
+        System.out.println(searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'h'));
     }
 }

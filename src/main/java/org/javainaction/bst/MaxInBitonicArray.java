@@ -1,4 +1,4 @@
-package org.javainaction.search;
+package org.javainaction.bst;
 
 /**
  * Find the maximum value in a given Bitonic array. An array is considered bitonic if it is monotonically increasing
@@ -22,6 +22,7 @@ package org.javainaction.search;
  *
  * Input: [10, 9, 8]
  * Output: 10
+ * @see FindPeakElement
  */
 public class MaxInBitonicArray {
     public static int findMax(int[] arr) {
@@ -40,10 +41,10 @@ public class MaxInBitonicArray {
     }
 
     public static void main(String[] args) {
-        System.out.println(MaxInBitonicArray.findMax(new int[] { 1, 3, 8, 12, 4, 2 }));
-        System.out.println(MaxInBitonicArray.findMax(new int[] { 3, 8, 3, 1 }));
-        System.out.println(MaxInBitonicArray.findMax(new int[] { 1, 3, 8, 12 }));
-        System.out.println(MaxInBitonicArray.findMax(new int[] { 10, 9, 8 }));
-        System.out.println(MaxInBitonicArray.findMax(new int[] { 10, 15, 1, 3, 8 }));
+        System.out.println(findMax(new int[] { 1, 3, 8, 12, 4, 2 }));
+        System.out.println(findMax(new int[] { 3, 8, 3, 1 }));
+        System.out.println(findMax(new int[] { 1, 3, 8, 12 }));
+        System.out.println(findMax(new int[] { 10, 9, 8 }));
+        System.out.println(findMax(new int[] { 10, 15, 1, 3, 8 }));
     }
 }

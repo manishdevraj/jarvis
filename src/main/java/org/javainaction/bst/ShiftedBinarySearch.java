@@ -1,4 +1,4 @@
-package org.javainaction.search;
+package org.javainaction.bst;
 
 /**
  * Different that Bitonic array where array is just shifted not Bitonic
@@ -7,7 +7,7 @@ public class ShiftedBinarySearch {
 
     public static void main(String[] args) {
         int[] arr = new int[] { 45, 61, 71, 72, 73, 0, 1, 21, 33, 45};
-        System.out.println(shiftedBinarySearch(arr, 33, 0, arr.length - 1));
+        System.out.println(shiftedBinarySearch(arr, 33 ));
     }
 
     // O (log(n)) time | O(1) space

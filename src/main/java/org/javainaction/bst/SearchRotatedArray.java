@@ -1,4 +1,4 @@
-package org.javainaction.search;
+package org.javainaction.bst;
 
 /**
  * Search in Rotated Array (medium) #
@@ -13,18 +13,10 @@ package org.javainaction.search;
  * Input: [10, 15, 1, 3, 8], key = 15
  * Output: 1
  * Explanation: '15' is present in the array at index '1'.
- *     1
- *     3
- *     8
- *     10
- *     15
- *  Original array:
- *  Array after 2 rotations:
- *     10
- *     15
- *     1
- *     3
- *     8
+ *
+ *  Original array: [1, 3, 8, 10, 15]
+ *  Array after 2 rotations: [10, 15, 1, 3, 8]
+ *
  * Example 2:
  *
  * Input: [4, 5, 7, 9, 10, -1, 2], key = 10
@@ -36,21 +28,23 @@ public class SearchRotatedArray {
         if (arr == null || arr.length == 0) return -1;
         int n = arr.length;
         int left = 0; int right = n - 1;
+
         while (left <= right) {
             int middle = (left + right) / 2;
             int potentialMatch = arr[middle];
             int leftValue = arr[left];
             int rightValue = arr[right];
+
             if (key == arr[middle]) {
                 return middle;
             } else if (leftValue <= potentialMatch) {
-                if (key >= leftValue && key < potentialMatch) {
+                if (leftValue <= key  && key < potentialMatch) {
                     right = middle - 1;
                 } else {
                     left = middle + 1;
                 }
             } else {
-                if (key > potentialMatch && key <= rightValue) {
+                if (potentialMatch < key  && key <= rightValue) {
                     left = middle + 1;
                 } else {
                     right = middle - 1;
@@ -61,7 +55,7 @@ public class SearchRotatedArray {
     }
 
     public static void main(String[] args) {
-        System.out.println(SearchRotatedArray.search(new int[] { 10, 15, 1, 3, 8 }, 15));
-        System.out.println(SearchRotatedArray.search(new int[] { 4, 5, 7, 9, 10, -1, 2 }, 10));
+        System.out.println(search(new int[] { 10, 15, 1, 3, 8 }, 15));
+        System.out.println(search(new int[] { 4, 5, 7, 9, 10, -1, 2 }, 10));
     }
 }

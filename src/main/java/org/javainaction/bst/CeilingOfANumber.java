@@ -1,4 +1,4 @@
-package org.javainaction.search;
+package org.javainaction.bst;
 
 /**
  * Given an array of numbers sorted in an ascending order, find the ceiling of a given number ‘key’.
@@ -63,9 +63,9 @@ public class CeilingOfANumber {
         return left;
     }
     public static void main(String[] args) {
-        System.out.println(CeilingOfANumber.searchCeilingOfANumber(new int[] { 4, 6, 10 }, 6));
-        System.out.println(CeilingOfANumber.searchCeilingOfANumber(new int[] { 1, 3, 8, 10, 15 }, 12));
-        System.out.println(CeilingOfANumber.searchCeilingOfANumber(new int[] { 4, 6, 10 }, 17));
-        System.out.println(CeilingOfANumber.searchCeilingOfANumber(new int[] { 4, 6, 10 }, -1));
+        System.out.println(searchCeilingOfANumber(new int[] { 4, 6, 10 }, 6));
+        System.out.println(searchCeilingOfANumber(new int[] { 1, 3, 8, 10, 15 }, 12));
+        System.out.println(searchCeilingOfANumber(new int[] { 4, 6, 10 }, 17));
+        System.out.println(searchCeilingOfANumber(new int[] { 4, 6, 10 }, -1));
     }
 }

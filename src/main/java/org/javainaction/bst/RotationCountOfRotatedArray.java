@@ -1,4 +1,4 @@
-package org.javainaction.search;
+package org.javainaction.bst;
 
 public class RotationCountOfRotatedArray {
     public static int countRotations(int[] arr) {

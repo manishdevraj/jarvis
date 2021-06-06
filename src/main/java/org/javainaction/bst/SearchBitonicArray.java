@@ -1,4 +1,4 @@
-package org.javainaction.search;
+package org.javainaction.bst;
 
 public class SearchBitonicArray {
     public static int search(int[] arr, int key) {
