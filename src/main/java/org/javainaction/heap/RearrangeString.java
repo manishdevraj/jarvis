@@ -30,7 +30,7 @@ public class RearrangeString {
         for (char chr : str.toCharArray())
             charFrequencyMap.put(chr, charFrequencyMap.getOrDefault(chr, 0) + 1);
 
-        PriorityQueue<Map.Entry<Character, Integer>> maxHeap = new PriorityQueue<Map.Entry<Character, Integer>>(
+        PriorityQueue<Map.Entry<Character, Integer>> maxHeap = new PriorityQueue<>(
                 (e1, e2) -> e2.getValue() - e1.getValue());
 
         // add all characters to the max heap
@@ -54,8 +54,9 @@ public class RearrangeString {
     }
 
     public static void main(String[] args) {
-        System.out.println("Rearranged string: " + RearrangeString.rearrangeString("aappp"));
-        System.out.println("Rearranged string: " + RearrangeString.rearrangeString("Programming"));
-        System.out.println("Rearranged string: " + RearrangeString.rearrangeString("aapa"));
+        System.out.println("aappp rearranged string: " + RearrangeString.rearrangeString("aappp"));
+        System.out.println("Programming rearranged string: " + RearrangeString.rearrangeString("Programming"));
+        System.out.println("aapa rearranged string: " + RearrangeString.rearrangeString("aapa"));
+        System.out.println("aaab rearranged string: " + RearrangeString.rearrangeString("aaab"));
     }
 }

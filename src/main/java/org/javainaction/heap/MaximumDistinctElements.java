@@ -67,13 +67,16 @@ public class MaximumDistinctElements {
     }
 
     public static void main(String[] args) {
-        int result = MaximumDistinctElements.findMaximumDistinctElements(new int[] { 7, 3, 5, 8, 5, 3, 3 }, 2);
-        System.out.println("Maximum distinct numbers after removing K numbers: " + result);
+        int result = findMaximumDistinctElements(new int[] { 7, 3, 5, 8, 5, 3, 3 }, 2);
+        System.out.println("{ 7, 3, 5, 8, 5, 3, 3 } maximum distinct numbers after removing K=2 numbers: "
+                + result);
 
-        result = MaximumDistinctElements.findMaximumDistinctElements(new int[] { 3, 5, 12, 11, 12 }, 3);
-        System.out.println("Maximum distinct numbers after removing K numbers: " + result);
+        result = findMaximumDistinctElements(new int[] { 3, 5, 12, 11, 12 }, 3);
+        System.out.println("{ 3, 5, 12, 11, 12 } maximum distinct numbers after removing K=3 numbers: "
+                + result);
 
-        result = MaximumDistinctElements.findMaximumDistinctElements(new int[] { 1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5 }, 2);
-        System.out.println("Maximum distinct numbers after removing K numbers: " + result);
+        result = findMaximumDistinctElements(new int[] { 1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5 }, 2);
+        System.out.println("{ 1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5 } maximum distinct numbers after removing K=2 numbers: "
+                + result);
     }
 }

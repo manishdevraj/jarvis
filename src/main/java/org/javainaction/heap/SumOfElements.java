@@ -1,5 +1,6 @@
 package org.javainaction.heap;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /**
@@ -29,6 +30,7 @@ public class SumOfElements {
             minHeap.add(n);
         }
 
+        //REMOVE ALL ELEMENTS BEFORE K1 SMALLEST
         int offset = k1 + 1;
         while (!minHeap.isEmpty() && offset > 1){
             minHeap.poll();
@@ -37,6 +39,7 @@ public class SumOfElements {
 
         offset = k2 - k1 - 1;
 
+        //SUM ALL ELEMENTS BETWEEN K1 AND K2
         while (!minHeap.isEmpty() && offset > 0){
             sum += minHeap.poll();
             offset--;
@@ -46,10 +49,12 @@ public class SumOfElements {
     }
 
     public static void main(String[] args) {
-        int result = SumOfElements.findSumOfElements(new int[] { 1, 3, 12, 5, 15, 11 }, 3, 6);
-        System.out.println("Sum of all numbers between k1 and k2 smallest numbers: " + result);
+        int result = findSumOfElements(new int[] { 1, 3, 12, 5, 15, 11 }, 3, 6);
+        System.out.println("{ 1, 3, 12, 5, 15, 11 } Sum of all numbers between k1=3 and k2=6 smallest numbers: "
+                + result);
 
-        result = SumOfElements.findSumOfElements(new int[] { 3, 5, 8, 7 }, 1, 4);
-        System.out.println("Sum of all numbers between k1 and k2 smallest numbers: " + result);
+        result = findSumOfElements(new int[] { 3, 5, 8, 7 }, 1, 4);
+        System.out.println(" { 3, 5, 8, 7 } Sum of all numbers between k1=1 and k2=4 smallest numbers: "
+                + result);
     }
 }

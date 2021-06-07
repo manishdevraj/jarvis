@@ -12,7 +12,7 @@
 - [ ] [Breath first search](#bfs)
 - [ ] [Depth first search](#dfs)
 - [ ] [Heap](#heap)
-- [ ] [Subset](#subset)
+- [ ] [Recursion and Backtracking](#recursion)
 - [ ] [Binary search](#binarysearch)
 - [ ] [Bit XOR](#bitxor)
 - [ ] [Top K element](#topk)
@@ -70,7 +70,12 @@ It predominately uses min/max heaps to control the slots or at times needs to me
 
 ### [[⬆]](#toc) <a name='cyclingsort'>Cycling sort problem</a>
 
-Unsorted array in range 1…. n, find missing element
+Unsorted array in range 1.... n range, we need to find either duplicate or missing element. Range usually is large.
+
+* Find one or all missing numbers
+* Find one or all duplicate numbers
+* Find kth missing positive number
+* Find corrupt number
 
 ### [[⬆]](#toc) <a name='reverseinplace'>Reverse in place problem</a>
 
@@ -89,23 +94,82 @@ maintaining links between nodes.
 
 ### [[⬆]](#toc) <a name='bfs'>Breath first search problem</a>
 
-Level by level order with O(w) complexity. (Use queues with queue size as a level order iteration)
+Level by level order with O(w) complexity.
+These problems largely deal with handling tree that demands traversal by level. We are required to use iterative solutions
+using queue where queue size acts as a level order during iteration.
+
+* Connect all level order siblings
+* Find a tree path in zig-zag manner
+* Right side view of tree
+* Get level order average/sum etc.
+* Find level order successor element
+
 
 ### [[⬆]](#toc) <a name='dfs'>Depth first search problem</a>
 
-Track while traversing and use recursion with O(h) complexity. (Use stack) Path, path sum, path sequence.
+Track while traversing and use recursion with O(h) complexity.
+These problems largely deal with handling tree that demands traversal to its depth. We are required to use recursive
+solutions or use stack in case of iterative solutions.
+
+* Find binary tree diameter
+* Find branch sum of a binary tree
+* Invert a given binary tree
+* Find maximum or path sum of given binary tree
+* Get the node depth of a tree
+* Get lowest common ancestor 
 
 ### [[⬆]](#toc) <a name='heap'>Heap problem</a>
 
-Find smallest or largest in some part of collection (Works with sliding window and intervals)
+These problems typically deal with finding either smallest or largest in a collection. 
+Large part of problems also works with sliding window or interval problems.
 
-### [[⬆]](#toc) <a name='subset'>Subset problem</a>
+* Connect ropes while maintaining minimum cost
+* Frequency sort in ascending or descending order
+* Kth closest element to origin
+* Kth smallest or largest number in a sorted array
+* Kth smallest or largest number in a sorted matrix
+* Find maximum CPU load
+* Find minimum roms needed for a conference
+* Find top k frequent elements
+* Merge sorted list/array
+* Find median (sliding window median or median from stream too)
+* Rearrange strings with K distance apart
 
-Find permutation or combination. (Use BFS)
+### [[⬆]](#toc) <a name='recursion'>Recursion and Backtracking problem</a>
+
+These problems demand we break problem into smaller units and perform DFS or recursion on remaining equation.
+They also deal with cases when solving linearly is not feasible and we need to backtrack solution multiple times.
+
+* Find all permutations of characters or numbers
+* Find all possible combination of characters or numbers
+* Find powerset of list
+* Find phone number mnemonics
+* Solve sudoku
+* How many ways to climb staircase
+* Find all subsets or subsets with duplicates
+* Find unique BST trees
+* Find next permutation
+* Find possible matching tags or parenthesis that can be created
 
 ### [[⬆]](#toc) <a name='binarysearch'>Binary search problem</a>
 
-Array, list, matrix. search something. Bitonic, shifted search, rotate search, find ceiling or floor.
+These problems hint towards performing search to improve efficiency while finding certain elements. 
+Most of the time they could be a sorted arrays in either direction.
+
+* BST traversal
+* Find smallest or largest value in BST
+* Find closes value in BST
+* Find minimum value in a sorted but the rotated array
+* Find range of given element in a sorted array
+* Find first bad version 
+* Find lowest common ancestor
+* Construct a minimum height BST
+* Are two BST same without constructing BST
+* Search in the Bitonic array
+* Search in a sorted matrix
+* Search in an infinite sorted array
+* Search in a rotated array
+* Validate if it's a valid BST
 
 ### [[⬆]](#toc) <a name='bitxor'>Bit XOR problem</a>
 
@@ -113,7 +177,14 @@ Bitwise XOR based bit manipulations
 
 ### [[⬆]](#toc) <a name='topk'>Top K element problem</a>
 
-Find top, small, frequent element (Use Heap)
+These are added flavor to heap problems where we need to find certain top elements. The top elements could be anything -
+unique elements, least unique, max occurring chars or least occurring characters.
+
+* Rearrange string without having same chars at adjacent 
+* Minimum distinct elements in array after K removals
+* Top K frequent numbers or words
+* Rearrange string with K distance apart
+* Frequency sort to achieve something either to minimize cost or gain more length
 
 ### [[⬆]](#toc) <a name='kwaymerge'>K-way merge problem</a>
 
