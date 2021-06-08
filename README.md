@@ -34,6 +34,11 @@ E.g. could be -
 * Find a maximum subarray sum with a size K
 * Replace 0's with 1's in an array where K replacements are allowed, find maximum consecutive 1's 
 * Select maximum fruits of K type from an array and find maximum fruits that can be collected
+* Non constructible change of coins
+* Buy and sell stocks
+* Sliding window maximum
+* Sliding window median
+* Longest substring with k distict characters
 
 ### [[⬆]](#toc) <a name='twopointer'>Two pointer problem</a>
 
@@ -44,6 +49,9 @@ E.g. could be -
 * Perform sub array sorted needed to sort entire array 
 * Calculate sorted squares of integers in a sorted array
 * Find maximum water that can be trapped between pillar in an array
+* Find peak in an array
+* Find how many boards needed to save people
+* Backspace compare two strings
 
 
 ### [[⬆]](#toc) <a name='fastandslow'>Fast and slow pointer problem</a>
@@ -54,7 +62,8 @@ or middle of a linked list.
 * Happy number
 * Find a cycle in a linked list
 * Find if linked list is a palindrome or not
-
+* Find middle of the linked list
+* Rearrange linked list in a certain fashion
 
 ### [[⬆]](#toc) <a name='intervals'>Interval problem</a>
 
@@ -66,7 +75,7 @@ It predominately uses min/max heaps to control the slots or at times needs to me
 * Find possible meeting time between two calendars
 * Minimum meeting rooms needed for a set of conferences
 * Find a free time between employees
-
+* Min laptops needed for rental
 
 ### [[⬆]](#toc) <a name='cyclingsort'>Cycling sort problem</a>
 
@@ -103,7 +112,7 @@ using queue where queue size acts as a level order during iteration.
 * Right side view of tree
 * Get level order average/sum etc.
 * Find level order successor element
-
+* Maximum binary tree depth
 
 ### [[⬆]](#toc) <a name='dfs'>Depth first search problem</a>
 
@@ -130,8 +139,7 @@ Large part of problems also works with sliding window or interval problems.
 * Kth smallest or largest number in a sorted matrix
 * Find maximum CPU load
 * Find minimum roms needed for a conference
-* Find top k frequent elements
-* Merge sorted list/array
+* Find Nth ugly number
 * Find median (sliding window median or median from stream too)
 * Rearrange strings with K distance apart
 
@@ -170,6 +178,9 @@ Most of the time they could be a sorted arrays in either direction.
 * Search in an infinite sorted array
 * Search in a rotated array
 * Validate if it's a valid BST
+* Find ugly number given a, b, c 
+* Find the day when the revenue milestones achieved 
+* Find ceiling of a number
 
 ### [[⬆]](#toc) <a name='bitxor'>Bit XOR problem</a>
 
@@ -188,7 +199,14 @@ unique elements, least unique, max occurring chars or least occurring characters
 
 ### [[⬆]](#toc) <a name='kwaymerge'>K-way merge problem</a>
 
-K-way merge, min and max, sorted list, array and matrix (Use heap)
+In this problem type we are required to merge K sorted array/list/matrix to find a range of elements or min/max.
+This also uses heap to maintain min or max elements at the top
+
+* Merge K sorted list/array
+* K smallest number in M sorted lists
+* K smallest number in a sorted matrix
+* Find smallest range in a matrix that includes at least 2 elements for either side
+
 
 ### [[⬆]](#toc) <a name='boundedknapsack'>Bounded Knapsack (0/1)</a>
 
