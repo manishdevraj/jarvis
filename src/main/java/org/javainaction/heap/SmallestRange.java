@@ -17,6 +17,35 @@ import java.util.PriorityQueue;
  * Input: L1=[1, 9], L2=[4, 12], L3=[7, 10, 16]
  * Output: [9, 12]
  * Explanation: The range [9, 12] includes 9 from L1, 12 from L2 and 10 from L3.
+ *
+ * You have k lists of sorted integers in non-decreasing order. Find the smallest range that includes at least one number from each of the k lists.
+ *
+ * We define the range [a, b] is smaller than range [c, d] if b - a < d - c or a < c if b - a == d - c.
+ *
+ * Example 1:
+ *
+ * Input: nums = [[4,10,15,24,26],[0,9,12,20],[5,18,22,30]]
+ * Output: [20,24]
+ * Explanation:
+ * List 1: [4, 10, 15, 24,26], 24 is in range [20,24].
+ * List 2: [0, 9, 12, 20], 20 is in range [20,24].
+ * List 3: [5, 18, 22, 30], 22 is in range [20,24].
+ * Example 2:
+ *
+ * Input: nums = [[1,2,3],[1,2,3],[1,2,3]]
+ * Output: [1,1]
+ * Example 3:
+ *
+ * Input: nums = [[10,10],[11,11]]
+ * Output: [10,11]
+ * Example 4:
+ *
+ * Input: nums = [[10],[11]]
+ * Output: [10,11]
+ * Example 5:
+ *
+ * Input: nums = [[1],[2],[3],[4],[5],[6],[7]]
+ * Output: [1,7]
  */
 public class SmallestRange {
     static class Node {
@@ -41,7 +70,7 @@ public class SmallestRange {
                 currentMaxNumber = Math.max(currentMaxNumber, lists.get(i)[0]);
             }
 
-        // take the smallest (top) element form the min heap, if it gives us smaller range, update the ranges
+        // take the smallest (top) element from the min heap, if it gives us smaller range, update the ranges
         // if the array of the top element has more elements, insert the next element in the heap
         while (minHeap.size() == lists.size()) {
             Node node = minHeap.poll();
