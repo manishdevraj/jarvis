@@ -1,4 +1,4 @@
-package org.javainaction.bst;
+package org.javainaction.binarysearch;
 
 /**
  * Given a sorted array of numbers, find if a given number ‘key’ is present in the array.

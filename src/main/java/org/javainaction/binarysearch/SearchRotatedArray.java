@@ -1,4 +1,4 @@
-package org.javainaction.bst;
+package org.javainaction.binarysearch;
 
 /**
  * Search in Rotated Array (medium) #

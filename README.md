@@ -12,7 +12,8 @@
 - [ ] [Breath first search](#bfs)
 - [ ] [Depth first search](#dfs)
 - [ ] [Heap](#heap)
-- [ ] [Recursion and Backtracking](#recursion)
+- [ ] [Recursion and Backtracking](#recursion) 
+- [ ] [Binary search tree](#bst)
 - [ ] [Binary search](#binarysearch)
 - [ ] [Bit XOR](#bitxor)
 - [ ] [Top K element](#topk)
@@ -28,6 +29,8 @@
 
 ### [[⬆]](#toc) <a name='slidingwindow'>Sliding window problem</a>
 
+[source](src/main/java/org/javainaction/slidingwindow)
+
 It typically deals with trying to find contiguous subarray, sub list with some defined window of size 
 K or at times trying to find the window.
 E.g. could be - 
@@ -41,6 +44,8 @@ E.g. could be -
 * Longest substring with k distict characters
 
 ### [[⬆]](#toc) <a name='twopointer'>Two pointer problem</a>
+
+[source](src/main/java/org/javainaction/twopointers)
 
 Problem deals in finding a sum or arranging array in certain fashion when array is unsorted.
 E.g. could be -
@@ -56,6 +61,8 @@ E.g. could be -
 
 ### [[⬆]](#toc) <a name='fastandslow'>Fast and slow pointer problem</a>
 
+[source](src/main/java/org/javainaction/fastslow)
+
 In these problem statements there usually a single linked list and we are required to find a cycle or cycle length 
 or middle of a linked list.
 
@@ -66,6 +73,8 @@ or middle of a linked list.
 * Rearrange linked list in a certain fashion
 
 ### [[⬆]](#toc) <a name='intervals'>Interval problem</a>
+
+[source](src/main/java/org/javainaction/interval)
 
 Interval problems where we have an upper and lower bound of an interval and we need to find an overlapping or insert or 
 a non-overlapping intervals in a 2D array or pair in a single array
@@ -79,6 +88,8 @@ It predominately uses min/max heaps to control the slots or at times needs to me
 
 ### [[⬆]](#toc) <a name='cyclingsort'>Cycling sort problem</a>
 
+[source](src/main/java/org/javainaction/cyclicsort)
+
 Unsorted array in range 1.... n range, we need to find either duplicate or missing element. Range usually is large.
 
 * Find one or all missing numbers
@@ -87,6 +98,8 @@ Unsorted array in range 1.... n range, we need to find either duplicate or missi
 * Find corrupt number
 
 ### [[⬆]](#toc) <a name='reverseinplace'>Reverse in place problem</a>
+
+[source](src/main/java/org/javainaction/linkedlist)
 
 Set of problem statements where we are required to either merge or re-arrange a linked in certain way, 
 find duplicate or remove Nth value from end Or reverse linked list from middle or from two ranged index values.
@@ -103,6 +116,8 @@ maintaining links between nodes.
 
 ### [[⬆]](#toc) <a name='bfs'>Breath first search problem</a>
 
+[source](src/main/java/org/javainaction/bt/bfs)
+
 Level by level order with O(w) complexity.
 These problems largely deal with handling tree that demands traversal by level. We are required to use iterative solutions
 using queue where queue size acts as a level order during iteration.
@@ -116,6 +131,8 @@ using queue where queue size acts as a level order during iteration.
 
 ### [[⬆]](#toc) <a name='dfs'>Depth first search problem</a>
 
+[source](src/main/java/org/javainaction/bt/dfs)
+
 Track while traversing and use recursion with O(h) complexity.
 These problems largely deal with handling tree that demands traversal to its depth. We are required to use recursive
 solutions or use stack in case of iterative solutions.
@@ -128,6 +145,8 @@ solutions or use stack in case of iterative solutions.
 * Get lowest common ancestor 
 
 ### [[⬆]](#toc) <a name='heap'>Heap problem</a>
+
+[source](src/main/java/org/javainaction/heap)
 
 These problems typically deal with finding either smallest or largest in a collection. 
 Large part of problems also works with sliding window or interval problems.
@@ -145,6 +164,8 @@ Large part of problems also works with sliding window or interval problems.
 
 ### [[⬆]](#toc) <a name='recursion'>Recursion and Backtracking problem</a>
 
+[source](src/main/java/org/javainaction/recursion)
+
 These problems demand we break problem into smaller units and perform DFS or recursion on remaining equation.
 They also deal with cases when solving linearly is not feasible and we need to backtrack solution multiple times.
 
@@ -159,7 +180,9 @@ They also deal with cases when solving linearly is not feasible and we need to b
 * Find next permutation
 * Find possible matching tags or parenthesis that can be created
 
-### [[⬆]](#toc) <a name='binarysearch'>Binary search problem</a>
+### [[⬆]](#toc) <a name='bst'>Binary search tree</a>
+
+[source](src/main/java/org/javainaction/bst)
 
 These problems hint towards performing search to improve efficiency while finding certain elements. 
 Most of the time they could be a sorted arrays in either direction.
@@ -167,22 +190,31 @@ Most of the time they could be a sorted arrays in either direction.
 * BST traversal
 * Find smallest or largest value in BST
 * Find closes value in BST
-* Find minimum value in a sorted but the rotated array
-* Find range of given element in a sorted array
-* Find first bad version 
 * Find lowest common ancestor
 * Construct a minimum height BST
+* Validate if it's a valid BST
+
+### [[⬆]](#toc) <a name='binarysearch'>Binary search problem</a>
+
+[source](src/main/java/org/javainaction/binarysearch)
+
+These problems hint towards performing search to improve efficiency while finding certain elements.
+Most of the time they could be a sorted arrays in either direction.
+
+* Find minimum value in a sorted and rotated array
+* Find range of given element in a sorted array
+* Find first bad version
 * Are two BST same without constructing BST
 * Search in the Bitonic array
 * Search in a sorted matrix
 * Search in an infinite sorted array
 * Search in a rotated array
-* Validate if it's a valid BST
-* Find ugly number given a, b, c 
-* Find the day when the revenue milestones achieved 
+* Find ugly number given a, b, c
+* Find the day when the revenue milestones achieved
 * Find ceiling of a number
 
 ### [[⬆]](#toc) <a name='bitxor'>Bit XOR problem</a>
+
 
 Bitwise XOR based bit manipulations
 

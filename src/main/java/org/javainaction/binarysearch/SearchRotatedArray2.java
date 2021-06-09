@@ -1,4 +1,4 @@
-package org.javainaction.bst;
+package org.javainaction.binarysearch;
 
 /**
  * There is an integer array nums sorted in non-decreasing order (not necessarily with distinct values).

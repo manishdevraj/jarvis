@@ -8,10 +8,10 @@ package org.javainaction.bst;
  */
 public class ValidateBST {
     public static boolean validateBst(BST tree) {
-        return validateBSTRecursive(tree, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        return validateBSTRecursive(tree, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
-    private static boolean validateBSTRecursive(BST tree, int minValue, int maxValue) {
+    private static boolean validateBSTRecursive(BST tree, long minValue, long maxValue) {
         if (tree == null) return true;
         if (minValue > tree.value && maxValue <= tree.value) return false;
 

@@ -1,4 +1,4 @@
-package org.javainaction.bst;
+package org.javainaction.binarysearch;
 
 public class SearchInSortedMatrix {
     // O(n) time | O(1) space

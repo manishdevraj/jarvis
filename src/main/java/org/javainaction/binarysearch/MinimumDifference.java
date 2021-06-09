@@ -1,4 +1,4 @@
-package org.javainaction.bst;
+package org.javainaction.binarysearch;
 
 /**
  * Given an array of numbers sorted in ascending order, find the element in the array that has the minimum difference

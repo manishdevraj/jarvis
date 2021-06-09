@@ -1,4 +1,4 @@
-package org.javainaction.bst;
+package org.javainaction.binarysearch;
 
 /**
  * Given an array of numbers sorted in an ascending order, find the ceiling of a given number ‘key’.

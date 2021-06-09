@@ -1,6 +1,5 @@
-package org.javainaction.bst;
+package org.javainaction.binarysearch;
 
-import java.util.concurrent.Callable;
 
 /**
  * An ugly number is a positive integer that is divisible by a, b, or c.

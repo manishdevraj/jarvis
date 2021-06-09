@@ -1,4 +1,4 @@
-package org.javainaction.bst;
+package org.javainaction.binarysearch;
 
 /**
  * Find the maximum value in a given Bitonic array. An array is considered bitonic if it is monotonically increasing
