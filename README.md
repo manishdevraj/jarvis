@@ -18,11 +18,10 @@
 - [ ] [Bit XOR](#bitxor)
 - [ ] [Top K element](#topk)
 - [ ] [K-way merge](#kwaymerge)
-- [ ] [Bounded Knapsack (0/1)](#boundedknapsack)
+- [ ] [Knapsack](#knapsack)
 - [ ] [Fibonacci](#fibonacci)
 - [ ] [Longest Palindrome Subsequence or Substring](#longestpalindrome)
 - [ ] [Longest Common Subsequence or Substring](#longestcommon)
-- [ ] [Unbounded Knapsack](#unboundedknapsack)
 - [ ] [Topology sort](#topologysort)
 - [ ] [Tries](#tries)
 - [ ] [Greedy algorithms](#greedy)
@@ -240,9 +239,15 @@ This also uses heap to maintain min or max elements at the top
 * Find smallest range in a matrix that includes at least 2 elements for either side
 
 
-### [[⬆]](#toc) <a name='boundedknapsack'>Bounded Knapsack (0/1)</a>
+### [[⬆]](#toc) <a name='knapsack'>Knapsack</a>
 
-Refer to DP Knapsack problem using weight, capacity and items problems
+We are given set of items with their weight and a capacity, aim is to fit the items that fall under give capacity.
+In some situation weight in implicit and w need to create on out of given problem.
+
+* Min number of ways to make coins to match value
+* Find minimum cost while cutting rod with given cutting price
+* Find partition set with given value of equal partitions or K equal partitions
+* Find minimum cost to cut a stick
 
 ### [[⬆]](#toc) <a name='fibonacci'>Fibonacci problem</a>
 
@@ -269,10 +274,6 @@ else
     // refer to matrix to understand better
     dp[i][j] = max(dp[i-1][j], dp[i][j-1])
 ```
-
-### [[⬆]](#toc) <a name='unboundedknapsack'>Unbounded Knapsack problem</a>
-
-Capacity, item and weight with unlimited quantity. Refer to DP Knapsack
 
 ### [[⬆]](#toc) <a name='topologysort'>Topology sort problem</a>
 

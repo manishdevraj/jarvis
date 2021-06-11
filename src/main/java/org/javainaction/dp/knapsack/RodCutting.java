@@ -1,4 +1,5 @@
-package org.javainaction.dp.knapsackbounded;
+package org.javainaction.dp.knapsack;
+
 
 /**
  * Given a rod of length ‘n’, we are asked to cut the rod and sell the pieces in a way that will maximize the profit.
@@ -33,16 +34,23 @@ public class RodCutting {
 
         // process all rod lengths for all prices
         for(int i=0; i < lengthCount; i++) {
-            for(int len=1; len <= n; len++) {
-                int p1=0, p2=0;
+            for(int len = 1; len <= n; len++) {
+                int cost1 = 0, cost2 = 0;
                 if(lengths[i] <= len)
-                    p1 = prices[i] + dp[i][len-lengths[i]];
+                    cost1 = prices[i] + dp[i][len-lengths[i]];
                 if( i > 0 )
-                    p2 = dp[i-1][len];
-                dp[i][len] = Math.max(p1, p2);
+                    cost2 = dp[i-1][len];
+                dp[i][len] = Math.max(cost1, cost2);
             }
         }
-
+        /**
+         * [
+         * [0, 2, 4, 6, 8, 10],
+         * [0, 2, 6, 8, 12, 14],
+         * [0, 2, 6, 8, 12, 14],
+         * [0, 2, 6, 8, 12, 14],
+         * [0, 2, 6, 8, 12, 14]]
+         */
         // maximum price will be at the bottom-right corner.
         return dp[lengthCount-1][n];
     }

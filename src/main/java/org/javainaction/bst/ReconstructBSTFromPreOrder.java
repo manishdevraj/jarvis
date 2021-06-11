@@ -1,8 +1,6 @@
 package org.javainaction.bst;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Give a preorder of a BST, construct its original BST
@@ -28,6 +26,29 @@ import java.util.List;
  *
  */
 public class ReconstructBSTFromPreOrder {
+
+    //O(n) time | O(n) space
+    public BST reconstructBstDfsMain(List<Integer> preOrderTraversalValues) {
+        if (preOrderTraversalValues == null || preOrderTraversalValues.size() == 0)
+            return null;
+        Queue<Integer> queue = new LinkedList<>(preOrderTraversalValues);
+        return reconstructBstDfs(queue, Integer.MIN_VALUE,
+                Integer.MAX_VALUE);
+    }
+
+    public BST reconstructBstDfs(Queue<Integer> queue, int minValue,
+                                 int maxValue){
+
+        if (queue.isEmpty()) return null;
+
+        int current = queue.peek();
+        if (current < minValue || current >= maxValue) return null;
+        BST node = new BST(queue.poll());
+        node.left = reconstructBstDfs(queue, minValue, current);
+        node.right = reconstructBstDfs(queue, current, maxValue);
+        return node;
+    }
+
     //O(n^2) time | O(n) space
     public BST reconstructBst(List<Integer> preOrderTraversalValues) {
         if (preOrderTraversalValues.size() == 0) return null;
@@ -81,7 +102,7 @@ public class ReconstructBSTFromPreOrder {
 
     public static void main(String[] args) {
         List<Integer> preOrderTraversalValues =
-                new ArrayList<Integer>(Arrays.asList(10, 4, 2, 1, 3, 17, 19, 18));
+                new ArrayList<>(Arrays.asList(10, 4, 2, 1, 3, 17, 19, 18));
         BST tree = new BST(10);
         tree.left = new BST(4);
         tree.left.left = new BST(2);
@@ -93,6 +114,10 @@ public class ReconstructBSTFromPreOrder {
         List<Integer> expected = new ReconstructBSTFromPreOrder().getDfsOrder(tree, new ArrayList<>());
         var actual = new ReconstructBSTFromPreOrder().reconstructBst(preOrderTraversalValues);
         List<Integer> actualValues = new ReconstructBSTFromPreOrder().getDfsOrder(actual, new ArrayList<>());
-        System.out.println("Reconstructed BST " + actualValues);
+        System.out.println("Reconstructed BST partition method " + actualValues);
+
+        actual = new ReconstructBSTFromPreOrder().reconstructBst(preOrderTraversalValues);
+        actualValues = new ReconstructBSTFromPreOrder().getDfsOrder(actual, new ArrayList<>());
+        System.out.println("Reconstructed BST DFS method " + actualValues);
     }
 }

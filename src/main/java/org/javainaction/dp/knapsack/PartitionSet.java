@@ -21,19 +21,10 @@ import java.util.stream.IntStream;
  * Input: {2, 3, 4, 6}
  * Output: False
  * Explanation: The given set cannot be partitioned into two subsets with equal sum.
+ *
+ * @see PartitionEqualSubsetSum
  */
 public class PartitionSet {
-
-    public static void main(String[] args) {
-        PartitionSet ps = new PartitionSet();
-        int[] num = {1, 2, 3, 4};
-        System.out.println(ps.canPartition(num));
-        num = new int[]{1, 1, 3, 4, 7};
-        System.out.println(ps.canPartition(num));
-        num = new int[]{2, 3, 4, 6};
-        System.out.println(ps.canPartition(num));
-    }
-
     private boolean canPartition(int[] num) {
         int sum = IntStream.of(num).sum();
         if (sum % 2 != 0) return false;
@@ -50,5 +41,15 @@ public class PartitionSet {
         }
 
         return canPartitionRecursive(num, sum, currentIdx + 1);
+    }
+
+    public static void main(String[] args) {
+        PartitionSet ps = new PartitionSet();
+        int[] num = {1, 2, 3, 4};
+        System.out.println(ps.canPartition(num));
+        num = new int[]{1, 1, 3, 4, 7};
+        System.out.println(ps.canPartition(num));
+        num = new int[]{2, 3, 4, 6};
+        System.out.println(ps.canPartition(num));
     }
 }

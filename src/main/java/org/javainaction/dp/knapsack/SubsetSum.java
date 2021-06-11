@@ -1,5 +1,7 @@
 package org.javainaction.dp.knapsack;
 
+import java.util.Arrays;
+
 /**
  * Given a set of positive numbers, determine if there exists a subset whose sum is equal to a given number ‘S’.
  *
@@ -28,6 +30,13 @@ public class SubsetSum {
         System.out.println(ss.canPartition(num, 10));
         num = new int[] { 1, 3, 4, 8 };
         System.out.println(ss.canPartition(num, 6));
+
+        num = new int[]{ 1, 2, 3, 7 };
+        System.out.println(ss.canPartitionTopDown(num, 6));
+        num = new int[] { 1, 2, 7, 1, 5 };
+        System.out.println(ss.canPartitionTopDown(num, 10));
+        num = new int[] { 1, 3, 4, 8 };
+        System.out.println(ss.canPartitionTopDown(num, 6));
     }
 
     private boolean canPartition(int[] num, int sum) {
@@ -50,8 +59,35 @@ public class SubsetSum {
                 }
             }
         }
-
+        /**
+         * For first input
+         * [
+         * [T, T, F, F, F, F, F],
+         * [T, T, T, T, T, T, F],
+         * [T, T, T, T, T, T, T],
+         * [T, T, T, T, T, T, T]]
+         */
         // the bottom-right corner will have our answer.
         return dp[num.length - 1][sum];
+    }
+
+    public boolean canPartitionTopDown(int[] nums, int target) {
+        Boolean[][] dp = new Boolean[nums.length][target + 1];
+        return canPartitionRecursive(dp, nums, target, 0);
+    }
+
+    private boolean canPartitionRecursive(Boolean[][] dp, int[] nums, int target, int current) {
+        if (target == 0) return true;
+        if (nums.length <= current || target < 0) return false;
+
+        if (dp[current][target] != null) return dp[current][target];
+        boolean partitionOne = false;
+        if (nums[current] <= target)
+            partitionOne = canPartitionRecursive(dp, nums, target - nums[current], current + 1);
+
+        boolean partitionTwo = canPartitionRecursive(dp, nums, target, current + 1);
+
+        dp[current][target] = partitionOne || partitionTwo;
+        return dp[current][target];
     }
 }

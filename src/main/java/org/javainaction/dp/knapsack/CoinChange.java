@@ -1,4 +1,4 @@
-package org.javainaction.dp.knapsackbounded;
+package org.javainaction.dp.knapsack;
 
 /**
  * Given an infinite supply of ‘n’ coin denominations and a total money amount, we are asked to find the total
@@ -68,5 +68,9 @@ public class CoinChange {
         int[] denominations = {1, 2, 3};
         System.out.println(cc.countChange(denominations, 5));
         System.out.println(numberOfWaysToMakeChange(5, denominations));
+
+        int[] input = {1, 5};
+        System.out.println(cc.countChange(input, 6));
+        System.out.println(numberOfWaysToMakeChange(6, input));
     }
 }
