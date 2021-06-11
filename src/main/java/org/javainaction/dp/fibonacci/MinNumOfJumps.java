@@ -1,15 +1,36 @@
 package org.javainaction.dp.fibonacci;
 
+/**
+ * Given an integer array find the minimum number of jumps needed to reach at the end of array
+ * {3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3}
+ *
+ * Output would be 4
+ *
+ * 3 --> (4 or 2 ) --> (2 or 3) --> 7 --> 3
+ *
+ * Given an array of non-negative integers nums, you are initially positioned at the first index of the array.
+ *
+ * Each element in the array represents your maximum jump length at that position.
+ *
+ * Your goal is to reach the last index in the minimum number of jumps.
+ *
+ * You can assume that you can always reach the last index.
+ *
+ *
+ *
+ * Example 1:
+ *
+ * Input: nums = [2,3,1,1,4]
+ * Output: 2
+ * Explanation: The minimum number of jumps to reach the last index is 2. Jump 1 step from index 0 to 1, then 3 steps to the last index.
+ * Example 2:
+ *
+ * Input: nums = [2,3,0,1,4]
+ * Output: 2
+ */
 public class MinNumOfJumps {
-
-    public static void main(String[] args) {
-        System.out.println(minNumberOfJumps(new int[]{3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3}));
-        System.out.println(minNumberOfJumpsDP(new int[]{3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3}));
-        System.out.println(countMinJumps(new int[]{3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3}));
-    }
-
+    // O(n) time | O(1) space
     public static int minNumberOfJumps(int[] array) {
-        // O(n) time | O(1) space
         if(array.length == 1 ) return 0;
         int jumps = 0;
         int maxReach = array[0];
@@ -24,15 +45,12 @@ public class MinNumOfJumps {
         }
         return jumps + 1;
     }
-
+    // O(n ^ 2) time | O(n) space
     public static int minNumberOfJumpsDP(int[] array) {
-        // O(n ^ 2) time | O(n) space
+        if (array.length == 0) return -1;
         int[] jumps = new int[array.length];
         int max = Integer.MAX_VALUE;
-        if (array.length < 0) return -1;
-
         jumps[0] = 0;
-
         for(int index = 1; index < array.length; index++) {
             jumps[index] = max;
             for(int j = 0; j < index ; j++) {
@@ -47,9 +65,11 @@ public class MinNumOfJumps {
 
     /**
      * Easy to understand solution
+     *
      * @param jumps
      * @return
      */
+    // O(n ^ 2) time | O(n) space
     public static int countMinJumps(int[] jumps) {
         int[] dp = new int[jumps.length];
 
@@ -63,5 +83,11 @@ public class MinNumOfJumps {
         }
 
         return dp[jumps.length-1];
+    }
+
+    public static void main(String[] args) {
+        System.out.println(minNumberOfJumps(new int[]{3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3}));
+        System.out.println(minNumberOfJumpsDP(new int[]{3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3}));
+        System.out.println(countMinJumps(new int[]{3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3}));
     }
 }

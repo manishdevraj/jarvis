@@ -95,6 +95,7 @@ Unsorted array in range 1.... n range, we need to find either duplicate or missi
 * Find one or all duplicate numbers
 * Find kth missing positive number
 * Find corrupt number
+* Passing yearbook by each student
 
 ### [[⬆]](#toc) <a name='reverseinplace'>Reverse in place problem</a>
 
@@ -281,6 +282,7 @@ Jobs and dependencies of the job. Linear ordering with dependencies. Order thing
 
 ### [[⬆]](#toc) <a name='greedy'>Greedy algorithms</a>
 
-Algorithms with greedy approach and using data structure suitabe to get to the solution
+Algorithms with greedy approach and using data structure suitable to get to the solution
 * Find a possible events that can be attended in a conference
 * Partition a pattern of string such that each partition has at most single character
+* Find if we can jump to the end of the array from starting position
