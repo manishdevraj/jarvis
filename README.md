@@ -324,21 +324,21 @@ if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
 }
 maxLength = Math.max(maxLength, dp[i][j]);
 ```
-***** Longest common substring
+***** Longest common substring *****
 ```
 if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
     dp[i][j] = 1 + dp[i - 1][j - 1];
     maxLCSLength = Math.max(maxLCSLength, dp[i][j]);
 }
 ```
-***** Longest increasing subsequence
+***** Longest increasing subsequence *****
 ```
 if (nums[i] > nums[j]) {
     dp[i] = Math.max(dp[i], dp[j] + 1);
     maxLength = Math.max(maxLength, dp[i]);
 }
 ```
-***** Shortest common subsequence
+***** Shortest common subsequence *****
 ```
 //if last character of both string matched
 if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
