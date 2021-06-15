@@ -16,12 +16,6 @@ package org.javainaction.dp.longestcommonsub;
  */
 public class SubseqPatternMatching {
 
-    public static void main(String[] args) {
-        SubseqPatternMatching spm = new SubseqPatternMatching();
-        System.out.println(spm.findSubseqPatternCount("baxmx", "ax"));
-        System.out.println(spm.findSubseqPatternCount("tomorrow", "tor"));
-    }
-
     private int findSubseqPatternCount(String str, String pattern) {
         if (pattern == null || pattern.length() == 0) return 0;
         if (str == null || pattern.length() > str.length()) return 0;
@@ -44,6 +38,11 @@ public class SubseqPatternMatching {
         return dp[str.length()][pattern.length()];
     }
 
+    public int findSPMCountTopDown(String str, String pattern) {
+        Integer[][] dp = new Integer[str.length() + 1][pattern.length() + 1];
+        return findSPMCountRecursive(dp, str, pattern, 0, 0);
+    }
+
     private int findSPMCountRecursive(Integer[][] dp, String str, String pat, int strIndex, int patIndex) {
 
         // if we have reached the end of the pattern
@@ -57,11 +56,20 @@ public class SubseqPatternMatching {
         if(dp[strIndex][patIndex] == null) {
             int c1 = 0;
             if(str.charAt(strIndex) == pat.charAt(patIndex))
-                c1 = findSPMCountRecursive(dp, str, pat, strIndex+1, patIndex+1);
-            int c2 = findSPMCountRecursive(dp, str, pat, strIndex+1, patIndex);
+                c1 = findSPMCountRecursive(dp, str, pat, strIndex + 1, patIndex + 1);
+            int c2 = findSPMCountRecursive(dp, str, pat, strIndex + 1, patIndex);
             dp[strIndex][patIndex] = c1 + c2;
         }
 
         return dp[strIndex][patIndex];
+    }
+
+    public static void main(String[] args) {
+        SubseqPatternMatching spm = new SubseqPatternMatching();
+        System.out.println(spm.findSubseqPatternCount("baxmx", "ax"));
+        System.out.println(spm.findSubseqPatternCount("tomorrow", "tor"));
+        System.out.println(spm.findSPMCountTopDown("baxmx", "ax"));
+        System.out.println(spm.findSPMCountTopDown("tomorrow", "tor"));
+
     }
 }

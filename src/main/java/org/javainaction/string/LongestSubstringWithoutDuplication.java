@@ -2,7 +2,13 @@ package org.javainaction.string;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Given a string find its longest substring without duplication
+ * You can assume there can be only one longest substring
+ *
+ * Example: clementisacap
+ * Output: mentisac
+ */
 public class LongestSubstringWithoutDuplication {
     // O(n) time | O(min(n,a)) space  where a is unique alphabets in string
     public static String longestSubstringWithoutDuplication(String str) {

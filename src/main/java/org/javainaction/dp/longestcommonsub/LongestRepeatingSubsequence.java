@@ -1,23 +1,41 @@
 package org.javainaction.dp.longestcommonsub;
 
+/**
+ * Given a string, find the length of the longest repeating subsequence such that the two subsequences don’t have same
+ * string character at the same position, i.e., any i’th character in the two subsequences shouldn’t have the same
+ * index in the original string.
+ *
+ * Input: str = "abc"
+ * Output: 0
+ * There is no repeating subsequence
+ *
+ * Input: str = "aab"
+ * Output: 1
+ * The two subssequence are 'a'(first) and 'a'(second).
+ * Note that 'b' cannot be considered as part of subsequence
+ * as it would be at same index in both.
+ *
+ * Input: str = "aabb"
+ * Output: 2
+ *
+ * Input: str = "axxxy"
+ * Output: 2
+ */
 public class LongestRepeatingSubsequence {
-
-    public static void main(String[] args) {
-        LongestRepeatingSubsequence lrs = new LongestRepeatingSubsequence();
-        System.out.println(lrs.findLongestRepeatingSeqLength("tomorrow"));
-        System.out.println(lrs.findLongestRepeatingSeqLength("aabdbcec"));
-        System.out.println(lrs.findLongestRepeatingSeqLength("fmff"));
+    public int findLongRepeatingTopDown(String str) {
+        return findLRSLengthRecursive(str, 0, 0);
     }
-
-    private int findLRSLengthRecursive(String str, int i1, int i2) {
-        if(i1 == str.length() || i2 == str.length())
+    private int findLRSLengthRecursive(String str, int i, int j) {
+        if(i == str.length() || j == str.length())
             return 0;
 
-        if(i1 != i2 && str.charAt(i1) == str.charAt(i2))
-            return 1 + findLRSLengthRecursive(str, i1+1, i2+1);
+        //we found match so increment both indices
+        //also make sure we do not count same index
+        if(i != j && str.charAt(i) == str.charAt(j))
+            return 1 + findLRSLengthRecursive(str, i + 1, j + 1);
 
-        int c1 = findLRSLengthRecursive(str, i1, i2+1);
-        int c2 = findLRSLengthRecursive(str, i1+1, i2);
+        int c1 = findLRSLengthRecursive(str, i, j + 1);
+        int c2 = findLRSLengthRecursive(str, i + 1, j);
 
         return Math.max(c1, c2);
     }
@@ -36,5 +54,16 @@ public class LongestRepeatingSubsequence {
             }
         }
         return maxLength;
+    }
+
+    public static void main(String[] args) {
+        LongestRepeatingSubsequence lrs = new LongestRepeatingSubsequence();
+        System.out.println(lrs.findLongestRepeatingSeqLength("tomorrow"));
+        System.out.println(lrs.findLongestRepeatingSeqLength("aabdbcec"));
+        System.out.println(lrs.findLongestRepeatingSeqLength("fmff"));
+
+        System.out.println(lrs.findLongRepeatingTopDown("tomorrow"));
+        System.out.println(lrs.findLongRepeatingTopDown("aabdbcec"));
+        System.out.println(lrs.findLongRepeatingTopDown("fmff"));
     }
 }

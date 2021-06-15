@@ -252,7 +252,15 @@ In some situation weight in implicit and w need to create on out of given proble
 
 ### [[⬆]](#toc) <a name='fibonacci'>Fibonacci problem</a>
 
-Fibonacci problems, also refer DP version of it
+Fibonacci problems where typical solutions results in N! time complexity which we need to improve
+by recursively going top down or memoizing and making it iterative
+
+* Express number
+* Get the Fibonacci number
+* Maximize house robbery
+* Find minimum number of jumps
+* Staircase traversal 
+* Find minimum fee for staicase traversal
 
 ### [[⬆]](#toc) <a name='longestpalindrome'>Longest Palindrome Subsequence or Substring problem</a>
 
@@ -267,13 +275,78 @@ else
 
 ### [[⬆]](#toc) <a name='longestcommon'>Longest Common Subsequence or Substring problem</a>
 
+We have various variations of this problem where we need to find longest/shortest common subsequence and substring.
+These problems also deals with edit distance, longest increasing, repeating, alternating subsequence or substring
+
+* Find the edit distance to match two strings (insert/delete/replace actions) 
+* Find best team score with no conflicts in their age
+* Levenshtein distance
+* Longest common substring/subsequence
+* Longest alternating/increasing/bitonic subsequence
+* Min Ascii delete sum to match string
+* Min delete/insert required to make sequence sorted
+* Min removal needed to make it a mountain array
+* Find uncross lines
+* Find wiggle sequence
+
+***** Levenshtein distance *****
 ```
-if str (i) == str (i)
-    //If last and first characters of str are same use cross diagonal value
-    dp[i][j] = 1 + dp[i-1][j-1]
-else
-    // refer to matrix to understand better
-    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+
+if (str1.charAt(i - 1) == str2.charAt(j  - 1)) {
+    edits[i][j] = edits[i - 1][j - 1];
+} else {
+    edits[i][j] = 1 + Math.min(edits[i - 1][j - 1], //replace
+        Math.min(edits[i][j - 1], //insert
+        edits[i - 1][j])); //delete;
+}
+```
+***** Longest wiggle/alternating subsequence *****
+```
+if (nums[i] > nums[j]) {
+    // if nums[i] is BIGGER than nums[j] then we will consider the LAS ending at 'j' where the
+    // last two elements were in DESCENDING order
+    up[i] = Math.max(up[i], 1 + down[j]);
+    maxLength = Math.max(maxLength, up[i]);
+} else {
+    // if nums[i] is SMALLER than nums[j] then we will consider the LAS ending at 'j' where the
+    // last two elements were in ASCENDING order
+    down[i] = Math.max(down[i], 1 + up[j]);
+    maxLength = Math.max(maxLength, down[i]);
+}
+
+```
+***** Longest common subsequence *****
+```
+if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+    dp[i][j] = 1 + dp[i - 1][j - 1];
+} else {
+    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+}
+maxLength = Math.max(maxLength, dp[i][j]);
+```
+***** Longest common substring
+```
+if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+    dp[i][j] = 1 + dp[i - 1][j - 1];
+    maxLCSLength = Math.max(maxLCSLength, dp[i][j]);
+}
+```
+***** Longest increasing subsequence
+```
+if (nums[i] > nums[j]) {
+    dp[i] = Math.max(dp[i], dp[j] + 1);
+    maxLength = Math.max(maxLength, dp[i]);
+}
+```
+***** Shortest common subsequence
+```
+//if last character of both string matched
+if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+    dp[i][j] = 1 + dp[i - 1][j - 1];
+} else {
+    //if last character didn't match
+    dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1]);
+}
 ```
 
 ### [[⬆]](#toc) <a name='topologysort'>Topology sort problem</a>

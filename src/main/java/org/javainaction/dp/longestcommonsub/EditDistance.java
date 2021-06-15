@@ -22,15 +22,38 @@ package org.javainaction.dp.longestcommonsub;
  *        s2 = "ppsspqrt"
  * Output: 3
  * Explanation: Replace 'a' with 'p', 'o' with 'q', and insert 'r'.
+ *
+ * Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2.
+ *
+ * You have the following three operations permitted on a word:
+ *
+ * Insert a character
+ * Delete a character
+ * Replace a character
+ *
+ *
+ * Example 1:
+ *
+ * Input: word1 = "horse", word2 = "ros"
+ * Output: 3
+ * Explanation:
+ * horse -> rorse (replace 'h' with 'r')
+ * rorse -> rose (remove 'r')
+ * rose -> ros (remove 'e')
+ * Example 2:
+ *
+ * Input: word1 = "intention", word2 = "execution"
+ * Output: 5
+ * Explanation:
+ * intention -> inention (remove 't')
+ * inention -> enention (replace 'i' with 'e')
+ * enention -> exention (replace 'n' with 'x')
+ * exention -> exection (replace 'n' with 'c')
+ * exection -> execution (insert 'u')
+ *
+ * @see LevenshteinDistance
  */
 public class EditDistance {
-
-    public static void main(String[] args) {
-        EditDistance editDisatnce = new EditDistance();
-        System.out.println(editDisatnce.findMinOperations("bat", "but"));
-        System.out.println(editDisatnce.findMinOperations("abdca", "cbda"));
-        System.out.println(editDisatnce.findMinOperations("passpot", "ppsspqrt"));
-    }
 
     private int findMinOperations(String str1, String str2) {
         int[][] edits = new int[str1.length() + 1][str2.length() + 1];
@@ -41,7 +64,6 @@ public class EditDistance {
         }
 
         // If the strings have a matching character, we can recursively match for the remaining lengths
-
         for (int i = 0; i <= str2.length(); i++) {
             edits[0][i] = i;
         }
@@ -61,5 +83,12 @@ public class EditDistance {
         }
 
         return edits[str1.length()][str2.length()];
+    }
+
+    public static void main(String[] args) {
+        EditDistance editDisatnce = new EditDistance();
+        System.out.println(editDisatnce.findMinOperations("bat", "but"));
+        System.out.println(editDisatnce.findMinOperations("abdca", "cbda"));
+        System.out.println(editDisatnce.findMinOperations("passpot", "ppsspqrt"));
     }
 }

@@ -24,16 +24,6 @@ import java.util.Arrays;
  * sorted sequence. Sorted sequences are {3}, {2}, {1}, and {0}
  */
 public class MinDeleteSeqSorted {
-    public static void main(String[] args) {
-        MinDeleteSeqSorted mdss = new MinDeleteSeqSorted();
-        int[] nums = {4,2,3,6,10,1,12};
-        System.out.println(mdss.findMinimumDeletions(nums));
-        nums = new int[]{-4,10,3,7,15};
-        System.out.println(mdss.findMinimumDeletions(nums));
-        nums = new int[]{3,2,1,0};
-        System.out.println(mdss.findMinimumDeletions(nums));
-    }
-
     private int findMinimumDeletions(int[] nums) {
         return nums.length - findLISLength(nums);
     }
@@ -45,6 +35,7 @@ public class MinDeleteSeqSorted {
         int maxLength = 0;
         for (int i = 0; i < nums.length; i++) {
             for (int j = 0; j < i; j++) {
+                //compute LIS in bottom up fashion
                 if (nums[i] > nums[j] && dp[j] + 1 > dp[i]) {
                     dp[i] = dp[j] + 1;
                     maxLength = Math.max(maxLength, dp[i]);
@@ -52,5 +43,15 @@ public class MinDeleteSeqSorted {
             }
         }
         return maxLength;
+    }
+
+    public static void main(String[] args) {
+        MinDeleteSeqSorted mdss = new MinDeleteSeqSorted();
+        int[] nums = {4,2,3,6,10,1,12};
+        System.out.println(mdss.findMinimumDeletions(nums));
+        nums = new int[]{-4,10,3,7,15};
+        System.out.println(mdss.findMinimumDeletions(nums));
+        nums = new int[]{3,2,1,0};
+        System.out.println(mdss.findMinimumDeletions(nums));
     }
 }

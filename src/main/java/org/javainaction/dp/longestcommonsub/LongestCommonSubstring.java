@@ -15,7 +15,12 @@ public class LongestCommonSubstring {
         return maxLCSLength;
     }
 
-    private int findLCSLengthRecursive(Integer[][][] dp, String s1, String s2, int i1, int i2, int count) {
+    public static int findLCSTopdown(String s1, String s2) {
+        Integer[][][] dp = new Integer[s1.length() + 1][s2.length() + 1][];
+        return findLCSLengthRecursive(dp, s1, s2, 0, 0, 0);
+    }
+
+    private static int findLCSLengthRecursive(Integer[][][] dp, String s1, String s2, int i1, int i2, int count) {
         if(i1 == s1.length() || i2 == s2.length())
             return count;
 
@@ -33,6 +38,9 @@ public class LongestCommonSubstring {
 
     public static void main(String[] args) {
         LongestCommonSubstring lcs = new LongestCommonSubstring();
+        System.out.println(lcs.findLCSLength("abdca", "cbda"));
+        System.out.println(lcs.findLCSLength("passport", "ppsspt"));
+
         System.out.println(lcs.findLCSLength("abdca", "cbda"));
         System.out.println(lcs.findLCSLength("passport", "ppsspt"));
     }
