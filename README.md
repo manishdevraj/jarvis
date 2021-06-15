@@ -220,6 +220,8 @@ Bitwise XOR based bit manipulations
 
 ### [[⬆]](#toc) <a name='topk'>Top K element problem</a>
 
+[source](src/main/java/org/javainaction/heap)
+
 These are added flavor to heap problems where we need to find certain top elements. The top elements could be anything -
 unique elements, least unique, max occurring chars or least occurring characters.
 
@@ -230,6 +232,8 @@ unique elements, least unique, max occurring chars or least occurring characters
 * Frequency sort to achieve something either to minimize cost or gain more length
 
 ### [[⬆]](#toc) <a name='kwaymerge'>K-way merge problem</a>
+
+[source](src/main/java/org/javainaction/heap)
 
 In this problem type we are required to merge K sorted array/list/matrix to find a range of elements or min/max.
 This also uses heap to maintain min or max elements at the top
@@ -242,6 +246,8 @@ This also uses heap to maintain min or max elements at the top
 
 ### [[⬆]](#toc) <a name='knapsack'>Knapsack</a>
 
+[source](src/main/java/org/javainaction/dp/knapsack)
+
 We are given set of items with their weight and a capacity, aim is to fit the items that fall under give capacity.
 In some situation weight in implicit and w need to create on out of given problem.
 
@@ -251,6 +257,8 @@ In some situation weight in implicit and w need to create on out of given proble
 * Find minimum cost to cut a stick
 
 ### [[⬆]](#toc) <a name='fibonacci'>Fibonacci problem</a>
+
+[source](src/main/java/org/javainaction/dp/fibonacci)
 
 Fibonacci problems where typical solutions results in N! time complexity which we need to improve
 by recursively going top down or memoizing and making it iterative
@@ -274,6 +282,8 @@ else
 ```
 
 ### [[⬆]](#toc) <a name='longestcommon'>Longest Common Subsequence or Substring problem</a>
+
+[source](src/main/java/org/javainaction/dp/longestcommonsub)
 
 We have various variations of this problem where we need to find longest/shortest common subsequence and substring.
 These problems also deals with edit distance, longest increasing, repeating, alternating subsequence or substring
