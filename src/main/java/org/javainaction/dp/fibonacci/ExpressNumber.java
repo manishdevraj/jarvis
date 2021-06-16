@@ -18,17 +18,6 @@ package org.javainaction.dp.fibonacci;
  */
 public class ExpressNumber {
 
-    public static void main(String[] args) {
-        ExpressNumber en = new ExpressNumber();
-        System.out.println(en.countWaysMemoize(4));
-        System.out.println(en.countWaysMemoize(5));
-        System.out.println(en.countWaysMemoize(6));
-
-        System.out.println(en.bottomUpCountWays(4));
-        System.out.println(en.bottomUpCountWays(5));
-        System.out.println(en.bottomUpCountWays(6));
-    }
-
     private int countWaysMemoize(int n) {
         int[] dp = new int[n + 1];
         return countWaysMemoizeRecursive(dp, n);
@@ -55,5 +44,16 @@ public class ExpressNumber {
             dp[i] = dp[i - 1] + dp[i - 3] + dp[i - 4];
         }
         return dp[n];
+    }
+
+    public static void main(String[] args) {
+        ExpressNumber en = new ExpressNumber();
+        System.out.println(en.countWaysMemoize(4));
+        System.out.println(en.countWaysMemoize(5));
+        System.out.println(en.countWaysMemoize(6));
+
+        System.out.println(en.bottomUpCountWays(4));
+        System.out.println(en.bottomUpCountWays(5));
+        System.out.println(en.bottomUpCountWays(6));
     }
 }

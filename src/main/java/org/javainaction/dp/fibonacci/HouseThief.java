@@ -22,6 +22,7 @@ import java.util.Arrays;
  * Input: {2, 10, 14, 8, 1}
  * Output: 18
  * Explanation: The thief should steal from houses 10 + 8
+ * @see HouseRobber2
  */
 public class HouseThief {
     //Recursive memo (top-down)
@@ -74,6 +75,20 @@ public class HouseThief {
         return p2;
     }
 
+    // Iterative + 2 variables (bottom-up)
+    //O(n) time | O(1) space
+    private int findMaxStealIterativeBottomup(int[] wealth) {
+        int start = 0; int end = wealth.length - 1;
+        int preStolen = 0, curStolen = 0;
+        while (start <= end) {
+            int holdWealth = curStolen;
+            curStolen = Math.max(wealth[start] + preStolen, curStolen);
+            preStolen = holdWealth;
+            start++;
+        }
+        return curStolen;
+    }
+
     public static void main(String[] args) {
         HouseThief ht = new HouseThief();
         int[] wealth = {2, 5, 1, 3, 6, 2, 4};
@@ -90,6 +105,11 @@ public class HouseThief {
         System.out.println(ht.findMaxStealOptimized(wealth));
         wealth = new int[]{2, 10, 14, 8, 1};
         System.out.println(ht.findMaxStealOptimized(wealth));
+
+        wealth = new int[] {2, 5, 1, 3, 6, 2, 4};
+        System.out.println(ht.findMaxStealIterativeBottomup(wealth));
+        wealth = new int[]{2, 10, 14, 8, 1};
+        System.out.println(ht.findMaxStealIterativeBottomup(wealth));
     }
 
 }

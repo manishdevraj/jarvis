@@ -26,6 +26,7 @@ import java.util.List;
  *
  * Input: n = 1, k = 1
  * Output: [[1]]
+ * @see CombinationSum3
  */
 public class Combinations {
 
