@@ -369,3 +369,18 @@ Algorithms with greedy approach and using data structure suitable to get to the 
 * Find a possible events that can be attended in a conference
 * Partition a pattern of string such that each partition has at most single character
 * Find if we can jump to the end of the array from starting position
+
+### [[⬆]](#toc) <a name='tries'>Tries</a>
+
+[source](src/main/java/org/javainaction/trie)
+
+These are problems that follow pattern of building a type ahead search systems where we need to search
+series of strings/characters in another collection/ dictionary of strings. The nature evolves around efficiently storing
+dictionary such that we could do prefix or suffix search or whole keyword match search.
+
+E.g. could be -
+* Construct a prefix or suffix trie
+* Find longest word in a given dictionary
+* Find a matching word ina the Boggle board that can be match in either of 4 or 8 directions in 2D matrix
+* Given a dictionary do a prefix search
+* Given a dictionary do a suffix search

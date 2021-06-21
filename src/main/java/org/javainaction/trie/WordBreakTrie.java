@@ -14,23 +14,10 @@ import java.util.stream.Stream;
  *
  * Given the set of words 'bed', 'bath', 'bedbath', 'and', 'beyond', and the string "bedbathandbeyond",
  * return either ['bed', 'bath', 'and', 'beyond] or ['bedbath', 'and', 'beyond'].
+ *
+ * @see MultiStringSearch
  */
 public class WordBreakTrie {
-
-    public static void main(String[] arg) {
-        String[] words = {"the", "quick", "brown", "fox"};
-        String str = "thequickbrownfox";
-
-        List<String> output = wordBreak(words, str);
-        System.out.println(output);
-
-        System.out.println(wordBreak(new String[] {"bed", "bath", "bedbath", "and", "beyond"}, "bedbathandbeyond"));
-
-        String bigString = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
-        String[] repeatedWords = new String[]{"a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"};
-
-        System.out.println(wordBreak(repeatedWords, bigString));
-    }
 
     private static List<String> wordBreak(String[] words, String str) {
         SuffixTrie root = new SuffixTrie();
@@ -88,5 +75,20 @@ public class WordBreakTrie {
             node.children.put(endSymbol, null);
             node.word = str;
         }
+    }
+
+    public static void main(String[] arg) {
+        String[] words = {"the", "quick", "brown", "fox"};
+        String str = "thequickbrownfox";
+
+        List<String> output = wordBreak(words, str);
+        System.out.println(output);
+
+        System.out.println(wordBreak(new String[] {"bed", "bath", "bedbath", "and", "beyond"}, "bedbathandbeyond"));
+
+        String bigString = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
+        String[] repeatedWords = new String[]{"a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"};
+
+        System.out.println(wordBreak(repeatedWords, bigString));
     }
 }

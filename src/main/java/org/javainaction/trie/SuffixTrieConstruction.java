@@ -3,9 +3,27 @@ package org.javainaction.trie;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Build a Trie data structure where class should have a root node and should support :
+ * 1. Creating trie from a given string
+ * 2. Searching for a string in current trie
+ *
+ * Note that every string added to trie ends with an end character '*'
+ *
+ * Input : "babc"
+ *
+ * {
+ *     "c": {"*", true},
+ *     "b": {
+ *         "c": {"*", true},
+ *         "a": {"b": {"c": {"*", true}}}
+ *     },
+ *     "a": {"b": {"c": {"*", true}}}
+ * }
+ */
 public class SuffixTrieConstruction {
     static class TrieNode {
-        Map<Character, TrieNode> children = new HashMap<Character, TrieNode>();
+        Map<Character, TrieNode> children = new HashMap<>();
     }
 
     static class SuffixTrie {
@@ -47,5 +65,10 @@ public class SuffixTrieConstruction {
             }
             return node.children.containsKey(endSymbol);
         }
+    }
+
+    public static void main(String[] args) {
+        var trie = new SuffixTrieConstruction.SuffixTrie("babc");
+        System.out.println("Does trie contains 'abc' " + trie.contains("abc"));
     }
 }
