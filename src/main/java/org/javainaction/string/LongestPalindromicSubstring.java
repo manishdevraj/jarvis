@@ -1,5 +1,34 @@
 package org.javainaction.string;
 
+/**
+ * Write a function to return a string's longest palindrome
+ *
+ * Input: abaxyzzyxf
+ *
+ * Output: xyzzyx
+ *
+ * Given a string s, return the longest palindromic substring in s.
+ *
+ *
+ *
+ * Example 1:
+ *
+ * Input: s = "babad"
+ * Output: "bab"
+ * Note: "aba" is also a valid answer.
+ * Example 2:
+ *
+ * Input: s = "cbbd"
+ * Output: "bb"
+ * Example 3:
+ *
+ * Input: s = "a"
+ * Output: "a"
+ * Example 4:
+ *
+ * Input: s = "ac"
+ * Output: "a"
+ */
 public class LongestPalindromicSubstring {
     //O(n^2) time | O(1) space
     public static String longestPalindromicSubstring(String str) {
@@ -26,5 +55,37 @@ public class LongestPalindromicSubstring {
             end++;
         }
         return new int[] {start + 1, end};
+    }
+
+    //O (n^3) time | O(1) space
+    public static String longestPalindromicSubstringO3(String str) {
+        String longest = "";
+        for (int i = 0 ; i < str.length(); i++ ){
+            for ( int j = i; j < str.length(); j++) {
+                String subString = str.substring(i , j + 1);
+                if (subString.length() > longest.length()
+                        && isPalindrome(subString)) {
+                    longest = subString;
+                }
+            }
+        }
+        return longest;
+    }
+
+    public static boolean isPalindrome(String str) {
+        int start = 0;
+        int end = str.length() - 1;
+        while (start < end) {
+            if (str.charAt(start) != str.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(longestPalindromicSubstring("abaxyzzyxf"));
     }
 }

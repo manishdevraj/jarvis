@@ -21,20 +21,7 @@ package org.javainaction.dp.palindromsubseq;
  * Explanation: LPS could be "p", "q" or "r".
  */
 public class LongestPalindromicSubstring {
-    public static void main(String[] args) {
-        LongestPalindromicSubstring lps = new LongestPalindromicSubstring();
-        System.out.println(lps.findLPSLength("abdbca"));
-        System.out.println(lps.findLPSLength("cddpd"));
-        System.out.println(lps.findLPSLength("pqr"));
 
-        System.out.println(lps.findLPSLengthBottomup("abdbca"));
-        System.out.println(lps.findLPSLengthBottomup("cddpd"));
-        System.out.println(lps.findLPSLengthBottomup("pqr"));
-
-        System.out.println(lps.longestPalindromicSubstring("abdbca"));
-        System.out.println(lps.longestPalindromicSubstring("cddpd"));
-        System.out.println(lps.longestPalindromicSubstring("pqr"));
-    }
 
     public int findLPSLength(String str) {
         Integer[][] dp = new Integer[str.length()][str.length()];
@@ -71,13 +58,13 @@ public class LongestPalindromicSubstring {
             dp[i][i] = true;
 
         int maxLength = 1;
-        for (int startIdx = str.length() - 1; startIdx >= 0; startIdx--) {
-            for (int endIdx = startIdx + 1; endIdx < str.length(); endIdx++) {
-                if (str.charAt(startIdx) == str.charAt(endIdx)) {
+        for (int start = str.length() - 1; start >= 0; start--) {
+            for (int end = start + 1; end < str.length(); end++) {
+                if (str.charAt(start) == str.charAt(end)) {
                     // if it's a two character string or if the remaining string is a palindrome too
-                    if (dp[startIdx + 1][endIdx - 1] || endIdx - startIdx == 1) {
-                        dp[startIdx][endIdx] = true;
-                        maxLength = Math.max(maxLength, endIdx - startIdx + 1);
+                    if (dp[start + 1][end - 1] || end - start == 1) {
+                        dp[start][end] = true;
+                        maxLength = Math.max(maxLength, end - start + 1);
                     }
                 }
             }
@@ -112,5 +99,18 @@ public class LongestPalindromicSubstring {
         return new int[] {start + 1, end};
     }
 
+    public static void main(String[] args) {
+        LongestPalindromicSubstring lps = new LongestPalindromicSubstring();
+        System.out.println(lps.findLPSLength("abdbca"));
+        System.out.println(lps.findLPSLength("cddpd"));
+        System.out.println(lps.findLPSLength("pqr"));
 
+        System.out.println(lps.findLPSLengthBottomup("abdbca"));
+        System.out.println(lps.findLPSLengthBottomup("cddpd"));
+        System.out.println(lps.findLPSLengthBottomup("pqr"));
+
+        System.out.println(lps.longestPalindromicSubstring("abdbca"));
+        System.out.println(lps.longestPalindromicSubstring("cddpd"));
+        System.out.println(lps.longestPalindromicSubstring("pqr"));
+    }
 }

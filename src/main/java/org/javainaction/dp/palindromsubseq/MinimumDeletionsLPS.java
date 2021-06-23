@@ -58,6 +58,7 @@ package org.javainaction.dp.palindromsubseq;
  * it a palindrome. If the “minimum deletion count” is not more than ‘K’, the string will be K-Palindromic.
  */
 public class MinimumDeletionsLPS {
+
     public static int findMinimumDeletions(String st) {
         // subtracting the length of Longest Palindromic Subsequence from the length of
         // the input string to get minimum number of deletions
@@ -72,13 +73,13 @@ public class MinimumDeletionsLPS {
         for (int i = 0; i < st.length(); i++)
             dp[i][i] = 1;
 
-        for (int startIndex = st.length() - 1; startIndex >= 0; startIndex--) {
-            for (int endIndex = startIndex + 1; endIndex < st.length(); endIndex++) {
+        for (int start = st.length() - 1; start >= 0; start--) {
+            for (int end = start + 1; end < st.length(); end++) {
                 // case 1: elements at the beginning and the end are the same
-                if (st.charAt(startIndex) == st.charAt(endIndex)) {
-                    dp[startIndex][endIndex] = 2 + dp[startIndex + 1][endIndex - 1];
+                if (st.charAt(start) == st.charAt(end)) {
+                    dp[start][end] = 2 + dp[start + 1][end - 1];
                 } else { // case 2: skip one element either from the beginning or the end
-                    dp[startIndex][endIndex] = Math.max(dp[startIndex + 1][endIndex], dp[startIndex][endIndex - 1]);
+                    dp[start][end] = Math.max(dp[start + 1][end], dp[start][end - 1]);
                 }
             }
         }

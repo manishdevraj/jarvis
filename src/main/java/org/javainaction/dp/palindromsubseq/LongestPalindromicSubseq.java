@@ -12,6 +12,7 @@ package org.javainaction.dp.palindromsubseq;
  * Input: "abdbca"
  * Output: 5
  * Explanation: LPS is "abdba".
+ *
  * Example 2:
  *
  * Input: = "cddpd"
@@ -24,16 +25,7 @@ package org.javainaction.dp.palindromsubseq;
  * Explanation: LPS could be "p", "q" or "r".
  */
 public class LongestPalindromicSubseq {
-    public static void main(String[] args) {
-        LongestPalindromicSubseq lps = new LongestPalindromicSubseq();
-        System.out.println(lps.findLPSLength("abdbca"));
-        System.out.println(lps.findLPSLength("cddpd"));
-        System.out.println(lps.findLPSLength("pqr"));
 
-        System.out.println(lps.findLPSLengthBottomup("abdbca"));
-        System.out.println(lps.findLPSLengthBottomup("cddpd"));
-        System.out.println(lps.findLPSLengthBottomup("pqr"));
-    }
 
     public int findLPSLength(String st) {
         Integer[][] dp = new Integer[st.length()][st.length()];
@@ -67,15 +59,26 @@ public class LongestPalindromicSubseq {
             dp[i][i] = 1;
         }
 
-        for (int startIdx = str.length() - 1; startIdx >= 0; startIdx--) {
-            for (int endIdx = startIdx + 1; endIdx < str.length(); endIdx++) {
-                if (str.charAt(startIdx) == str.charAt(endIdx)) {
-                    dp[startIdx][endIdx] = 2 + dp[startIdx + 1][endIdx - 1];
+        for (int start = str.length() - 1; start >= 0; start--) {
+            for (int end = start + 1; end < str.length(); end++) {
+                if (str.charAt(start) == str.charAt(end)) {
+                    dp[start][end] = 2 + dp[start + 1][end - 1];
                 } else {
-                    dp[startIdx][endIdx] = Math.max(dp[startIdx + 1][endIdx], dp[startIdx][endIdx - 1]);
+                    dp[start][end] = Math.max(dp[start + 1][end], dp[start][end - 1]);
                 }
             }
         }
         return dp[0][str.length() - 1];
+    }
+
+    public static void main(String[] args) {
+        LongestPalindromicSubseq lps = new LongestPalindromicSubseq();
+        System.out.println(lps.findLPSLength("abdbca"));
+        System.out.println(lps.findLPSLength("cddpd"));
+        System.out.println(lps.findLPSLength("pqr"));
+
+        System.out.println(lps.findLPSLengthBottomup("abdbca"));
+        System.out.println(lps.findLPSLengthBottomup("cddpd"));
+        System.out.println(lps.findLPSLengthBottomup("pqr"));
     }
 }

@@ -38,12 +38,12 @@ public class PalindromePartitioningMinCuts {
             isPalindrome[i][i] = true;
 
         // populate isPalindrome table
-        for (int startIndex = st.length() - 1; startIndex >= 0; startIndex--) {
-            for (int endIndex = startIndex + 1; endIndex < st.length(); endIndex++) {
-                if (st.charAt(startIndex) == st.charAt(endIndex)) {
+        for (int start = st.length() - 1; start >= 0; start--) {
+            for (int end = start + 1; end < st.length(); end++) {
+                if (st.charAt(start) == st.charAt(end)) {
                     // if it's a two character string or if the remaining string is a palindrome too
-                    if (endIndex - startIndex == 1 || isPalindrome[startIndex + 1][endIndex - 1]) {
-                        isPalindrome[startIndex][endIndex] = true;
+                    if (end - start == 1 || isPalindrome[start + 1][end - 1]) {
+                        isPalindrome[start][end] = true;
                     }
                 }
             }
@@ -52,16 +52,16 @@ public class PalindromePartitioningMinCuts {
         // now lets populate the second table, every index in 'cuts' stores the minimum cuts needed
         // for the substring from that index till the end
         int[] cuts = new int[st.length()];
-        for (int startIndex = st.length() - 1; startIndex >= 0; startIndex--) {
+        for (int start = st.length() - 1; start >= 0; start--) {
             int minCuts = st.length(); // maximum cuts
-            for (int endIndex = st.length() - 1; endIndex >= startIndex; endIndex--) {
-                if (isPalindrome[startIndex][endIndex]) {
+            for (int end = st.length() - 1; end >= start; end--) {
+                if (isPalindrome[start][end]) {
                     // we can cut here as we got a palindrome
                     // also we dont need any cut if the whole substring is a palindrome
-                    minCuts = (endIndex == st.length() - 1) ? 0 : Math.min(minCuts, 1 + cuts[endIndex + 1]);
+                    minCuts = (end == st.length() - 1) ? 0 : Math.min(minCuts, 1 + cuts[end + 1]);
                 }
             }
-            cuts[startIndex] = minCuts;
+            cuts[start] = minCuts;
         }
 
         return cuts[0];

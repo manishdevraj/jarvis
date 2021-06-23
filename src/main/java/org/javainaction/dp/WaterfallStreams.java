@@ -1,4 +1,4 @@
-package org.javainaction.array;
+package org.javainaction.dp;
 
 /**
  * Given a 2D array with 1 representing block and 0 with free space, if we put water from a source column at 0th row

@@ -25,6 +25,7 @@
 - [ ] [Topology sort](#topologysort)
 - [ ] [Tries](#tries)
 - [ ] [Greedy algorithms](#greedy)
+- [ ] [Array](#array)
 
 ### [[⬆]](#toc) <a name='slidingwindow'>Sliding window problem</a>
 
@@ -272,6 +273,34 @@ by recursively going top down or memoizing and making it iterative
 
 ### [[⬆]](#toc) <a name='longestpalindrome'>Longest Palindrome Subsequence or Substring problem</a>
 
+[source](src/main/java/org/javainaction/dp/palindromsubseq)
+
+These problems deals with computation around finding different ways to get the palindrome in strings. Idea typically is
+to find longest palindrome substring or subsequence which deals with complexity of finding palindromes in every 
+possible substring.
+
+* Find longest palindrome substring
+* Find longest palindrome subsequence
+* Find minimum insertion or deletion to make a string a palindrome string
+* Minimum number of cuts needed to make each substring a palindrome
+* Count different palindrome subsequence
+
+***** Longest palindrome substring *****
+```
+for (int start = str.length() - 1; start >= 0; start--) {
+    for (int end = start + 1; end < str.length(); end++) {
+        if (str.charAt(start) == str.charAt(end)) {
+            // if it's a two character string or if the remaining string is a palindrome too
+            if (dp[start + 1][end - 1] || end - start == 1) {
+                dp[start][end] = true;
+                maxLength = Math.max(maxLength, end - start + 1);
+            }
+        }
+    }
+}
+
+```
+***** Longest palindrome subsequence *****
 ```
 if str (start) == str (end)
     //If last and first characters of str are same
@@ -279,6 +308,21 @@ if str (start) == str (end)
 else
     // refer to matrix to understand better
     dp[start][end] = max(dp[start+1][end], dp[start][end-1]) 
+```
+***** After memoizing palindrome, get minimum cuts *****
+
+```
+for (int start = st.length() - 1; start >= 0; start--) {
+    int minCuts = st.length(); // maximum cuts
+    for (int end = st.length() - 1; end >= start; end--) {
+        if (isPalindrome[start][end]) {
+            // we can cut here as we got a palindrome
+            // also we dont need any cut if the whole substring is a palindrome
+            minCuts = (end == st.length() - 1) ? 0 : Math.min(minCuts, 1 + cuts[end + 1]);
+        }
+    }
+    cuts[start] = minCuts;
+}
 ```
 
 ### [[⬆]](#toc) <a name='longestcommon'>Longest Common Subsequence or Substring problem</a>
@@ -384,3 +428,24 @@ E.g. could be -
 * Find a matching word ina the Boggle board that can be match in either of 4 or 8 directions in 2D matrix
 * Given a dictionary do a prefix search
 * Given a dictionary do a suffix search
+
+### [[⬆]](#toc) <a name='array'>Array</a>
+
+[source](src/main/java/org/javainaction/array)
+
+These are series of problems with mix solving technique when given an array.
+
+* Apartment hunting
+* Count good triplets
+* Move zero to left or right
+* Pancake sorting
+* Rotate array
+* Tournament winner
+* Ugly number
+* Water jug problem
+* Straight line
+* Largest range
+* Minimum increments to make array unique
+* Move elements to right
+* Buy and sell stock
+* Reverse to make it equal

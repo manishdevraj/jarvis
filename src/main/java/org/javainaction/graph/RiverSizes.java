@@ -55,9 +55,7 @@ public class RiverSizes {
             currentRiverSize++;
             //find all neighbours
             List<Integer[]> unvisitedNeighbors = getUnvisitedNeighbors(i, j, matrix, visited);
-            for(Integer[] neighbor : unvisitedNeighbors) {
-                nodesToExplore.add(neighbor);
-            }
+            nodesToExplore.addAll(unvisitedNeighbors);
         }
         //if we found any river then add it's size to result
         if(currentRiverSize > 0) {

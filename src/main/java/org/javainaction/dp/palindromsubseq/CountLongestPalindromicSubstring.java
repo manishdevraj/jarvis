@@ -52,5 +52,6 @@ public class CountLongestPalindromicSubstring {
         System.out.println(findCPS("abdbca"));
         System.out.println(findCPS("cdpdd"));
         System.out.println(findCPS("pqr"));
+        System.out.println(findCPS("abc"));
     }
 }

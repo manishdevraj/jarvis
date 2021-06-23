@@ -15,19 +15,7 @@ import java.util.stream.IntStream;
  * index (we cannot hold 5 since it would run off to the left), so we can trap 8 units of water.
  */
 public class WaterArea {
-    public static void main(String[] args){
-        System.out.println(Arrays.toString(new int[]{2, 1, 2})
-                + " can store water area : " + waterArea(new int[]{2, 1, 2}));
-        System.out.println(Arrays.toString(new int[]{3, 0, 1, 3, 0, 5})
-                + " can store water area : " + waterArea(new int[]{3, 0, 1, 3, 0, 5}));
 
-        System.out.println(Arrays.toString(new int[]{2, 1, 2})
-                + " can store water area : " + waterAreaSpaceOne(new int[]{2, 1, 2}));
-        System.out.println(Arrays.toString(new int[]{3, 0, 1, 3, 0, 5})
-                + " can store water area : " + waterAreaSpaceOne(new int[]{3, 0, 1, 3, 0, 5}));
-        System.out.println(Arrays.toString(new int[]{1, 8,6,2,5,4,8,3,7})
-                + " can store water area : " + waterAreaSpaceOne(new int[]{1,8,6,2,5,4,8,3,7}));
-    }
 
     /**
      * To do so, we have to realize that, if we just look at the two extremeties of the input array, the smaller of
@@ -105,5 +93,19 @@ public class WaterArea {
         }
 
         return IntStream.of(maxes).sum();
+    }
+
+    public static void main(String[] args){
+        System.out.println(Arrays.toString(new int[]{2, 1, 2})
+                + " can store water area : " + waterArea(new int[]{2, 1, 2}));
+        System.out.println(Arrays.toString(new int[]{3, 0, 1, 3, 0, 5})
+                + " can store water area : " + waterArea(new int[]{3, 0, 1, 3, 0, 5}));
+
+        System.out.println(Arrays.toString(new int[]{2, 1, 2})
+                + " can store water area : " + waterAreaSpaceOne(new int[]{2, 1, 2}));
+        System.out.println(Arrays.toString(new int[]{3, 0, 1, 3, 0, 5})
+                + " can store water area : " + waterAreaSpaceOne(new int[]{3, 0, 1, 3, 0, 5}));
+        System.out.println(Arrays.toString(new int[]{1, 8,6,2,5,4,8,3,7})
+                + " can store water area : " + waterAreaSpaceOne(new int[]{1,8,6,2,5,4,8,3,7}));
     }
 }
