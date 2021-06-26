@@ -26,6 +26,7 @@
 - [ ] [Tries](#tries)
 - [ ] [Greedy algorithms](#greedy)
 - [ ] [Array](#array)
+- [ ] [Sorting](#sorting)
 
 ### [[⬆]](#toc) <a name='slidingwindow'>Sliding window problem</a>
 
@@ -403,11 +404,24 @@ if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
 }
 ```
 
-### [[⬆]](#toc) <a name='topologysort'>Topology sort problem</a>
+### [[⬆]](#toc) <a name='topologysort'>Topology sort</a>
 
-Jobs and dependencies of the job. Linear ordering with dependencies. Order things when they are interdependent kind of problems.
+[source](src/main/java/org/javainaction/topologicalsort)
+
+In these set of problems we are given number of tasks/jobs/items and their dependencies on each other that we cannot
+perform action before prerequisite is met. Key here is to maintain graph of these jobs with their dependent children
+and a edge between each of these vertices. Certainly we need to start with vertices whose incoming edges are zero
+meaning they are not dependent on anybody. And we traverse dfs until we can comfortably execute all jobs without any 
+conflicts.
+
+* Task scheduling
+* Course that we can undertake
+* Job order with their prerequisites
+* Loud and rich people find quietest person
 
 ### [[⬆]](#toc) <a name='greedy'>Greedy algorithms</a>
+
+[source](src/main/java/org/javainaction/greedy)
 
 Algorithms with greedy approach and using data structure suitable to get to the solution
 * Find a possible events that can be attended in a conference
@@ -449,3 +463,20 @@ These are series of problems with mix solving technique when given an array.
 * Move elements to right
 * Buy and sell stock
 * Reverse to make it equal
+
+### [[⬆]](#toc) <a name='sorting'>Sorting</a>
+
+[source](src/main/java/org/javainaction/sort)
+
+Different sorting algorithms
+
+* Bubble sort
+* Insertion sort
+* Selection sort
+* Merge sort
+* Quick sort
+* Heap sort
+* Raddix sort
+* Count inversions
+* Three number sort (Dutch national flag)
+* How many smaller than current number

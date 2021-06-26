@@ -1,5 +1,14 @@
 package org.javainaction.sort;
 
+import java.util.Arrays;
+
+/**
+ * Implement insertion sort
+ * Idea is to use two pointer both starting from left i = 1 and j = i and check if next number is less that prev number
+ * swap until both pointers reached the end
+ *
+ * "We insert the element that is unsorted"
+ */
 public class InsertionSort {
     //Best: O(n) time | O(1) space
     //Average: O(n^2) time | O(1) space;
@@ -46,4 +55,24 @@ public class InsertionSort {
      *     A[j + 1] = temp;
      * }
      */
+
+    public static int[] insertionSortInversions(int[] arr) {
+        int k = 0;
+        for (int i = 1; i < arr.length; i++) {
+            int temp = arr[i];
+            int j;
+            for (j = i - 1; j >=0 && temp < arr[j]; j--) {
+                arr[j + 1] = arr[j];
+                k++;//number of inversions
+            }
+            arr[j + 1] = temp;
+        }
+        return arr;
+    }
+
+    public static void main(String[] arg) {
+        int[] input = {5, 2, 8, 5, 6, 3, 9};
+        System.out.println(Arrays.toString(InsertionSort.insertionSort(input)));
+        System.out.println(Arrays.toString(InsertionSort.insertionSortInversions(input)));
+    }
 }

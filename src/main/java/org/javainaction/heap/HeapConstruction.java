@@ -90,7 +90,7 @@ public class HeapConstruction {
     public static void main(String[] args) {
         MinHeap minHeap =
                 new MinHeap(
-                        new ArrayList<Integer>(
+                        new ArrayList<>(
                                 Arrays.asList(48, 12, 24, 7, 8, -5, 24, 391, 24, 56, 2, 6, 8, 41)));
         minHeap.insert(76);
         assert isMinHeapPropertySatisfied(minHeap.heap);

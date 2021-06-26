@@ -34,7 +34,7 @@ public class TaskScheduling {
         HashMap<Integer, List<Integer>> graph = new HashMap<>(); // adjacency list graph
         for (int i = 0; i < tasks; i++) {
             inDegree.put(i, 0);
-            graph.put(i, new ArrayList<Integer>());
+            graph.put(i, new ArrayList<>());
         }
 
         // b. Build the graph
