@@ -485,6 +485,8 @@ Different sorting algorithms
 
 ### [[⬆]](#toc) <a name='string'>String</a>
 
+[source](src/main/java/org/javainaction/string)
+
 Problems around manipulating/matching strings such as palindrome, anagram, match string, encoding, cipher, etc.
 
 * Caesar cypher
