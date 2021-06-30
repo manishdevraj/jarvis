@@ -15,7 +15,6 @@
 - [ ] [Recursion and Backtracking](#recursion) 
 - [ ] [Binary search tree](#bst)
 - [ ] [Binary search](#binarysearch)
-- [ ] [Bit XOR](#bitxor)
 - [ ] [Top K element](#topk)
 - [ ] [K-way merge](#kwaymerge)
 - [ ] [Knapsack](#knapsack)
@@ -26,6 +25,7 @@
 - [ ] [Tries](#tries)
 - [ ] [Greedy algorithms](#greedy)
 - [ ] [Array](#array)
+- [ ] [String](#string)
 - [ ] [Sorting](#sorting)
 
 ### [[⬆]](#toc) <a name='slidingwindow'>Sliding window problem</a>
@@ -214,11 +214,6 @@ Most of the time they could be a sorted arrays in either direction.
 * Find ugly number given a, b, c
 * Find the day when the revenue milestones achieved
 * Find ceiling of a number
-
-### [[⬆]](#toc) <a name='bitxor'>Bit XOR problem</a>
-
-
-Bitwise XOR based bit manipulations
 
 ### [[⬆]](#toc) <a name='topk'>Top K element problem</a>
 
@@ -423,10 +418,17 @@ conflicts.
 
 [source](src/main/java/org/javainaction/greedy)
 
-Algorithms with greedy approach and using data structure suitable to get to the solution
+Algorithms with greedy approach tend to get solved by choosing greedy choices and using data structure suitable to
+get to the solution
+
 * Find a possible events that can be attended in a conference
 * Partition a pattern of string such that each partition has at most single character
 * Find if we can jump to the end of the array from starting position
+* Minimum waiting time to execute jobs
+* Find the starting city from where we can travel clockwise to all other cities
+* Find if we can complete travel from any point where we have cost and fuel from that point
+* Find maximum or minimum speed for Tandem bicycle
+* Assign task such that all tasks are executed as fast as possible
 
 ### [[⬆]](#toc) <a name='tries'>Tries</a>
 
@@ -476,7 +478,21 @@ Different sorting algorithms
 * Merge sort
 * Quick sort
 * Heap sort
-* Raddix sort
+* Radix sort
 * Count inversions
 * Three number sort (Dutch national flag)
 * How many smaller than current number
+
+### [[⬆]](#toc) <a name='string'>String</a>
+
+Problems around manipulating/matching strings such as palindrome, anagram, match string, encoding, cipher, etc.
+
+* Caesar cypher
+* Run length encoding
+* Valid IP addresses
+* Find the Jewels in the stone
+* Ransom note
+* String permutations
+* Reverse words in string sentence
+* Longest balanced substring
+* First non repeating character

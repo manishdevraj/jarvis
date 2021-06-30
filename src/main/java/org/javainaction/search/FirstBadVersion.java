@@ -20,31 +20,22 @@ package org.javainaction.search;
  * call isBadVersion(4) -> true
  *
  * Then 4 is the first bad version.
+ * @see org.javainaction.binarysearch.FirstBadVersion
  */
 public class FirstBadVersion {
     private static boolean[] versions = {false, false, false, true, true};
-    public static void main(String[] arg) {
-        System.out.println("First bad version between 1 ... " + versions.length
-                + " is -> " + firstBadVersion(versions.length));
-    }
-
     public static int firstBadVersion(int n) {
         int start = 1;
         int end = n;
-        while(start <= end) {
-            int middle = (start + end) / 2;
-            boolean isBad = isBadVersion(middle);
-            if (isBad) {
-                if (middle == 1 || !isBadVersion(middle - 1)) {
-                    return middle;
-                } else {
-                    end = middle - 1;
-                }
+        while(start < end) {
+            int middle = start + (end - start) / 2;
+            if (isBadVersion(middle)) {
+                 end = middle;
             } else {
                 start = middle + 1;
             }
         }
-        return 0;
+        return start;
     }
 
     //Helper method not part of original question
@@ -53,5 +44,10 @@ public class FirstBadVersion {
             return versions[i - 1];
         else
             return false;
+    }
+
+    public static void main(String[] arg) {
+        System.out.println("First bad version between 1 ... " + versions.length
+                + " is -> " + firstBadVersion(versions.length));
     }
 }

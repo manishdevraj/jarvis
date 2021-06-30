@@ -26,8 +26,10 @@ package org.javainaction.string;
  * Constraints:
  *
  * You may assume that both strings contain only lowercase letters.
+ *
+ * @see MinimumCharactersForWords
  */
-public class RansomeNote {
+public class RansomNote {
     public boolean canConstruct(String ransomNote, String magazine) {
         int[] mags = new int[26];
         for (char c : magazine.toCharArray()) {
@@ -38,5 +40,11 @@ public class RansomeNote {
             if (--mags[c - 'a'] < 0) return false;
         }
         return true;
+    }
+
+    public static void main(String[] args) {
+        var obj = new RansomNote();
+        System.out.println(obj.canConstruct("a", "b"));
+        System.out.println(obj.canConstruct("aa", "aab"));
     }
 }

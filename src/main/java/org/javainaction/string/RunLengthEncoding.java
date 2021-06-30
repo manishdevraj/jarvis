@@ -10,17 +10,6 @@ package org.javainaction.string;
  */
 public class RunLengthEncoding {
 
-    public static void main(String[] args){
-        String encode = "4A3B2C1D2A";
-        String decode = "AAAABBBCCDAA";
-        System.out.println("Encoded value for "+ decode +" is " + encode(decode));
-        System.out.println("Encoded value for AAAA is " + encode("AAAA"));
-
-        System.out.println("Encoded value for "+ encode +" is " + decode(encode));
-        System.out.println("Encoded value for 4A is " + decode("4A"));
-
-    }
-
     public static String encode(String input) {
         if (input == null || input.isEmpty()) return null;
         StringBuilder builder = new StringBuilder();
@@ -54,5 +43,16 @@ public class RunLengthEncoding {
             i+=2;
         }
         return builder.toString();
+    }
+
+    public static void main(String[] args){
+        String encode = "4A3B2C1D2A";
+        String decode = "AAAABBBCCDAA";
+        System.out.println("Encoded value for "+ decode +" is " + encode(decode));
+        System.out.println("Encoded value for AAAA is " + encode("AAAA"));
+
+        System.out.println("Encoded value for "+ encode +" is " + decode(encode));
+        System.out.println("Encoded value for 4A is " + decode("4A"));
+
     }
 }

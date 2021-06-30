@@ -2,6 +2,10 @@ package org.javainaction.bt;
 
 import java.util.Stack;
 
+/**
+ * The distance between node in a binary tree and its root call node depth.
+ * Given a Binary tree find all kinds of node depth 
+ */
 public class AllKindsOfNodeDepths {
     //O(nlog(n)) time | O(h) space
     public static int allKindsOfNodeDepths(BinaryTree root) {
@@ -37,5 +41,19 @@ public class AllKindsOfNodeDepths {
             left = null;
             right = null;
         }
+    }
+
+    public static void main(String[] args) {
+        var root = new BinaryTree(1);
+        root.left = new BinaryTree(2);
+        root.left.left = new BinaryTree(4);
+        root.left.left.left = new BinaryTree(8);
+        root.left.left.right = new BinaryTree(9);
+        root.left.right = new BinaryTree(5);
+        root.right = new BinaryTree(3);
+        root.right.left = new BinaryTree(6);
+        root.right.right = new BinaryTree(7);
+        int actual = allKindsOfNodeDepths(root);
+        System.out.println(actual);
     }
 }
