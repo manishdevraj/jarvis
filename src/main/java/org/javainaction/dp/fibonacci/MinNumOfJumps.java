@@ -16,8 +16,6 @@ package org.javainaction.dp.fibonacci;
  *
  * You can assume that you can always reach the last index.
  *
- *
- *
  * Example 1:
  *
  * Input: nums = [2,3,1,1,4]
@@ -36,10 +34,14 @@ public class MinNumOfJumps {
         int maxReach = array[0];
         int steps = array[0];
         for(int i = 1; i < array.length - 1; i++) {
+            //we can travel up to max range of value of steps we can take either last max or current index + value
             maxReach = Math.max(maxReach, array[i] + i);
             steps--;
             if (steps == 0) {
                 jumps++;
+                //we need to account for steps we already have taken since we have found maxReach
+                //at i = 1 : 4 we had max reach = 5 and we ran out of steps at i = 3 : 1
+                //since we travelled 3 steps out of 5 already we need have max reach = 2 remaining steps at i = 3
                 steps = maxReach - i;
             }
         }
@@ -54,6 +56,7 @@ public class MinNumOfJumps {
         for(int index = 1; index < array.length; index++) {
             jumps[index] = max;
             for(int j = 0; j < index ; j++) {
+                //we have reached at point where
                 if (array[j] >= index - j) {
                     jumps[index] = Math.min(jumps[index], jumps[j] + 1);
                     j++;

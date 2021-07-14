@@ -1,9 +1,6 @@
 package org.javainaction.interval;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * Given a list of intervals representing the start and end time of ‘N’ meetings, find the minimum number of rooms required to hold all the meetings.
@@ -34,6 +31,7 @@ import java.util.PriorityQueue;
  *
  * Here is a visual representation of Example 4:
  * @see org.javainaction.heap.MaximumCPULoad
+ * @see LaptopRentals
  */
 public class MinimumMeetingRooms {
     static class Meeting {
@@ -49,16 +47,23 @@ public class MinimumMeetingRooms {
     public static int findMinimumMeetingRooms(List<Meeting> meetings) {
         if (meetings == null || meetings.size() == 0) return 0;
 
-        Collections.sort(meetings,
-                (a, b) -> Integer.compare(a.start, b.start));
+        //sort meeting by start time
+        meetings.sort((a, b) -> Integer.compare(a.start, b.start));
+
         int minRooms = 0;
         PriorityQueue<Meeting> heap = new PriorityQueue<>(meetings.size(),
-                (a, b) -> Integer.compare(a.end, b.end));
+                Comparator.comparingInt(a -> a.end));
+
         for (Meeting meeting : meetings) {
+            //when current meetings need room no earlier than previous meeting end then we can remove
+            //need to have unique room
+            //[0, 2] by previous meeting and [2, 4] by current meeting then we can give earlier room to current meeting
+            //min heap will contain single element indicating only one is needed between two of these meetings
             while (!heap.isEmpty() && meeting.start >= heap.peek().end) {
                 heap.poll();
             }
             heap.offer(meeting);
+            //size of heap denotes overlapping meeting so is # of required rooms
             minRooms = Math.max(minRooms, heap.size());
         }
         return minRooms;

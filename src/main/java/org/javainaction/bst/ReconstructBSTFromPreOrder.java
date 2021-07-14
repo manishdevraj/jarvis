@@ -5,13 +5,17 @@ import java.util.*;
 /**
  * Give a preorder of a BST, construct its original BST
  *
- * Given an array of integers preorder, which represents the preorder traversal of a BST (i.e., binary search tree), construct the tree and return its root.
+ * Given an array of integers preorder, which represents the preorder traversal of a BST (i.e., binary search tree),
+ * construct the tree and return its root.
  *
- * It is guaranteed that there is always possible to find a binary search tree with the given requirements for the given test cases.
+ * It is guaranteed that there is always possible to find a binary search tree with the given requirements for
+ * the given test cases.
  *
- * A binary search tree is a binary tree where for every node, any descendant of Node.left has a value strictly less than Node.val, and any descendant of Node.right has a value strictly greater than Node.val.
+ * A binary search tree is a binary tree where for every node, any descendant of Node.left has a value strictly less
+ * than Node.val, and any descendant of Node.right has a value strictly greater than Node.val.
  *
- * A preorder traversal of a binary tree displays the value of the node first, then traverses Node.left, then traverses Node.right.
+ * A preorder traversal of a binary tree displays the value of the node first, then traverses Node.left, then traverses
+ * Node.right.
  *
  *
  * Example 1:
@@ -24,6 +28,7 @@ import java.util.*;
  * Input: preorder = [1,3]
  * Output: [1,null,3]
  *
+ * @see SerializeDeserializeBST where deserialize uses the same concept
  */
 public class ReconstructBSTFromPreOrder {
 
@@ -42,8 +47,10 @@ public class ReconstructBSTFromPreOrder {
         if (queue.isEmpty()) return null;
 
         int current = queue.peek();
+        //if values are out of bounds then not part of this node's subtree
         if (current < minValue || current >= maxValue) return null;
         BST node = new BST(queue.poll());
+        //user pre order to build BST
         node.left = reconstructBstDfs(queue, minValue, current);
         node.right = reconstructBstDfs(queue, current, maxValue);
         return node;
@@ -56,7 +63,26 @@ public class ReconstructBSTFromPreOrder {
         int current = preOrderTraversalValues.get(0);
         int rightRootIndex = preOrderTraversalValues.size();
 
+        //same are earlier example but instead of comparing bounds we check next root right index and divide
+        // tree between left tree : between 1... right index
+        // right tree : 4... size of pre order array
         //find first root index of current node
+        // [8, 5, 1, 7, 10, 12] //value
+        // [0, 1, 2, 3, 4, 5] //index
+
+        //[8, 5, 1, 7, 10, 12]
+        //iteration 1:... cur : 0 and right index : 4, leftTree(1,4), rightTree(4, 6) => yields BST(8)
+        // [5, 1, 7]
+        //iteration 1.1:... cur : 0 and right index : 2, leftTree(1,2), rightTree(2, 2) => yields BST(5)
+        // [1, 7]
+        //iteration 1.2:... cur : 0 and right index : 1, leftTree(1,1), rightTree(1, 1) => yields BST(1)
+        // [7]
+        //iteration 1.3:... cur : 0 and right index : 1  => yields BST(7)
+        // [10, 12]
+        //iteration 2:... cur : 0 and right index : 1, leftTree(1,1), rightTree(1, 1) => yields BST(10)
+        // [7]
+        //iteration 1.2:... cur : 0 and right index : 1  => yields BST(12)
+        
         for (int i = 1; i < preOrderTraversalValues.size(); i++) {
             int value = preOrderTraversalValues.get(i);
             if (value >= current) {
@@ -66,11 +92,9 @@ public class ReconstructBSTFromPreOrder {
         }
 
         //left sub tree is between current and right root index
-        BST leftSubtree = reconstructBst(preOrderTraversalValues.subList(1,
-                rightRootIndex));
+        BST leftSubtree = reconstructBst(preOrderTraversalValues.subList(1, rightRootIndex));
         //right sub tree is between right root index and remaining order
-        BST rightSubtree = reconstructBst(preOrderTraversalValues.subList(rightRootIndex,
-                preOrderTraversalValues.size()));
+        BST rightSubtree = reconstructBst(preOrderTraversalValues.subList(rightRootIndex, preOrderTraversalValues.size()));
 
         BST bst = new BST(current);
         bst.left = leftSubtree;
@@ -116,7 +140,7 @@ public class ReconstructBSTFromPreOrder {
         List<Integer> actualValues = new ReconstructBSTFromPreOrder().getDfsOrder(actual, new ArrayList<>());
         System.out.println("Reconstructed BST partition method " + actualValues);
 
-        actual = new ReconstructBSTFromPreOrder().reconstructBst(preOrderTraversalValues);
+        actual = new ReconstructBSTFromPreOrder().reconstructBstDfsMain(preOrderTraversalValues);
         actualValues = new ReconstructBSTFromPreOrder().getDfsOrder(actual, new ArrayList<>());
         System.out.println("Reconstructed BST DFS method " + actualValues);
     }

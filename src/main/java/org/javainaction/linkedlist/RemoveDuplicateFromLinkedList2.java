@@ -12,7 +12,6 @@ import java.util.List;
  *
  * Example 1:
  *
- *
  * Input: head = [1,2,3,3,4,4,5]
  * Output: [1,2,5]
  * Example 2:
@@ -52,9 +51,8 @@ public class RemoveDuplicateFromLinkedList2 {
 
     public static void main(String[] args) {
         LinkedList head = createLinkedList(new int[]{1,2,3,3,4,4,5});
-        System.out.println("{1,2,3,3,4,4,5} after removing all duplicates : " + head);
+        System.out.println("{1,2,3,3,4,4,5} after removing all duplicates : " + deleteDuplicates(head));
     }
-
 
     public static LinkedList createLinkedList(int[] array) {
         LinkedList node;

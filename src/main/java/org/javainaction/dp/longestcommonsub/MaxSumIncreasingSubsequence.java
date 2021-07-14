@@ -19,19 +19,30 @@ import java.util.List;
  * Input: {-4,10,3,7,15}
  * Output: 25
  * Explanation: The increaseing sequences are {10, 15} and {3,7,15}.
- * @see BestTeamWithNoConflicts
+ * @see LongestIncreasingSubsequence
+ * @see LongestIncreasingSubseqArray
+ *
  */
 public class MaxSumIncreasingSubsequence {
     public static int getMaxSumIncreasingSubseq(int[] nums) {
+        //clone the array because to mark sum at each index as value of themselves
         int[] sums = nums.clone();
-        int maxSumIdx = 0;
+
+        //idea is to capture the longest increasing subsequence where sum of their values is maximum
+        //when we start max at start of index is value at start
         int max = sums[0];
+
         for (int i = 0; i < nums.length; i++) {
             for (int j = 0; j < i; j++) {
+                // unlike LIS where we just compute total length by adding LIS at i as dp[j] + 1
+                // we replace 1 with num[i] and sum array becomes memoized information
+                // we need to check if sum[i] which is memo is smaller than sum[j] + num[i], when nums[i] > nums[j]
+                //if so store that value as that will be maximum
                 if (nums[i] > nums[j] && sums[j] + nums[i] > sums[i]) {
                     sums[i] = sums[j] + nums[i];
                 }
             }
+            //store maximum sum
             max = Math.max(sums[i], max);
         }
         return max;

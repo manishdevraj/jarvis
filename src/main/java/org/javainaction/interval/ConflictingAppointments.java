@@ -34,11 +34,12 @@ public class ConflictingAppointments {
 
     public static boolean canAttendAllAppointments(Interval[] intervals) {
         if (intervals == null || intervals.length == 0) return true;
-
+        //swap by start times between appointments
         Arrays.sort(intervals, (a, b) -> Integer.compare(a.start, b.start));
         for (int i = 0; i < intervals.length - 1; i++) {
             Interval previous = intervals[i];
             Interval next = intervals[i + 1];
+            //we have an overlapping interval
             if (next.start < previous.end) {
                 return false;
             }

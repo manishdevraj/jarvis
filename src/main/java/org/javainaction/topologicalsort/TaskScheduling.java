@@ -22,6 +22,7 @@ import java.util.*;
  * Input: Tasks=6, Prerequisites=[2, 5], [0, 5], [0, 4], [1, 4], [3, 2], [1, 3]
  * Output: true
  * Explanation: A possible sceduling of tasks is: [0 1 4 3 2 5]
+ * @see JobOrder
  */
 public class TaskScheduling {
     public static boolean isSchedulingPossible(int tasks, int[][] prerequisites) {

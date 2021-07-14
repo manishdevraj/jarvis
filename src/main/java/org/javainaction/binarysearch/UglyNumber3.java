@@ -27,6 +27,7 @@ package org.javainaction.binarysearch;
  *
  * Input: n = 1000000000, a = 2, b = 217983653, c = 336916467
  * Output: 1999999984
+ *
  */
 public class UglyNumber3 {
     /**

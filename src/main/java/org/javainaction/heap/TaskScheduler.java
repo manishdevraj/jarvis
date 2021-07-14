@@ -21,9 +21,12 @@ import java.util.*;
  * Output: 5
  * Explanation: a -> b -> idle -> idle -> a
  *
- * Given a characters array tasks, representing the tasks a CPU needs to do, where each letter represents a different task. Tasks could be done in any order. Each task is done in one unit of time. For each unit of time, the CPU could complete either one task or just be idle.
+ * Given a characters array tasks, representing the tasks a CPU needs to do,
+ * where each letter represents a different task. Tasks could be done in any order. Each task is done in one
+ * unit of time. For each unit of time, the CPU could complete either one task or just be idle.
  *
- * However, there is a non-negative integer n that represents the cooldown period between two same tasks (the same letter in the array), that is that there must be at least n units of time between any two same tasks.
+ * However, there is a non-negative integer n that represents the cooldown period between two same tasks
+ * (the same letter in the array), that is that there must be at least n units of time between any two same tasks.
  *
  * Return the least number of units of times that the CPU will take to finish all the given tasks.
  *
@@ -53,6 +56,7 @@ import java.util.*;
  * Explanation:
  * One possible solution is
  * A -> B -> C -> A -> D -> E -> A -> F -> G -> A -> idle -> idle -> A -> idle -> idle -> A
+ * @see MaximumCPULoad
  */
 public class TaskScheduler {
     public static int scheduleTasks(char[] tasks, int k) {
@@ -68,18 +72,29 @@ public class TaskScheduler {
         int intervalCount = 0;
         while (!maxHeap.isEmpty()) {
             List<Map.Entry<Character, Integer>> waitList = new ArrayList<>();
-            int n = k + 1; // try to execute as many as 'k+1' tasks from the max-heap
+            // try to execute as many as 'k+1' tasks from the max-heap
+            int n = k + 1;
+            //this is our window to execute all tasks
             for (; n > 0 && !maxHeap.isEmpty(); n--) {
+                //each execution is single interval
                 intervalCount++;
                 Map.Entry<Character, Integer> currentEntry = maxHeap.poll();
+                //add task to waiting list if there is still remaining to be executed based on frequency value
                 if (currentEntry.getValue() > 1) {
                     currentEntry.setValue(currentEntry.getValue() - 1);
                     waitList.add(currentEntry);
                 }
             }
-            maxHeap.addAll(waitList); // put all the waiting list back on the heap
-            if (!maxHeap.isEmpty())
-                intervalCount += n; // we'll be having 'n' idle intervals for the next iteration
+            //if we have any items in our waiting list put all the waiting list back on the heap
+            maxHeap.addAll(waitList);
+            //do we have items to execute but could not execute due to duplicate tasks
+            //even though we had n = k + 1 window
+            // [a, a, c] with window of 3 we cannot execute one a task so we need to account for that as an additional
+            //idle with value of n
+            if (!maxHeap.isEmpty()) {
+                // we'll be having 'n' idle intervals for the next iteration
+                intervalCount += n;
+            }
         }
 
         // if we were successful in appending all the characters to the result string, return it

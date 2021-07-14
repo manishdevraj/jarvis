@@ -38,6 +38,8 @@ public class MeasuringCups {
 
     public boolean canMeasureInRange(int[][] measuringCups, Map<String, Boolean> memoization,
                                      int low, int high) {
+        //memoization is needed so we have all combinations of low and high cup measurements
+        //as it is not compulsory that measurement will happen sequentially that matches the criteria
         String memoizeKey = String.valueOf(low) + ":" + String.valueOf(high);
         if (memoization.containsKey(memoizeKey)) {
             return memoization.get(memoizeKey);
@@ -54,6 +56,7 @@ public class MeasuringCups {
                 canMeasure = true;
                 break;
             }
+            //we need to make sure we do not go into negative measurements
             int newLow = Math.max(0, low - cup[0]);
             int newHigh = Math.max(0, high - cup[1]);
 

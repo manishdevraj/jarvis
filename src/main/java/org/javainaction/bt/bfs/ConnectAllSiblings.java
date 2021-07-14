@@ -21,47 +21,27 @@ import java.util.Queue;
  *
  */
 public class ConnectAllSiblings {
-    static  class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode next;
-
-        TreeNode(int x) {
-            val = x;
-            left = right = next = null;
-        }
-
-        @Override
-        public String toString() {
-            return "TreeNode{" +
-                    "val=" + val +
-                    //", left=" + left +
-                    //", right=" + right +
-                    ", next=" + next +
-                    '}';
-        }
-    };
-
     public static void connect(TreeNode root) {
         if (root == null) return;
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         TreeNode previous = null;
+
         while (!queue.isEmpty()) {
             int levelSize = queue.size();
             for (int i = 0; i < levelSize; i++) {
                 TreeNode currentNode = queue.poll();
-                if (previous != null) {
-                    previous.next = currentNode;
-                }
-                if (currentNode != null) previous = currentNode;
+                //connect last node with current node
+                //last node could be previous level order successor
+                if (previous != null) previous.next = currentNode;
 
-                if (currentNode.left != null)
-                    queue.add(currentNode.left);
-                if (currentNode.right != null)
-                    queue.add(currentNode.right);
+                if (currentNode != null) {
+                    //keep track of previous node
+                    previous = currentNode;
+                    if (currentNode.left != null) queue.add(currentNode.left);
+                    if (currentNode.right != null)  queue.add(currentNode.right);
+                }
             }
         }
     }
@@ -73,17 +53,45 @@ public class ConnectAllSiblings {
         root.left.left = new TreeNode(9);
         root.right.left = new TreeNode(10);
         root.right.right = new TreeNode(5);
-
-        System.out.println(root);
+        root.printLevelOrder();
 
         ConnectAllSiblings.connect(root);
 
         // level order traversal using 'next' pointer
         TreeNode current = root;
-        System.out.println("Traversal using 'next' pointer: " + root);
-        while (current != null) {
-            System.out.print(current.val + " ");
-            current = current.next;
-        }
+        System.out.println("Traversal using 'next' pointer: ");
+        current.printLevelOrder();
     }
+
+    static  class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode next;
+
+        TreeNode(int x) {
+            val = x;
+            left = right = next = null;
+        }
+
+        // level order traversal using 'next' pointer
+        void printLevelOrder() {
+            TreeNode nextLevelRoot = this;
+            while (nextLevelRoot != null) {
+                TreeNode current = nextLevelRoot;
+                nextLevelRoot = null;
+                while (current != null) {
+                    System.out.print(current.val + " ");
+                    if (nextLevelRoot == null) {
+                        if (current.left != null)
+                            nextLevelRoot = current.left;
+                        else if (current.right != null)
+                            nextLevelRoot = current.right;
+                    }
+                    current = current.next;
+                }
+                System.out.println();
+            }
+        }
+    };
 }

@@ -19,6 +19,8 @@ import java.util.List;
  *
  * Input: [2, 4, 5, 6, 9], K = 3, X = 10
  * Output: [5, 6, 9]
+ * @see org.javainaction.binarysearch.KClosestElements
+ * @see org.javainaction.binarysearch.FindKClosestElements
  */
 public class KClosestElements {
     public static List<Integer> findClosestElements(int[] arr, int K, Integer X) {

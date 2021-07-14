@@ -19,6 +19,7 @@ package org.javainaction.greedy;
 public class ValidStartingCity {
 
     public int validStartingCity(int[] distances, int[] fuel, int mpg) {
+        //this is cost to reach to ith city
         int milesRemaining = 0;
         int minMilesRemaining = 0;
         int startingCity = 0;

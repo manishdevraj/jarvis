@@ -6,10 +6,11 @@ import java.util.List;
 
 /**
  * Build heap with following methods
- * insert:
- * remove:
- * buildHeap:
- * peek:
+ *
+ * insert: Insert element
+ * remove: Removes element
+ * buildHeap: Build heap using given array
+ * peek: Peek element
  */
 public class HeapConstruction {
     static class MinHeap {

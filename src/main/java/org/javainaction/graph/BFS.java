@@ -11,7 +11,7 @@ import java.util.Queue;
 public class BFS {
     static class Node {
         String name;
-        List<Node> children = new ArrayList<Node>();
+        List<Node> children = new ArrayList<>();
 
         public Node(String name) {
             this.name = name;
@@ -22,8 +22,10 @@ public class BFS {
             queue.add(this);
             while (!queue.isEmpty()) {
                 Node current = queue.poll();
-                array.add(current.name);
-                queue.addAll(current.children);
+                if (current != null) {
+                    array.add(current.name);
+                    queue.addAll(current.children);
+                }
             }
             return array;
         }
@@ -36,14 +38,14 @@ public class BFS {
     }
 
     public static void main(String[] args) {
-        BFS.Node graph = new BFS.Node("A");
+        var graph = new Node("A");
         graph.addChild("B").addChild("C").addChild("D");
         graph.children.get(0).addChild("E").addChild("F");
         graph.children.get(2).addChild("G").addChild("H");
         graph.children.get(0).children.get(1).addChild("I").addChild("J");
         graph.children.get(2).children.get(0).addChild("K");
         String[] expected = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"};
-        List<String> inputArray = new ArrayList<String>();
+        var inputArray = new ArrayList<String>();
         System.out.println(graph.breadthFirstSearch(inputArray));
     }
 }

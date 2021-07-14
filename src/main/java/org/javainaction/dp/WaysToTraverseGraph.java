@@ -19,7 +19,7 @@ package org.javainaction.dp;
  *  3. Down, Right, Down
  *
  *  Output: 10
- *
+ * @see UniquePaths
  */
 public class WaysToTraverseGraph {
     //O(n * m) time | O(n * m) space

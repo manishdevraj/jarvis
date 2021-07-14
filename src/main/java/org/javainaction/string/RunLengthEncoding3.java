@@ -1,7 +1,5 @@
 package org.javainaction.string;
 
-import java.util.Arrays;
-
 /**
  * Given an array of characters chars, compress it using the following algorithm:
  *
@@ -54,10 +52,13 @@ public class RunLengthEncoding3 {
             chars[index++] = chars[left];
 
             if (frequency > 1) {
+                //we might have more single digit, convert frequency into character array and append
+                //like 12 frequency will be converted into [1, 2] and appended at original character
                 for (char digit : String.valueOf(frequency).toCharArray()){
                     chars[index++] = digit;
                 }
             }
+            //shrink window to right as we have computed all characters between and their frequencies
             left = right;
         }
         return index;

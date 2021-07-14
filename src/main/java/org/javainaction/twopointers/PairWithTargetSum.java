@@ -2,8 +2,20 @@ package org.javainaction.twopointers;
 
 import java.util.HashMap;
 
+/**
+ * Fid a pair matching a target sum in a given array. Return indices of such a pair
+ * If no pair matches given sum then return [-1, -1]
+ *
+ * Example: [1, 2, 3, 4, 6], target = 6
+ * Output [2, 4]
+ *
+ * Example: [2, 5, 9, 11], target = 11
+ * Output [0, 2]
+ *
+ */
 public class PairWithTargetSum {
 
+    //O(log(n)) time | O(1) space
     public static int[] search(int[] arr, int targetSum) {
         int left = 0, right = arr.length - 1;
         while (left < right) {
@@ -19,7 +31,8 @@ public class PairWithTargetSum {
         return new int[] { -1, -1 };
     }
 
-    public static int[] searchBinary(int[] arr, int targetSum) {
+    //O(n) time | O(n) space
+    public static int[] searchUsingMap(int[] arr, int targetSum) {
         HashMap<Integer, Integer> nums = new HashMap<>(); // to store numbers and their indices
         for (int i = 0; i < arr.length; i++) {
             if (nums.containsKey(targetSum - arr[i]))
@@ -31,9 +44,14 @@ public class PairWithTargetSum {
     }
 
     public static void main(String[] args) {
-        int[] result = PairWithTargetSum.search(new int[] { 1, 2, 3, 4, 6 }, 6);
+        int[] result = search(new int[] { 1, 2, 3, 4, 6 }, 6);
         System.out.println("Pair with target sum: [" + result[0] + ", " + result[1] + "]");
-        result = PairWithTargetSum.search(new int[] { 2, 5, 9, 11 }, 11);
+        result = search(new int[] { 2, 5, 9, 11 }, 11);
+        System.out.println("Pair with target sum: [" + result[0] + ", " + result[1] + "]");
+
+        result = searchUsingMap(new int[] { 1, 2, 3, 4, 6 }, 6);
+        System.out.println("Pair with target sum: [" + result[0] + ", " + result[1] + "]");
+        result = searchUsingMap(new int[] { 2, 5, 9, 11 }, 11);
         System.out.println("Pair with target sum: [" + result[0] + ", " + result[1] + "]");
     }
 }

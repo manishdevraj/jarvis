@@ -27,9 +27,11 @@ public class RemoveDuplicateFromLinkedList {
         LinkedList left = linkedList;
         while (left != null) {
             LinkedList right = left.next;
+            //skip nodes until distinct node not found
             while (right != null && left.value == right.value) {
                 right = right.next;
             }
+            //connect left to right, either we continued in linear fashion or jumped to distinct element to right
             left.next = right;
             left = right;
         }

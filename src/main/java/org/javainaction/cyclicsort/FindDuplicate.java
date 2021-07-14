@@ -22,11 +22,14 @@ public class FindDuplicate {
     public static int findNumber(int[] nums) {
         int i = 0;
         while (i < nums.length) {
-            if (nums[i] != i + 1) {
-                if (nums[i] != nums[nums[i] - 1])
+            if (nums[i] != i + 1) { //number potentially be duplicate but we might need to make swap first to find out
+                if (nums[i] != nums[nums[i] - 1]) // swap number that is not correctly sorted
                     swap(nums, i, nums[i] - 1);
-                else // we have found the duplicate
+                else {
+                    // we have found the duplicate, because we already have one element at its correct position but
+                    // this one
                     return nums[i];
+                }
             } else {
                 i++;
             }
@@ -42,8 +45,6 @@ public class FindDuplicate {
 
     /**
      * Fast and slow pointer method
-     * @param arr
-     * @return
      */
     public static int findDuplicate(int[] arr) {
         int slow = 0, fast = 0;
@@ -81,7 +82,5 @@ public class FindDuplicate {
         System.out.println(findDuplicate(new int[] { 2, 1, 3, 3, 5, 4 }));
         System.out.println(findDuplicate(new int[] { 2, 4, 1, 4, 4 }));
         System.out.println(findDuplicate(new int[] { 2, 4, 1, 3, 5 }));
-
-
     }
 }

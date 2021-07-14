@@ -39,7 +39,7 @@ import java.util.List;
  *
  * Input: nums = [7,7,7,7,7,7,7]
  * Output: 1
- *
+ * @see LongestIncreasingSubseqArray
  */
 public class LongestIncreasingSubsequence {
 

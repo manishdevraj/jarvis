@@ -56,16 +56,22 @@ public class NodesInSubtree {
      *
      * It modifies passed count map and updates data and uses DFS to return char count map
      */
-    private Map<Character, Integer> dfsBuildSubtreeMap(Node node, String s, Map<Integer, Map<Character, Integer>> nodeMap) {
+    private Map<Character, Integer> dfsBuildSubtreeMap(Node node, String s, Map<Integer,
+            Map<Character, Integer>> nodeMap) {
         Map<Character, Integer> charCountMap = new HashMap<>();
+        //u which corresponds to a lowercase character
+        // c in the string s using 1-based indexing, that is why -1 from nod val
+        //initialize char with frequency with 1
         charCountMap.put(s.charAt(node.val - 1), 1);
 
         for (Node child : node.children) {
             for (Map.Entry<Character, Integer> entry : dfsBuildSubtreeMap(child, s, nodeMap).entrySet()) {
-                charCountMap.put(entry.getKey(), charCountMap.getOrDefault(entry.getKey(), 0) + entry.getValue());
+                charCountMap.put(entry.getKey(),
+                        charCountMap.getOrDefault(entry.getKey(), 0) + entry.getValue());
             }
         }
 
+        //a node map with all its children's frequency map
         nodeMap.put(node.val, charCountMap);
         return charCountMap;
     }

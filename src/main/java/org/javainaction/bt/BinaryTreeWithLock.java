@@ -16,20 +16,18 @@ package org.javainaction.bt;
  * Each method should run in O(h), where h is the height of the tree.
  */
 public class BinaryTreeWithLock {
-    //O(h) time
-    private static class BinaryTree {
-        int value;
-        boolean locked;
-        BinaryTree left;
-        BinaryTree right;
-        BinaryTree parent;
-        int lockedDescendant;
-    }
-
     public boolean isLocked(BinaryTree node) {
         return node.locked;
     }
 
+    /**
+     * Idea is to keep a count with each node that indicates if all its descendants are locked
+     * And this count can only be manipulated from child to parent traversal during lock and unlock process
+     * If child A is being attempted to lock we need to check if it is already locked if not the check if we can
+     * lock it to begin with if yes then add counter to all its parent
+     *
+     * During unlock just do opposite steps
+     */
     public boolean lock(BinaryTree node) {
         if (isLocked(node)) {
             return true;
@@ -64,6 +62,8 @@ public class BinaryTreeWithLock {
         return true;
     }
 
+    //we can only lock or unlock a node if all its descendant are locked
+    //or either of its parent is already locked otherwise we cannot lock or unlock this node
     private boolean canLockUnlock(BinaryTree node) {
         if (node.lockedDescendant > 0) return true;
 
@@ -73,5 +73,15 @@ public class BinaryTreeWithLock {
             parent = parent.parent;
         }
         return false;
+    }
+
+    //O(h) time
+    private static class BinaryTree {
+        int value;
+        boolean locked;
+        BinaryTree left;
+        BinaryTree right;
+        BinaryTree parent;
+        int lockedDescendant;
     }
 }

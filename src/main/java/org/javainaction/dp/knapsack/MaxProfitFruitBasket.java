@@ -28,35 +28,40 @@ package org.javainaction.dp.knapsack;
  * items which will give us maximum profit such that their cumulative weight is not more than a given number ‘C’.
  * Each item can only be selected once,
  * which means either we put an item in the knapsack or we skip it.
+ * @see RodCutting
  */
-public class Knapsack {
+public class MaxProfitFruitBasket {
 
     public int solveKnapsack(int[] profits, int[] weights, int capacity) {
         Integer[][] dp = new Integer[profits.length][capacity + 1];
         return this.knapsackRecursive(dp, profits, weights, capacity, 0);
     }
 
-    private int knapsackRecursive(Integer[][] dp, int[] profits, int[] weights, int capacity,
-                                  int currentIndex) {
+    private int knapsackRecursive(Integer[][] dp, int[] profits, int[] weights, int capacity, int currentIndex) {
+        //we have no more fruits to pick or capacity ran out
         if (currentIndex >= profits.length || capacity <= 0) {
             return 0;
         }
 
-        if (dp[currentIndex][capacity] != null) return dp[currentIndex][capacity];
+        //if we have computed this problem, then return result
+        if (dp[currentIndex][capacity] != null)
+            return dp[currentIndex][capacity];
 
-        // recursive call after choosing the element at the currentIndex
-        // if the weight of the element at currentIndex exceeds the capacity, we shouldn't process this
-        int profit1 = 0;
+        //if weight of fruit is under current capacity and
+        int profitInc = 0;
         if (weights[currentIndex] <= capacity) {
-            profit1 = profits[currentIndex] + knapsackRecursive(dp, profits, weights,
-                    capacity - weights[currentIndex],
-                    currentIndex + 1);
+            //profit including this fruit and any other fruit from the basket
+            //since we added this fruit, reduce capacity
+            //currentIndex + 1 because we need to pick distinct fruits
+            profitInc = profits[currentIndex]
+                    + knapsackRecursive(dp, profits, weights,
+                    capacity - weights[currentIndex],currentIndex + 1);
         }
 
-        // recursive call after excluding the element at the currentIndex
-        int profit2 = knapsackRecursive(dp, profits, weights, capacity, currentIndex + 1);
+        //profit excluding previous fruit, so we do not deduct capacity
+        int profitExcl = knapsackRecursive(dp, profits, weights, capacity, currentIndex + 1);
 
-        dp[currentIndex][capacity] = Math.max(profit1, profit2);
+        dp[currentIndex][capacity] = Math.max(profitInc, profitExcl);
 
         return dp[currentIndex][capacity];
     }
@@ -70,13 +75,15 @@ public class Knapsack {
         int[][] dp = new int[n][capacity + 1];
 
         // populate the capacity=0 columns, with '0' capacity we have '0' profit
-        for(int i=0; i < n; i++)
+        for (int i=0; i < n; i++)
             dp[i][0] = 0;
 
         // if we have only one weight, we will take it if it is not more than the capacity
-        for(int c=0; c <= capacity; c++) {
-            if(weights[0] <= c)
+        for (int c=0; c <= capacity; c++) {
+            if (weights[0] <= c) {
                 dp[0][c] = profits[0];
+            }
+
         }
 
         // process all sub-arrays for all the capacities
@@ -96,8 +103,9 @@ public class Knapsack {
         // maximum profit will be at the bottom-right corner.
         return dp[n-1][capacity];
     }
+
     public static void main(String[] args) {
-        Knapsack ks = new Knapsack();
+        MaxProfitFruitBasket ks = new MaxProfitFruitBasket();
         int[] profits = {1, 6, 10, 16};
         int[] weights = {1, 2, 3, 5};
         int maxProfit = ks.solveKnapsack(profits, weights, 7);

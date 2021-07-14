@@ -21,7 +21,8 @@ import java.util.Map;
  * Output: 5
  * Explanation: There will be 5 unique BSTs that can store numbers from 1 to 5.
  *
- * Given an integer n, return the number of structurally unique BST's (binary search trees) which has exactly n nodes of unique values from 1 to n.
+ * Given an integer n, return the number of structurally unique BST's (binary search trees)
+ * which has exactly n nodes of unique values from 1 to n.
  *
  *
  *
@@ -34,16 +35,18 @@ import java.util.Map;
  *
  * Input: n = 1
  * Output: 1
+ * @see AllPossibleFBT
+ * @see org.javainaction.bt.NumWaysBinaryTree
  */
 public class CountUniqueTrees {
     // O(n^2) time | O(n) space
     public int countTrees(int n) {
         List<Integer> count = new ArrayList<>();
         count.add(1);
-        for (int m = 1; m < n + 1; m++) {
+        for (int treeSize = 1; treeSize < n + 1; treeSize++) {
             int numberOfTrees = 0;
-            for (int leftTreeSize = 0; leftTreeSize < m; leftTreeSize++) {
-                int rightTreeSize = m - 1 - leftTreeSize;
+            for (int leftTreeSize = 0; leftTreeSize < treeSize; leftTreeSize++) {
+                int rightTreeSize = treeSize - leftTreeSize - 1;
                 int noOfLeftTrees = count.get(leftTreeSize);
                 int noOfRightTrees = count.get(rightTreeSize);
                 numberOfTrees += noOfLeftTrees * noOfRightTrees;
@@ -54,13 +57,15 @@ public class CountUniqueTrees {
     }
 
     // O(n^2) time | O(n) space
-    static Map<Integer, Integer> map = new HashMap<>();
-    public int countTreesRecursion(int n) {
-        if (map.containsKey(n))
-            return map.get(n);
+    static Map<Integer, Integer> memoize = new HashMap<>();
+    public int countTreesMemo(int n) {
+        memoize.put(1, 1);
+        return countTreesRecursion(n);
+    }
 
-        if (n <= 1)
-            return 1;
+    public int countTreesRecursion(int n) {
+        if (memoize.containsKey(n)) return memoize.get(n);
+
         int count = 0;
         for (int i = 1; i <= n; i++) {
             // making 'i' root of the tree
@@ -68,13 +73,13 @@ public class CountUniqueTrees {
             int countOfRightSubtrees = countTrees(n - i);
             count += (countOfLeftSubtrees * countOfRightSubtrees);
         }
-        map.put(n, count);
+        memoize.put(n, count);
         return count;
     }
 
     public static void main(String[] args) {
         CountUniqueTrees ct = new CountUniqueTrees();
-        int count = ct.countTrees(3);
-        System.out.print("Total trees: " + count);
+        System.out.println("Total trees with n = 3: " + ct.countTreesMemo(3));
+        System.out.println("Total trees with n = 3: " + ct.countTrees(3));
     }
 }

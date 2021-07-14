@@ -55,14 +55,20 @@ package org.javainaction.dp.longestcommonsub;
  */
 public class EditDistance {
 
-    private int findMinOperations(String str1, String str2) {
+    public int findMinOperations(String str1, String str2) {
         int[][] edits = new int[str1.length() + 1][str2.length() + 1];
 
+        // here we need to update memo with increasing sequence of numbers because when comparing
+        //"" with "" "a" we need one delete to make it equal,  when comparing
+        //"" with "" "a" "b" we need two delete to make it equal
         // If the strings have a matching character, we can recursively match for the remaining lengths
         for (int i = 0; i <= str1.length(); i++) {
             edits[i][0] = i;
         }
 
+        // here we need to update memo with increasing sequence of numbers because when comparing
+        //"" with "" "a" we need one delete to make it equal,  when comparing
+        //"" with "" "a" "b" we need two delete to make it equal
         // If the strings have a matching character, we can recursively match for the remaining lengths
         for (int i = 0; i <= str2.length(); i++) {
             edits[0][i] = i;
@@ -72,8 +78,10 @@ public class EditDistance {
             for (int j = 1; j <= str2.length(); j++) {
                 // If the strings have a matching character, we can recursively match for the remaining lengths
                 if (str1.charAt(i - 1) == str2.charAt(j  - 1)) {
-                    edits[i][j] = edits[i - 1][j - 1];
+                    edits[i][j] = edits[i - 1][j - 1]; //get last match score
                 } else {
+                    //try to find if we can match then by either replacing, deleting or inserting character
+                    //take minimum cost
                     edits[i][j] = 1 + Math.min(edits[i - 1][j - 1], //replace
                                     Math.min(edits[i][j - 1], //insert
                                      edits[i - 1][j])); //delete;

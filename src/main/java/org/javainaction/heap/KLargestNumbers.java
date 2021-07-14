@@ -1,8 +1,7 @@
 package org.javainaction.heap;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Given an unsorted array of numbers, find the ‘K’ largest numbers in it.
@@ -34,11 +33,22 @@ public class KLargestNumbers {
         return new ArrayList<>(minHeap);
     }
 
-    public static void main(String[] args) {
-        List<Integer> result = KLargestNumbers.findKLargestNumbers(new int[] { 3, 1, 5, 12, 2, 11 }, 3);
-        System.out.println("Here are the top K numbers: " + result);
+    public static List<Integer> findKLargestNumbersV2(int[] nums, int k) {
+        var minHeap  = new PriorityQueue<Integer>((n1, n2) -> n1 - n2);
+        for (int num : nums) {
+            minHeap.offer(num);
+            if (minHeap.size() > k && !minHeap.isEmpty()) minHeap.poll();
+        }
+        return new ArrayList<>(minHeap);
+    }
 
-        result = KLargestNumbers.findKLargestNumbers(new int[] { 5, 12, 11, -1, 12 }, 3);
-        System.out.println("Here are the top K numbers: " + result);
+    public static void main(String[] args) {
+        var input = new int[] { 3, 1, 5, 12, 2, 11 };
+        System.out.println(Arrays.toString(input) + " the top K = 3 numbers: " + findKLargestNumbers(input, 3));
+        System.out.println(Arrays.toString(input) + " the top K = 3 numbers: " + findKLargestNumbersV2(input, 3));
+
+        input = new int[] { 5, 12, 11, -1, 12 };
+        System.out.println(Arrays.toString(input) + " the top K = 3 numbers: " + findKLargestNumbers(input, 3));
+        System.out.println(Arrays.toString(input) + " the top K = 3 numbers: " + findKLargestNumbersV2(input, 3));
     }
 }

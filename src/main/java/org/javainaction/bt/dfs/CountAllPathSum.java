@@ -11,18 +11,9 @@ import java.util.ListIterator;
  *               12
  *           7         1
  *        4        10    5
+ * @see PathSum3
  */
 public class CountAllPathSum {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public static int countPaths(TreeNode root, int S) {
         List<Integer> currentPath = new LinkedList<>();
         return countPathsRecursive(root, S, currentPath);
@@ -65,5 +56,15 @@ public class CountAllPathSum {
         root.right.left = new TreeNode(10);
         root.right.right = new TreeNode(5);
         System.out.println("Tree has path: " + CountAllPathSum.countPaths(root, 11));
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

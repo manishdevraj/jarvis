@@ -17,18 +17,20 @@ import java.util.Arrays;
  * Denominations: {1,2,3}
  * Total amount: 11
  * Output: 4
+ *
  * Explanation: We need minimum four coins {2,3,3,3} to make a total of '11'
  * Problem Statement #
  * Given a number array to represent different coin denominations and a total amount ‘T’, we need to find the minimum
  * number of coins needed to make change for ‘T’. We can assume an infinite supply of coins, therefore, each coin can
  * be chosen multiple times.
  *
- * You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+ * You are given an integer array coins representing coins of different denominations and an integer amount
+ * representing a total amount of money.
  *
- * Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
+ * Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made
+ * up by any combination of the coins, return -1.
  *
  * You may assume that you have an infinite number of each kind of coin.
- *
  *
  *
  * Example 1:

@@ -1,5 +1,7 @@
 package org.javainaction.bst;
 
+import java.util.Stack;
+
 /**
  * Given the root of a Binary Search Tree (BST), return the minimum absolute difference between the values of any two different nodes in the tree.
  *
@@ -31,13 +33,31 @@ public class MinAbsDiffBST {
 
         getMinDiffInOrder(root.left);
         
-        if (prev != null) {
-            minDifference = Math.min(minDifference, root.value - prev.value);
-        }
+        if (prev != null) minDifference = Math.min(minDifference, root.value - prev.value);
 
         prev = root;
         getMinDiffInOrder(root.right);
 
+    }
+
+    public int getMinAbsDifference(BST root) {
+        Stack<BST> stack = new Stack<>();
+        BST current = root;
+        BST prev = null;
+        int minDifference = Integer.MAX_VALUE;
+        //in order traversal using stack
+        while (!stack.isEmpty() || current != null) {
+            if (current != null) {
+                stack.push(current); //put into stack as this will become inorder when popped out
+                current = current.left; //keep going to left
+            } else {
+                current = stack.pop();
+                if (prev != null) minDifference = Math.min(minDifference, prev.value - current.value);
+                prev = current;
+                current = current.right; //go to right
+            }
+        }
+        return minDifference;
     }
     
     public static void main(String[] args) {
@@ -47,8 +67,11 @@ public class MinAbsDiffBST {
         root.right.left = new BST(12);
         root.right.right = new BST(49);
 
-        var expected = 13;
+        var expected = 1;
         var actual = new MinAbsDiffBST().getMinimumDifference(root);
+        System.out.println("Min difference  " + actual);
+
+        actual = new MinAbsDiffBST().getMinimumDifference(root);
         System.out.println("Min difference  " + actual);
     }
 

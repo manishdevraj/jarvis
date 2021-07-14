@@ -4,10 +4,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
+import java.util.concurrent.Callable;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * Given an array of numbers and a number ‘k’, find the median of all the ‘k’ sized sub-arrays (or windows) of the array.
+ * Given an array of numbers and a number ‘k’, find the median of all the ‘k’ sized sub-arrays (or windows) of
+ * the array.
  *
  * Example 1:
  *
@@ -29,13 +32,17 @@ import java.util.function.Supplier;
  * [1, 2, -1, 3, 5] -> median is 2.0
  * [1, 2, -1, 3, 5] -> median is 3.0
  *
- * The median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value. So the median is the mean of the two middle values.
+ * The median is the middle value in an ordered integer list. If the size of the list is even,
+ * there is no middle value. So the median is the mean of the two middle values.
  *
  * For examples, if arr = [2,3,4], the median is 3.
  * For examples, if arr = [1,2,3,4], the median is (2 + 3) / 2 = 2.5.
- * You are given an integer array nums and an integer k. There is a sliding window of size k which is moving from the very left of the array to the very right. You can only see the k numbers in the window. Each time the sliding window moves right by one position.
+ * You are given an integer array nums and an integer k. There is a sliding window of size k which is
+ * moving from the very left of the array to the very right. You can only see the k numbers in the window.
+ * Each time the sliding window moves right by one position.
  *
- * Return the median array for each window in the original array. Answers within 10-5 of the actual value will be accepted.
+ * Return the median array for each window in the original array. Answers within 10-5 of the actual value will
+ * be accepted.
  *
  *
  *
@@ -64,6 +71,7 @@ public class SlidingWindowMedian {
         PriorityQueue<Integer> lower = new PriorityQueue<>(Collections.reverseOrder());
         PriorityQueue<Integer> greater = new PriorityQueue<>();
 
+        //balance heaps
         Runnable balance = () -> {
             if (lower.size() > greater.size() + 1) {
                 greater.offer(lower.poll());
@@ -72,38 +80,56 @@ public class SlidingWindowMedian {
             }
         };
 
-        double[] result = new double[nums.length - k + 1];
-        for (int i = 0; i < nums.length; i++) {
-            int val = nums[i];
+        //gets the median when needed
+        //this doesn't need global variable to keep median updated
+        Callable<Double> median = () -> {
+            if (lower.size() == greater.size())
+               return ((double) lower.peek() + (double) greater.peek()) / 2;
+            else if(greater.size() > lower.size())
+                return (double) greater.peek();
+            else return (double) lower.peek();
+        };
+
+        //consumer to add to heaps
+        Consumer<Integer> add = (val) -> {
             if (lower.isEmpty() || val <= lower.peek()) {
                 lower.offer(val);
             } else {
                 greater.offer(val);
             }
-
             balance.run();
+        };
+
+        //consumer to remove from heaps
+        Consumer<Integer> remove = (val) -> {
+            if (val <= lower.peek()) {
+                lower.remove(val);
+            } else {
+                greater.remove(val);
+            }
+            balance.run();
+        };
+
+        double[] result = new double[nums.length - k + 1];
+        for (int i = 0; i < nums.length; i++) {
+            //median adds and balances the median
+            int val = nums[i];
+            add.accept(val);
 
             if (i - k + 1 >= 0) {
-                result[i - k + 1] = getMedian(lower, greater);
+                //get median value at this moment
+                try {
+                    result[i - k + 1] = median.call();
+                } catch (Exception e) {
+                    //should not happen
+                }
 
                 // remove the the element going out of the sliding window
-                int elementToBeRemoved = nums[i - k + 1];
-                if (elementToBeRemoved <= lower.peek()) {
-                    lower.remove(elementToBeRemoved);
-                } else {
-                    greater.remove(elementToBeRemoved);
-                }
-                balance.run();
+                // remove consumer will balance again
+                remove.accept(nums[i - k + 1]);
             }
         }
         return result;
-    }
-
-    public static double getMedian(PriorityQueue<Integer> lower, PriorityQueue<Integer> greater) {
-        return lower.size() == greater.size()
-                ? ((double) lower.peek() + (double) greater.peek()) / 2
-                : greater.size() > lower.size()
-                ? (double) greater.peek() : (double) lower.peek();
     }
 
     public static void main(String[] args) {

@@ -22,32 +22,42 @@ import java.util.function.Predicate;
  *   "192.1.6.80"
  *   "192.1.68.0"
  *   "192.16.8.0"
+ *
+ * @see org.javainaction.dp.MaximizeExpression
  */
 public class ValidateIPAddress {
     //O(n) time | O(1) space
     public ArrayList<String> validIPAddresses(String string) {
         var ipAddresses = new ArrayList<String>();
+        //function to test IP address
+        //that it is integer and contains 0 to 255 numbers
+        //and when we convert into Integer the integer and string length match
+        //"000" as string would be 0 as integer and length won't match
         Predicate<String> isValidIP =
                 (ip) -> Integer.parseInt(ip) <= 255 && ip.length() == Integer.toString(Integer.parseInt(ip)).length();
 
         for (int i = 1; i < Math.min(string.length(), 4); i++) {
             String[] currentIPAddresses = new String[] {"", "", "", ""};
 
+            //find first substring it is valid, or else continue until we have substring that matches
             currentIPAddresses[0] = string.substring(0, i);
             if (isValidIP.negate().test(currentIPAddresses[0])) {
                 continue;
             }
 
+            //try second substing from i + 1 to j, if it is valid, or else continue until we have substring that matches
             for (int j = i + 1; j < i + Math.min(string.length() - i, 4); j++) {
                 currentIPAddresses[1] = string.substring(i, j);
                 if (isValidIP.negate().test(currentIPAddresses[1])) {
                     continue;
                 }
 
+                //try two substring between j + 1 K and K to length of string
                 for (int k = j + 1; k < j + Math.min(string.length() - j, 4); k++) {
                     currentIPAddresses[2] = string.substring(j, k);
                     currentIPAddresses[3] = string.substring(k);
 
+                    //if all sub IPv4 token are valid add it to valid IP addresses
                     if (isValidIP.test(currentIPAddresses[2])
                             && isValidIP.test(currentIPAddresses[3])) {
                         ipAddresses.add(join(currentIPAddresses));

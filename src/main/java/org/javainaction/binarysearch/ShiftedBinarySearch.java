@@ -6,7 +6,7 @@ package org.javainaction.binarysearch;
  * Find a given element in a sorted array but that is shifted by one or more positions
  *
  * Input [3, 4, 1, 2] and target = 1
- *
+ * @see SearchRotatedArray
  */
 public class ShiftedBinarySearch {
 

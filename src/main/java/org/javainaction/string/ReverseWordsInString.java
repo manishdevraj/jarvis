@@ -11,6 +11,7 @@ import java.util.Collections;
  * Output: "best! the is AlgoExpert";
  *
  * You are not allowed to use string split or reverse methods but you are allowed to use join method.
+ * @see ReverseWordsInString2
  */
 public class ReverseWordsInString {
     public String reverseWordsInString(String string) {
@@ -38,15 +39,18 @@ public class ReverseWordsInString {
         for (int right = chars.length - 1; right >=0;) {
             if (Character.isSpaceChar(chars[right])) {
                 var space = new ArrayList<Character>();
+                //from space and up to space add all characters resulting string
                 while (right >= 0 && Character.isSpaceChar(chars[right])) {
                     space.add(chars[right--]);
                 }
                 space.forEach(output::append);
             } else {
                 var word = new ArrayList<Character>();
+                //from alphabetic characters and up to all alphabetic characters add them to list
                 while (right >= 0 && !Character.isSpaceChar(chars[right])) {
                     word.add(chars[right--]);
                 }
+                //reverse the word and append to result
                 Collections.reverse(word);
                 word.forEach(output::append);
             }

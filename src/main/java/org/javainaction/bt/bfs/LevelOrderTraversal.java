@@ -9,12 +9,10 @@ import java.util.Queue;
  * Given a binary tree, populate an array to represent its level-by-level traversal. You should populate the
  * values of all nodes of each level from left to right in separate sub-arrays.
  *
- * Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
- *
- *
+ * Given the root of a binary tree, return the level order traversal of its nodes' values.
+ * (i.e., from left to right, level by level).
  *
  * Example 1:
- *
  *
  * Input: root = [3,9,20,null,null,15,7]
  * Output: [[3],[9,20],[15,7]]
@@ -34,16 +32,6 @@ import java.util.Queue;
  * -1000 <= Node.val <= 1000
  */
 public class LevelOrderTraversal {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public static List<List<Integer>> traverse(TreeNode root) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
 
@@ -58,13 +46,10 @@ public class LevelOrderTraversal {
 
             for (int i = 0; i < levelSize; i++) {
                 TreeNode current = queue.poll();
-
                 if (current != null) {
                     currentLevel.add(current.val);
-                    if (current.left != null)
-                        queue.offer(current.left);
-                    if (current.right != null)
-                        queue.offer(current.right);
+                    if (current.left != null) queue.offer(current.left);
+                    if (current.right != null) queue.offer(current.right);
                 }
             }
             result.add(currentLevel);
@@ -82,4 +67,15 @@ public class LevelOrderTraversal {
         List<List<Integer>> result = LevelOrderTraversal.traverse(root);
         System.out.println("Level order traversal: " + result);
     }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
 }

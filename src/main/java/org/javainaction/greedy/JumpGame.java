@@ -20,17 +20,23 @@ package org.javainaction.greedy;
  * Output: false
  * Explanation: You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it
  * impossible to reach the last index.
+ * @see org.javainaction.recursion.JumpGame3
+ * @see org.javainaction.dp.JumpGame4
  */
 public class JumpGame {
 
     public boolean canJump(int[] array) {
         int n = array.length, farthest = 0;
+        //we iterate step by step looking at max we can reach at
+        //if at any point in time we have an element that does not take us anywhere like 0
+        //our farthest will be less than current index and we can safely say we cannot jump at the end
         for (int i = 0; i < n; i++) {
             // if previous farthest is smaller than i,
             // meaning we cannot reach location i, thus return false.
             if (farthest < i) return false;
             farthest = Math.max(i + array[i], farthest);
         }
+        //because we did not have any hurdles means we reached at end
         return true;
     }
 

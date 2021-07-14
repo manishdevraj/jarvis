@@ -21,29 +21,10 @@ import java.util.Queue;
  * [f, f, f, f]]
  * and start = (3, 0) (bottom left) and end = (0, 0) (top left), the minimum number of steps required to reach the
  * end is 7, since we would need to go through (1, 2) because there is a wall everywhere else on the second row.
+ * @see org.javainaction.graph.ShortestPathGridObstaclesElimination
  */
+
 public class ShortestPathMaze {
-    public static void main(String[] args) {
-        boolean[][] maze = {{false, false, false, false},
-                {true, true, false, true},
-                {false, false, false, false},
-                {false, false, false, false}};
-        int[] start = {3, 0};
-        int[] end = {0, 0};
-        Node startNode = new Node(start, 0);
-        Node endNode = new Node(end, 0);
-        System.out.println(findShortestPathMaze(maze, startNode, endNode));
-    }
-
-    static class Node {
-        int[] point;
-        int distance;
-
-        public Node(int[] point, int distance) {
-            this.point = point;
-            this.distance = distance;
-        }
-    }
 
     private static int findShortestPathMaze(boolean[][] maze, Node start, Node end) {
         if (maze == null || maze.length == 0) return -1;
@@ -58,7 +39,7 @@ public class ShortestPathMaze {
         neighbours.add(start);
         int minDistance = Integer.MAX_VALUE;
         while (!neighbours.isEmpty()) {
-            Node node = neighbours.peek();
+            Node node = neighbours.poll();
             int[] point = node.point;
             int i = point[0];
             int j = point[1];
@@ -67,15 +48,10 @@ public class ShortestPathMaze {
                 minDistance = Math.min(node.distance, minDistance);
             }
 
-            neighbours.remove();
+            if(visited[i][j]) continue;
 
-            if (!isValidBounds(i, j, height, width)) return -1;
-            if (isWall(i, j, maze)) {
-                continue;
-            }
-            if(visited[i][j]) {
-                continue;
-            }
+            if (isWall(i, j, maze)) continue;
+
             visited[i][j] = true;
 
             List<Node> closestNeighbours = getNeighbours(node, maze, visited);
@@ -122,5 +98,27 @@ public class ShortestPathMaze {
     private static boolean isAtDestination(Node source, Node destination) {
         if (source.point[0] == destination.point[0] && source.point[1] == destination.point[1]) return true;
         return false;
+    }
+
+    public static void main(String[] args) {
+        boolean[][] maze = {{false, false, false, false},
+                {true, true, false, true},
+                {false, false, false, false},
+                {false, false, false, false}};
+        int[] start = {3, 0};
+        int[] end = {0, 0};
+        Node startNode = new Node(start, 0);
+        Node endNode = new Node(end, 0);
+        System.out.println(findShortestPathMaze(maze, startNode, endNode));
+    }
+
+    static class Node {
+        int[] point;
+        int distance;
+
+        public Node(int[] point, int distance) {
+            this.point = point;
+            this.distance = distance;
+        }
     }
 }

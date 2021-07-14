@@ -1,9 +1,5 @@
 package org.javainaction.linkedlist;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Given the head of a LinkedList and two positions ‘p’ and ‘q’, reverse the LinkedList from position ‘p’ to ‘q’.
  *
@@ -26,7 +22,8 @@ import java.util.List;
  * head = reverse(head, n/2 + 2, n)
  * Please note the function call in the second step. We’re skipping two elements as we will be skipping the middle
  * element.
- * @see ReverseEveryKAlternateElem
+ * @see ReverseLinkedList2
+ * @see ReverseEveryKElements
  */
 public class ReverseSubList {
     public static ListNode reverse(ListNode head, int p, int q) {
@@ -41,9 +38,9 @@ public class ReverseSubList {
         // we are interested in three parts of the LinkedList,
         //part before index 'p', part between 'p' and
         // 'q', and the part after index 'q'
-        ListNode lastNodeOfFirstPart = previous; // points to the node at index 'p-1'
+        ListNode lastPrevious = previous; // points to the node at index 'p-1'
         // after reversing the LinkedList 'current' will become the last node of the sub-list
-        ListNode lastNodeOfSubList = current;
+        ListNode lastCurrent = current;
         ListNode next = null; // will be used to temporarily store the next node
         // reverse nodes between 'p' and 'q'
         for(int i = 0; current != null && i < q - p + 1; ++i) {
@@ -54,13 +51,12 @@ public class ReverseSubList {
         }
 
         // connect with the first part
-        if (lastNodeOfFirstPart != null)
-            lastNodeOfFirstPart.next = previous; // 'previous' is now the first node of the sub-list
+        if (lastPrevious != null) lastPrevious.next = previous; // 'previous' is now the first node of the sub-list
         else // this means p == 1 i.e., we are changing the first node (head) of the LinkedList
             head = previous;
 
         // connect with the last part
-        lastNodeOfSubList.next = current;
+        lastCurrent.next = current;
 
         return head;
     }

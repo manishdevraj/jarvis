@@ -6,10 +6,11 @@ import java.util.Map;
 import java.util.Queue;
 
 /**
- * Given an array of strings words representing an English Dictionary, return the longest word in words that can be built one character at a time by other words in words.
+ * Given an array of strings words representing an English Dictionary, return the longest word in words that can be
+ * built one character at a time by other words in words.
  *
- * If there is more than one possible answer, return the longest word with the smallest lexicographical order. If there is no answer, return the empty string.
- *
+ * If there is more than one possible answer, return the longest word with the smallest lexicographical order.
+ * If there is no answer, return the empty string.
  *
  *
  * Example 1:
@@ -21,7 +22,8 @@ import java.util.Queue;
  *
  * Input: words = ["a","banana","app","appl","ap","apply","apple"]
  * Output: "apple"
- * Explanation: Both "apply" and "apple" can be built from other words in the dictionary. However, "apple" is lexicographically smaller than "apply".
+ * Explanation: Both "apply" and "apple" can be built from other words in the dictionary. However, "apple" is
+ * lexicographically smaller than "apply".
  */
 public class LongestWordDictionary {
 
@@ -46,21 +48,24 @@ public class LongestWordDictionary {
             node.word = word;
         }
 
-
         public String findLongestWord() {
             String result = "";
             Queue<TrieNode> queue = new LinkedList<>();
             queue.offer(root);
+
             while (!queue.isEmpty()) {
                 int size = queue.size();
                 for (int i = 0; i < size; i++) {
                     TrieNode node = queue.poll();
                     for(TrieNode child : node.children.values()){
-                        if (child.isWord
-                                && child.word != null
+                        //we only process complete words
+                        if (child.isWord && child.word != null
+                                //either trie child word is bigger than previous result
+                                //or is lexicographically smallest
                                 && (child.word.length() > result.length() || child.word.compareTo(result) < 0)) {
                             result = child.word;
                         }
+                        //we might have bigger word made after this trie so try for next iteration
                         if (child.isWord) queue.offer(child);
                     }
                 }

@@ -17,6 +17,7 @@ import java.util.PriorityQueue;
  *
  * Input: L1=[5, 2, 1], L2=[2, -1], K=3
  * Output: [5, 2], [5, -1], [2, 2]
+ * @see KPairswithSmallestSums
  */
 public class LargestPairs {
     public static List<int[]> findKLargestPairs(int[] nums1, int[] nums2, int k) {

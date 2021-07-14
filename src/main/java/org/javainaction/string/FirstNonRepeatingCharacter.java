@@ -21,6 +21,8 @@ import java.util.HashMap;
  *
  * Input: s = "aabb"
  * Output: -1
+ *
+ * @see GenerateDocument
  */
 public class FirstNonRepeatingCharacter {
     public int firstNonRepeatingCharacter(String string) {
@@ -31,7 +33,10 @@ public class FirstNonRepeatingCharacter {
         }
 
         for (int i = 0; i < string.length(); i++) {
-            if (frequencies.get(string.charAt(i)) == 1) return i;
+            //if it is first character with frequency count as 1
+            if (frequencies.get(string.charAt(i)) == 1) {
+                return i;
+            }
         }
         return -1;
     }

@@ -31,9 +31,10 @@ public class ContainsDuplicate2 {
         //if we grow by k window size and no duplicates found then we shrink window by
         //removing elements of set
         for (int i = 0; i < nums.length; i++) {
+            //shrink window by removing numbers falling out of range of K window
+            if (i > k) duplicates.remove(nums[i - k -1]);
 
-            if (i > k) duplicates.remove(nums[i-k-1]);
-
+            //this allows us to find if we have a window of size K that contains duplicate
             if(!duplicates.add(nums[i])) return true;
         }
 

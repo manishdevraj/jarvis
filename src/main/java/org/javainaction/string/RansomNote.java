@@ -28,6 +28,8 @@ package org.javainaction.string;
  * You may assume that both strings contain only lowercase letters.
  *
  * @see MinimumCharactersForWords
+ * @see GenerateDocument
+ * @see JewelsStones
  */
 public class RansomNote {
     public boolean canConstruct(String ransomNote, String magazine) {

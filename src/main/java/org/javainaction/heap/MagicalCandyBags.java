@@ -31,14 +31,17 @@ import java.util.PriorityQueue;
 public class MagicalCandyBags {
     static int maxCandies(int[] arr, int k) {
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-        for (int j : arr) {
-            maxHeap.offer(j);
+        for (int candy : arr) {
+            maxHeap.offer(candy);
         }
 
         int maxCandies = 0;
         while (!maxHeap.isEmpty() && k-- > 0) {
+            //get the bag with maximum candies
             int candies = maxHeap.poll();
+            //maximum candies you could eat for this iteration
             maxCandies += candies;
+            //refill candies
             maxHeap.offer((int) Math.floor(candies / 2));
         }
         return maxCandies;

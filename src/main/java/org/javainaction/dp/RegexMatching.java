@@ -1,10 +1,6 @@
 package org.javainaction.dp;
 
 public class RegexMatching {
-    public static void main(String[] args) {
-        System.out.println(isMatch("aa", "a*"));
-    }
-
     public static boolean isMatch(String s, String p) {
         // corner case
         if(s == null || p == null) return false;
@@ -81,5 +77,9 @@ public class RegexMatching {
         }
 
         return M[m][n];
+    }
+
+    public static void main(String[] args) {
+        System.out.println(isMatch("aa", "a*"));
     }
 }

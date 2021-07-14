@@ -19,6 +19,8 @@ package org.javainaction.string;
  *
  * S and J will consist of letters and have length at most 50.
  * The characters in J are distinct.
+ * @see GenerateDocument
+ * @see RansomNote
  */
 public class JewelsStones {
     //O(max (J, S)) time | O(1) space
@@ -28,6 +30,8 @@ public class JewelsStones {
         for (char c : J.toCharArray())
             count[c]++;
 
+        //add jewels in stones count, we are adding for all characters as this will be in int array
+        //anything that was not stone will be added as 0 so not need to check if it exist or > 0
         for (char c : S.toCharArray())
             jewelsInStone += count[c];
 

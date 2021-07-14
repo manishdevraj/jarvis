@@ -23,8 +23,6 @@ import java.util.List;
  * Output: 4
  */
 
-
-
 public class MiddleOfLinkedList {
 
     static class ListNode {
@@ -51,6 +49,7 @@ public class MiddleOfLinkedList {
     public static ListNode findMiddle(ListNode head) {
         ListNode slowPointer = head;
         ListNode fastPointer = head;
+        //when fast.next reaches end we are at the middle of linked list
         while (fastPointer != null && fastPointer.next != null) {
             fastPointer = fastPointer.next.next;
             slowPointer = slowPointer.next;

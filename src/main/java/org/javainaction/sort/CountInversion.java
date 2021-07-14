@@ -27,6 +27,7 @@ public class CountInversion {
         int leftInversions = countSubArrayInversions(array, start, middle);
         int rightInversions = countSubArrayInversions(array, middle, end);
         int mergedArrayInversions = mergeSortCountInversions(array, start, middle, end);
+        //check all left, right and merged inversions and add them up together
         return leftInversions + rightInversions + mergedArrayInversions;
     }
 

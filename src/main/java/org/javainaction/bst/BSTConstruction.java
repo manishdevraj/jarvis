@@ -127,7 +127,7 @@ public class BSTConstruction {
         assert root.right.left.left.value == 12;
 
         root.remove(10);
-        assert root.contains(10) == false;
+        assert !root.contains(10);
         assert root.value == 12;
         assert root.contains(15);
     }

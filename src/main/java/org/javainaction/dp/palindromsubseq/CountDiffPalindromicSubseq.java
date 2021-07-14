@@ -1,7 +1,8 @@
 package org.javainaction.dp.palindromsubseq;
 
 /**
- * Given a string s, return the number of different non-empty palindromic subsequences in s. Since the answer may be very large, return it modulo 109 + 7.
+ * Given a string s, return the number of different non-empty palindromic subsequences in s.
+ * Since the answer may be very large, return it modulo 109 + 7.
  *
  * A subsequence of a string is obtained by deleting zero or more characters from the string.
  *
@@ -83,12 +84,39 @@ public class CountDiffPalindromicSubseq {
                 dp[i][j] = dp[i][j] < 0 ? dp[i][j] + 1000000007 : dp[i][j] % 1000000007;
             }
         }
-
         return dp[0][len - 1];
+    }
+
+
+    private int countPalindromicSubsequencesV2(String str) {
+        //in case of longest palindrome substring we used boolean and used end - start + 1 as our length
+        //here we need to store length in our memo
+        int[][] dp = new int[str.length()][str.length()];
+        int count = 0;
+
+        //every single char string is palindrome of length 1
+        for (int i = 0; i < str.length(); i++) {
+            dp[i][i] = 1;   // Consider the test case "a", "b" "c"...
+            count++;
+        }
+
+        for (int start = str.length() - 1; start >= 0; start--) {
+            for (int end = start + 1; end < str.length(); end++) {
+                if (str.charAt(start) == str.charAt(end)) {
+                    dp[start][end] = 2 + dp[start + 1][end - 1];
+                    count++;
+                } else {
+                    dp[start][end] = Math.max(dp[start + 1][end], dp[start][end - 1]);
+                }
+            }
+        }
+
+        return count;
     }
 
     public static void main(String[] args) {
         var obj = new CountDiffPalindromicSubseq();
         System.out.println(obj.countPalindromicSubsequences("bccb"));
+        System.out.println(obj.countPalindromicSubsequencesV2("bccb"));
     }
 }

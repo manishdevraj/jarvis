@@ -21,6 +21,7 @@ package org.javainaction.search;
  *
  * Then 4 is the first bad version.
  * @see org.javainaction.binarysearch.FirstBadVersion
+ *
  */
 public class FirstBadVersion {
     private static boolean[] versions = {false, false, false, true, true};

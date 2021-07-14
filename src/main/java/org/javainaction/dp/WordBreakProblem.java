@@ -19,6 +19,21 @@ import java.util.stream.Stream;
  */
 public class WordBreakProblem {
 
+    //Try for every combination of words from i to end of the string
+    private static List<String> wordBreak(Set<String> wordSet, String str, List<String> output) {
+        int left = 0;
+        for (int right = left + 1; right <= str.length(); right++) {
+            String word = str.substring(left, right);
+            if (wordSet.contains(word)) { //if we have found the word
+                output.add(word);
+                //shrink left, as we have already found word combination between left and right, shrink our window
+                //to right
+                left = right;
+            }
+        }
+        return output;
+    }
+
     public static void main(String[] arg) {
         String[] words = {"the", "quick", "brown", "fox"};
         String str = "thequickbrownfox";
@@ -27,17 +42,4 @@ public class WordBreakProblem {
         wordBreak(wordSet, str, output);
         System.out.println(output);
     }
-
-    private static List<String> wordBreak(Set<String> wordSet, String str, List<String> output) {
-        for (int i = 1; i <= str.length(); i++) {
-            String word = str.substring(0, i);
-            if (wordSet.contains(word)) {
-                output.add(word);
-                wordBreak(wordSet, str.substring(i), output);
-            }
-        }
-        return output;
-    }
-
-
 }

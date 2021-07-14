@@ -16,6 +16,7 @@ import java.util.*;
  * Input: [2, 0, -1, 1, -2, 2], target=2
  * Output: [-2, 0, 2, 2], [-1, 0, 1, 2]
  * Explanation: Both the quadruplets add up to the target.
+ * @see FourNumSum
  */
 public class QuadrupleSumToTarget {
 

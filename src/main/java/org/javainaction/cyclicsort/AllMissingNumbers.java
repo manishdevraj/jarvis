@@ -25,12 +25,21 @@ public class AllMissingNumbers {
     public static List<Integer> findNumbers(int[] nums) {
         int i = 0;
         while (i < nums.length) {
+            //For numbers 1.. n we see if we have num at num - 1, if no we keep on swapping them until we
+            //either of them at correct position
+            //or when they are duplicate we will ignore as at least one instance is at correct position
+            //[2, 4, 1, 2]
+            //[4, 2, 1, 2]
+            //[2, 2, 1, 4]
+            //[1, 2, 2, 4] after i is at 2
             if (nums[i] != nums[nums[i] - 1])
                 swap(nums, i, nums[i] - 1);
             else
                 i++;
         }
 
+        //from above we can see that we have 2 at 3rd index being duplicate
+        //so we compute missing number being i + 1 = 3 in this case
         List<Integer> missingNumbers = new ArrayList<>();
         for (i = 0; i < nums.length; i++)
             if (nums[i] != i + 1)

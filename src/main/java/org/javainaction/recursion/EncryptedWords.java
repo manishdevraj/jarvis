@@ -38,9 +38,8 @@ public class EncryptedWords {
     String findEncryptedWord(String s) {
         if (s.isEmpty()) return "";
         if (s.length() == 1) return s;
-        int middle = (s.length() % 2 != 0) ? (s.length() / 2) : (s.length() / 2 - 1);
-        return s.charAt(middle)
-                + findEncryptedWord(s.substring(0, middle)) //first half of string
+        int middle = s.length() % 2 != 0 ? s.length() / 2 : (s.length() / 2) - 1;
+        return s.charAt(middle) + findEncryptedWord(s.substring(0, middle)) //first half of string
                 + findEncryptedWord(s.substring(middle + 1)); //second half of string
 
     }

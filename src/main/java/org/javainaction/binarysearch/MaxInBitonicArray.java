@@ -29,8 +29,12 @@ public class MaxInBitonicArray {
         if (arr == null || arr.length == 0) return -1;
         int n = arr.length;
         int left = 0; int right = n - 1;
+        //Max in Bitonic array would be element at the peak
         while (left < right) {
             int middle = left + (right - left) / 2;
+            //if middle > middle + 1 the we are descending side of the peak so move right to middle as we might still
+            //have peak at middle - 1
+            //or else move left = middle + 1
             if (arr[middle] > arr[middle + 1]) {
                 right = middle;
             } else {

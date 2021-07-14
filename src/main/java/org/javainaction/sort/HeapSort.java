@@ -5,9 +5,9 @@ import java.util.Arrays;
 /**
  * Implement heap sort
  *
- * Throughout the algorithm we are going to have two subarrays one sorted and one not sorted.
- * Idea is to build a max heap and then move our max element to the end and sift down rest of the subarray to make
- * them as a max heap
+ * Throughout the algorithm we are going to have two sub arrays one sorted and one not sorted.
+ * Idea is to build a heap and then move our (min/max) element to the end and sift down rest of the sub array to make
+ * them as a heap
  * We continue doing so until we no longer have to maintain maxheap and entire array is sorted
  */
 public class HeapSort {

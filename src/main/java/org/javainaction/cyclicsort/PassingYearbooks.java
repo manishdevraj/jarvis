@@ -54,8 +54,12 @@ public class PassingYearbooks {
         int[] output = new int[arr.length];
         //we always need at least one pass
         Arrays.fill(output, 1);
+
         for (int i = 0 ; i < arr.length; i++) {
+            //we store i so that we keep on trying to find such that arr[i] == i + 1
+            //in one pass if that is not the case then we reduce it to arr[i] - 1
             int j = i;
+
             //It's possible that arr[i-1] = i for any given i,
             //in which case student i will pass their yearbook back to themselves
             //if not find what it takes to get their own book back
@@ -66,7 +70,6 @@ public class PassingYearbooks {
         }
         return output;
     }
-
 
     // These are the tests we use to determine if the solution is correct.
     // You can add your own at the bottom, but they are otherwise not editable!

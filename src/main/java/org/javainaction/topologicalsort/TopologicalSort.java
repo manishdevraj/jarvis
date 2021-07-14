@@ -44,6 +44,8 @@ import java.util.*;
  * 6) 5, 6, 3, 4, 1, 2, 0
  *
  * There are other valid topological ordering of the graph too.
+ * @see TaskScheduling
+ * @see JobOrder
  */
 public class TopologicalSort {
     public static List<Integer> sort(int vertices, int[][] edges) {
@@ -60,8 +62,8 @@ public class TopologicalSort {
         }
 
         // b. Build the graph
-        for (int i = 0; i < edges.length; i++) {
-            int parent = edges[i][0], child = edges[i][1];
+        for (int[] edge : edges) {
+            int parent = edge[0], child = edge[1];
             graph.get(parent).add(child); // put the child into it's parent's list
             inDegree.put(child, inDegree.get(child) + 1); // increment child's inDegree
         }

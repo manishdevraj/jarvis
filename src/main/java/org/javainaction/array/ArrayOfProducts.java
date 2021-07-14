@@ -21,15 +21,7 @@ public class ArrayOfProducts {
      *
      */
 
-
-    public static void main(String[] args) {
-        var input = new int[] {5, 1, 4, 2};
-        //var expected = new int[] {8, 40, 10, 20};
-        System.out.println(Arrays.toString(input) + " array of product is : " + arrayOfProducts(input));
-    }
-
-        //O(n) time | O(n) space
-
+    //O(n) time | O(n) space
     public static int[] arrayOfProducts(int[] array) {
         int[] products = new int[array.length];
 
@@ -38,12 +30,20 @@ public class ArrayOfProducts {
             products[i] = leftRunnningProduct;
             leftRunnningProduct *= array[i];
         }
+        //[1, 5, 5, 20]
 
         int rightRunnningProduct = 1;
         for (int i = array.length - 1; i >= 0; i--) {
             products[i] *= rightRunnningProduct;
             rightRunnningProduct *= array[i];
         }
+        //[8, 40, 10, 20]
         return products;
+    }
+
+    public static void main(String[] args) {
+        var input = new int[] {5, 1, 4, 2};
+        //var expected = new int[] {8, 40, 10, 20};
+        System.out.println(Arrays.toString(input) + " array of product is : " + arrayOfProducts(input));
     }
 }

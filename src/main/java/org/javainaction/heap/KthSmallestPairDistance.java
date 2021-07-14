@@ -7,9 +7,8 @@ import java.util.PriorityQueue;
 /**
  * The distance of a pair of integers a and b is defined as the absolute difference between a and b.
  *
- * Given an integer array nums and an integer k, return the kth smallest distance among all the pairs nums[i] and nums[j] where 0 <= i < j < nums.length.
- *
- *
+ * Given an integer array nums and an integer k, return the kth smallest distance among all
+ * the pairs nums[i] and nums[j] where 0 <= i < j < nums.length.
  *
  * Example 1:
  *
@@ -28,8 +27,49 @@ import java.util.PriorityQueue;
  *
  * Input: nums = [1,6,1], k = 3
  * Output: 5
+ * @see KthSmallestInMSortedArrays in this case we created element with array and element index
+ * @see KthSmallestInSortedMatrix in this case we create element with row and col value
+ * Here we create Tuple (i, j) such that i < j < arr.length
  */
 public class KthSmallestPairDistance {
+    /**
+     * This approach uses heap where we keep each i and i + 1 indices such that they are lowest possible abs difference
+     * For a fairly large array with 6 figures k value this will take time
+     *
+     */
+    public static int smallestDistancePairHeap(int[] nums, int k) {
+        Arrays.sort(nums);
+
+        PriorityQueue<Tuple> priorityQueue =
+                new PriorityQueue<>(nums.length, Comparator.comparingInt(tuple -> nums[tuple.j] - nums[tuple.i]));
+
+        //store a all initial combinations of (i, j) such that i < j < arr.length
+        for (int i = 0; i + 1 < nums.length; i++) {
+            priorityQueue.offer(new Tuple(i, i + 1));
+        }
+
+        Tuple result = null;
+        for (; k > 0; --k) {
+            Tuple current = priorityQueue.poll();
+            result = current;
+            if (current.j + 1 < nums.length) {
+                priorityQueue.offer(new Tuple(current.i, current.j + 1));
+            }
+        }
+
+        if (result != null) return nums[result.j] - nums[result.i];
+
+        return -1;
+    }
+
+    static class Tuple {
+        int i;
+        int j;
+        Tuple(int i, int j) {
+            this.i = i;
+            this.j = j;
+        }
+    }
 
     /**
      * Binary search using sliding window approach
@@ -38,9 +78,6 @@ public class KthSmallestPairDistance {
      * For every possible right, we maintain the loop invariant: left is the smallest value such that
      * nums[right] - nums[left] <= guess. Then, the number of pairs with right as it's right-most endpoint
      * is right - left, and we add all of these up.
-     * @param nums
-     * @param k
-     * @return
      */
     public static int smallestDistancePair(int[] nums, int k) {
         Arrays.sort(nums);
@@ -59,44 +96,6 @@ public class KthSmallestPairDistance {
             else lo = mi + 1;
         }
         return lo;
-    }
-
-    /**
-     * This approach uses heap where we keep each i and i + 1 indices such that they are lowest possible abs difference
-     * For a fairly large array with 6 figures k value this will take time
-     *
-     */
-    public static int smallestDistancePairHeap(int[] nums, int k) {
-        Arrays.sort(nums);
-
-        PriorityQueue<Tuple> priorityQueue =
-                new PriorityQueue<>(nums.length, Comparator.comparingInt(tuple -> nums[tuple.j] - nums[tuple.i]));
-
-        for (int i = 0; i + 1 < nums.length; i++) {
-            priorityQueue.offer(new Tuple(i, i + 1));
-        }
-
-        Tuple result = null;
-        for (; k > 0; --k) {
-            Tuple current = priorityQueue.poll();
-            result = current;
-            if (current.j + 1 < nums.length) {
-                priorityQueue.offer(new Tuple(current.i, current.j + 1));
-            }
-        }
-        if (result != null)
-            return nums[result.j] - nums[result.i];
-
-        return -1;
-    }
-
-    static class Tuple {
-        int i;
-        int j;
-        Tuple(int i, int j) {
-            this.i = i;
-            this.j = j;
-        }
     }
 
     public static void main(String[] args) {

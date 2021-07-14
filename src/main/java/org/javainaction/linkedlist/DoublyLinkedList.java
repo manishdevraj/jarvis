@@ -3,13 +3,13 @@ package org.javainaction.linkedlist;
 /**
  * Double linked list construction class with following methods
  *
- * setHead()
- * setTail()
- * insertBefore()
- * insertAfter()
- * insertAtPosition()
- * remove()
- * removeNodeWithValue()
+ * setHead(element) : Sets a head element
+ * setTail(element) : Sets a tail element
+ * insertBefore(node, element) : Insert before a given node
+ * insertAfter(node, element): Insert after a given node
+ * insertAtPosition(pos, element): Insert at a given position
+ * remove(element) : Removes an element
+ * removeNodeWithValue(value): Removes a node with value
  */
 public class DoublyLinkedList {
     public Node head;

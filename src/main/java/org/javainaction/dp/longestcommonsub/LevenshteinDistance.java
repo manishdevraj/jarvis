@@ -31,6 +31,9 @@ public class LevenshteinDistance {
         int[][] edits = new int[str2.length() + 1][str1.length() + 1];
         // We add empty char at start of row and column to be able to
         // go diagonal for first character
+        // here we need to update memo with increasing sequence of numbers because when comparing
+        //"" with "" "a" we need one delete to make it equal,  when comparing
+        //"" with "" "a" "b" we need two delete to make it equal
         for (int i = 0 ; i < str2.length() + 1; i++) {
             for (int j = 0; j < str1.length() + 1; j++){
                 edits[i][j] = j;
@@ -62,7 +65,7 @@ public class LevenshteinDistance {
 
         int[] evenEdits = new int[small.length() + 1];
         int[] oddEdits = new int[small.length() + 1];
-        for (int j = 0; j < str1.length() + 1; j++){
+        for (int j = 0; j < small.length() + 1; j++){
             evenEdits[j] = j;
         }
 

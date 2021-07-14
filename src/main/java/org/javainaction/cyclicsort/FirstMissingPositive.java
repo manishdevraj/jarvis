@@ -16,6 +16,7 @@ package org.javainaction.cyclicsort;
  *
  * Input: [3, 2, 5, 1]
  * Output: 4
+ * @see FirstKMissingPositive
  */
 public class FirstMissingPositive {
     public static int findNumber(int[] nums) {

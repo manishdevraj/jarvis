@@ -129,6 +129,7 @@ public class MedianTwoSortedArrays {
         if (N1 < N2) return findMedianSortedArrays(nums2, nums1);	// Make sure A2 is the shorter one.
 
         int lo = 0, hi = N2 * 2;
+
         while (lo <= hi) {
             int mid2 = (lo + hi) / 2;   // Try Cut 2
             int mid1 = N1 + N2 - mid2;  // Calculate Cut 1 accordingly

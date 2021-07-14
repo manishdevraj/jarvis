@@ -1,12 +1,13 @@
 package org.javainaction.array;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+/**
+ * Find apartment closest with min distance from amenities
+ */
 public class ApartmentHunting {
     // O(b^2*r) time | O(b) where b is the number of blokcs and r is the
-    // numer of requirements
+    // number of requirements
     public static int apartmentHunting(List<Map<String, Boolean>> blocks, String[] reqs) {
         int[] maxDistancesAtBlocks = new int[blocks.size()];
         Arrays.fill(maxDistancesAtBlocks, Integer.MIN_VALUE);
@@ -40,5 +41,37 @@ public class ApartmentHunting {
 
     public static int distanceBetween(int a, int b) {
         return Math.abs(a - b);
+    }
+
+    public static void main(String[] args) {
+        var blocks = new ArrayList<Map<String, Boolean>>();
+
+        blocks.add(0, new HashMap<>());
+        blocks.get(0).put("gym", false);
+        blocks.get(0).put("school", true);
+        blocks.get(0).put("store", false);
+
+        blocks.add(1, new HashMap<>());
+        blocks.get(1).put("gym", true);
+        blocks.get(1).put("school", false);
+        blocks.get(1).put("store", false);
+
+        blocks.add(2, new HashMap<>());
+        blocks.get(2).put("gym", true);
+        blocks.get(2).put("school", true);
+        blocks.get(2).put("store", false);
+
+        blocks.add(3, new HashMap<>());
+        blocks.get(3).put("gym", false);
+        blocks.get(3).put("school", true);
+        blocks.get(3).put("store", false);
+
+        blocks.add(4, new HashMap<>());
+        blocks.get(4).put("gym", false);
+        blocks.get(4).put("school", true);
+        blocks.get(4).put("store", true);
+
+        String[] reqs = new String[] {"gym", "school", "store"};
+        System.out.println(apartmentHunting(blocks, reqs) == 3);
     }
 }

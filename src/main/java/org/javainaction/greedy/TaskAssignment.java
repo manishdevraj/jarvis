@@ -25,6 +25,7 @@ import java.util.List;
  *
  *
  *  K will always be greater than zero
+ * @see TandemBicycle
  */
 public class TaskAssignment {
     public List<List<Integer>> taskAssignment(int k, List<Integer> tasks) {
@@ -34,6 +35,11 @@ public class TaskAssignment {
         for (Integer task : tasks) {
             taskIndexPairs[index] = new int[]{task, index++};
         }
+
+        //longest time to complete the pair meaning we need to minimize the max of the pair
+        //this can be done if we combine biggest element with smallest element as rest of the elements are guaranteed
+        //to be less than biggest element and might result in smaller max than combining
+        // two bigger values together
 
         Arrays.sort(taskIndexPairs, (a, b) -> a[0] - b[0]);
 

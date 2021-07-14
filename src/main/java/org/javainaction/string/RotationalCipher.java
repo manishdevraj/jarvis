@@ -27,7 +27,7 @@ import java.util.function.BiFunction;
  * input = abcdefghijklmNOPQRSTUVWXYZ0123456789
  * rotationFactor = 39
  * output = nopqrstuvwxyzABCDEFGHIJKLM9012345678
- *
+ * @see CaesarCypherEncryptor
  */
 public class RotationalCipher {
     String rotationalCipher(String input, int rotationFactor) {
@@ -44,13 +44,18 @@ public class RotationalCipher {
 
         int i = 0;
         for (char c : input.toCharArray()) {
+            //if it is alphabetic
             if (Character.isAlphabetic(c)) {
+                //if it is upper case
                 if (Character.isUpperCase(c))
                     output[i++] = encryptUppercase.apply(c, rotationFactor);
+                //or lowercase
                 else
                     output[i++] = encryptLowercase.apply(c, rotationFactor);
+            //if it contains digits
             } else if (Character.isDigit(c))
                 output[i++] = encryptDigits.apply(c, rotationFactor);
+            //or else leave unencrypted
             else
                 output[i++] = c;
         }

@@ -38,7 +38,6 @@ public class IslandPerimeter {
                 if (grid[i][j] == 1) {
                     landPerimeter += traverseLand(grid, i, j, 0);
                 }
-
             }
         }
         return landPerimeter;
@@ -53,17 +52,13 @@ public class IslandPerimeter {
      * |  |  +  |  |          ->       |     |
      * +--+     +--+                   +--+--+
      *
-     * 4 + 4 - ? = 6  -> ? = 2
+     * 4 + 4 - x = 6  -> x = 2
      *
-     * @param grid
-     * @param i
-     * @param j
-     * @return
      */
     public static int traverseLand(int[][] grid, int i, int j, int neighbours) {
         if (i < grid.length - 1 && grid[i + 1][j] == 1) neighbours++;
         if (j < grid[i].length - 1 && grid[i][j + 1] == 1) neighbours++;
-        return 4 - neighbours * 2;
+        return 4 - (neighbours * 2);
     }
 
     public static void main(String[] args) {

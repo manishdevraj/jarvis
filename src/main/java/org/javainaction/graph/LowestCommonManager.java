@@ -61,7 +61,7 @@ public class LowestCommonManager {
 
         OrgChart(char name) {
             this.name = name;
-            this.directReports = new ArrayList<OrgChart>();
+            this.directReports = new ArrayList<>();
         }
 
         // This method is for testing only.

@@ -73,17 +73,21 @@ public class EmployeeFreeTime {
         PriorityQueue<EmployeeInterval> minHeap = new PriorityQueue<>(schedule.size(),
                 (a, b) -> Integer.compare(a.interval.end, b.interval.end));
 
-        for (int i = 0; i < schedule.size(); i++) {
-            minHeap.offer(new EmployeeInterval(schedule.get(i).get(0), i, 0));
+        //all employees first interval to minHeap
+        for (int k = 0; k < schedule.size(); k++) {
+            //first interval, employee index, 0 as interval index
+            minHeap.offer(new EmployeeInterval(schedule.get(k).get(0), k, 0));
         }
 
         Interval previousInterval = !minHeap.isEmpty() ? minHeap.peek().interval : null;
         while (!minHeap.isEmpty()) {
             EmployeeInterval currentInterval = minHeap.poll();
             if (previousInterval.end < currentInterval.interval.start) {
+                //we found available space between two intervals
                 result.add(new Interval(previousInterval.end, currentInterval.interval.start));
                 previousInterval = currentInterval.interval;
             } else {
+                //slide interval if current interval is ending later
                 if (previousInterval.end < currentInterval.interval.end) {
                     previousInterval = currentInterval.interval;
                 }
@@ -103,17 +107,16 @@ public class EmployeeFreeTime {
 
     /**
      * Without using Min heap but merge technique to find free slots
-     * @param schedule
-     * @return
      */
     public static List<Interval> findEmployeeFreeTimeMerged(List<List<Interval>> schedule) {
 
         List<Interval> intervals = new ArrayList<>();
-        for (List<Interval> interval : schedule) {
-            intervals.addAll(interval);
-        }
+        //add all intervals from each employees
+        schedule.forEach(intervals::addAll);
 
+        //merge all intervals together
         List<Interval> mergeIntervals = mergeIntervals(intervals);
+
         List<Interval> result = new ArrayList<>();
         for (int i = 1; i < mergeIntervals.size(); i++) {
             Interval previous = mergeIntervals.get(i - 1);
@@ -127,9 +130,7 @@ public class EmployeeFreeTime {
     }
 
     /**
-     * Merge intervals from all schedules to then find overlapping and free interval slots
-     * @param intervals
-     * @return
+     * Merge intervals from all schedules to find overlapping and free interval slots
      */
     private static List<Interval> mergeIntervals(List<Interval> intervals) {
         if (intervals == null || intervals.size() == 0) return intervals;
@@ -146,6 +147,7 @@ public class EmployeeFreeTime {
                 if (previous.end >= current.start) {
                     //flatten interval such that we can go as back as lower value of two start intervals
                     //and as higher as max value of end intervals
+                    //[1, 3], [2, 4] will be merged to [1, 4]
                     mergeIntervals.add(new Interval(
                             Math.min(previous.start, current.start),
                             Math.max(previous.end, current.end)
@@ -174,8 +176,8 @@ public class EmployeeFreeTime {
 
         input = new ArrayList<>();
         input.add(new ArrayList<>(Arrays.asList(new Interval(1, 3), new Interval(9, 12))));
-        input.add(new ArrayList<>(Arrays.asList(new Interval(2, 4))));
-        input.add(new ArrayList<>(Arrays.asList(new Interval(6, 8))));
+        input.add(new ArrayList<>(Collections.singletonList(new Interval(2, 4))));
+        input.add(new ArrayList<>(Collections.singletonList(new Interval(6, 8))));
         result = findEmployeeFreeTime(input);
 
         System.out.println("Free intervals between {[{1, 3}, {9, 12}], [{2, 4}], [{6, 8}]} : " );
@@ -186,8 +188,8 @@ public class EmployeeFreeTime {
 
 
         input = new ArrayList<>();
-        input.add(new ArrayList<>(Arrays.asList(new Interval(1, 3))));
-        input.add(new ArrayList<>(Arrays.asList(new Interval(2, 4))));
+        input.add(new ArrayList<>(Collections.singletonList(new Interval(1, 3))));
+        input.add(new ArrayList<>(Collections.singletonList(new Interval(2, 4))));
         input.add(new ArrayList<>(Arrays.asList(new Interval(3, 5), new Interval(7, 9))));
         result = findEmployeeFreeTime(input);
 

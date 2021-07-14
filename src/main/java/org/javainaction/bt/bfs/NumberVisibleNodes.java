@@ -27,24 +27,6 @@ import java.util.Queue;
  * output = 4
  */
 public class NumberVisibleNodes {
-    class Node {
-        int data;
-        Node left;
-        Node right;
-        Node() {
-            this.data = 0;
-            this.left = null;
-            this.right = null;
-        }
-        Node(int data) {
-            this.data = data;
-            this.left = null;
-            this.right = null;
-        }
-    }
-
-    // Add any helper functions you may need here
-
 
     int visibleNodes(Node root) {
         Queue<Node> queue = new LinkedList<>();
@@ -57,11 +39,12 @@ public class NumberVisibleNodes {
             for (int i = 0; i < levelSize; i++) {
                 Node current = queue.poll();
                 if (i == 0) leftVisibleNodes++;
-                if (current.left != null) queue.offer(current.left);
-                if (current.right != null) queue.offer(current.right);
+                if (current != null) {
+                    if (current.left != null) queue.offer(current.left);
+                    if (current.right != null) queue.offer(current.right);
+                }
             }
         }
-
         return leftVisibleNodes;
     }
 
@@ -118,7 +101,24 @@ public class NumberVisibleNodes {
         // Add your own test cases here
 
     }
+
     public static void main(String[] args) throws IOException {
         new NumberVisibleNodes().run();
+    }
+
+    class Node {
+        int data;
+        Node left;
+        Node right;
+        Node() {
+            this.data = 0;
+            this.left = null;
+            this.right = null;
+        }
+        Node(int data) {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
     }
 }

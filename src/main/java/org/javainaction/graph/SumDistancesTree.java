@@ -30,7 +30,6 @@ public class SumDistancesTree {
      * In O(N) we can find sum of distances in tree from root and all other nodes.
      * Now for all N nodes?
      * Of course, we can do it N times and solve it in O(N^2).
-     * C++ and Java may get accepted luckily, but it's not what we want.
      *
      * When we move our root from one node to its connected node,
      * one part of nodes get closer, one the other part get further.
@@ -54,13 +53,11 @@ public class SumDistancesTree {
      * res[root] = sum(res[i]) + sum(count[i])
      *
      * Pre order dfs traversal, update res:
-     * When we move our root from parent to its child i, count[i] points get 1 closer to root, n - count[i] nodes get 1 futhur to root.
+     * When we move our root from parent to its child i, count[i] points get 1 closer to root, n - count[i]
+     * nodes get 1 farther to root.
      * res[i] = res[root] - count[i] + N - count[i]
      *
      * return res, done.
-     * @param n
-     * @param edges
-     * @return
      */
     public static int[] sumOfDistancesInTree(int n, int[][] edges) {
         //count all nodes in subtree
@@ -89,6 +86,7 @@ public class SumDistancesTree {
     public static void postOrder(List<Set<Integer>> tree, int node,
                           int parent, int[] count, int[] dist) {
         for (int child : tree.get(node)) {
+            //skip parent node
             if (child == parent) continue;
 
             postOrder(tree, child, node, count, dist);

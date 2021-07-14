@@ -3,7 +3,8 @@ package org.javainaction.slidingwindow;
 import java.util.Arrays;
 
 /**
- * There are several cards arranged in a row, and each card has an associated number of points. The points are given in the integer array cardPoints.
+ * There are several cards arranged in a row, and each card has an associated number of points.
+ * The points are given in the integer array cardPoints.
  *
  * In one step, you can take one card from the beginning or from the end of the row. You have to take exactly k cards.
  *
@@ -41,15 +42,6 @@ import java.util.Arrays;
  * Output: 202
  */
 public class MaxPointsFromCards {
-    public static void main(String[] args) {
-        var array = new int[] {1,2,3,4,5,6,1};
-        System.out.println("Maximum score from " + Arrays.toString(array) + " is : " + maxScore(array, 3));
-        array = new int[] {9,7,7,9,7,7,9};
-        System.out.println("Maximum score from  " + Arrays.toString(array) + " is : " + maxScore(array, 7));
-        array = new int[] {1,79,80,1,1,1,200,1};
-        System.out.println("Maximum score from  " + Arrays.toString(array) + " is : " + maxScore(array, 3));
-    }
-
     public static int maxScore(int[] cardPoints, int k) {
         if (cardPoints == null) return -1;
 
@@ -59,16 +51,36 @@ public class MaxPointsFromCards {
 
         int totalPoints = 0;
 
+        //running sum from o to k integers this acts as anchor for comparison where we have already calculated
+        // left tree sum
         for (int i = 0; i < k; i++) {
             totalPoints += cardPoints[i];
         }
 
+        //we have max from one end of the deck
         int max = totalPoints;
 
+        //try and find new max by removing kth element from start going backwards
+        //and add nth element from the end of the deck going backwards up to k
+        // [x, y, z, ..... a, b, c]
+        // we are max of ( x + y + z)
+        // total += (z) - (c)
+        // total += (y) - (b)
+        // total += (x) - (a)
+        // we either found new max from right to left or we retain the max from left to right
         for (int i = 0; i < k; i++) {
             totalPoints += cardPoints[N - 1 - i] - cardPoints[k - 1 - i];
             max = Math.max(max, totalPoints);
         }
         return max;
+    }
+
+    public static void main(String[] args) {
+        var array = new int[] {1,2,3,4,5,6,1};
+        System.out.println("Maximum score from " + Arrays.toString(array) + " is : " + maxScore(array, 3));
+        array = new int[] {9,7,7,9,7,7,9};
+        System.out.println("Maximum score from  " + Arrays.toString(array) + " is : " + maxScore(array, 7));
+        array = new int[] {1,79,80,1,1,1,200,1};
+        System.out.println("Maximum score from  " + Arrays.toString(array) + " is : " + maxScore(array, 3));
     }
 }

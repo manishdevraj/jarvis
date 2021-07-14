@@ -44,7 +44,6 @@ public class CountSmallNumsAfterSelf {
      *
      * Consider when merging two sorted list
      *
-     *
      * Yes! When we select an element i on the left array, we know that elements selected previously from the right
      * array jump from i's right to i's left.
      *

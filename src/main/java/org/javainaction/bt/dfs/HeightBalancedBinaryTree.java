@@ -24,10 +24,11 @@ public class HeightBalancedBinaryTree {
         TreeInfo rightTreeInfo = checkIfBalanced(currentNode.right);
 
         //if either is unbalanced then nothing is balanced so check all subtrees
-        boolean isBalanced = leftTreeInfo.isBalanced && rightTreeInfo.isBalanced
+        boolean isBalanced = leftTreeInfo.isBalanced
+                && rightTreeInfo.isBalanced
                 && Math.abs(leftTreeInfo.height - rightTreeInfo.height) <= 1;
 
-        return new TreeInfo(Math.max(leftTreeInfo.height, rightTreeInfo.height) + 1, isBalanced);
+        return new TreeInfo(1+ Math.max(leftTreeInfo.height, rightTreeInfo.height), isBalanced);
     }
 
     static class TreeInfo {

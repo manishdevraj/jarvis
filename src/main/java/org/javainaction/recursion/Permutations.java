@@ -36,14 +36,14 @@ public class Permutations {
     }
 
     //O(n*n!) time | O(n*n!) space
-    public static void findAllPermutations (int i, List<Integer> array, List<List<Integer>> permutations) {
-        if (array.size() - 1 == i) {
+    public static void findAllPermutations (int start, List<Integer> array, List<List<Integer>> permutations) {
+        if (array.size() - 1 == start) {
             permutations.add(new ArrayList<>(array));
         } else {
-            for(int j = i; j < array.size(); j++){
-                swap(array, i, j);
-                findAllPermutations(i + 1, array, permutations);
-                swap(array, i, j);
+            for(int j = start; j < array.size(); j++){
+                swap(array, start, j);
+                findAllPermutations(start + 1, array, permutations);
+                swap(array, start, j);
             }
         }
     }
@@ -79,6 +79,7 @@ public class Permutations {
     }
 
     public static void main(String[] args) {
-        System.out.print("{ 1, 3, 5 } are all the permutations: " + findPermutations(new int[] { 1, 3, 5 }));
+        System.out.println("{ 1, 3, 5 } are all the permutations: " + findPermutations(new int[] { 1, 3, 5 }));
+        System.out.println("{ 1, 3, 5 } are all the permutations: " + getPermutations(Arrays.asList( 1, 3, 5 )));
     }
 }

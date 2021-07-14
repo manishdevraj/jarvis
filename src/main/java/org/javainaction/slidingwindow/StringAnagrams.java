@@ -28,10 +28,11 @@ import java.util.Map;
  * Input: String="abbcabc", Pattern="abc"
  * Output: [2, 3, 4]
  * Explanation: The three anagrams of the pattern in the given string are "bca", "cab", and "abc".
+ * @see MinimumWindowSubstring where are are finding patter in substring
  */
 public class StringAnagrams {
     public static List<Integer> findStringAnagrams(String str, String pattern) {
-        List<Integer> resultIndices = new ArrayList<Integer>();
+        var resultIndices = new ArrayList<Integer>();
         if(str == null || pattern == null) return resultIndices;
 
         int windowStart = 0, matched = 0;
@@ -46,23 +47,16 @@ public class StringAnagrams {
             if (charFrequencyMap.containsKey(rightChar)) {
                 // decrement the frequency of the matched character
                 charFrequencyMap.put(rightChar, charFrequencyMap.get(rightChar) - 1);
-                if (charFrequencyMap.get(rightChar) == 0) {
-                    // character is completely matched
-                    matched++;
-                }
-
+                if (charFrequencyMap.get(rightChar) == 0) matched++; // character is completely matched
             }
 
-            if (matched == charFrequencyMap.size()){
-                resultIndices.add(windowStart);
-            }
+            //store start of the solution
+            if (matched == charFrequencyMap.size()) resultIndices.add(windowStart);
 
             if (windowEnd >= pattern.length() - 1) { // shrink the window by one character
                 char leftChar = str.charAt(windowStart++);
                 if (charFrequencyMap.containsKey(leftChar)) {
-                    if (charFrequencyMap.get(leftChar) == 0) {
-                        matched--; // before putting the character back, decrement the matched count
-                    }
+                    if (charFrequencyMap.get(leftChar) == 0) matched--; // before putting the character back, decrement the matched count
                     // put the character back for matching
                     charFrequencyMap.put(leftChar, charFrequencyMap.get(leftChar) + 1);
                 }

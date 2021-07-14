@@ -24,16 +24,18 @@ import java.util.Map;
  * Given a string, find the length of the longest substring in it with at most two distinct characters.
  *
  * Solution: This problem is exactly similar to our parent problem.
+ * @see LongestSubstringKDistinct
  */
 public class MaxFruitCountOf2Types {
     public static int findLength(char[] arr) {
+        int baskets = 2;
         int windowStart = 0, maxLength = 0;
         Map<Character, Integer> fruitFrequencyMap = new HashMap<>();
         // try to extend the range [windowStart, windowEnd]
         for (int windowEnd = 0; windowEnd < arr.length; windowEnd++) {
             fruitFrequencyMap.put(arr[windowEnd], fruitFrequencyMap.getOrDefault(arr[windowEnd], 0) + 1);
             // shrink the sliding window, until we are left with '2' fruits in the frequency map
-            if (fruitFrequencyMap.size() > 2) {
+            while (fruitFrequencyMap.size() > baskets) {
                 fruitFrequencyMap.put(arr[windowStart], fruitFrequencyMap.get(arr[windowStart]) - 1);
                 if (fruitFrequencyMap.get(arr[windowStart]) == 0) {
                     fruitFrequencyMap.remove(arr[windowStart]);
@@ -51,5 +53,8 @@ public class MaxFruitCountOf2Types {
                 MaxFruitCountOf2Types.findLength(new char[] { 'A', 'B', 'C', 'A', 'C' }));
         System.out.println("Maximum number of fruits: " +
                 MaxFruitCountOf2Types.findLength(new char[] { 'A', 'B', 'C', 'B', 'B', 'C' }));
+        System.out.println("Maximum number of fruits: " +
+                MaxFruitCountOf2Types.findLength(new char[] { 'A', 'B', 'C', 'A', 'B', 'C' }));
+
     }
 }

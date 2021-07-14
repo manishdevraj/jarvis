@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Given a collection of numbers, nums, that might contain duplicates, return all possible unique permutations in any order.
+ * Given a collection of numbers, nums, that might contain duplicates,
+ * return all possible unique permutations in any order.
  *
  *
  *
@@ -39,12 +40,18 @@ public class Permutations2 {
             permutations.add(new ArrayList<>(currentPermutations));
         } else {
             for(int i = 0; i < array.length; i++){
+                //skip visited items
                 if (visited[i]) continue;
+                //skip duplicate items
                 if (i > 0 && array[i] == array[i - 1] && !visited[i - 1]) continue;
+                //mark
                 visited[i] = true;
+                //add item
                 currentPermutations.add(array[i]);
                 findAllUniquePermutation(array, currentPermutations, permutations, visited);
+                //remove items
                 currentPermutations.remove(currentPermutations.size() - 1);
+                //change mark
                 visited[i] = false;
             }
         }

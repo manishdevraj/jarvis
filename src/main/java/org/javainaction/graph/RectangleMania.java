@@ -20,7 +20,6 @@ class RectangleMania {
     public static void main(String[] args) {
         Point[] coords = new Point[]
                 {new Point(0, 0), new Point(0, 1),  new Point(1, 1),  new Point(1, 0)};
-                       // ,  new Point(2, 1),  new Point(2, 0),  new Point(3, 1),  new Point(3, 0)};
         System.out.println(rectangleMania(coords));
     }
 

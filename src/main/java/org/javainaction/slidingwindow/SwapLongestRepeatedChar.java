@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 /**
- * Given a string text, we are allowed to swap two of the characters in the string. Find the length of the longest substring with repeated characters.
- *
- *
+ * Given a string text, we are allowed to swap two of the characters in the string. Find the length of the longest
+ * substring with repeated characters.
  *
  * Example 1:
  *
@@ -35,6 +34,7 @@ import java.util.stream.Stream;
  *
  * Input: text = "abcdef"
  * Output: 1
+ * @see LongestTurbulentSubarray
  */
 public class SwapLongestRepeatedChar {
     public static int maxRepOpt1(String s) {
@@ -42,11 +42,11 @@ public class SwapLongestRepeatedChar {
         var frequencies = new HashMap<Character, List<Integer>>();
         //store frequencies with their indices so we know if we are comparing adjacent pairs
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (!frequencies.containsKey(c))
-                frequencies.put(c, new ArrayList<>());
-            frequencies.get(c).add(i);
+            var value = frequencies.getOrDefault(s.charAt(i), new ArrayList<>());
+            value.add(i);
+            frequencies.put(s.charAt(i), value);
         }
+
 
         int longest = 1;
         for (List<Integer> indices : frequencies.values()) {
@@ -59,7 +59,7 @@ public class SwapLongestRepeatedChar {
                 if (indices.get(i) == indices.get(i - 1) + 1) curLength++;
                 else {
                     // if they are not contiguous
-                    //if both sides have the same char and are separated by only 1 char
+                    // if both sides have the same char and are separated by only 1 char
                     prevLength =  indices.get(i) == indices.get(i - 1) + 2 ? curLength : 0;
                     // to reset the process/counter
                     curLength = 1;

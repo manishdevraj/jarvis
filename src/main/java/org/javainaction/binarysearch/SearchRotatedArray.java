@@ -37,13 +37,18 @@ public class SearchRotatedArray {
 
             if (key == arr[middle]) {
                 return middle;
+            //if we are in ascending array
             } else if (leftValue <= potentialMatch) {
+                //check bounds and use standard binary search
+                //move right if key is withing ascending array
                 if (leftValue <= key  && key < potentialMatch) {
                     right = middle - 1;
                 } else {
                     left = middle + 1;
                 }
             } else {
+                //we are in descending array
+                //check bounds and move left if key is within descending array or else right
                 if (potentialMatch < key  && key <= rightValue) {
                     left = middle + 1;
                 } else {

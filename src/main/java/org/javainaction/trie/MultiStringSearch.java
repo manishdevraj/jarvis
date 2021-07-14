@@ -16,15 +16,15 @@ public class MultiStringSearch {
     // O(ns + bs) time | O(ns) space
     public static List<Boolean> multiStringSearch(String bigString, String[] smallStrings) {
 
-        SuffixTrie suffixTrie = new SuffixTrie();
+        Trie trie = new Trie();
         for (String smallString : smallStrings) {
-            suffixTrie.insert(smallString);
+            trie.insert(smallString);
         }
 
         Set<String> containedStrings = new HashSet<>();
 
         for (int i = 0; i < bigString.length(); i++) {
-            findSmallStringsIn(bigString, i, suffixTrie, containedStrings);
+            findSmallStringsIn(bigString, i, trie, containedStrings);
         }
 
         List<Boolean> solution = new ArrayList<>(smallStrings.length);
@@ -35,16 +35,16 @@ public class MultiStringSearch {
     }
 
     public static void findSmallStringsIn(String str, int startIdx,
-                                          SuffixTrie suffixTrie,
+                                          Trie trie,
                                           Set<String> containedStrings) {
-        TrieNode node = suffixTrie.root;
+        TrieNode node = trie.root;
         for (int i = startIdx; i < str.length(); i++) {
             char letter = str.charAt(i);
             if (!node.children.containsKey(letter)) {
                 break;
             }
             node = node.children.get(letter);
-            if (node.children.containsKey(suffixTrie.endSymbol)) {
+            if (node.children.containsKey(trie.endSymbol)) {
                 containedStrings.add(node.word);
             }
         }
@@ -54,7 +54,7 @@ public class MultiStringSearch {
         String word;
     }
 
-    static class SuffixTrie {
+    static class Trie {
         TrieNode root = new TrieNode();
         char endSymbol = '*';
 

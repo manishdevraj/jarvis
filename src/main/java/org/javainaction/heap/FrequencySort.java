@@ -35,6 +35,7 @@ public class FrequencySort {
 
         StringBuilder outputBuilder = new StringBuilder(str.length());
         while (!maxHeap.isEmpty()){
+            //get each character and it's frequency so we can append it that many times
             Map.Entry<Character, Integer> charToken = maxHeap.poll();
             char c = charToken.getKey();
             int count = charToken.getValue();

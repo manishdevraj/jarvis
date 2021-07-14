@@ -3,19 +3,14 @@ package org.javainaction.twopointers;
 import java.util.Arrays;
 
 /**
- * Write a function that takes an array anf returns two indices between which we need to sort an integer array
+ * Write a function that takes an array and returns two indices between which we need to sort an integer array
  * to make entire array sorted in ascending order.
  * If input array is already sorted return {-1, -1}
  *
  * For e.g. {1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19} sorted needed at {3, 9}
+ * @see ShortestWindowSort
  */
 public class SubArraySort {
-    public static void main(String[] args) {
-        int[] expected = {3, 9};
-        System.out.println("{1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19} sub array sorting at : "
-                + Arrays.toString(SubArraySort.subarraySort(new int[]{1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19})));
-    }
-
     public static int[] subarraySort(int[] array) {
         int leftOutOfOrder = Integer.MAX_VALUE;
         int rightOutOfOrder = Integer.MIN_VALUE;
@@ -52,5 +47,11 @@ public class SubArraySort {
             return num < array[i-1];
         }
         return array[i + 1] < num || num < array[i-1];
+    }
+
+    public static void main(String[] args) {
+        int[] expected = {3, 9};
+        System.out.println("{1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19} sub array sorting at : "
+                + Arrays.toString(SubArraySort.subarraySort(new int[]{1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19})));
     }
 }

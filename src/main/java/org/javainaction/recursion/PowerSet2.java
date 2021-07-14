@@ -19,6 +19,7 @@ import java.util.List;
  *
  * Input: nums = [0]
  * Output: [[],[0]]
+ * @see Permutations2
  */
 public class PowerSet2 {
     // O(n*2^n) time | O(n*2^n) space
@@ -32,6 +33,7 @@ public class PowerSet2 {
         int index = 0;
         for (int i = 0; i < nums.length; i++) {
             //make sure we do not have similar numbers
+            //when we need to add new numbers make sure we choose index such that we have no duplicate
             index = i >= 1 && nums[i] == nums[i - 1] ? size : 0;
             size = powerset.size();
             for (int j = index; j < size; j++) {

@@ -13,7 +13,7 @@ package org.javainaction.linkedlist;
  * Output: [5]
  *
  *
- * @see org.javainaction.linkedlist.ReverseSubList
+ * @see ReverseSubList
  */
 public class ReverseLinkedList2 {
 
@@ -22,6 +22,8 @@ public class ReverseLinkedList2 {
         // create a dummy node to mark the head of this list
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
+
+        //position previous before left count so that it will connect to reversed linked
         ListNode prev = dummy;
         for (int i = 0 ; i < left - 1; i++) {
             prev = prev.next;
@@ -31,13 +33,17 @@ public class ReverseLinkedList2 {
         ListNode start = prev.next;
         // a pointer to a node that will be reversed
         ListNode end = start.next;
-        // 1 - 2 -3 - 4 - 5 ; left = 2; right = 4 ---> prev = 1, start = 2, end = 3
+        // 1 - 2 - 3 - 4 - 5 ; left = 2; right = 4 ---> prev = 1, start = 2, end = 3
         // dummy-> 1 -> 2 -> 3 -> 4 -> 5
 
         for (int i = 0 ; i < right - left; i++) {
+            //move start to end's next 2 -> 4 in first and 2 -> 5 in second iteration
             start.next = end.next;
+            //move end to prev's next 3 -> 2 in first and 4 -> 3 in second iteration
             end.next = prev.next;
+            //now move prev to new end 1 -> 3 in first and 1 -> 4 in second iteration
             prev.next = end;
+            //move end to new location 4 in first and 5 in second iteration
             end = start.next;
         }
 
@@ -45,7 +51,6 @@ public class ReverseLinkedList2 {
         // second reversing: dummy->1 - 4 - 3 - 2 - 5; prev = 1, start = 2, end = 5 (finish)
 
         return head;
-
     }
 
     public static void main(String[] args) {

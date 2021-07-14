@@ -1,7 +1,8 @@
 package org.javainaction.recursion;
 
 /**
- * Given an array of non-negative integers arr, you are initially positioned at start index of the array. When you are at index i, you can jump to i + arr[i] or i - arr[i], check if you can reach to any index with value 0.
+ * Given an array of non-negative integers arr, you are initially positioned at start index of the array.
+ * When you are at index i, you can jump to i + arr[i] or i - arr[i], check if you can reach to any index with value 0.
  *
  * Notice that you can not jump outside of the array at any time.
  *
@@ -27,6 +28,8 @@ package org.javainaction.recursion;
  * Input: arr = [3,0,2,1,2], start = 2
  * Output: false
  * Explanation: There is no way to reach at index 1 with value 0.
+ * @see org.javainaction.greedy.JumpGame
+ * @see org.javainaction.dp.JumpGame4
  */
 public class JumpGame3 {
     public static boolean canReach(int[] arr, int start) {
@@ -35,6 +38,7 @@ public class JumpGame3 {
         // -1 and have a check arr[start] > 0
         if (start >= 0 && start < arr.length && arr[start] < arr.length) {
             int jump = arr[start];
+            //this makes sure that element are out of bounds
             arr[start] += arr.length;
             return jump == 0 //we reached at 0 or
                     || canReach(arr, start - jump) // jump backwards

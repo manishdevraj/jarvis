@@ -48,8 +48,10 @@ public class SearchInfiniteSortedArray {
     public static int search(ArrayReader reader, int key) {
         int start = 0;
         int end = 1;
+        //move window until we have the target inside infinite array
         while (reader.get(end) < key) {
             int newStart = end + 1;
+            //slide window from end + 1 to 2 times end
             end += (end - start + 1) * 2;
             start = newStart;
         }

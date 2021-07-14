@@ -34,6 +34,7 @@ package org.javainaction.binarysearch;
 public class NextLetter {
     public static char searchNextLetter(char[] letters, char key) {
         int n = letters.length;
+        //because array is circular, otherwise for key > letter[n - 1] we would have returned ceiling as letter[n - 1]
         if (key < letters[0] || key > letters[n - 1]) return letters[0];
 
         int left = 0;
@@ -46,6 +47,10 @@ public class NextLetter {
                 left = middle + 1;
             }
         }
+        //because we have circular list and we have not math we can use mod to point at next possible cieling of the
+        //number
+        //For [a, c, f, h] and target b = 98 integer representation, when b is not found in array, left points at 1
+        //[ 1 % 4 ] points at 1st index which is c character as expected
         return letters[left % n];
     }
 

@@ -33,18 +33,17 @@ public class PartitionLabels {
         }
 
         int windowMax = 0;
-        int anchor = 0;
+        int left = 0;
         List<Integer> result = new ArrayList<>();
 
-        for (int i = 0; i < s.length(); i++) {
+        for (int right = 0; right < s.length(); right++) {
             //window can be extended up to last occurrence of the character being found
-            windowMax = Math.max(windowMax, charPos[s.charAt(i) - 'a']);
+            windowMax = Math.max(windowMax, charPos[s.charAt(right) - 'a']);
             //we found max window of the partition
-            //we successfully reach at the max window, chop our partition at this point and start counting from next
-            // index
-            if ( i == windowMax) {
-                result.add(i - anchor + 1);
-                anchor = i + 1;
+            //we successfully reach at the max window, chop our partition at this point and start counting from next index
+            if ( right == windowMax) {
+                result.add(right - left + 1);
+                left = right + 1;
             }
         }
         return result;

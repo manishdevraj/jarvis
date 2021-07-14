@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Given a wooden stick of length n units. The stick is labelled from 0 to n. For example, a stick of length 6 is labelled as follows:
+ * Given a wooden stick of length n units. The stick is labelled from 0 to n.
+ * For example, a stick of length 6 is labelled as follows:
  *
  *
  * Given an integer array cuts where cuts[i] denotes a position you should perform a cut at.
@@ -17,8 +18,26 @@ import java.util.stream.Collectors;
  * When you cut a stick, it will be split into two smaller sticks (i.e. the sum of their lengths is the length of
  * the stick before the cut). Please refer to the first example for a better explanation.
  *
- * Return the minimum total cost of the cuts.
+ *  Stick
+ *  0-----1-----2-----3-----4-----5-----6-----7
  *
+ *  cut at 3
+ *
+ *  0-----1-----2-----3     3-----4-----5-----6-----7
+ *
+ *  cut at 5
+ *
+ *  0-----1-----2-----3     3-----4-----5       5-----6-----7
+ *
+ *  cut at 1
+ *
+ *  0-----1     1-----2-----3     3-----4-----5       5-----6-----7
+ *
+ *  cut at 4
+ *
+ *  0-----1     1-----2-----3     3-----4       4-----5       5-----6-----7
+ *
+ * Return the minimum total cost of the cuts.
  *
  *
  * Example 1:
@@ -62,6 +81,7 @@ public class MinCostCutStick {
      * If we first cut at point 2 (or 3), the cost will be 12 (5 + 2 + 5).
      */
     public int minCost(int n, int[] cuts) {
+        //1 <= cuts.length <= min(n - 1, 100)
         Integer[][] memoize = new Integer[102][102];
         var c = Arrays.stream(cuts).boxed().collect(Collectors.toList());
         c.add(0);
@@ -74,17 +94,19 @@ public class MinCostCutStick {
         //nothing left to cut
         if (j - i <= 1) return 0;
 
-        if (memoize[i][j] == null) {
-            memoize[i][j] = Integer.MAX_VALUE;
-            for (int k = i + 1; k < j; ++k) {
-                int cutCost = cuts.get(j) - cuts.get(i);
-                memoize[i][j] =
-                        Math.min(memoize[i][j],
-                                cutCost +
-                                        minCostRecursive(memoize, cuts, i, k) +
-                                        minCostRecursive(memoize, cuts, k, j));
-            }
+        if (memoize[i][j] != null) return memoize[i][j];
+
+        memoize[i][j] = Integer.MAX_VALUE;
+
+        for (int k = i + 1; k < j; ++k) {
+            //cost is cut at stick length
+            int cutCost = cuts.get(j) - cuts.get(i);
+
+            memoize[i][j] = Math.min(memoize[i][j], cutCost
+                    +   minCostRecursive(memoize, cuts, i, k)
+                    +   minCostRecursive(memoize, cuts, k, j));
         }
+
         return memoize[i][j];
     }
 

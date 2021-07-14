@@ -23,20 +23,22 @@ public class MergeSortedArrays {
     // array elements and k is the number of arrays
     public static List<Integer> mergeSortedArrays(List<List<Integer>> arrays) {
         List<Integer> sortedList = new ArrayList<>();
-        PriorityQueue<Element> priorityQueue = new PriorityQueue<>((a, b) -> a.number - b.number);
+        PriorityQueue<Element> priorityQueue =
+                new PriorityQueue<>((a, b) ->
+                        arrays.get(a.arrayIndex).get(a.elementIndex) - arrays.get(b.arrayIndex).get(b.elementIndex));
 
         for(int arrayIndex = 0; arrayIndex < arrays.size(); arrayIndex++) {
-            priorityQueue.offer(new Element(arrayIndex, 0, arrays.get(arrayIndex).get(0)));
+            priorityQueue.offer(new Element(arrayIndex, 0));
         }
 
         while (!priorityQueue.isEmpty()) {
             Element small = priorityQueue.poll();
-            sortedList.add(small.number);
-            if (small.elementIndex == arrays.get(small.arrayIndex).size() - 1) {
+            List<Integer> subList = arrays.get(small.arrayIndex);
+            sortedList.add(subList.get(small.elementIndex));
+            if (small.elementIndex == subList.size() - 1) {
                 continue;
             }
-            priorityQueue.offer(new Element(small.arrayIndex, small.elementIndex + 1,
-                    arrays.get(small.arrayIndex).get(small.elementIndex  + 1)));
+            priorityQueue.offer(new Element(small.arrayIndex, small.elementIndex + 1));
         }
 
         return sortedList;
@@ -45,12 +47,10 @@ public class MergeSortedArrays {
     static class Element {
         int arrayIndex;
         int elementIndex;
-        int number;
 
-        public Element(int arrayIndex, int elementIndex, int number) {
+        public Element(int arrayIndex, int elementIndex) {
             this.arrayIndex = arrayIndex;
             this.elementIndex = elementIndex;
-            this.number = number;
         }
     }
 
@@ -61,8 +61,7 @@ public class MergeSortedArrays {
         arrays.add(Arrays.asList(-124, 81, 121));
         arrays.add(Arrays.asList(3, 6, 12, 20, 150));
         var actual = mergeSortedArrays(arrays);
-        /*var expected =
-                Arrays.asList(new Integer[] {-124, -1, 0, 1, 3, 5, 6, 9, 12, 20, 21, 81, 121, 150});*/
+        //var expected = Arrays.asList(new Integer[] {-124, -1, 0, 1, 3, 5, 6, 9, 12, 20, 21, 81, 121, 150});
         System.out.println("Merged list : " + actual);
 
     }

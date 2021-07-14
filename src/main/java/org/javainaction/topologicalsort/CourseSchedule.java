@@ -24,9 +24,12 @@ import java.util.*;
  * Explanation: There are a total of 2 courses to take.
  * To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1.
  * So it is impossible.
+ * @see TaskScheduling
+ * @see TopologicalSort
  */
 public class CourseSchedule {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
+        //in degree maintained as int[] over hashmap
         int[] inDegree = new int[numCourses];
         Map<Integer, List<Integer>> graph = new HashMap<>();
 
@@ -41,26 +44,25 @@ public class CourseSchedule {
             inDegree[child]++; // increment child's inDegree
         }
 
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Integer> source = new LinkedList<>();
         for (int i = 0; i < numCourses; i++) {
             if (inDegree[i] == 0)
-                queue.add(i);
+                source.add(i);
         }
 
         int dependenciesCount = prerequisites.length;
-        while (!queue.isEmpty()) {
-            Integer course = queue.poll();
+        while (!source.isEmpty()) {
+            Integer course = source.poll();
             // get the node's children to decrement their in-degrees
             List<Integer> children = graph.get(course);
             for (int child : children) {
                 dependenciesCount--;
                 if (--inDegree[child] == 0) //we can attend course
-                    queue.add(child);
+                    source.add(child);
             }
         }
 
         return dependenciesCount == 0;
-
     }
 
     public static void main(String[] args) {

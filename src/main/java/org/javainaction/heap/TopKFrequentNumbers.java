@@ -23,17 +23,19 @@ public class TopKFrequentNumbers {
         Arrays.stream(nums)
                 .forEach(n -> numFrequencyMap.put(n, numFrequencyMap.getOrDefault(n, 0) + 1));
 
-        PriorityQueue<Map.Entry<Integer, Integer>> heap = new PriorityQueue<>(
+        PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<>(
                 (a, b) -> (a.getValue() - b.getValue()));
 
+        //min heap because we need to sort by least frequent and we remove them when threshold beyond k
+        //min heap poll will remove least significant item (less frequent in this case)
         for (Map.Entry<Integer, Integer> entry : numFrequencyMap.entrySet()) {
-            heap.add(entry);
-            if (heap.size() > k) heap.poll();
+            minHeap.add(entry);
+            if (minHeap.size() > k) minHeap.poll();
         }
 
         List<Integer> topNumbers = new ArrayList<>(k);
-        while (!heap.isEmpty()){
-            topNumbers.add(heap.poll().getKey());
+        while (!minHeap.isEmpty()){
+            topNumbers.add(minHeap.poll().getKey());
         }
 
         return topNumbers;

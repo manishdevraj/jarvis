@@ -13,6 +13,7 @@
 - [ ] [Depth first search](#dfs)
 - [ ] [Heap](#heap)
 - [ ] [Recursion and Backtracking](#recursion) 
+- [ ] [Binary tree](#binarytree)
 - [ ] [Binary search tree](#bst)
 - [ ] [Binary search](#binarysearch)
 - [ ] [Top K element](#topk)
@@ -25,8 +26,11 @@
 - [ ] [Tries](#tries)
 - [ ] [Greedy algorithms](#greedy)
 - [ ] [Array](#array)
-- [ ] [String](#string)
 - [ ] [Sorting](#sorting)
+- [ ] [String](#string)
+- [ ] [Linked List](#linkedlist)
+- [ ] [Graph](#graph)
+
 
 ### [[⬆]](#toc) <a name='slidingwindow'>Sliding window problem</a>
 
@@ -34,7 +38,7 @@
 
 It typically deals with trying to find contiguous subarray, sub list with some defined window of size 
 K or at times trying to find the window.
-E.g. could be - 
+
 * Find a maximum subarray sum with a size K
 * Replace 0's with 1's in an array where K replacements are allowed, find maximum consecutive 1's 
 * Select maximum fruits of K type from an array and find maximum fruits that can be collected
@@ -49,7 +53,7 @@ E.g. could be -
 [source](src/main/java/org/javainaction/twopointers)
 
 Problem deals in finding a sum or arranging array in certain fashion when array is unsorted.
-E.g. could be -
+
 * Dutch national flag problem (sort the colors in an array without using extra space)
 * Find two number sum, triplet sum, quadruplet sum with target sum or min/max value
 * Perform sub array sorted needed to sort entire array 
@@ -95,7 +99,8 @@ Unsorted array in range 1.... n range, we need to find either duplicate or missi
 
 * Find one or all missing numbers
 * Find one or all duplicate numbers
-* Find kth missing positive number
+* Find k missing positive number
+* Find all missing positive numbers  
 * Find corrupt number
 * Passing yearbook by each student
 
@@ -103,18 +108,18 @@ Unsorted array in range 1.... n range, we need to find either duplicate or missi
 
 [source](src/main/java/org/javainaction/linkedlist)
 
-Set of problem statements where we are required to either merge or re-arrange a linked in certain way, 
-find duplicate or remove Nth value from end Or reverse linked list from middle or from two ranged index values.
+Set of problem statements where we are required to either merge or re-arrange a linked in certain way, reverse 
+a linked list from middle or from two ranged index values.
 
-It heavily uses fast slow pointer technique but additional complexity arround reversing linked list and 
+It heavily uses fast slow pointer technique but additional complexity around reversing linked list and 
 maintaining links between nodes.
 
-* Add two numbers like arithmetic equation 
-* Merge two linked list
-* Swap node pairs or from certain indices
-* Reverse linked list from certain indices
-* Remove duplicates
-* Remove node from X location in linked list
+* Reverse nodes between given two indices
+* Reverse every K alternate nodes
+* Reverse every K elements
+* Reverse nodes in K groups
+* Rotate a linked list
+* Reverse every eve value nodes in linked list keep odds intact
 
 ### [[⬆]](#toc) <a name='bfs'>Breath first search problem</a>
 
@@ -158,11 +163,14 @@ Large part of problems also works with sliding window or interval problems.
 * Kth closest element to origin
 * Kth smallest or largest number in a sorted array
 * Kth smallest or largest number in a sorted matrix
+* Find maximum capital after investing into K projects
 * Find maximum CPU load
-* Find minimum roms needed for a conference
-* Find Nth ugly number
+* Find minimum rooms needed for a conference
+* Find next interval between given intervals  
 * Find median (sliding window median or median from stream too)
 * Rearrange strings with K distance apart
+* Rearrange strings with unique character next to each other
+* Magical candy bags
 
 ### [[⬆]](#toc) <a name='recursion'>Recursion and Backtracking problem</a>
 
@@ -181,6 +189,26 @@ They also deal with cases when solving linearly is not feasible and we need to b
 * Find unique BST trees
 * Find next permutation
 * Find possible matching tags or parenthesis that can be created
+
+### [[⬆]](#toc) <a name='binarytree'>Binary Tree</a>
+
+[source](src/main/java/org/javainaction/bt)
+
+In this problem we are trying to find solution where tree traversal is just simple aspect of solution finding.
+And we are trying to achieve more with tree like, serialise deserialize or lock unlock or number of different binary
+tree possibles with N
+
+* Serialize and deserialize binary tree
+* Lock and unlock binary tree
+* Compare all lead values of a binary tree
+* Find all kinds of node depth from root
+* Flatten binary tree in in-order
+* Flatten binary tree in pre-order
+* Number of ways to create binary trees
+* Create a right sibling tree
+* Traverse tree in in-order fashion using iterative approach where callback is used to get values of tree
+* Find the in-order successor of the tree
+
 
 ### [[⬆]](#toc) <a name='bst'>Binary search tree</a>
 
@@ -223,10 +251,13 @@ These are added flavor to heap problems where we need to find certain top elemen
 unique elements, least unique, max occurring chars or least occurring characters.
 
 * Rearrange string without having same chars at adjacent 
-* Minimum distinct elements in array after K removals
+* Minimum distinct elements in an array after K removals
+* Maximum distinct elements in an array after K removals
 * Top K frequent numbers or words
 * Rearrange string with K distance apart
 * Frequency sort to achieve something either to minimize cost or gain more length
+* Frequency stack implementation
+* Frequency sort increasing
 
 ### [[⬆]](#toc) <a name='kwaymerge'>K-way merge problem</a>
 
@@ -238,8 +269,12 @@ This also uses heap to maintain min or max elements at the top
 * Merge K sorted list/array
 * K smallest number in M sorted lists
 * K smallest number in a sorted matrix
+* K pairs with smallest sum
+* K largest numbers
+* K smallest pair distance
 * Find smallest range in a matrix that includes at least 2 elements for either side
-
+* K closest elements
+* K closest point to orogin
 
 ### [[⬆]](#toc) <a name='knapsack'>Knapsack</a>
 
@@ -350,6 +385,22 @@ if (str1.charAt(i - 1) == str2.charAt(j  - 1)) {
         edits[i - 1][j])); //delete;
 }
 ```
+
+***** Delete cost to make two equal *****
+```
+//if last character of both string matched
+if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+    dp[i][j] = 1 + dp[i - 1][j - 1];
+} else {
+    //if last character didn't match
+    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+}
+
+// total cost to delete
+// m = s1.length() and n = s2.length()
+
+int deleteCost = m + n - 2 * dp[m][n]
+```
 ***** Longest wiggle/alternating subsequence *****
 ```
 if (nums[i] > nums[j]) {
@@ -394,8 +445,43 @@ if (nums[i] > nums[j]) {
 if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
     dp[i][j] = 1 + dp[i - 1][j - 1];
 } else {
-    //if last character didn't match
+    //if last character didn't match, thi
+    //find min cost of insertion and deletion to match common subsequence like edit distance
+    //but do not consider replacements
     dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1]);
+}
+```
+
+***** Longest Bitonic Subsequence *****
+```
+// find LDS for every index up to the beginning of the array
+//step:1 find the longest increasing subsequences till i
+for (int i = 0; i < nums.length; i++) {
+    for (int j = i - 1; j >= 0; j--) {
+        if (nums[j] < nums[i]) {
+            longIncSubseq[i] = Math.max(longIncSubseq[i], longIncSubseq[j] + 1);
+        }
+    }
+}
+
+// find LDS for every index up to the end of the array
+//step : 2 find longest decreasing subsequence starting from i
+for (int i = nums.length - 1; i >=0; i--) {
+    for (int j = i + 1; j < nums.length; j++) {
+        if (nums[j] < nums[i]) {
+            longDecSubseq[i] = Math.max(longDecSubseq[i], longDecSubseq[j] + 1);
+        }
+    }
+}
+
+/*step 3: now find longest bitonic subsequence
+but ensure that there something on the left and right of a particular index i
+inorder to make it a mountain  which means lis[i] > 1 and lds[i] > 1
+*/
+int maxLength = 0;
+for (int i = 0; i < nums.length; i++) {
+    // - 1 to accommodate peak of the mountain
+    maxLength = Math.max(maxLength, longIncSubseq[i] + longDecSubseq[i] - 1);
 }
 ```
 
@@ -498,3 +584,40 @@ Problems around manipulating/matching strings such as palindrome, anagram, match
 * Reverse words in string sentence
 * Longest balanced substring
 * First non repeating character
+
+### [[⬆]](#toc) <a name='linkedlist'>Linked List</a>
+
+[source](src/main/java/org/javainaction/linkedlist)
+
+Problems around manipulating Linked List(s) to achieve certain objectives, find duplicate or remove Nth value from end.
+
+* Add two numbers from two linked list as an arithmetic equation
+* Merge two linked list
+* Rearrange linked list to certain pattern
+* Remove duplicates from linked list
+* Remove all duplicates leaving linked list with distinct values  
+* Remove kth node from end
+* Swap kth node from start to end
+* Swap node pairs in linked list
+* Find linked list intersection
+
+### [[⬆]](#toc) <a name='graph'>Graph</a>
+
+[source](src/main/java/org/javainaction/graph)
+
+Typically, input is a 2D matrix, and we are required to traverse the matrix to achieve the goal, the traverl technique
+are similar to BFS and DFS
+
+* Find the Battleship on a board
+* Find words in a given Boggle board
+* Find maximum area of the island
+* Remove islands in a given matrix
+* Calculate the island perimeter
+* Calculate the size of the river
+* Find unique paths
+* Find youngest common ancestor
+* Mark matrix with zeroes if row or col contains zero
+* Find surrounded regions by X in a matrix that contains X and O
+* Find lowest common manager
+* Detect cycle in a matrix
+

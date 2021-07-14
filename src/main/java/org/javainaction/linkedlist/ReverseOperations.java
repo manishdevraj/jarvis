@@ -39,18 +39,19 @@ public class ReverseOperations {
     // even head point to odd element
     // 2-8-9
     // 8-2-9
-    Node reverseEventNodes(Node node) {
+    Node reverseEvenNodes(Node node) {
         Node prev = null;
         Node current = node;
-
+        //reverse all even elements
         while (current != null && current.data % 2 == 0){
             Node next = current.next;
             current.next = prev;
             prev = current;
             current = next;
         }
+        //connect reversed even tail to current odd element
         if (node != null) node.next = current;
-
+        //previous is always new head
         return prev;
     }
 
@@ -62,9 +63,9 @@ public class ReverseOperations {
         Node prev = dummy;
 
         while (current != null) {
-            //reverse every event elements
+            //reverse every even elements
             if (current.data % 2 == 0)
-                prev.next = reverseEventNodes(current);
+                prev.next = reverseEvenNodes(current); // connect previous to new head
             //keep going through odd elements
             prev = current;
             current = current.next;

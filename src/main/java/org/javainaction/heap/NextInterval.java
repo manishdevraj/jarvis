@@ -48,15 +48,21 @@ public class NextInterval {
 
         // go through all the intervals to find each interval's next interval
         for (int i = 0; i < n; i++) {
+            //traverse from last as this is interval for which we are looking at next interval
             int maxEnd = maxEndHeap.poll();
+            //default value
             result[maxEnd] = -1;
+            //if start max interval can be started after max end interval
             if (intervals[maxStartHeap.peek()].start >= intervals[maxEnd].end) {
+                //we got our start
                 int maxStart = maxStartHeap.poll();
-                while(!maxStartHeap.isEmpty()
-                        && intervals[maxStartHeap.peek()].start >= intervals[maxEnd].end) {
+                //we may be having more than one such next interval so keep on polling until we get immediate one
+                while(!maxStartHeap.isEmpty() && intervals[maxStartHeap.peek()].start >= intervals[maxEnd].end) {
                     maxStart = maxStartHeap.poll();
                 }
+                //store result
                 result[maxEnd] = maxStart;
+                // add back last max start as any previous one's are invalid for rest of the input
                 maxStartHeap.add(maxStart);
             }
         }

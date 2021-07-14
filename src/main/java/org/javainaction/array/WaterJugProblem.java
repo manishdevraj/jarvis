@@ -6,9 +6,12 @@ import java.util.Queue;
 import java.util.Set;
 
 /**
- * You are given two jugs with capacities jug1Capacity and jug2Capacity liters. There is an infinite amount of water supply available. Determine whether it is possible to measure exactly targetCapacity liters using these two jugs.
+ * You are given two jugs with capacities jug1Capacity and jug2Capacity liters.
+ * There is an infinite amount of water supply available. Determine whether it is possible to measure exactly
+ * targetCapacity liters using these two jugs.
  *
- * If targetCapacity liters of water are measurable, you must have targetCapacity liters of water contained within one or both buckets by the end.
+ * If targetCapacity liters of water are measurable, you must have targetCapacity liters of water contained within
+ * one or both buckets by the end.
  *
  * Operations allowed:
  *
@@ -63,7 +66,7 @@ public class WaterJugProblem {
             queue.offer(new State(curr.a + curr.b < y ? 0 : curr.a - (y - curr.b),
                     Math.min(curr.a + curr.b, y)));                         // pour all water from jug1 to jug2
 
-            for(State tmp: queue) {
+            for (State tmp: queue) {
                 if(visited.contains(tmp)) continue;
                 states.offer(tmp);
                 visited.add(tmp);

@@ -29,9 +29,11 @@ public class LinkedListCycleLength {
         return 0;
     }
 
+    //iterate within loop to get total length
     private static int calculateLength(ListNode slow) {
         ListNode current = slow;
         int cycleLength = 0;
+        //do while as at the start slow and current are at same location
         do {
             current = current.next;
             cycleLength++;

@@ -14,6 +14,7 @@ package org.javainaction.bt.dfs;
  * Depth of node 2 and 3 is : 1
  * Depth of node 4, 5, 6, 7 is : 2
  * Etc.
+ *
  */
 public class NodeDepth {
 
@@ -23,7 +24,9 @@ public class NodeDepth {
 
     private static int findNodeDepth(BinaryTree root, int depth) {
         if (root == null) return 0;
-        return depth + findNodeDepth(root.left, depth + 1) + findNodeDepth(root.right, depth + 1);
+        return depth
+                + findNodeDepth(root.left, depth + 1)
+                + findNodeDepth(root.right, depth + 1);
     }
 
     public static void main(String[] args) {

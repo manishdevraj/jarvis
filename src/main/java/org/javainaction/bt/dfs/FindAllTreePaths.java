@@ -17,16 +17,6 @@ import java.util.List;
  * with the maximum sum.
  */
 public class FindAllTreePaths {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public static List<List<Integer>> findPaths(TreeNode root, int sum) {
         List<List<Integer>> allPaths = new ArrayList<>();
         List<Integer> currentPath = new ArrayList<>();
@@ -62,5 +52,15 @@ public class FindAllTreePaths {
         int sum = 23;
         List<List<Integer>> result = FindAllTreePaths.findPaths(root, sum);
         System.out.println("Tree paths with sum " + sum + ": " + result);
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

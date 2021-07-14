@@ -20,6 +20,9 @@ public class MinimumWaitingTime {
 
         for (int i = 0; i < N; i++) {
             int duration = queries[i];
+            //idea is to minimize the waiting time
+            //for input [5, 1, 4] what made 5 * X = 0 waiting time to be added is the key to choose pending queries
+            //11 as we can execute query [1, 4, 5] with (0) + (1) + (1 + 4) = 6 time
             int pendingQueries = N - (i + 1);
             waitingTime += duration * pendingQueries;
         }

@@ -8,55 +8,25 @@ import java.util.Queue;
  * to a null node.
  */
 public class ConnectLevelOrderSiblings {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode next;
-
-        TreeNode(int x) {
-            val = x;
-            left = right = next = null;
-        }
-
-        // level order traversal using 'next' pointer
-        void printLevelOrder() {
-            TreeNode nextLevelRoot = this;
-            while (nextLevelRoot != null) {
-                TreeNode current = nextLevelRoot;
-                nextLevelRoot = null;
-                while (current != null) {
-                    System.out.print(current.val + " ");
-                    if (nextLevelRoot == null) {
-                        if (current.left != null)
-                            nextLevelRoot = current.left;
-                        else if (current.right != null)
-                            nextLevelRoot = current.right;
-                    }
-                    current = current.next;
-                }
-                System.out.println();
-            }
-        }
-    }
-
+    //O(n) time | O(w) space where w is max width of tree's level order
     public static void connect(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) {
             int levelSize = queue.size();
-            TreeNode previous = null;
+            TreeNode previous = null; //reset last not at each level
+
             for (int i = 0; i < levelSize; i++) {
                 TreeNode currentNode = queue.poll();
-                if (previous != null) {
-                    previous.next = currentNode;
-                }
-                if (currentNode != null) previous = currentNode;
+                //connect last node with current node
+                if (previous != null) previous.next = currentNode;
 
-                if (currentNode.left != null)
-                    queue.add(currentNode.left);
-                if (currentNode.right != null)
-                    queue.add(currentNode.right);
+                if (currentNode != null) {
+                    //keep track of previous node for each iteration
+                    previous = currentNode;
+                    if (currentNode.left != null) queue.add(currentNode.left);
+                    if (currentNode.right != null) queue.add(currentNode.right);
+                }
             }
         }
     }
@@ -123,5 +93,37 @@ public class ConnectLevelOrderSiblings {
         ConnectLevelOrderSiblings.connectDfs(root);
         System.out.println("Level order traversal using 'next' pointer: ");
         root.printLevelOrder();
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode next;
+
+        TreeNode(int x) {
+            val = x;
+            left = right = next = null;
+        }
+
+        // level order traversal using 'next' pointer
+        void printLevelOrder() {
+            TreeNode nextLevelRoot = this;
+            while (nextLevelRoot != null) {
+                TreeNode current = nextLevelRoot;
+                nextLevelRoot = null;
+                while (current != null) {
+                    System.out.print(current.val + " ");
+                    if (nextLevelRoot == null) {
+                        if (current.left != null)
+                            nextLevelRoot = current.left;
+                        else if (current.right != null)
+                            nextLevelRoot = current.right;
+                    }
+                    current = current.next;
+                }
+                System.out.println();
+            }
+        }
     }
 }

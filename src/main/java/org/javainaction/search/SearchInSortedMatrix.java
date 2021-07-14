@@ -17,13 +17,16 @@ import java.util.Arrays;
  */
 public class SearchInSortedMatrix {
     // O(n) time | O(1) space
+    //Idea is to start at top right corner
+    //every time we have target less than index value that means it has to be row and previous columne
+    //if target is larger than current index then we nee to scan next row
     public static int[] searchInSortedMatrix(int[][] matrix, int target) {
         int row = 0;
         int col = matrix[0].length - 1;
         while (row < matrix.length && col >= 0) {
-            if (matrix[row][col] > target) {
+            if (target < matrix[row][col]) {
                 col--;
-            } else if (matrix[row][col] < target) {
+            } else if (target > matrix[row][col]) {
                 row++;
             } else {
                 return new int[] {row, col};

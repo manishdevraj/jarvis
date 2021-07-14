@@ -6,8 +6,7 @@ import java.util.Queue;
 /**
  * Given the root of a binary tree, the level of its root is 1, the level of its children is 2, and so on.
  *
- * Return the smallest level x such that the sum of all the values of nodes at level x is maximal.
- *
+ * Return the smallest level x such that the sum of all the values of nodes at level x is maximum.
  *
  *
  * Example 1:
@@ -34,14 +33,18 @@ public class MaximumLevelSum {
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
+
         int level = 1;
         while(!queue.isEmpty()) {
-            int levelSum = 1;
-            for (int i = 0; i < queue.size(); i++) {
+            int levelSum = 0; //reset the level sum
+            int queueSize = queue.size();
+            for (int i = 0; i < queueSize; i++) {
                 TreeNode node = queue.poll();
-                levelSum += node.val;
-                if (node.left != null) queue.offer(node.left);
-                if (node.right != null) queue.offer(node.right);
+                if (node != null) {
+                    levelSum += node.val;
+                    if (node.left != null) queue.offer(node.left);
+                    if (node.right != null) queue.offer(node.right);
+                }
             }
 
             if (maxLevelSum < levelSum) {
@@ -59,7 +62,7 @@ public class MaximumLevelSum {
                 TreeNode(7, new TreeNode(7), new TreeNode(-8)),
                 new TreeNode(0));
         System.out.println(root);
-        System.out.println(" with maximum sum leve at " + maxLevelSum(root));
+        System.out.println(" with maximum sum level at " + maxLevelSum(root));
 
         //[989,null,10250,98693,-89388,null,null,null,-32127]
         root = new TreeNode(989,
@@ -72,15 +75,18 @@ public class MaximumLevelSum {
         System.out.println(root);
         System.out.println(" with maximum sum leve at " + maxLevelSum(root));
 
+        root = new TreeNode(1, new
+                TreeNode(7, new TreeNode(7), new TreeNode(8)),
+                new TreeNode(0));
+        System.out.println(root);
+        System.out.println(" with maximum sum level at " + maxLevelSum(root));
+
     }
 
     private static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
-
-        TreeNode() {
-        }
 
         TreeNode(int val) {
             this.val = val;
@@ -90,15 +96,6 @@ public class MaximumLevelSum {
             this.val = val;
             this.left = left;
             this.right = right;
-        }
-
-        @Override
-        public String toString() {
-            return "TreeNode{" +
-                    "val=" + val +
-                    ", left=" + left +
-                    ", right=" + right +
-                    '}';
         }
     }
 }

@@ -13,12 +13,13 @@ public class ValidateBST {
 
     private static boolean validateBSTRecursive(BST tree, long minValue, long maxValue) {
         if (tree == null) return true;
+        //check bounds
         if (minValue > tree.value && maxValue <= tree.value) return false;
-
+        //if either of node is not valid return false
         if (tree.left != null && !validateBSTRecursive(tree.left, minValue, tree.value)) return false;
-
         if (tree.right != null && !validateBSTRecursive(tree.right, tree.value, maxValue)) return false;
 
+        //we match all test cases so node must valid BST
         return true;
     }
 

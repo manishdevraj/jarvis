@@ -20,8 +20,6 @@ import java.util.List;
  *
  */
 public class RotateList {
-
-
     public static ListNode rotate(ListNode head, int rotations) {
         if (head == null || head.next == null || rotations <= 0)
             return head;
@@ -79,7 +77,7 @@ public class RotateList {
             this.value = value;
         }
 
-        @Override
+        /*@Override
         public String toString() {
             List<Integer> result = new ArrayList<>();
             result.add(value);
@@ -89,6 +87,6 @@ public class RotateList {
                 node = node.next;
             }
             return Arrays.toString(result.toArray());
-        }
+        }*/
     }
 }

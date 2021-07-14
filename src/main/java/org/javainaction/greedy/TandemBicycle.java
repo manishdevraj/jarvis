@@ -17,15 +17,18 @@ import java.util.Comparator;
  *
  * Output 32
  *
- *
- *
  */
 public class TandemBicycle {
     //O(nlog(n)) time | O(1) space
     public int tandemBicycle(int[] redShirtSpeeds, int[] blueShirtSpeeds, boolean fastest) {
         Arrays.sort(blueShirtSpeeds);
         Arrays.sort(redShirtSpeeds);
-
+        //for fastest
+        //take maximum from left of array one and right of array two when both are in ascending order
+        //this increases chance of having maximum in either sides
+        //for slowest
+        //reverse one of the array do take maximum from left of array one and right of array two
+        //this makes sure that we get max in either side cancelling other lower maximum
         if (!fastest) {
             reverseInPlace(redShirtSpeeds);
         }

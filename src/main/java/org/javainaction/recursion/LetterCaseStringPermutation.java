@@ -44,16 +44,26 @@ import java.util.function.Supplier;
 public class LetterCaseStringPermutation {
     public static List<String> findLetterCaseStringPermutations(String str) {
         List<String> permutations = new ArrayList<>();
+
         if (str == null) return permutations;
-        Function<Character, Character> changeCaseFunction = (c) -> Character.isUpperCase(c)
-                ? Character.toLowerCase(c) : Character.toUpperCase(c);
+
+        Function<Character, Character> changeCaseFunction
+                = (c) -> Character.isUpperCase(c) ? Character.toLowerCase(c) : Character.toUpperCase(c);
 
         permutations.add(str);
+
         for(int i = 0; i < str.length(); i++) {
+            //we only need to change letters
             if (Character.isLetter(str.charAt(i))){
                 int n = permutations.size();
                 for (int j = 0; j < n; j++) {
+                    //we try permutations of each characters from previous permutation
+                    //get previous permutation and change case
+                    //first time we have ad52 and we change i = 0 case so we add Ad52
+                    //next time we have [ad52, Ad52] we need to change only i = 1 char
+                    //so we get [ad52, Ad52, aD52, AD52] because we get previous permutations
                     char[] chars = permutations.get(j).toCharArray();
+                    //change only ith character every time
                     chars[i] = changeCaseFunction.apply(chars[i]);
                     permutations.add(String.valueOf(chars));
                 }

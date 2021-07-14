@@ -37,24 +37,23 @@ public class CourseSchedule2 {
         if (numCourses <= 0) return new int[]{};
 
         Map<Integer, List<Integer>> graph = new HashMap<>();
-        Map<Integer, Integer> inDegree = new HashMap<>();
+        int[] inDegree = new int[numCourses];
 
 
         for (int i = 0; i < numCourses; i++) {
             graph.put(i, new ArrayList<>());
-            inDegree.put(i, 0);
         }
 
         for (int[] prerequisite : prerequisites) {
             int parent = prerequisite[1];
             int child = prerequisite[0];
             graph.get(parent).add(child); // put the child into it's parent's list
-            inDegree.put(child, inDegree.get(child) + 1); // increment child's inDegree
+            inDegree[child]++; // increment child's inDegree
         }
 
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < numCourses; i++) {
-            if (inDegree.get(i) == 0)
+            if (inDegree[i] == 0)
                 queue.add(i);
         }
 
@@ -66,8 +65,7 @@ public class CourseSchedule2 {
             List<Integer> children = graph.get(course);
             for (int child : children) {
                 dependenciesCount--;
-                inDegree.put(child, inDegree.get(child) - 1);
-                if (inDegree.get(child) == 0) //we can attend course
+                if (--inDegree[child] == 0) //we can attend course
                     queue.add(child);
             }
         }

@@ -3,12 +3,12 @@ package org.javainaction.dp;
 /**
  * A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
  *
- * The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+ * The robot can only move either down or right at any point in time.
+ * The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
  *
  * Now consider if some obstacles are added to the grids. How many unique paths would there be?
  *
  * An obstacle and space is marked as 1 and 0 respectively in the grid.
- *
  *
  *
  * Example 1:
@@ -25,6 +25,8 @@ package org.javainaction.dp;
  *
  * Input: obstacleGrid = [[0,1],[0,0]]
  * Output: 1
+ * @see UniquePaths
+ * @see org.javainaction.graph.UniquePaths3
  */
 public class UniquePaths2 {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
@@ -67,10 +69,11 @@ public class UniquePaths2 {
         return obstacleGrid[m - 1][n - 1];
     }
 
+
     public static void main(String[] args) {
         int expected = 2;
         int[][] grid = new int[][]{{0, 0, 0}, {0, 1, 0}, {0 , 0, 0}};
         var actual = new UniquePaths2().uniquePathsWithObstacles(grid);
-        System.out.println("UniquePaths : " + actual);
+        System.out.println("UniquePaths via DP : " + actual);
     }
 }

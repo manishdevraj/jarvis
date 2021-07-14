@@ -1,20 +1,42 @@
 package org.javainaction.bst;
 
 /**
- * Give only 3 nodes 1, 2, 3 but not actual binary search tree, find if
- * Either 1 is parent of 2 and 2 is parent of 3
+ * Give only 3 nodes 1, 2, 3 but not actual binary search tree,
+ * find if either 1 is parent of 2 and 2 is parent of 3
  * Or 1 is child of 2 and 2 is child of 3
+ *
+ *              1                   3
+ *              |                   |
+ *              2          OR       2
+ *              |                   |
+ *              3                   1
  */
 public class ValidateThreeNodes {
 
     //O(h) time | O(1) space where h is height of the tree
     public boolean validateThreeNodes(BST nodeOne, BST nodeTwo, BST nodeThree) {
-        if (isDescendant(nodeTwo, nodeOne)) {
-            return isDescendant(nodeThree, nodeTwo);
-        }
+        /*
+            We either have two of the following stages evaluated from bottom up:
 
+            Find if either 1 is parent of 2 and 2 is parent of 3
+            Or 1 is child of 2 and 2 is child of 3
+
+             1                   3
+             |                   |
+             2          OR       2
+             |                   |
+             3                   1
+
+         */
+
+        //Find if either 1 is parent of 2 and 2 is parent of 3
         if (isDescendant(nodeTwo, nodeThree)) {
             return isDescendant(nodeOne, nodeTwo);
+        }
+
+        //Or 1 is child of 2 and 2 is child of 3
+        if (isDescendant(nodeTwo, nodeOne)) {
+            return isDescendant(nodeThree, nodeTwo);
         }
         return false;
     }
@@ -53,7 +75,12 @@ public class ValidateThreeNodes {
         var nodeThree = root.left.right.left;
         boolean expected = true;
         boolean actual = new ValidateThreeNodes().validateThreeNodes(nodeOne, nodeTwo, nodeThree);
-        System.out.println(nodeOne + ", " + nodeTwo + ", " + nodeThree
+        System.out.println(nodeOne.value + ", " + nodeTwo.value + ", " + nodeThree.value
+                + " are descendant or ancestor of each other? " + actual);
+
+        nodeOne = root.right.left;
+        actual = new ValidateThreeNodes().validateThreeNodes(nodeOne, nodeTwo, nodeThree);
+        System.out.println(nodeOne.value + ", " + nodeTwo.value + ", " + nodeThree.value
                 + " are descendant or ancestor of each other? " + actual);
     }
 }

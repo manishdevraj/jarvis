@@ -1,13 +1,9 @@
-package org.javainaction.heap;
-
-import java.util.*;
+package org.javainaction.dp;
 
 /**
  * An ugly number is a positive integer whose prime factors are limited to 2, 3, and 5.
  *
  * Given an integer n, return the nth ugly number.
- *
- *
  *
  * Example 1:
  *
@@ -29,7 +25,7 @@ public class UglyNumber2 {
         for (int i = 1; i < n; i++) {
 
             /*
-                2: currentUglyNumber = min(1 * 2, 1 * 3, 1* 5) = 2
+                2: currentUglyNumber = min(1 * 2, 1 * 3, 1 * 5) = 2
                     produced by p2, so p2++
                     dp [1, 2]
                 3: currentUglyNumber = min(2 * 2, 1 * 3, 1 * 5) = 3

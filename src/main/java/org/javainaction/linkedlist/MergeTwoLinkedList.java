@@ -1,7 +1,5 @@
 package org.javainaction.linkedlist;
 
-import org.javainaction.fastslow.PalindromicLinkedList;
-
 import java.util.*;
 
 /**
@@ -34,12 +32,13 @@ public class MergeTwoLinkedList {
                 p1Prev.next = p1;
             }
         }
-        if (p1 == null && p1Prev != null) {
+        if (p1 == null) {
             p1Prev.next = p2;
         }
         return headOne.value < headTwo.value ? headOne : headTwo;
     }
 
+    //with this logic we can even merge k sorted linked list
     public static LinkedList mergeLinkedListsUsingHeap(LinkedList headOne, LinkedList headTwo) {
         PriorityQueue<LinkedList> priorityQueue = new PriorityQueue<>(new Comparator<LinkedList>() {
             @Override
@@ -61,11 +60,14 @@ public class MergeTwoLinkedList {
                 priorityQueue.add(top.next);
             }
 
+            //base case when we got empty list
             if (head == null) {
                 head = top;
             } else {
+                //point tail to popped element
                 tail.next = top;
             }
+            //move tail to popped element
             tail = top;
         }
 

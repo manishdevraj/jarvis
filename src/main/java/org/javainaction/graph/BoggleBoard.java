@@ -76,15 +76,15 @@ public class BoggleBoard {
     private static List<Integer[]> getNeighbors(char[][] board, int i, int j) {
         List<Integer[]> neighbors = new ArrayList<>();
 
-        if (i > 0 && j > 0) neighbors.add(new Integer[]{ i - 1, j - 1});
-        if (i > 0 && j < board[i].length - 1) neighbors.add(new Integer[]{ i - 1, j + 1});
-        if (i < board.length - 1 && j > 0) neighbors.add(new Integer[]{ i + 1, j - 1});
-        if (i < board.length - 1 && j < board[i].length - 1) neighbors.add(new Integer[]{ i + 1, j + 1});
+        if (i > 0 && j > 0) neighbors.add(new Integer[]{ i - 1, j - 1}); // top left
+        if (i > 0 && j < board[i].length - 1) neighbors.add(new Integer[]{ i - 1, j + 1}); // top right
+        if (i < board.length - 1 && j > 0) neighbors.add(new Integer[]{ i + 1, j - 1}); // bottom left
+        if (i < board.length - 1 && j < board[i].length - 1) neighbors.add(new Integer[]{ i + 1, j + 1}); //bottom right
 
-        if (i > 0) neighbors.add(new Integer[]{ i - 1, j});
-        if (j < board[i].length - 1) neighbors.add(new Integer[]{ i, j + 1});
-        if (j > 0) neighbors.add(new Integer[]{ i, j - 1});
-        if (i < board.length - 1) neighbors.add(new Integer[]{ i + 1, j});
+        if (i > 0) neighbors.add(new Integer[]{ i - 1, j}); // up
+        if (j < board[i].length - 1) neighbors.add(new Integer[]{ i, j + 1}); // right
+        if (j > 0) neighbors.add(new Integer[]{ i, j - 1}); // left
+        if (i < board.length - 1) neighbors.add(new Integer[]{ i + 1, j}); //down
 
         return neighbors;
     }

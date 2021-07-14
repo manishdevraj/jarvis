@@ -18,8 +18,9 @@ public class MissingNumber {
     public static int findMissingNumber(int[] nums) {
         int i = 0;
         while (i < nums.length) {
-            //In this problem, each number should be equal to its index, compared to index + 1 in the Cyclic Sort.
-            // Therefore => nums[i] == nums[nums[i]]
+            // In this problem, each number should be equal to its index, compared to index + 1 in the Cyclic Sort.
+            // we have 0 .. n + 1 => nums[i] == nums[nums[i]]
+            // when we have 1 .. n then we compare num[i] with num[num[i] - 1]
             if (nums[i] < nums.length && nums[i] != nums[nums[i]])
                 swap(nums, i, nums[i]);
             else

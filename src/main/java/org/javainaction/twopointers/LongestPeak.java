@@ -8,15 +8,6 @@ package org.javainaction.twopointers;
  * Return 0 if there is no peak found
  */
 public class LongestPeak {
-
-    public static void main(String[] args) {
-        System.out.println(longestPeak(new int[]{1, 4, 10, 2}));
-        System.out.println(longestPeak(new int[]{1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3}));
-        System.out.println(longestPeak(new int[]{5, 4, 3, 2, 1, 2, 1}));
-        System.out.println(longestPeak(new int[]{5, 4, 3, 2, 1, 2, 10, 12, -3, 5, 6, 7, 10}));
-        System.out.println(longestPeak(new int[]{1, 2, 3, 4, 5, 6, 10, 100, 1000}));
-    }
-
     // O(n) time | O(1) space
     private static int longestPeak(int[] array) {
         if (array == null || array.length == 0) return 0;
@@ -46,5 +37,13 @@ public class LongestPeak {
         }
 
         return longestPeak;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(longestPeak(new int[]{1, 4, 10, 2}));
+        System.out.println(longestPeak(new int[]{1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3}));
+        System.out.println(longestPeak(new int[]{5, 4, 3, 2, 1, 2, 1}));
+        System.out.println(longestPeak(new int[]{5, 4, 3, 2, 1, 2, 10, 12, -3, 5, 6, 7, 10}));
+        System.out.println(longestPeak(new int[]{1, 2, 3, 4, 5, 6, 10, 100, 1000}));
     }
 }

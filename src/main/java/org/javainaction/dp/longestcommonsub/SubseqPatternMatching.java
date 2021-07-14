@@ -13,6 +13,7 @@ package org.javainaction.dp.longestcommonsub;
  * Input: string: “tomorrow”, pattern: “tor”
  * Output: 4
  * Explanation: Following are the four occurences: {tomorrow, tomorrow, tomorrow, tomorrow}.
+ * @see LongestCommonSubsequence
  */
 public class SubseqPatternMatching {
 
@@ -22,6 +23,7 @@ public class SubseqPatternMatching {
 
         int[][] dp = new int[str.length() + 1][pattern.length() + 1];
 
+        //find entire column with value 1
         for (int i = 0 ; i < str.length(); i++) {
             dp[i][0] = 1;
         }
@@ -31,6 +33,11 @@ public class SubseqPatternMatching {
                 if (str.charAt(strIdx - 1) == pattern.charAt(patIdx - 1)) {
                     dp[strIdx][patIdx] = dp[strIdx - 1][patIdx - 1];
                 }
+                //pattern as subsequence means we need to only look up in previous character at string
+                //this is because we do not treat string matching as sub sequence but only pattern matching
+                //In string : “baxmx”, pattern: “ax”
+                //at str index 2 since we got match for a from pattern count would be 1
+                //we consider that count in either cases to be total sequence matching
                 dp[strIdx][patIdx] += dp[strIdx - 1][patIdx];
             }
         }

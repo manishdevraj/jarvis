@@ -34,23 +34,22 @@ public class IterativeInorderTraversal {
 
         while (current != null){
             BinaryTree next;
+            //we are going down the left subtree
             if (previous == null || previous == current.parent) {
                 if (current.left != null) {
                     next = current.left;
                 } else {
-                    //left leaf node that either has a right child
-                    //if not then it goes back to its parent
+                    //as we didn't have left for this current we need to do in order to self and then to right
+                    //if we do not have right then we need to go back up
                     callback.apply(current);
-                    next = current.right != null ?
-                            current.right : current.parent;
+                    next = current.right != null ? current.right : current.parent;
                 }
             } else if (previous == current.left) {
-                //we are going up where previous is rotated to curent left
+                //we are going up where previous is rotated to current left
                 //child and that is why we need to check and do callback
                 //due to in-order we didn't process this node yet
                 callback.apply(current);
-                next = current.right != null ?
-                        current.right : current.parent;
+                next = current.right != null ? current.right : current.parent;
             } else {
                 //rotation of nodes at leaf end
                 next = current.parent;
@@ -99,7 +98,7 @@ public class IterativeInorderTraversal {
         var program = new IterativeInorderTraversal();
         program.testArray.clear();
         iterativeInOrderTraversal(root, program::testCallback);
-        List<Integer> expected = Arrays.asList(new Integer[] {4, 9, 2, 1, 6, 3, 7});
+        List<Integer> expected = Arrays.asList(4, 9, 2, 1, 6, 3, 7);
         System.out.println("Iterative callback " + program.testArray);
     }
 }

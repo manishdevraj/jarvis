@@ -15,6 +15,8 @@ import java.util.List;
  *
  * Input: [1, 5, 3, 3]
  * Output: [], [1], [5], [3], [1,5], [1,3], [5,3], [1,5,3], [3,3], [1,3,3], [3,3,5], [1,5,3,3]
+ * @see PowerSet2 In this case we skipped duplicate by making size = 0
+ *
  */
 public class SubsetWithDuplicates {
     public static List<List<Integer>> findSubsets(int[] nums) {
@@ -27,6 +29,10 @@ public class SubsetWithDuplicates {
             startIdx = 0;
             // we will take all existing subsets and insert the current number in them to create new subsets
             if (j > 0 && nums[j] == nums[j - 1]) {
+                // In this case we just need to slide window such that duplicate permutation is skipped
+                // but rest are added
+                // [] [1] [3] [1,3] when second 3 comes, we do not add to empty set making it [] [1] [3] [3] [1,3]
+                // We slide start such that it is added to 1 and 3 [], [1], [3], [1,3], [3,3], [1,3,3]
                 startIdx = endIdx + 1;
             }
             endIdx = subsets.size() - 1;

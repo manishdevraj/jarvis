@@ -11,20 +11,26 @@ package org.javainaction.twopointers;
  *
  * Input: [-3, -1, 0, 1, 2]
  * Output: [0 1 1 4 9]
+ * @see SortedSquaredArray
  */
+
 public class SortedArraySquares {
     public static int[] makeSquares(int[] arr) {
+
         int[] squares = new int[arr.length];
         int left = 0;
         int right = arr.length - 1;
-        int highestSquareIdx = arr.length - 1;
+        int highestSquareIdx = arr.length - 1; //start from last so that we have array sorted
+
         while (left < right) {
+            //we need not worry about abs as -a x -a will result in positive squares
             int leftSquare = arr[left] * arr[left];
             int rightSquare = arr[right] * arr[right];
             if (leftSquare > rightSquare) {
                 squares[highestSquareIdx--] = leftSquare;
                 left++;
             } else {
+                //when right elements are greater or equal
                 squares[highestSquareIdx--] = rightSquare;
                 right--;
             }

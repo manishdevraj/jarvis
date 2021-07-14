@@ -33,13 +33,30 @@ public class WiggleSubsequence {
     //O(n^2) time | O(n) space
     public int wiggleMaxLength(int[] nums) {
         int index = 1;
+        //remove any duplicate from wiggle sequence
         while (index < nums.length && nums[index - 1] == nums[index]) index++;
+        //if we have all duplicates
         if (index == nums.length) return 1;
 
         //stores the LAS ending at 'i' such that the last two elements are in ascending order
         int[] up = new int[nums.length];
         //stores the LAS ending at 'i' such that the last two elements are in descending order
         int[] down = new int[nums.length];
+        /**
+         *
+         *   Here as we can see that from UP sequence the length is 5
+         *   [1 -> 7 is a up sequence so starts with 1 and then we have wiggle up to 5 elements]
+         *   UP     0  1  1  3  3  5
+         *           /  \  /  \  /
+         *   DOWN   0  0  2  2  4  4
+         *
+         *   Here as we can see that from DOWN sequence the length is 4
+         *   [1 -> 7 is not a down sequence so starts with 0 and then we have wiggle up to 4 elements]
+         *   UP     0  1  1  3  3  5
+         *            \  /  \  /  \
+         *   DOWN   0  0  2  2  4  4
+         *
+         */
         for (int i = 1; i < nums.length; i++) {
             for (int j = 0; j < i ; j++) {
                 if (nums[i] > nums[j]) {

@@ -77,21 +77,22 @@ public class KnapsackProblem {
             return 0;
         }
 
-        if (dp[currentIndex][capacity] != null) return dp[currentIndex][capacity];
+        if (dp[currentIndex][capacity] != null)
+            return dp[currentIndex][capacity];
 
         // recursive call after choosing the element at the currentIndex
         // if the weight of the element at currentIndex exceeds the capacity, we shouldn't process this
-        int profit1 = 0;
+        int profitIncl = 0;
         if (weights[currentIndex] <= capacity) {
-            profit1 = profits[currentIndex] + knapsackRecursive(dp, profits, weights,
+            profitIncl = profits[currentIndex] + knapsackRecursive(dp, profits, weights,
                     capacity - weights[currentIndex],
                     currentIndex + 1);
         }
 
         // recursive call after excluding the element at the currentIndex
-        int profit2 = knapsackRecursive(dp, profits, weights, capacity, currentIndex + 1);
+        int profitExcl = knapsackRecursive(dp, profits, weights, capacity, currentIndex + 1);
 
-        dp[currentIndex][capacity] = Math.max(profit1, profit2);
+        dp[currentIndex][capacity] = Math.max(profitIncl, profitExcl);
 
         return dp[currentIndex][capacity];
     }

@@ -6,7 +6,6 @@ package org.javainaction.array;
  * Given an integer n, return true if n is an ugly number.
  *
  *
- *
  * Example 1:
  *
  * Input: n = 6
@@ -32,10 +31,14 @@ public class UglyNumber {
     public static boolean isUgly(int n) {
         if (n < 1) return false;
         if (n == 1) return true;
+
         int[] uglyArray = new int[]{2, 3, 5};
+
         for (int ugly : uglyArray) {
+            //while n is fully divisible by either 2 or 3 or 5 then n /= ugly makes it 1
             while (n % ugly == 0) n /= ugly;
         }
+
         return n == 1;
     }
 

@@ -8,10 +8,18 @@ import java.util.*;
  *
  * A mapping of digit to letters (just like on the telephone buttons) is given below.
  * Note that 1 does not map to any letters.
+ * Numeric pad represents:
  *
- *
- *
- *
+ * '0': "0"
+ * '1': "1"
+ * '2': "abc"
+ * '3': "def"
+ * '4': "ghi"
+ * '5': "jkl"
+ * '6': "mno"
+ * '7': "pqrs"
+ * '8': "tuv"
+ * '9': "wxyz"
  *
  * Example 1:
  *
@@ -58,6 +66,11 @@ public class PhoneNumberMnemonics {
             mnemonicsResult.add(mnemonic);
         } else {
             char digit = phoneNumber.charAt(position);
+            //for every digit we need to try combinations
+            //recursive call stack with pos = 0 we put all characters for 2 in call stack
+            // [a, null],  [b, null],  [c, null]
+            //in stack for a when pos = 1 we try letters for 3 and for first result
+            //we get "ad", "ae", "af"
             String letters = mnemonicsMap.get(digit);
             for(char c : letters.toCharArray()) {
                 currentPhoneNumber[position] = String.valueOf(c);
@@ -92,5 +105,8 @@ public class PhoneNumberMnemonics {
                 };
         System.out.println("Mnemonics for 1905 are  " + phoneNumberMnemonics(phoneNumber));
         System.out.println("Mnemonics for 1905 are  " + letterCombinations(phoneNumber));
+
+        System.out.println("Mnemonics for 23 are  " + phoneNumberMnemonics("23"));
+        System.out.println("Mnemonics for 23 are  " + letterCombinations("23"));
     }
 }

@@ -3,12 +3,12 @@ package org.javainaction.greedy;
 /**
  * We have n chips, where the position of the ith chip is position[i].
  *
- * We need to move all the chips to the same position. In one step, we can change the position of the ith chip from position[i] to:
+ * We need to move all the chips to the same position.
+ * In one step, we can change the position of the ith chip from position[i] to:
  *
  * position[i] + 2 or position[i] - 2 with cost = 0.
  * position[i] + 1 or position[i] - 1 with cost = 1.
  * Return the minimum cost needed to move all the chips to the same position.
- *
  *
  *
  * Example 1:
@@ -46,12 +46,15 @@ public class MinimumCostToMoveChips {
          *
          *   The final position is at the even position, or
          *   The final position is at the odd position.
-         *   In the first case, we at least need to cost odd_cnt to move all the chips at the odd positions to the even positions. Similarly, in the second case, we at least need to cost even_cnt.
+         *   In the first case, we at least need to cost odd_cnt to move all the chips at the odd positions to the
+         *   even positions. Similarly, in the second case, we at least need to cost even_cnt.
          *
          *  Therefore, min(even_cnt, odd_cnt) is the smallest possible cost.
          */
         for (int coinPos : position) {
+            //either move all event to odd
             if (coinPos % 2 == 0) evenCost++;
+            //or move all odd to even
             else oddCost++;
         }
         return Math.min(evenCost, oddCost);

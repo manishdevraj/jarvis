@@ -29,6 +29,7 @@ public class CoinChange {
         if (total == 0)
             return 1;
 
+        //if we ran out of coins
         if(denominations.length == 0 || currentIndex >= denominations.length)
             return 0;
 
@@ -37,15 +38,18 @@ public class CoinChange {
             return dp[currentIndex][total];
 
         // recursive call after selecting the coin at the currentIndex
-        // if the number at currentIndex exceeds the total, we shouldn't process this
-        int sum1 = 0;
-        if( denominations[currentIndex] <= total )
-            sum1 = countChangeRecursive(dp, denominations, total - denominations[currentIndex], currentIndex);
+        // if the number at currentIndex exceeds the total, we shouldn't process this we need to make sure we can make
+        // whole amount and not partial
+        int waysToMakeIncl = 0;
+        if( denominations[currentIndex] <= total ) {
+            waysToMakeIncl = countChangeRecursive(dp, denominations, total - denominations[currentIndex], currentIndex);
+        }
+
 
         // recursive call after excluding the number at the currentIndex
-        int sum2 = countChangeRecursive(dp, denominations, total, currentIndex + 1);
+        int waysToMameExclude = countChangeRecursive(dp, denominations, total, currentIndex + 1);
 
-        dp[currentIndex][total] = sum1 + sum2;
+        dp[currentIndex][total] = waysToMakeIncl + waysToMameExclude;
         return dp[currentIndex][total];
     }
 

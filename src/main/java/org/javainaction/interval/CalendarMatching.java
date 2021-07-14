@@ -13,30 +13,6 @@ class CalendarMatching {
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
     public static NumberFormat numberFormat = new DecimalFormat("00");
 
-    public static void main(String[] args) throws ParseException {
-        List<StringMeeting> calendar1 = Arrays.asList(new StringMeeting("9:00", "10:30"),
-                new StringMeeting("12:00", "13:00"), new StringMeeting("16:00", "18:00"));
-
-        List<StringMeeting> calendar2 = Arrays.asList(new StringMeeting("10:00", "11:30"),
-                new StringMeeting("12:30", "14:30"), new StringMeeting("14:30", "15:00"),
-                new StringMeeting("16:00", "17:00"));
-        StringMeeting dailyBounds1 = new StringMeeting("9:00", "20:00");
-
-        StringMeeting dailyBounds2 = new StringMeeting("10:30", "18:30");
-
-        int meetingDuration = 30;
-
-        List<StringMeeting> output = calendarMatching(calendar1, dailyBounds1, calendar2, dailyBounds2, meetingDuration);
-
-        //11:30 12:00 & 15:00 16:00 18:00 & 18:30
-
-        for (StringMeeting meeting : output) {
-            System.out.println("[ " + meeting.start + " , " + meeting.end + " ]");
-        }
-
-
-    }
-
     public static List<StringMeeting> calendarMatching(
             List<StringMeeting> calendar1,
             StringMeeting dailyBounds1,
@@ -132,6 +108,28 @@ class CalendarMatching {
         public StringMeeting(String start, String end) {
             this.start = start;
             this.end = end;
+        }
+    }
+
+    public static void main(String[] args) throws ParseException {
+        List<StringMeeting> calendar1 = Arrays.asList(new StringMeeting("9:00", "10:30"),
+                new StringMeeting("12:00", "13:00"), new StringMeeting("16:00", "18:00"));
+
+        List<StringMeeting> calendar2 = Arrays.asList(new StringMeeting("10:00", "11:30"),
+                new StringMeeting("12:30", "14:30"), new StringMeeting("14:30", "15:00"),
+                new StringMeeting("16:00", "17:00"));
+        StringMeeting dailyBounds1 = new StringMeeting("9:00", "20:00");
+
+        StringMeeting dailyBounds2 = new StringMeeting("10:30", "18:30");
+
+        int meetingDuration = 30;
+
+        List<StringMeeting> output = calendarMatching(calendar1, dailyBounds1, calendar2, dailyBounds2, meetingDuration);
+
+        //11:30 12:00 & 15:00 16:00 18:00 & 18:30
+
+        for (StringMeeting meeting : output) {
+            System.out.println("[ " + meeting.start + " , " + meeting.end + " ]");
         }
     }
 

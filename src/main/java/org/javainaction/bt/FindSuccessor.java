@@ -46,7 +46,10 @@ public class FindSuccessor {
 
     public static BinaryTree getRightMostParent(BinaryTree current) {
         while (current.parent != null
-                && current.parent.right == current) { //we have already visited parent
+                //we have already visited parent in case of 5 current is 5 and parent is 2 but right if 2 is self so
+                //we try and find unvisited node as this is in order traversal if we are at right node,
+                //then parent is already visited but find grand parent (1) that isn't yet
+                && current.parent.right == current) {
             current = current.parent;
         }
         return current.parent;

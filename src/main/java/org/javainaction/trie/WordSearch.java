@@ -3,7 +3,8 @@ package org.javainaction.trie;
 /**
  * Given an m x n grid of characters board and a string word, return true if word exists in the grid.
  *
- * The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+ * The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or
+ * vertically neighboring. The same letter cell may not be used more than once.
  *
  *
  *
@@ -23,6 +24,7 @@ package org.javainaction.trie;
  * Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
  * Output: false
  * @see WordSearch2
+ * @see org.javainaction.graph.BoggleBoard
  */
 public class WordSearch {
     // O(nm*4^s + ws) time | O(nm+ ws) space
@@ -43,16 +45,20 @@ public class WordSearch {
                                         boolean[][] visited,
                                         int start) {
 
+        //if we are at end of thr word search
+        if (start == words.length) return true;
 
-        if (start == words.length ) return true;
-
+        //check bounds
         if (i < 0 || j < 0 || i == board.length || j == board[i].length) return false;
+        //check if characters match
         if (words[start] != board[i][j]) return false;
 
+        //check if unvisited
         if (visited[i][j]) return false;
 
         visited[i][j] = true;
 
+        //try all neighbours
         boolean found = exploreBoard(board, i - 1, j, words, visited, start + 1)
                 || exploreBoard(board, i + 1, j, words, visited, start + 1)
                 || exploreBoard(board, i, j - 1, words, visited, start + 1)

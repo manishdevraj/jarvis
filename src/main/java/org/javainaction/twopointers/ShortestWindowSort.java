@@ -23,6 +23,7 @@ package org.javainaction.twopointers;
  * Input: [3, 2, 1]
  * Output: 3
  * Explanation: The whole array needs to be sorted.
+ * @see SubArraySort
  */
 public class ShortestWindowSort {
 
@@ -54,15 +55,11 @@ public class ShortestWindowSort {
     }
 
     public static boolean isOutOfOrder(int i, int num, int[] array) {
-        if (i == 0) {
-            return array[i + 1] < num;
-        }
+        if (i == 0) return array[i + 1] < num;
 
-        if (i == array.length - 1) {
-            return num < array[i-1];
-        }
+        if (i == array.length - 1) return num < array[i - 1];
 
-        return array[i + 1] < num || num < array[i-1];
+        return array[i + 1] < num || num < array[i - 1];
     }
 
     public static void main(String[] args) {

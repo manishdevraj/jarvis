@@ -34,7 +34,6 @@ public class LongSubWithAtKRepeatingChar {
                 uniqueChars++;
                 freq[c-'a'] = true;
             }
-            //freqMap[c-'a']++;
         }
 
         int max = 0;

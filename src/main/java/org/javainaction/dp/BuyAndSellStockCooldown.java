@@ -3,11 +3,11 @@ package org.javainaction.dp;
 /**
  * You are given an array prices where prices[i] is the price of a given stock on the ith day.
  *
- * Find the maximum profit you can achieve. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times) with the following restrictions:
+ * Find the maximum profit you can achieve. You may complete as many transactions as you like
+ * (i.e., buy one and sell one share of the stock multiple times) with the following restrictions:
  *
  * After you sell your stock, you cannot buy stock on the next day (i.e., cooldown one day).
  * Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
- *
  *
  *
  * Example 1:
@@ -50,12 +50,14 @@ public class BuyAndSellStockCooldown {
         sell[1] = Math.max(0, buy[0] + prices[1]);
 
         for (int i = 2; i < prices.length; i++) {
-            //buy[i]: To make a decision whether to buy at i, we either take a rest, by just using the old decision
-            // at i - 1, or sell at/before i - 2, then buy at i, We cannot sell at i - 1, then buy at i, because of
-            // cooldown.
+            // buy[i]: To make a decision whether to buy at i
+            // we either take a rest, by just using the old decision at i - 1, or
+            // sell at/before i - 2, then buy at i.
+            // We cannot sell at i - 1, then buy at i, because of cooldown.
             buy[i] = Math.max(buy[i - 1], sell[i - 2] - prices[i]);
-            //sell[i]: To make a decision whether to sell at i, we either take a rest, by just using the old decision
-            // at i - 1, or buy at/before i - 1, then sell at i.
+            // sell[i]: To make a decision whether to sell at i
+            // we either take a rest, by just using the old decision at i - 1, or
+            // buy at/before i - 1, then sell at i.
             sell[i] = Math.max(sell[i - 1], buy[i - 1] + prices[i]);
         }
 

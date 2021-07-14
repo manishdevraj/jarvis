@@ -23,6 +23,8 @@ package org.javainaction.twopointers;
  *
  * For example, given the array ['G', 'B', 'R', 'R', 'B', 'R', 'G'], it should become ['R', 'R', 'R', 'G', 'G',
  * 'B', 'B'].
+ *
+ * @see RearrangeString
  */
 public class DutchNationalFlagProblem {
     public static void sort(int[] arr) {
@@ -31,12 +33,20 @@ public class DutchNationalFlagProblem {
         int i = 0;
         while (i <= high) {
             if (arr[i] == 0) {
+                //swap all 0's with low pointer
+                //as we got swap right we can increment both i and low
                 swap(arr, i, low);
                 i++;
                 low++;
             } else if(arr[i] == 1) {
+                //do nothing for 1's as they are in place just move along
+                //even case such as [1, 1, 1] will not sorted with 1's in place with O(n) time
                 i++;
             } else if (arr[i] == 2) {
+                //swap all 2's with igh pointer
+                //after swap we might get 0 or 1 so do not move i, just move high pointer
+                // [0, 1, 2, 1, 0] with i at 3 and high at 4 we get swap and get [0, 1, 0, 1, 2]
+                // no we got 2 moved to right place but at 3 we still got 0 which needs swapping
                 swap(arr, i, high);
                 high--;
             }

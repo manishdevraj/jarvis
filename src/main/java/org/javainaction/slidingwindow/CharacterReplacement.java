@@ -46,9 +46,35 @@ public class CharacterReplacement {
         return maxLength;
     }
 
+    public static int findMaxLength(String str, int k) {
+        if (str == null || str.length() == 0) return 0;
+        int[] freq = new int[26];
+        int windowStart = 0;
+        int count = 0;
+        int max = 0;
+        for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
+            count = Math.max(count, ++freq[str.charAt(windowEnd) - 'a']);
+            //if we have all repeating characters like say 'aaaaa' then it will never go out of bounds for K repetition
+            // as (4 - 0 + 1 - 5 = 0 > 2) will not add up
+            // but let us say we have 'aabcc' then we need to slide window because
+            // as (4 - 0 + 1 - 2 = 3 > 2) means we have more than k distinct elements
+            if (windowEnd - windowStart + 1 - count > k) {
+                freq[str.charAt(windowStart) - 'a']--;
+                windowStart++;
+            }
+
+            max = Math.max(max, windowEnd - windowStart + 1);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         System.out.println(CharacterReplacement.findLength("aabccbb", 2));
         System.out.println(CharacterReplacement.findLength("abbcb", 1));
         System.out.println(CharacterReplacement.findLength("abccde", 1));
+
+        System.out.println(CharacterReplacement.findMaxLength("aabccbb", 2));
+        System.out.println(CharacterReplacement.findMaxLength("abbcb", 1));
+        System.out.println(CharacterReplacement.findMaxLength("abccde", 1));
     }
 }

@@ -16,7 +16,7 @@ import java.util.ArrayDeque;
  *            9      6
  *
  * Answer would be 6 as diameter of node 3 is 6 which is greater than the height of the root itself which is 5
- *
+ * @see TreeDiameter
  */
 public class BinaryTreeDiameter {
 
@@ -25,18 +25,19 @@ public class BinaryTreeDiameter {
         return findBinaryTreeDiameter(tree).diameter;
     }
 
-    public static TreeInfo findBinaryTreeDiameter(BinaryTree parent) {
-        if (parent == null) return new TreeInfo(0, 0);
+    public static TreeInfo findBinaryTreeDiameter(BinaryTree node) {
+        if (node == null) return new TreeInfo(0, 0);
 
-        var leftTree = parent.left;
-        var rightTree = parent.right;
+        var leftTree = node.left;
+        var rightTree = node.right;
 
         var leftTreeInfo = findBinaryTreeDiameter(leftTree);
         var rightTreeInfo = findBinaryTreeDiameter(rightTree);
         var maxDiameter = Math.max(leftTreeInfo.diameter, rightTreeInfo.diameter);
-        var longestPathThroughRoot = leftTreeInfo.height + rightTreeInfo.height;
-
-        var currentDiameter = Math.max(maxDiameter, longestPathThroughRoot);
+        var longestPathThroughParent = leftTreeInfo.height + rightTreeInfo.height;
+        //either diameter or longest path through self defines current diameter
+        var currentDiameter = Math.max(maxDiameter, longestPathThroughParent);
+        //current height is 1 + max of either child's height
         var currentHeight = 1 + Math.max(leftTreeInfo.height, rightTreeInfo.height);
 
         return new TreeInfo(currentDiameter, currentHeight);

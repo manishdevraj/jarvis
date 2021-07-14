@@ -3,9 +3,9 @@ package org.javainaction.bst;
 /**
  * In a BST tree given a target value, find the closed value in BST
  *
- *               10
- *           5       15
- *         2   5  13    22
+ *                 10
+ *            5         15
+ *         2    6    13      22
  *       1            14
  *
  *       Target = 12 Output would be 13
@@ -17,7 +17,6 @@ public class FindClosestValueInBst {
         double closest = Double.MAX_VALUE;
         BST node = tree;
         while (node != null) {
-
             if (Math.abs(target - closest) > Math.abs(target - node.value)) closest = node.value;
 
             if (target < node.value) node = node.left;
@@ -46,7 +45,7 @@ public class FindClosestValueInBst {
         root.left = new BST(5);
         root.left.left = new BST(2);
         root.left.left.left = new BST(1);
-        root.left.right = new BST(5);
+        root.left.right = new BST(6);
         root.right = new BST(15);
         root.right.left = new BST(13);
         root.right.left.right = new BST(14);

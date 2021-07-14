@@ -3,15 +3,17 @@ package org.javainaction.twopointers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * Write a function to find all triplets whose sum matches the target
+ * Input: {1, 2, 3, 4, 5, 6} and target 10
+ *
+ * Output: [1, 3, 6], [1, 4, 5] [2, 3, 5]
+ */
 public class ThreeNumberSum {
     public static List<Integer[]> threeNumberSum(int[] array, int targetSum) {
-        // Write your code here.
         List<Integer[]> threeSomeArray = new ArrayList<>();;
         Arrays.sort(array);
         return threeSome(array, targetSum, threeSomeArray);
-        //return threeSomeArray;
-        //[ -8, -6, 1, 2, 3, 5, 6, 12]
     }
 
     public static List<Integer[]> threeSome(int[] array, int targetSum,
@@ -28,11 +30,25 @@ public class ThreeNumberSum {
                     right--;
                 } else if(threeSum < targetSum) {
                     left++;
-                } else if(threeSum > targetSum) {
+                } else {
                     right--;
                 }
             }
         }
         return threeSomeArray;
+    }
+
+    public static void main(String[] args) {
+        List<Integer[]> result = threeNumberSum(new int[]{1, 2, 3, 4, 5, 6}, 10);
+        System.out.println("{1, 2, 3, 4, 5, 6} three nums with target 10 : ");
+        result.forEach(a -> System.out.println(Arrays.toString(a)));
+
+        result = threeNumberSum(new int[]{12, 3, 1, 2, -6, 5, -8, 6}, 0);
+        System.out.println("{12, 3, 1, 2, -6, 5, -8, 6} three nums with target 0 : ");
+        result.forEach(a -> System.out.println(Arrays.toString(a)));
+
+        result = threeNumberSum(new int[]{1, 2, 3}, 6);
+        System.out.println("{1, 2, 3}  three nums with target 6 : ");
+        result.forEach(a -> System.out.println(Arrays.toString(a)));
     }
 }

@@ -14,35 +14,31 @@ import java.util.List;
  *
  * Input: {5, 7, -24, 12, 10, 2, 3, 12, 5, 6, 35}
  * Output: [-24, 2, 3, 5, 6, 35]
- *
  */
 public class LongestIncreasingSubseqArray {
-
     // O(n^2) time | O(n) space
     public static List<Integer> longestIncreasingSubsequence(int[] array) {
-        int[] lengths = new int[array.length];
+        int[] dp = new int[array.length];
         int[] sequences = new int[array.length];
-        Arrays.fill(lengths, 1);
+        Arrays.fill(dp, 1);
         Arrays.fill(sequences, Integer.MIN_VALUE);
         int longestSequence = 0;
         for (int i = 0; i < array.length; i++) {
-            int currentNum= array[i];
             for (int j = 0; j < i; j++) {
-                int other = array[j];
-                if (other < currentNum && lengths[j] + 1 >= lengths[i]) {
-                    lengths[i] = lengths[j] + 1;
+                if (array[i] > array[j] && dp[j] + 1 >= dp[i]) {
+                    dp[i] = dp[j] + 1;
                     sequences[i] = j;
                 }
             }
-            if (lengths[i] >= lengths[longestSequence]) {
+            //longest sequence is last sequence that allows us to build numbers by looking at their sequence index
+            if (dp[i] >= dp[longestSequence]) {
                 longestSequence = i;
             }
         }
         return buildSequence(longestSequence, sequences, array);
     }
 
-    public static List<Integer> buildSequence(int index,
-                                              int[] sequences, int[] array) {
+    public static List<Integer> buildSequence(int index, int[] sequences, int[] array) {
         List<Integer> result = new ArrayList<>();
         while (index != Integer.MIN_VALUE) {
             result.add(0, array[index]);

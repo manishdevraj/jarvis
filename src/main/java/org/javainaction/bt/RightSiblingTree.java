@@ -53,10 +53,12 @@ public class RightSiblingTree {
             if (parent.right == null) {
                 node.right = null;
             } else {
+                //we need to make sure we do not self join as for right node parent.right would be node it self
                 //we need to go 2 level up to jump into other side of the tree
                 node.right = parent.right.left;
             }
         }
+
         mutate(right, node, false);
     }
 

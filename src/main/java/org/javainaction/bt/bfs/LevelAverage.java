@@ -16,16 +16,6 @@ import java.util.Queue;
  * maxValue = max(maxValue, currentNode.val)
  */
 public class LevelAverage {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public static List<Double> findLevelAverages(TreeNode root) {
         List<Double> result = new ArrayList<>();
         if (root == null)
@@ -62,5 +52,15 @@ public class LevelAverage {
         root.right.right = new TreeNode(5);
         List<Double> result = LevelAverage.findLevelAverages(root);
         System.out.print("Level averages are: " + result);
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

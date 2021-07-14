@@ -25,8 +25,6 @@ package org.javainaction.dp.palindromsubseq;
  * Explanation: LPS could be "p", "q" or "r".
  */
 public class LongestPalindromicSubseq {
-
-
     public int findLPSLength(String st) {
         Integer[][] dp = new Integer[st.length()][st.length()];
         return findLPSLengthRecursive(dp, st, 0, st.length() - 1);
@@ -38,23 +36,28 @@ public class LongestPalindromicSubseq {
         // every sequence with one element is a palindrome of length 1
         if (startIdx == endIdx) return 1;
 
-        if (dp[startIdx][endIdx] == null) {
-            if (st.charAt(startIdx) == st.charAt(endIdx)) {
-                // case 1: elements at the beginning and the end are the same
-                dp[startIdx][endIdx] = 2 + findLPSLengthRecursive(dp, st, startIdx + 1, endIdx - 1);
-            } else {
-                // case 2: skip one element either from the beginning or the end
-                int lpsBottom = findLPSLengthRecursive(dp, st, startIdx + 1, endIdx);
-                int lpsLeft = findLPSLengthRecursive(dp, st, startIdx, endIdx - 1);
-                dp[startIdx][endIdx] = Math.max(lpsBottom, lpsLeft);
-            }
+        //if we have computed already
+        if (dp[startIdx][endIdx] != null) return dp[startIdx][endIdx];
+
+        if (st.charAt(startIdx) == st.charAt(endIdx)) {
+            // case 1: elements at the beginning and the end are the same
+            dp[startIdx][endIdx] = 2 + findLPSLengthRecursive(dp, st, startIdx + 1, endIdx - 1);
+        } else {
+            // case 2: skip one element either from the beginning or the end
+            int lpsBottom = findLPSLengthRecursive(dp, st, startIdx + 1, endIdx);
+            int lpsLeft = findLPSLengthRecursive(dp, st, startIdx, endIdx - 1);
+            dp[startIdx][endIdx] = Math.max(lpsBottom, lpsLeft);
         }
+
         return dp[startIdx][endIdx];
     }
 
     private int findLPSLengthBottomup(String str) {
+        //in case of longest palindrome substring we used boolean and used end - start + 1 as our length
+        //here we need to store length in our memo
         int[][] dp = new int[str.length()][str.length()];
 
+        //every single char string is palindrome of length 1
         for (int i = 0; i < str.length(); i++) {
             dp[i][i] = 1;
         }
@@ -68,6 +71,7 @@ public class LongestPalindromicSubseq {
                 }
             }
         }
+
         return dp[0][str.length() - 1];
     }
 

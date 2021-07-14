@@ -11,27 +11,6 @@ import java.util.List;
  *
  */
 public class BranchSums {
-    public static class BinaryTree {
-        int value;
-        BinaryTree left;
-        BinaryTree right;
-
-        BinaryTree(int value) {
-            this.value = value;
-            this.left = null;
-            this.right = null;
-        }
-
-        @Override
-        public String toString() {
-            return "BinaryTree{" +
-                    "value=" + value +
-                    ", left=" + left +
-                    ", right=" + right +
-                    '}';
-        }
-    }
-
     public static List<Integer> branchSums(BinaryTree root) {
         List<Integer> result = new ArrayList<>();
         findBranchSumPreorder(root, 0, result);
@@ -90,5 +69,26 @@ public class BranchSums {
         List<Integer> expected = new ArrayList<>(Arrays.asList(15, 16, 18, 10, 11));
         System.out.println(tree);
         System.out.println("Branch sum : " + branchSums(tree));
+    }
+
+    public static class BinaryTree {
+        int value;
+        BinaryTree left;
+        BinaryTree right;
+
+        BinaryTree(int value) {
+            this.value = value;
+            this.left = null;
+            this.right = null;
+        }
+
+        @Override
+        public String toString() {
+            return "BinaryTree{" +
+                    "value=" + value +
+                    ", left=" + left +
+                    ", right=" + right +
+                    '}';
+        }
     }
 }

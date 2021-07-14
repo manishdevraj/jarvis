@@ -35,6 +35,7 @@ public class LongestBalancedSubstring {
         int closing = 0;
         //we need to go from left to right where balance is when we have
         //opening matching with a closed matched
+        //(()))( this will be considered by opening first and closing second logic
         for (int i = 0; i < string.length(); i++) {
             char c = string.charAt(i);
 
@@ -45,6 +46,7 @@ public class LongestBalancedSubstring {
             if (opening == closing)
                 maxLength = Math.max(maxLength, closing * 2);
             else if (closing > opening) {
+                //closing before opening is invalid bracket
                 opening = 0;
                 closing = 0;
             }
@@ -54,6 +56,7 @@ public class LongestBalancedSubstring {
         closing = 0;
         //we need to go from right to left where balance is when we have
         //closing matching with a open matched
+        //we need to also validate such braces )()())
         for (int i = string.length() - 1; i >= 0; i--) {
             char c = string.charAt(i);
 
@@ -64,6 +67,7 @@ public class LongestBalancedSubstring {
             if (opening == closing)
                 maxLength = Math.max(maxLength, opening * 2);
             else if (opening > closing) {
+                //opening before closing is invalid bracket
                 opening = 0;
                 closing = 0;
             }
@@ -77,6 +81,7 @@ public class LongestBalancedSubstring {
         int maxLength = 0;
         var openingStack = new Stack<Integer>();
         //to count first opening parenthesis
+        //when we have (()) at i = 3 we will have -1 in stack making it (3 - (-1)) as current length of brackets
         openingStack.push(-1);
         for (int i = 0; i < string.length(); i++) {
             if (string.charAt(i) == '(') {
@@ -84,7 +89,11 @@ public class LongestBalancedSubstring {
             } else {
                 //pop out
                 openingStack.pop();
-                if (openingStack.size() == 0) openingStack.push(i);
+                //if we got new start enter new index
+                //"(()))" at i = 4 we have an empty stack but we got closing bracket
+                if (openingStack.size() == 0) {
+                    openingStack.push(i);
+                }
                 else {
                     //if we have an element means distance between current index and last opening bracket index
                     //is our balanced length
@@ -100,6 +109,18 @@ public class LongestBalancedSubstring {
         var input = "(()))(";
         var expected = 4;
         var actual = new LongestBalancedSubstring().longestBalancedSubstring(input);
+        System.out.println(actual);
+        actual = new LongestBalancedSubstring().longestBalancedSubstringStack(input);
+        System.out.println(actual);
+
+        input = ")()())";
+        actual = new LongestBalancedSubstring().longestBalancedSubstring(input);
+        System.out.println(actual);
+        actual = new LongestBalancedSubstring().longestBalancedSubstringStack(input);
+        System.out.println(actual);
+
+        input = ")))(((";
+        actual = new LongestBalancedSubstring().longestBalancedSubstring(input);
         System.out.println(actual);
         actual = new LongestBalancedSubstring().longestBalancedSubstringStack(input);
         System.out.println(actual);

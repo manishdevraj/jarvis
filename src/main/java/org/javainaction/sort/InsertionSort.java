@@ -18,6 +18,7 @@ public class InsertionSort {
 
         for(int i = 1; i < array.length; i++) {
             int j = i;
+            //all elements to the left of the i will be sorted
             while(j > 0 && array[j] < array[j - 1]) {
                 swap(j, j - 1, array);
                 j--;

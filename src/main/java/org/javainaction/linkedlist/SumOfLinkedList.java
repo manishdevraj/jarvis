@@ -16,7 +16,7 @@ import java.util.List;
  *
  * Output : [1, 9, 2, 2]
  *
- *
+ * @see AddTwoNumbers2
  */
 public class SumOfLinkedList {
     public static LinkedList sumOfLinkedLists(LinkedList linkedListOne, LinkedList linkedListTwo) {

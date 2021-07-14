@@ -28,23 +28,24 @@ public class NthFibonacci {
     }
 
     //O(n) time | O(1) space
-    private static int getNthFibonacci(int n) {
-        int[] result = new int[]{0 , 1};
-        if (n == 1) return result[n - 1];
-        int count = 3;
-        while (count++ <= n) {
-            int nextFibonacci = result [0] + result[1];
-            result[0] = result[1];
-            result[1] = nextFibonacci;
+    private static int getNthFibBottomUp(int n) {
+        if (n < 2) return n;
+        int n1 = 0;
+        int n2 = 1;
+        int i = 3;
+        while (i++ <= n) {
+            int nextFibonacci = n1 + n2;
+            n1 = n2; //cascade values down
+            n2 = nextFibonacci; //store next fib number
         }
-        return result[1];
+        return n2; //next fib number
     }
 
     public static void main(String[] args) {
         System.out.println("Nth fibonacci for n = 6 : " + getNthFib(6));
         System.out.println("Nth fibonacci for n = 2 : " + getNthFib(2));
-        System.out.println("Nth fibonacci for n = 6 : " + getNthFibonacci(6));
-        System.out.println("Nth fibonacci for n = 2 : " + getNthFibonacci(2));
+        System.out.println("Nth fibonacci for n = 6 : " + getNthFibBottomUp(6));
+        System.out.println("Nth fibonacci for n = 2 : " + getNthFibBottomUp(2));
     }
 
 

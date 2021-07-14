@@ -25,34 +25,6 @@ import java.util.Queue;
  * Output: []
  */
 public class RightViewTree {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
-    public static List<Integer> rightSideView(TreeNode root) {
-        List<Integer> result = new ArrayList<Integer>();
-        rightView(root, result, 0);
-        return result;
-    }
-
-    //DFS recursive
-    public static  void rightView(TreeNode curr, List<Integer> result, int currDepth){
-        if(curr == null){
-            return;
-        }
-        if(currDepth == result.size()){
-            result.add(curr.val);
-        }
-        rightView(curr.right, result, currDepth + 1);
-        rightView(curr.left, result, currDepth + 1);
-    }
-
     //BFS traversal
     public static List<Integer> traverse(TreeNode root) {
         List<Integer> result = new ArrayList<>();
@@ -68,17 +40,34 @@ public class RightViewTree {
                 TreeNode currentNode = queue.poll();
                 if (currentNode != null) {
                     // if it is the last node of this level, add it to the result
-                    if (i == levelSize - 1)
-                        result.add(currentNode.val);
+                    if (i == levelSize - 1) result.add(currentNode.val);
                     // insert the children of current node in the queue
-                    if (currentNode.left != null)
-                        queue.offer(currentNode.left);
-                    if (currentNode.right != null)
-                        queue.offer(currentNode.right);
+                    if (currentNode.left != null) queue.offer(currentNode.left);
+                    if (currentNode.right != null) queue.offer(currentNode.right);
                 }
             }
         }
         return result;
+    }
+
+    public static List<Integer> rightSideView(TreeNode root) {
+        var result = new ArrayList<Integer>();
+        rightView(root, result, 0);
+        return result;
+    }
+
+    //DFS recursive
+    public static  void rightView(TreeNode curr, List<Integer> result, int currDepth){
+        if(curr == null){
+            return;
+        }
+
+        if(currDepth == result.size()){
+            result.add(curr.val);
+        }
+
+        rightView(curr.right, result, currDepth + 1);
+        rightView(curr.left, result, currDepth + 1);
     }
 
     public static void main(String[] args) {
@@ -92,5 +81,15 @@ public class RightViewTree {
 
         System.out.println("Right view is " + traverse(root));
         System.out.println("Right view is " + rightSideView(root));
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

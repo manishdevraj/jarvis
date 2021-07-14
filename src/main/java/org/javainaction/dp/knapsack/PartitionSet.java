@@ -27,14 +27,17 @@ import java.util.stream.IntStream;
 public class PartitionSet {
     private boolean canPartition(int[] num) {
         int sum = IntStream.of(num).sum();
+        //we cannot make equal partition using odd elements
         if (sum % 2 != 0) return false;
 
-        return canPartitionRecursive(num, sum, 0);
+        return canPartitionRecursive(num, sum / 2, 0);
     }
 
     private boolean canPartitionRecursive(int[] num, int sum, int currentIdx) {
         if (sum == 0) return true;
+
         if (currentIdx >= num.length || num.length == 0) return false;
+
         if (num[currentIdx] <= sum) {
             if (canPartitionRecursive(num, sum - num[currentIdx], currentIdx + 1))
                 return true;

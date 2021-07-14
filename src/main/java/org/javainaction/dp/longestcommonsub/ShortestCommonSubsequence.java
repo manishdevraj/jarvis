@@ -14,6 +14,7 @@ package org.javainaction.dp.longestcommonsub;
  * Input: s1: "dynamic" s2:"programming"
  * Output: 15
  * Explanation: The SCS is "dynprogrammicng".
+ * @see EditDistance
  */
 public class ShortestCommonSubsequence {
     public int shortestCommonSubseqLength(String s1, String s2) {
@@ -34,6 +35,8 @@ public class ShortestCommonSubsequence {
                     dp[i][j] = 1 + dp[i - 1][j - 1];
                 } else {
                     //if last character didn't match
+                    //find min cost of insertion and deletion to match common subsequence like edit distance
+                    //but do not consider replacements
                     dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1]);
                 }
             }

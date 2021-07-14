@@ -33,23 +33,22 @@ public class GeneralizedAbbreviationRecursive {
 
         if (position == word.length()) {
             //suffix
-            if (count != 0) {
-                current.append(count);
-            }
+            if (count != 0) current.append(count);
+
             result.add(current.toString());
         } else {
             // continue abbreviating by incrementing the current abbreviation count
-            //here we do not abbreviate, current string, cnt + 1, pos + 1
+            // here we do not abbreviate, current string, cnt + 1, pos + 1
             generateAbbreviationRecursive(word, new StringBuilder(current), position + 1,
                     count + 1, result);
 
             // restart abbreviating, append the count and the current character to the string
-            //here we abbreviate, update current string, cnt = 0, pos + 1
+            // here we abbreviate, update current string, cnt = 0, pos + 1
+
             //prefix
             StringBuilder currentNew = new StringBuilder();
-            if (count != 0) {
-                currentNew.append(count);
-            }
+            if (count != 0)  currentNew.append(count);
+
             generateAbbreviationRecursive(word, currentNew.append(word.charAt(position)), position + 1,
                     0, result);
         }

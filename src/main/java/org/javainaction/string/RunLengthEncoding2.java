@@ -22,8 +22,8 @@ public class RunLengthEncoding2 {
 
         for (int i = 1; i < string.length(); i++) {
             char curChar = string.charAt(i);
-            char prevChar = string.charAt(i  -1);
-
+            char prevChar = string.charAt(i - 1);
+            //when we found new character or we found frequency == 9 encode
             if (curChar != prevChar || frequency == 9) {
                 encoded.append(frequency).append(prevChar);
                 frequency = 0;

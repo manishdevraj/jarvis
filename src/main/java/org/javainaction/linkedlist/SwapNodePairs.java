@@ -30,8 +30,6 @@ public class SwapNodePairs {
     /**
      * O(n) time | O(1) space
      * If we use recursion then O(n) space would be used
-     * @param head
-     * @return
      */
 
     public static ListNode swapPairs(ListNode head) {
@@ -45,9 +43,9 @@ public class SwapNodePairs {
             ListNode secondNode = previous.next.next;
 
             // prev -> firstNode -> secondNode -> x
-            firstNode.next = secondNode.next;
-            secondNode.next = firstNode;
-            previous.next = secondNode;
+            firstNode.next = secondNode.next; //first -> x
+            secondNode.next = firstNode; //second -> first
+            previous.next = secondNode; //prev -> second
             // prev -> secondNode-> firstNode -> x
 
             //point last pair tail to first node;
@@ -56,6 +54,7 @@ public class SwapNodePairs {
         return dummy.next;
     }
 
+    //Using recursion
     public static ListNode nodeSwap(ListNode head) {
         if (head == null || head.next == null) return head;
 

@@ -2,6 +2,8 @@ package org.javainaction.dp.knapsack;
 
 import org.javainaction.dp.fibonacci.HouseThief;
 
+import java.util.Arrays;
+
 /**
  * Write a function that takes in array of positive integer and returns max subset sum that excludes adjacent elements
  *
@@ -11,6 +13,29 @@ import org.javainaction.dp.fibonacci.HouseThief;
  * @see HouseThief
  */
 public class MaxSubsetSumNoAdj {
+
+    //Recursive memo (top-down)
+    public static int findMaxSubsetNonAdjTopdown(int[] array) {
+        var memo = new int[array.length];
+        Arrays.fill(memo, -1);
+        return findMaxSubsetNonAdjRecursive(memo, array, 0);
+    }
+
+    private static int findMaxSubsetNonAdjRecursive(int[] memo, int[] array, int currentIndex) {
+        if( currentIndex >= array.length)
+            return 0;
+
+        if (memo[currentIndex] >= 0) return memo[currentIndex];
+
+        // store from current slot and skip one to store next
+        int storeCurrent = array[currentIndex] + findMaxSubsetNonAdjRecursive(memo, array, currentIndex + 2);
+        // skip current number from the adjacent slot
+        int skipCurrent = findMaxSubsetNonAdjRecursive(memo, array, currentIndex + 1);
+
+        memo[currentIndex] = Math.max(storeCurrent, skipCurrent);
+        return memo[currentIndex];
+    }
+
     //Iterative + memo (bottom-up)
     //O(n) time | O(n) space
     public static int maxSubsetSumNonAdjIterativeBU(int[] array) {
@@ -30,23 +55,29 @@ public class MaxSubsetSumNoAdj {
         if(array.length == 0) return 0;
         else if(array.length == 1) return array[0];
 
-        int p1 = array[0];
-        int p2 = Math.max(array[1], p1);
+        int previous = array[0];
+        int current = Math.max(array[1], previous);
         for(int i = 2; i < array.length; i++) {
-            int currentMax = Math.max(p2, p1 + array[i]);
-            p1 = p2;
-            p2 = currentMax;
+            int currentMax = Math.max(current, previous + array[i]);
+            previous = current;
+            current = currentMax;
         }
-        return p2;
+        return current;
     }
 
     public static void main(String[] args) {
+        System.out.println(findMaxSubsetNonAdjTopdown(new int[] {75, 105, 120, 75, 90, 135}));
+        System.out.println(findMaxSubsetNonAdjTopdown(new int[]{2, 5, 1, 3, 6, 2, 4}));
+        System.out.println(findMaxSubsetNonAdjTopdown(new int[] {2, 10, 14, 8, 1}));
+
+        System.out.println(maxSubsetSumNoAdjacent(new int[] {75, 105, 120, 75, 90, 135}));
         System.out.println(maxSubsetSumNoAdjacent(new int[]{2, 5, 1, 3, 6, 2, 4}));
         System.out.println(maxSubsetSumNoAdjacent(new int[] {2, 10, 14, 8, 1}));
-        System.out.println(maxSubsetSumNoAdjacent(new int[] {75, 105, 120, 75, 90, 135}));
 
         System.out.println(maxSubsetSumNonAdjIterativeBU(new int[] {75, 105, 120, 75, 90, 135}));
         System.out.println(maxSubsetSumNonAdjIterativeBU(new int[]{2, 5, 1, 3, 6, 2, 4}));
         System.out.println(maxSubsetSumNonAdjIterativeBU(new int[] {2, 10, 14, 8, 1}));
+
+
     }
 }

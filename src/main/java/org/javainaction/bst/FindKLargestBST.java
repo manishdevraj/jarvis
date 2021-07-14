@@ -2,6 +2,7 @@ package org.javainaction.bst;
 
 /**
  * Give a binary search tree, find the kth largest value in BST
+ * @see FindKSmallestBST
  */
 public class FindKLargestBST {
 
@@ -55,7 +56,7 @@ public class FindKLargestBST {
         root.left.left = new BST(2);
         root.left.left.left = new BST(1);
         root.left.left.right = new BST(3);
-        root.left.right = new BST(5);
+        root.left.right = new BST(6);
         root.right = new BST(20);
         root.right.left = new BST(17);
         root.right.right = new BST(22);
@@ -63,5 +64,11 @@ public class FindKLargestBST {
         int expected = 17;
         var actual = new FindKLargestBST().findKthLargestValueInBst(root, k);
         System.out.println("K = 3 larges value in BST " + actual);
+
+        actual = new FindKLargestBST().findKthLargestValueInBst(root, 6);
+        System.out.println("K = 6 smallest value in BST " + actual);
+
+        actual = new FindKLargestBST().findKthLargestValueInBst(root, 7);
+        System.out.println("K = 7 smallest value in BST " + actual);
     }
 }

@@ -49,16 +49,16 @@ public class ReverseNodesInKGroup {
             /**
              * This check could be improved but need to change complete algorithm
              */
+            //count if we have enough nodes to reverse
             while(cur != null){
                 cur = cur.next;
                 count++;
             }
 
             if (count >= k) {
-                ListNode lastNodeOfFirstPart = previous;
-                ListNode lastNodeOfSubList = current;
+                ListNode lastPrevious = previous;
+                ListNode lastCurrent = current;
                 ListNode next = null;
-
 
                 for (int i = 0; current != null && i < k; i++) {
                     next = current.next;
@@ -67,16 +67,16 @@ public class ReverseNodesInKGroup {
                     current = next;
                 }
 
+                if (lastPrevious != null) lastPrevious.next = previous; //previous is new sub head connect with last prev
+                else head = previous; //reversed item where in previous becomes head
 
-                if (lastNodeOfFirstPart != null) lastNodeOfFirstPart.next = previous;
-                else if (lastNodeOfFirstPart == null) head = previous;
+                // connect with the next part
+                lastCurrent.next = current;
 
-                //connect with next part
-                if (lastNodeOfSubList != null)
-                    lastNodeOfSubList.next = current;
-
-                previous = lastNodeOfSubList;
+                //assign previous to last current
+                previous = lastCurrent;
             } else {
+                //we need to less than k nodes as is
                 break;
             }
         }

@@ -12,21 +12,14 @@ import java.util.List;
  * Input: 2
  * Output: List containing root nodes of all structurally unique BSTs.
  * Explanation: Here are the 2 structurally unique BSTs storing all numbers from 1 to 2:
+ * @see AllPossibleFBT
+ * @see CountUniqueTrees
+ * @see org.javainaction.bt.NumWaysBinaryTree
  */
 public class UniqueBSTTree {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public static List<TreeNode> findUniqueTrees(int n) {
-        if (n <= 0)
-            return new ArrayList<>();
+        if (n <= 0) return new ArrayList<>();
+
         return findUniqueTreesRecursive(1, n);
     }
 
@@ -59,6 +52,16 @@ public class UniqueBSTTree {
 
     public static void main(String[] args) {
         List<TreeNode> result = UniqueBSTTree.findUniqueTrees(3);
-        System.out.print("Total trees: " + result.size());
+        System.out.print("Unique BST for N = 3:  " + result.size());
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

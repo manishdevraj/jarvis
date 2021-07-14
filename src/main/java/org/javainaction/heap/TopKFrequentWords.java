@@ -5,7 +5,8 @@ import java.util.*;
 /**
  * Given a non-empty list of words, return the k most frequent elements.
  *
- * Your answer should be sorted by frequency from highest to lowest. If two words have the same frequency, then the word with the lower alphabetical order comes first.
+ * Your answer should be sorted by frequency from highest to lowest. If two words have the same frequency,
+ * then the word with the lower alphabetical order comes first.
  *
  * Example 1:
  *
@@ -40,12 +41,13 @@ public class TopKFrequentWords {
 
         PriorityQueue<Map.Entry<String, Integer>> minHeap
                 = new PriorityQueue<>(
-                (a, b) -> a.getValue().equals(b.getValue()) ?
-                        b.getKey().compareTo(a.getKey()) :
-                        a.getValue() - b.getValue()
+                (a, b) -> a.getValue().equals(b.getValue()) ? //for same frequency
+                        b.getKey().compareTo(a.getKey()) : // the lower alphabetical order comes first
+                        a.getValue() - b.getValue() //by lower frequencies
         );
 
         //min heap because we need to sort by least frequent and we remove them when threshold beyond k
+        //min heap poll will remove least significant item (less frequent in this case)
         for(Map.Entry<String, Integer> entry : frequency.entrySet()) {
             minHeap.offer(entry);
             if (minHeap.size() > k) minHeap.poll();

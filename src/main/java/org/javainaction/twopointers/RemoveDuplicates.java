@@ -6,25 +6,29 @@ package org.javainaction.twopointers;
  *
  * Problem 1: Given an unsorted array of numbers and a target ‘key’, remove all instances of ‘key’ in-place and
  * return the new length of the array.
+ *
+ * Example: [2, 3, 3, 3, 6, 9, 9 ]
+ * Output: 4
+ *
  */
 public class RemoveDuplicates {
 
     public static int remove(int[] arr) {
-        int notDuplicatedIdx = 1;
-        for(int j = 1; j < arr.length; j++) {
-            if (arr[notDuplicatedIdx - 1] != arr[j]) {
-                arr[notDuplicatedIdx] = arr[j];
-                notDuplicatedIdx++;
+        int uniqueIndex = 1;
+        for(int right = 1; right < arr.length; right++) {
+            if (arr[uniqueIndex - 1] != arr[right]) {
+                arr[uniqueIndex] = arr[right];
+                uniqueIndex++;
             }
         }
-        return notDuplicatedIdx;
+        return uniqueIndex;
     }
 
     public static void main(String[] args) {
         int[] arr = new int[] { 2, 3, 3, 3, 6, 9, 9 };
-        System.out.println(RemoveDuplicates.remove(arr));
+        System.out.println(remove(arr));
 
         arr = new int[] { 2, 2, 2, 11 };
-        System.out.println(RemoveDuplicates.remove(arr));
+        System.out.println(remove(arr));
     }
 }

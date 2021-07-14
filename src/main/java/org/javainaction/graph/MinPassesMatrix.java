@@ -1,8 +1,29 @@
 package org.javainaction.graph;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
+import java.util.function.BiFunction;
+
+/**
+ * Given a matrix with possibly unequal height, return minimum passes required to convert all negative numbers into
+ * all positive numbers.
+ *
+ * Negative integers can be converted to positive integers only if one or more of its neighbours are positive numbers
+ * Neighbours are defined by connected elements horizontally or vertically
+ *
+ * Note: 0 is neutral integer not positive or negative, it won't help conversion
+ *
+ * Input: [
+ * [0, -1, -3, 2, 0],
+ * [1, -2, -5, -1, -3],
+ * [3, 0, 0, -4, -1]]
+ *
+ * Conversion: [
+ * [0, 1, 3, 2, 0],
+ * [1, 2, 5, 1, 3],
+ * [3, 0, 0, 4, 1]]
+ *
+ * Output min passes : 3
+ */
 
 public class MinPassesMatrix {
 
@@ -17,6 +38,17 @@ public class MinPassesMatrix {
             }
         }
 
+        //get all pairs of neighbours
+        BiFunction<Integer, Integer, List<Integer[]>> neighboursFunction =
+                (i, j) -> {
+                    var neighbours = new ArrayList<Integer[]>();
+                    if (i > 0) neighbours.add(new Integer[]{i - 1, j});
+                    if (j > 0) neighbours.add(new Integer[]{i, j - 1});
+                    if (i < matrix.length - 1) neighbours.add(new Integer[]{i + 1, j});
+                    if (j < matrix[i].length - 1) neighbours.add(new Integer[]{i, j + 1});
+                    return neighbours;
+                };
+
         int minPasses = 0;
 
         while (!positiveQueue.isEmpty()) {
@@ -24,34 +56,17 @@ public class MinPassesMatrix {
             //this is to count the passes
             while (currentSize > 0) {
                 Integer[] pos = positiveQueue.poll();
-                int i = pos[0];
-                int j = pos[1];
-
-                if ( i > 0) {
-                    int sign = matrix[i - 1][j] < 0 ? -1 : 1;
-                    matrix[i - 1][j] *= sign;
-                    if (sign == -1)
-                        positiveQueue.offer(new Integer[]{i - 1, j});
+                if (pos != null) {
+                    neighboursFunction.apply(pos[0], pos[1])
+                            .stream()
+                            .filter(pair -> !positiveQueue.contains(pair)) //only go for ones not already positive
+                            .filter(pair -> matrix[pair[0]][pair[1]] < 0) //only for negative values elements
+                            .forEach(pair -> {
+                                matrix[pair[0]][pair[1]] *= -1; //we are sure that all numbers negative
+                                positiveQueue.offer(pair); //add for future pass
+                            });
+                    currentSize--;
                 }
-                if (i < matrix.length - 1) {
-                    int sign = matrix[i + 1][j] < 0 ? -1 : 1;
-                    matrix[i + 1][j] *= sign;
-                    if (sign == -1)
-                        positiveQueue.offer(new Integer[]{i + 1, j});
-                }
-                if (j > 0) {
-                    int sign = matrix[i][j - 1] < 0 ? -1 : 1;
-                    matrix[i][j - 1] *= sign;
-                    if (sign == -1 )
-                        positiveQueue.offer(new Integer[]{i, j - 1});
-                }
-                if (j < matrix[i].length - 1) {
-                    int sign = matrix[i][j + 1] < 0 ? -1 : 1;
-                    matrix[i][j + 1] *= sign;
-                    if (sign == -1 )
-                        positiveQueue.offer(new Integer[]{i, j + 1});
-                }
-                currentSize--;
             }
             //one round of positive numbers done
             minPasses++;

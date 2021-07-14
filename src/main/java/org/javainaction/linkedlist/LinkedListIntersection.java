@@ -59,11 +59,13 @@ public class LinkedListIntersection {
              * remove this when Linked list can be equated using ==
              */
             if (nodeA != null && nodeB != null && nodeA.value == nodeB.value) return nodeA;
-
+            //if we traverse both list one after other, and if they are intersecting then we will reach intersection
+            //or else we will come out of it by traversing both list
+            // ( a + b ) == ( b + a )
             nodeA = nodeA == null ? headB : nodeA.next;
             nodeB = nodeB == null ? headA : nodeB.next;
         }
-        return nodeA;
+        return null;
     }
 
     public static LinkedList findIntersection(LinkedList listOne, LinkedList listTwo) {
@@ -78,27 +80,14 @@ public class LinkedListIntersection {
         return intersect;
     }
 
-    public static void main(String[] args) {
-        LinkedList listOne = createLinkedList(new int[]{3, 7, 8, 10});
-        LinkedList listTwo = createLinkedList(new int[]{99, 1, 2, 8, 10});
-        LinkedList result = findIntersectionWithoutLeg(listOne, listTwo);
-        System.out.println("List " + listOne + " and " + listTwo + " are intersecting at -> ");
-        System.out.print(result != null ? result.value : null);
-        System.out.println("");
-        result = findIntersectionWithoutLeg(createLinkedList(new int[]{1}), createLinkedList(new int[]{1}));
-        System.out.println("List {1} and {1} are intersecting at -> ");
-        System.out.print(result != null ? result.value : null);
-    }
-
     public static LinkedList getIntersection(LinkedList listOne, LinkedList listTwo, int difference) {
         while (listOne != null && difference != 0) {
             listOne = listOne.next;
             difference--;
         }
         while(listOne != null
-                && listTwo != null && listOne.next != null
-                && listTwo.next != null) {
-            if (listOne.next == listTwo.next) {
+                && listTwo != null) {
+            if (listOne.value == listTwo.value) {
                 return listOne;
             }
             listOne = listOne.next;
@@ -114,6 +103,26 @@ public class LinkedListIntersection {
             node = node.next;
         }
         return count;
+    }
+
+    public static void main(String[] args) {
+        LinkedList result = findIntersectionWithoutLeg(createLinkedList(new int[]{3, 7, 8, 10}),
+                createLinkedList(new int[]{99, 1, 2, 8, 10}));
+        var output = result != null ? result.value : null;
+        System.out.println("List {3, 7, 8, 10} and {99, 1, 2, 8, 10} are intersecting at -> " + output);
+
+        result = findIntersectionWithoutLeg(createLinkedList(new int[]{1}), createLinkedList(new int[]{1}));
+        output = result != null ? result.value : null;
+        System.out.println("List {1} and {1} are intersecting at -> " + output);
+
+        result = findIntersection(createLinkedList(new int[]{3, 7, 8, 10}),
+                createLinkedList(new int[]{99, 1, 2, 8, 10}));
+        output = result != null ? result.value : null;
+        System.out.println("List {3, 7, 8, 10} and {99, 1, 2, 8, 10} are intersecting at -> " + output);
+
+        result = findIntersection(createLinkedList(new int[]{1}), createLinkedList(new int[]{1}));
+        output = result != null ? result.value : null;
+        System.out.println("List {1} and {1} are intersecting at -> " + output);
     }
 
     public static LinkedList createLinkedList(int[] array) {

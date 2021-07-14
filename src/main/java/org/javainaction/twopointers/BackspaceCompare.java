@@ -35,8 +35,11 @@ public class BackspaceCompare {
             int indexOne = getValidIndex(str1, i);
             int indexTwo = getValidIndex(str2, j);
 
+            //both strings are at starting bounds
             if (indexOne < 0 && indexTwo < 0) return true;
+            //either string reached out ot of bounds
             if (indexOne < 0 || indexTwo < 0) return false;
+            //if either character is not same
             if (str1.charAt(indexOne) != str2.charAt(indexTwo)) return false;
             i = indexOne - 1;
             j = indexTwo - 1;

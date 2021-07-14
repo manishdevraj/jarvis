@@ -1,6 +1,5 @@
 package org.javainaction.graph;
 
-import java.util.Arrays;
 
 /**
  * Given an array with value represents a jump in array.
@@ -18,12 +17,14 @@ public class SingleCycleCheck {
         int numElementsVisited = 0;
         int currentIdx = 0;
         while(numElementsVisited < array.length) {
+            //if we reached at beginning before reaching end means it is not a single cycle
             if (numElementsVisited > 0 && currentIdx == 0) return false;
             numElementsVisited++;
             int jump = array[currentIdx];
             int nextIdx = (currentIdx + jump) % array.length;
             currentIdx = nextIdx >= 0 ? nextIdx : nextIdx + array.length;
         }
+        //if we reached to beginning after traversing all elements that means we have single cycle
         return currentIdx == 0;
     }
 

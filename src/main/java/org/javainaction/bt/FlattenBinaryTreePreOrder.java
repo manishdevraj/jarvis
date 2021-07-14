@@ -1,10 +1,5 @@
 package org.javainaction.bt;
 
-import org.javainaction.bt.bfs.LevelAverage;
-
-import javax.swing.tree.TreeNode;
-import java.util.List;
-
 /**
  * Given the root of a binary tree, flatten the tree into a "linked list":
  *
@@ -26,8 +21,9 @@ import java.util.List;
  *
  * Input: root = [0]
  * Output: [0]
+ * @see FlattenBinaryTreeInOrder
  */
-public class FlattenBinaryTreeLinkedList {
+public class FlattenBinaryTreePreOrder {
     public void flatten(TreeNode root) {
         TreeNode current = root;
         // iteration 1 : cur:1, last:4, 1->2 and 4->5 and 1.left == null
@@ -45,7 +41,7 @@ public class FlattenBinaryTreeLinkedList {
                 //subtree is already linked by current node's last node
                 last.right = current.right;
                 current.right = current.left;
-                current.left = null;
+                current.left = null; //break the link
             }
             current = current.right;
         }
@@ -75,7 +71,7 @@ public class FlattenBinaryTreeLinkedList {
         root.left.left = new TreeNode(3);
         root.left.right = new TreeNode(4);
         root.right.right = new TreeNode(6);
-        var obj = new FlattenBinaryTreeLinkedList();
+        var obj = new FlattenBinaryTreePreOrder();
         obj.flatten(root);
         System.out.print("Flatten tree to linked list : " + root);
     }

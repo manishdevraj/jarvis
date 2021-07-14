@@ -1,7 +1,7 @@
 package org.javainaction.trie;
 
 /**
- * Design a special dictionary with some words that searchs the words in it by a prefix and a suffix.
+ * Design a special dictionary with some words that searches the words in it by a prefix and a suffix.
  *
  * Implement the WordFilter class:
  *

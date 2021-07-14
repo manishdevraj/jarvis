@@ -28,18 +28,6 @@ public class RearrangeList {
         ListNode(int value) {
             this.value = value;
         }
-
-        @Override
-        public String toString() {
-            List<Integer> result = new ArrayList<>();
-            result.add(value);
-            ListNode node = next;
-            while (node != null) {
-                result.add(node.value);
-                node = node.next;
-            }
-            return Arrays.toString(result.toArray());
-        }
     }
 
     public static void reorder(ListNode head) {
@@ -63,6 +51,7 @@ public class RearrangeList {
         }
 
         // set the next of the last node to 'null'
+        // to avoid self loop
         if (headFirstHalf != null)
             headFirstHalf.next = null;
     }

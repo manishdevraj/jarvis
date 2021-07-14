@@ -13,9 +13,7 @@ package org.javainaction.fastslow;
  *
  * Following the movement rules above results in the repeating index sequence
  * seq[0] -> seq[1] -> ... -> seq[k - 1] -> seq[0] -> ...
- * Every nums[seq[j]] is either all positive or all negative.
- *
- * k > 1
+ * Every nums[seq[j]] is either all positive or all negative. and k > 1
  *
  * Return true if there is a cycle in nums, or false otherwise.
  *
@@ -85,23 +83,22 @@ public class CircularArrayLoop {
             return -1; // change in direction, return -1
 
         int nextIndex = (currentIndex + arr[currentIndex]) % arr.length;
-        if (nextIndex < 0)
-            nextIndex += arr.length; // wrap around for negative numbers
+        if (nextIndex < 0) nextIndex += arr.length; // wrap around for negative numbers
 
         // one element cycle, return -1
-        if (nextIndex == currentIndex)
-            nextIndex = -1;
+        if (nextIndex == currentIndex) nextIndex = -1;
 
         return nextIndex;
     }
 
     public static void main(String[] args) {
+
+        System.out.println("{2,-1,1,2,2} has cycle " + loopExists(new int[] { 2,-1,1,2,2 }));
         System.out.println("{ 1, 2, -1, 2, 2 } has cycle " + loopExists(new int[] { 1, 2, -1, 2, 2 }));
         System.out.println("{ 2, 2, -1, 2 } has cycle " + loopExists(new int[] { 2, 2, -1, 2 }));
         System.out.println("{ 2, 1, -1, -2 } has cycle " + loopExists(new int[] { 2, 1, -1, -2 }));
         System.out.println("{2,-1, 1, 2, 2} has cycle : " + loopExists(new int[] { 2,-1,1,2,2 }));
         System.out.println("{-1, 2} has cycle : " + loopExists(new int[] { -1, 2 }));
         System.out.println("{-2, 1,-1,-2,-2} has cycle : " + loopExists(new int[] { -2,1,-1,-2,-2}));
-
     }
 }

@@ -71,6 +71,7 @@ public class MinRemMakeMountainArray {
                 maxLength = Math.max(maxLength, longIncSubseq[i] + longDecSubseq[i] - 1);
         }
 
+        //find maximum Bitonic subsequence and remove from length of the array to find duplications
         return nums.length - maxLength;
     }
 

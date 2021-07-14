@@ -46,6 +46,7 @@ import java.util.*;
  * There are other valid topological ordering of the graph too.
  */
 public class TopologicalSort {
+    
     // O(j + d) time | O(j + d) space
     public static List<Integer> topologicalSort(List<Integer> jobs, List<Integer[]> deps) {
         JobGraph jobGraph = createJobGraph(jobs, deps);

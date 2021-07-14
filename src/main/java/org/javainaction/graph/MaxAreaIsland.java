@@ -16,8 +16,15 @@ import java.util.List;
  * Example 1:
  *
  *
- * Input: grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,1,1,0,1,0,0,0,0,0,0,0,0],
- * [0,1,0,0,1,1,0,0,1,0,1,0,0],[0,1,0,0,1,1,0,0,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],
+ * Input: grid =
+ * [
+ * [0,0,1,0,0,0,0,1,0,0,0,0,0],
+ * [0,0,0,0,0,0,0,1,1,1,0,0,0],
+ * [0,1,1,0,1,0,0,0,0,0,0,0,0],
+ * [0,1,0,0,1,1,0,0,1,0,1,0,0],
+ * [0,1,0,0,1,1,0,0,1,1,1,0,0],
+ * [0,0,0,0,0,0,0,0,0,0,1,0,0],
+ * [0,0,0,0,0,0,0,1,1,1,0,0,0],
  * [0,0,0,0,0,0,0,1,1,0,0,0,0]]
  * Output: 6
  * Explanation: The answer is not 11, because the island must be connected 4-directionally.
@@ -47,8 +54,11 @@ public class MaxAreaIsland {
                 && j >=0 && j < grid[0].length
                 && grid[i][j] == 1) {
 
+            //we have done in place visited marked this can be also changed back to
+            // visited[i][j] = true and don't traverse those are visited in if condition
             grid[i][j] = 0;
 
+            //maximum area of island is itself + area from all its neighbours from (top, bottom, left, right)
             return 1 + findMaxArea (grid, i - 1, j) + findMaxArea (grid, i + 1, j)
                     + findMaxArea (grid, i, j - 1) + findMaxArea (grid, i, j + 1);
         }

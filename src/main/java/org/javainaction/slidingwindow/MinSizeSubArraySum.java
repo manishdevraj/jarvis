@@ -19,6 +19,7 @@ package org.javainaction.slidingwindow;
  * Input: [3, 4, 1, 1, 6], S=8
  * Output: 3
  * Explanation: Smallest subarrays with a sum greater than or equal to '8' are [3, 4, 1] or [1, 1, 6].
+ * @see MaxSumSubArrayOfSizeK where problem is to find max sum vs here sum should match S
  */
 public class MinSizeSubArraySum {
     public static int findMinSubArray(int S, int[] arr) {

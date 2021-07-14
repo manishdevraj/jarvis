@@ -10,8 +10,8 @@ import java.util.Collections;
  *
  * Return a string of the words in reverse order concatenated by a single space.
  *
- * Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.
- *
+ * Note that s may contain leading or trailing spaces or multiple spaces between two words.
+ * The returned string should only have a single space separating the words. Do not include any extra spaces.
  *
  *
  * Example 1:
@@ -36,24 +36,29 @@ import java.util.Collections;
  *
  * Input: s = "Alice does not even like bob"
  * Output: "bob like even not does Alice"
+ * @see ReverseWordsInString
  */
 public class ReverseWordsInString2 {
     public String reverseWords(String s) {
+        //this should take care of leading and trailing spaces
         String string = s.trim();
         char[] chars = string.toCharArray();
         StringBuilder output = new StringBuilder();
         for (int right = chars.length - 1; right >=0;) {
             if (Character.isSpaceChar(chars[right])) {
-                var space = new ArrayList<Character>();
+                //from space to any more spaces traverse
                 while (right >= 0 && Character.isSpaceChar(chars[right])) {
-                    space.add(chars[right--]);
+                    right--;
                 }
+                //add just single space for any space found
                 output.append(" ");
             } else {
                 var word = new ArrayList<Character>();
+                //from alphabets to all other consecutive alphabets traverse
                 while (right >= 0 && !Character.isSpaceChar(chars[right])) {
                     word.add(chars[right--]);
                 }
+                //reverse the list to make a whole word again
                 Collections.reverse(word);
                 word.forEach(output::append);
             }

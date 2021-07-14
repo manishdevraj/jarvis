@@ -6,7 +6,6 @@ import java.util.Arrays;
  * Given an array, rotate the array to the right by k steps, where k is non-negative.
  *
  *
- *
  * Example 1:
  *
  * Input: nums = [1,2,3,4,5,6,7], k = 3
@@ -24,21 +23,14 @@ import java.util.Arrays;
  * rotate 2 steps to the right: [3,99,-1,-100]
  */
 public class RotateArray {
-    public static void main(String[] args) {
-        int[] result = RotateArray.rotateReverse(new int[] { 1,2,3,4,5,6,7 }, 3);
-        System.out.println(" After rotation " + Arrays.toString(result) + " by " + 3 + " positions!");
-        result = RotateArray.rotateReverse(new int[] { -1,-100,3,99 }, 2);
-        System.out.println(" After rotation " + Arrays.toString(result) + " by " + 2 + " positions!");
-        result = RotateArray.rotateLikeCyclicReplacement(new int[] { 1,2,3,4,5,6,7 }, 3);
-        System.out.println(" After rotation " + Arrays.toString(result) + " by " + 3 + " positions!");
-        result = RotateArray.rotateLikeCyclicReplacement(new int[] { -1,-100,3,99 }, 2);
-        System.out.println(" After rotation " + Arrays.toString(result) + " by " + 2 + " positions!");
-    }
 
     public static int[] rotateReverse(int[] nums, int k) {
         k %= nums.length;
+        //reverse complete array
         reverse(nums, 0, nums.length - 1);
+        //reverse between 0 to k - 1
         reverse(nums, 0, k - 1);
+        //reverse between k to len of array
         reverse(nums, k, nums.length - 1);
         return nums;
     }
@@ -72,5 +64,15 @@ public class RotateArray {
         return nums;
     }
 
+    public static void main(String[] args) {
+        int[] result = RotateArray.rotateReverse(new int[] { 1,2,3,4,5,6,7 }, 3);
+        System.out.println(" After rotation " + Arrays.toString(result) + " by " + 3 + " positions!");
+        result = RotateArray.rotateReverse(new int[] { -1,-100,3,99 }, 2);
+        System.out.println(" After rotation " + Arrays.toString(result) + " by " + 2 + " positions!");
+        result = RotateArray.rotateLikeCyclicReplacement(new int[] { 1,2,3,4,5,6,7 }, 3);
+        System.out.println(" After rotation " + Arrays.toString(result) + " by " + 3 + " positions!");
+        result = RotateArray.rotateLikeCyclicReplacement(new int[] { -1,-100,3,99 }, 2);
+        System.out.println(" After rotation " + Arrays.toString(result) + " by " + 2 + " positions!");
+    }
 
 }

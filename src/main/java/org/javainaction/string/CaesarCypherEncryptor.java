@@ -12,6 +12,7 @@ public class CaesarCypherEncryptor {
     // O(n) time | O(1) space
     public static String caesarCypherEncryptor(String str, int key) {
         char[] output = new char[str.length()];
+        //add key to char's integer value and % with 26 as it is 26 lower letter alphabets
         BiFunction<Character, Integer, Character> encryptLowercase
                 = (c, k) -> (char) ((char) (c - 'a' + k) % 26 + 'a');
         int i = 0;

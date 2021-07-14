@@ -11,12 +11,7 @@ import java.util.Arrays;
  *
  */
 public class AverageOfSubarrayOfSizeK {
-    public static void main(String[] args) {
-        double[] result = AverageOfSubarrayOfSizeK.findAverages(5, new int[] { 1, 3, 2, 6, -1, 4, 1, 8, 2 });
-        System.out.println("Averages of subarrays of size K: " + Arrays.toString(result));
-    }
-
-    private static double[] findAverages(int K, int[] array) {
+   private static double[] findAverages(int K, int[] array) {
         double[] result = new double[array.length - K + 1];
         double windowSum = 0;
         int windowStart = 0;
@@ -31,5 +26,10 @@ public class AverageOfSubarrayOfSizeK {
             }
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        double[] result = AverageOfSubarrayOfSizeK.findAverages(5, new int[] { 1, 3, 2, 6, -1, 4, 1, 8, 2 });
+        System.out.println("Averages of subarrays of size K: " + Arrays.toString(result));
     }
 }

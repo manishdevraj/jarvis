@@ -28,12 +28,19 @@ package org.javainaction.string;
  *
  * Input: s = "ac"
  * Output: "a"
+ * @see org.javainaction.dp.palindromsubseq.LongestPalindromicSubstring
  */
 public class LongestPalindromicSubstring {
     //O(n^2) time | O(1) space
     public static String longestPalindromicSubstring(String str) {
         int[] currentLongest = {0, 1};
         for (int i = 1 ; i < str.length(); i++ ) {
+            //this is different than longest palindrome substring problem where we just want to know longest length
+            //here we need to know actual substring so we need indices
+            //key idea is to see if we have longest from i by either considering
+            // its odd length i - 1, i and i + 1 or (say string aba) this would be of length 3
+            // its even length i - 1 and i (say string aa) this would be of length 2
+            //and check if it is palindrome
             int[] odd = getLongestPalindromAt(str, i - 1, i + 1);
             int[] even = getLongestPalindromAt(str, i - 1, i);
             int[] longest = odd[1] - odd[0] > even[1] - even[0] ?
@@ -55,34 +62,6 @@ public class LongestPalindromicSubstring {
             end++;
         }
         return new int[] {start + 1, end};
-    }
-
-    //O (n^3) time | O(1) space
-    public static String longestPalindromicSubstringO3(String str) {
-        String longest = "";
-        for (int i = 0 ; i < str.length(); i++ ){
-            for ( int j = i; j < str.length(); j++) {
-                String subString = str.substring(i , j + 1);
-                if (subString.length() > longest.length()
-                        && isPalindrome(subString)) {
-                    longest = subString;
-                }
-            }
-        }
-        return longest;
-    }
-
-    public static boolean isPalindrome(String str) {
-        int start = 0;
-        int end = str.length() - 1;
-        while (start < end) {
-            if (str.charAt(start) != str.charAt(end)) {
-                return false;
-            }
-            start++;
-            end--;
-        }
-        return true;
     }
 
     public static void main(String[] args) {

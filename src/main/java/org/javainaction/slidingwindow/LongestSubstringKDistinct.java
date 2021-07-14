@@ -21,6 +21,7 @@ import java.util.Map;
  * Input: String="cbbebi", K=3
  * Output: 5
  * Explanation: The longest substrings with no more than '3' distinct characters are "cbbeb" & "bbebi".
+ * @see org.javainaction.string.LongestSubstringKDistinct
  */
 public class LongestSubstringKDistinct {
     public static int findLength(String str, int k) {

@@ -1,5 +1,6 @@
 package org.javainaction.heap;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /**
@@ -35,7 +36,7 @@ import java.util.PriorityQueue;
  *
  * Input: matrix = [[-5]], k = 1
  * Output: -5
- *
+ * @see KthSmallestInMSortedArrays
  */
 public class KthSmallestInSortedMatrix {
     static class Node {
@@ -58,16 +59,15 @@ public class KthSmallestInSortedMatrix {
 
         // take the smallest (top) element form the min heap, if the running count is equal to k return the number
         // if the row of the top element has more elements, add the next element to the heap
-        int numberCount = 0, result = 0;
-        while (!minHeap.isEmpty()) {
+        int result = -1;
+        for (; k > 0; --k) {
             Node node = minHeap.poll();
             result = matrix[node.row][node.col];
-            if (++numberCount == k)
-                break;
-            node.col++;
-            if (matrix[0].length > node.col)
-                minHeap.add(node);
+            if (++node.col < matrix[0].length) {
+                minHeap.offer(node);
+            }
         }
+
         return result;
     }
 
@@ -116,6 +116,12 @@ public class KthSmallestInSortedMatrix {
     public static void main(String[] args) {
         int matrix[][] = { { 2, 6, 8 }, { 3, 7, 10 }, { 5, 8, 11 } };
         int result = KthSmallestInSortedMatrix.findKthSmallest(matrix, 5);
-        System.out.print("Kth smallest number is: " + result);
+        System.out.println(Arrays.deepToString(matrix));
+        System.out.println("Kth smallest number is: " + result);
+
+        matrix = new int[][]{ { 2, 6, 8 }, { 3, 7, 10 }, { 5, 8, 11 } };
+        result = KthSmallestInSortedMatrix.findKthSmallestBinarySearch(matrix, 5);
+        System.out.println(Arrays.deepToString(matrix));
+        System.out.println("Kth smallest number is: " + result);
     }
 }

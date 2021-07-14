@@ -23,28 +23,29 @@ package org.javainaction.dp.longestcommonsub;
  * Output: 3 deletions and 1 insertion
  * Explanation: We need to delete {'a', 'o', 'r'} and insert {'p'} to s1 to transform it into s2.
  * @see LongestCommonSubsequence
+ * @see DeleteOpTwoStrings
  */
 public class MinDeleteInsert {
     private int findLCSLength(String s1, String s2) {
-        int[][] dp = new int[s1.length()+1][s2.length()+1];
-        int maxLength = 0;
+        int[][] dp = new int[s1.length() + 1][s2.length() + 1];
+        //also note that we will treat this operation as LCS
         for(int i = 1; i <= s1.length(); i++) {
             for(int j = 1; j <= s2.length(); j++) {
                 if(s1.charAt(i-1) == s2.charAt(j-1))
-                    dp[i][j] = 1 + dp[i-1][j-1];
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
                 else
-                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
-
-                maxLength = Math.max(maxLength, dp[i][j]);
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]); //insert or delete
             }
         }
-        return maxLength;
+        return dp[s1.length()][s2.length()];
     }
 
     public void findMDI(String s1, String s2) {
         int c1 = findLCSLength(s1, s2);
-        System.out.println("Minimum deletions needed: " + (s1.length() - c1));
-        System.out.println("Minimum insertions needed: " + (s2.length() - c1));
+        //if we delete from string one length then that is delete cost
+        //if we delete form string two length then that becomes insert cost
+        System.out.println(s1 + " minimum deletions needed: " + (s1.length() - c1));
+        System.out.println(s2 + " minimum insertions needed: " + (s2.length() - c1));
     }
 
     public static void main(String[] args) {

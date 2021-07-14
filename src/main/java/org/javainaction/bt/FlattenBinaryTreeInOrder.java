@@ -3,10 +3,12 @@ package org.javainaction.bt;
 import java.util.*;
 
 /**
- * Flatten binary structure is similar to double linked list where instead of left and right there would be prev and next
+ * Flatten binary structure is similar to double linked list where instead of left and right there would be prev and
+ * next
  *
  * Write a function to flatten a binary tree to follow left to right order
- * If tree happens to be a valid BST then output would be sorted. This should happen in place with mutating orginal tree
+ * If tree happens to be a valid BST then output would be sorted. This should happen in place with mutating original
+ * tree
  *
  *                   1
  *               2       3
@@ -18,11 +20,12 @@ import java.util.*;
  *
  *
  */
-public class FlattenBinaryTree {
+public class FlattenBinaryTreeInOrder {
     // O(n) time | O(n) space where n is number of nodes in a binary tree
     public static BinaryTree flattenBinaryTree(BinaryTree root) {
         List<BinaryTree> list = new ArrayList<>();
         inOrder(root, list);
+        //connect as a linked list
         for (int i = 0 ; i < list.size() - 1; i++){
             BinaryTree leftNode = list.get(i);
             BinaryTree rightNode = list.get(i + 1);
@@ -95,12 +98,12 @@ public class FlattenBinaryTree {
     }
 
     public static void main(String[] args) {
-        var obj = new FlattenBinaryTree();
+        var obj = new FlattenBinaryTreeInOrder();
         BinaryTree root = new BinaryTree(1);
         obj.insert(root, new int[] {2, 3, 4, 5, 6});
         root.left.right.left = new BinaryTree(7);
         root.left.right.right = new BinaryTree(8);
-        BinaryTree leftMostNode = obj.flattenBinaryTree(root);
+        BinaryTree leftMostNode = flattenBinaryTree(root);
         List<Integer> leftToRightToLeft = obj.leftToRightToLeft(leftMostNode);
         List<Integer> expected =
                 new ArrayList<>(Arrays.asList(4, 2, 7, 5, 8, 1, 6, 3, 3, 6, 1, 8, 5, 7, 2, 4));

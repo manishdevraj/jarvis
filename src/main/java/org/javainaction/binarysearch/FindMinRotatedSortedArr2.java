@@ -1,17 +1,17 @@
 package org.javainaction.binarysearch;
 
 /**
- * Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,4,4,5,6,7] might become:
+ * Suppose an array of length n sorted in ascending order is rotated between 1 and n times.
+ * For example, the array nums = [0,1,4,4,5,6,7] might become:
  *
  * [4,5,6,7,0,1,4] if it was rotated 4 times.
  * [0,1,4,4,5,6,7] if it was rotated 7 times.
- * Notice that rotating an array [a[0], a[1], a[2], ..., a[n-1]] 1 time results in the array [a[n-1], a[0], a[1], a[2], ..., a[n-2]].
+ * Notice that rotating an array [a[0], a[1], a[2], ..., a[n-1]] 1 time results in the array
+ * [a[n-1], a[0], a[1], a[2], ..., a[n-2]].
  *
  * Given the sorted rotated array nums that may contain duplicates, return the minimum element of this array.
  *
  * You must decrease the overall operation steps as much as possible.
- *
- *
  *
  * Example 1:
  *
@@ -43,8 +43,8 @@ public class FindMinRotatedSortedArr2 {
      * There are 4 kinds of relationship among num[lo], nums[mi], nums[hi]
      *
      * nums[lo] <= nums[mi] <= nums[hi], min is nums[lo]
-     * nums[lo] > nums[mi] <= nums[hi], (lo, mi] is not sorted, min is inside
-     * nums[lo] <= nums[mi] > nums[hi], (mi, hi] is not sorted, min is inside
+     * nums[lo] > nums[mi] <= nums[hi], [lo, mi] is not sorted, min is inside
+     * nums[lo] <= nums[mi] > nums[hi], [mi, hi] is not sorted, min is inside
      * nums[lo] > nums[mi] > nums[hi], impossible
      */
     public static int findMin(int[] arr) {
@@ -61,17 +61,18 @@ public class FindMinRotatedSortedArr2 {
 
             int middle = left + (right - left) / 2;
 
+            //we have array descending from middle so min should be between middle + 1 and right
+            //nums[lo] <= nums[mi] > nums[hi], [mi, hi] is not sorted, min is inside
             if (arr[right] < arr[middle]) {
                 left = middle + 1;
+            //we have array ascending from middle to right so array must be between left and middle (including self)
+            // nums[lo] > nums[mi] <= nums[hi], [lo, mi] is not sorted, min is inside
             } else if (arr[middle] < arr[right]) {
                 right = middle;
             } else {
                 //we have either same element or arr[left] <= arr[middle] <= arr[right]
-                if (arr[right - 1] > arr[right]) {
-                    left = right;
-                    break;
-                }
-                right--;
+                //nums[lo] <= nums[mi] <= nums[hi], min is nums[lo]
+                left = right;
             }
         }
 
@@ -79,8 +80,11 @@ public class FindMinRotatedSortedArr2 {
     }
 
     public static void main(String[] args) {
-        System.out.println(findMin(new int[] { 1, 3, 5 }));
+        System.out.println(findMin(new int[] { 1, 1, 2, 2, 2, 2, 3, 3 }));
+        System.out.println(findMin(new int[] { 2, 2, 2, 2 }));
+        System.out.println(findMin(new int[] { 6, -1, 3, 5 }));
         System.out.println(findMin(new int[] { 3, 1, 3}));
         System.out.println(findMin(new int[] { 2, 2, 2, 0, 1, 2}));
+        System.out.println(findMin(new int[] { 1, 2, 3, 4, 5, 6, 7}));
     }
 }

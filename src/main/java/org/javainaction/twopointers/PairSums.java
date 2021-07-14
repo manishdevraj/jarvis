@@ -11,18 +11,22 @@ import java.util.Map;
  * even if they include the same values.
  * Signature
  * int numberOfWays(int[] arr, int k)
+ *
  * Input
  * n is in the range [1, 100,000].
  * Each value arr[i] is in the range [1, 1,000,000,000].
  * k is in the range [1, 1,000,000,000].
+ *
  * Output
  * Return the number of different pairs of elements which sum to k.
+ *
  * Example 1
  * n = 5
  * k = 6
  * arr = [1, 2, 3, 4, 3]
  * output = 2
  * The valid pairs are 2+4 and 3+3.
+ *
  * Example 2
  * n = 5
  * k = 6
@@ -35,21 +39,21 @@ public class PairSums {
         if (arr  == null || arr.length == 0) return 0;
 
         Map<Integer, Integer> freq = new HashMap<>();
-        for (int i = 0; i < arr.length; i++) {
-            freq.put(arr[i], freq.getOrDefault(arr[i], 0) + 1);
+        for (int num : arr) {
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
         }
 
         int count = 0;
 
-        for (int i = 0; i < arr.length; i++) {
-            if (freq.get(k - arr[i]) != null) {
-                count += freq.get(k - arr[i]);
+        for (int num : arr) {
+            if (freq.get(k - num) != null) {
+                count += freq.get(k - num);
             }
             // if we have duplicate then we need to remove self from total frequencies each time
             // {3, 3, 3} with K 6 would make (1st and 2nd) (2nd and 3rd) and (1st and 3rd pair) but
             // freq (3 + 3 + 3 ) / 2 to be wrong
             // so we need to make sure they are considered as (2 + 2 + 2) / 2 as 3 pairs
-            if (k - arr[i] == arr[i])
+            if (k - num == num)
                 count--;
         }
         // as we are going linear each element of pair is counted twice so just divide count by 2 to get actual

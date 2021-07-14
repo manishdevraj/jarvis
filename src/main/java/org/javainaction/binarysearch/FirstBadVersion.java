@@ -11,8 +11,6 @@ package org.javainaction.binarysearch;
  * You are given an API bool isBadVersion(version) which returns whether version is bad. Implement a function to
  * find the first bad version. You should minimize the number of calls to the API.
  *
- *
- *
  * Example 1:
  *
  * Input: n = 5, bad = 4
@@ -26,10 +24,11 @@ package org.javainaction.binarysearch;
  *
  * Input: n = 1, bad = 1
  * Output: 1
+ * @see CeilingOfANumber
  */
 
 class VersionControl {
-    boolean[] versions = new boolean[]{false, false, false, false, true, true};
+    boolean[] versions = new boolean[] {false, false, false, false, true, true};
     boolean isBadVersion(int version) {
         return versions[version];
     }
@@ -40,8 +39,10 @@ public class FirstBadVersion extends VersionControl{
         int left = 1;
         int right = n;
         while (left < right) {
-            int middle = (left + right) / 2;
+            int middle = left + (right - left) / 2;
             boolean isBad = isBadVersion(middle);
+            //if we have bad version at middle then it means we need to go search left side
+            //or else go to right part of it , like ceiling of the number left will point to first bad version
             if (isBad) {
                 right = middle - 1;
             } else {

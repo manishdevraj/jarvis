@@ -8,6 +8,7 @@ package org.javainaction.twopointers;
  * Input - "123abA" output - "Aab123"
  *
  * Rearrange it in o(n) in one pass without using extra space.
+ * @see DutchNationalFlagProblem
  */
 public class RearrangeString {
     public String rerrangeWord(String word) {

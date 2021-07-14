@@ -12,29 +12,25 @@ import java.util.stream.IntStream;
  * For example, given [(30, 75), (0, 50), (60, 150)], you should return 2.
  */
 public class MinClassroom {
-    public static void main(String[] arg) {
-        int[][] lectures = {{30, 75}, {0, 50}, {60, 50}};
-        System.out.println(minClassroomRequired(lectures));
-    }
-
      public static int minClassroomRequired(int[][] lectures){
         int minClassRoom = 0;
 
         Arrays.sort(lectures, Comparator.comparing((int[] lecture) -> lecture[0]));
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+
         for (int[] lecture : lectures) {
-            if (priorityQueue.isEmpty()) {
-                minClassRoom++;
-            } else {
-                if (lecture[0] >= priorityQueue.peek()) {
-                    priorityQueue.poll();
-                } else {
-                    minClassRoom++;
-                }
-            }
+            while (!priorityQueue.isEmpty() && priorityQueue.peek() <= lecture[0])
+                priorityQueue.poll();
+
             priorityQueue.offer(lecture[1]);
+            minClassRoom = Math.max(minClassRoom, priorityQueue.size());
         }
 
         return minClassRoom;
+    }
+
+    public static void main(String[] arg) {
+        int[][] lectures = {{30, 75}, {0, 50}, {60, 50}};
+        System.out.println(minClassroomRequired(lectures));
     }
 }

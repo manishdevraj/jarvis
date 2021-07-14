@@ -56,6 +56,7 @@ package org.javainaction.dp.palindromsubseq;
  *
  * This problem can easily be converted to our base problem of finding the minimum deletions in a string to make
  * it a palindrome. If the “minimum deletion count” is not more than ‘K’, the string will be K-Palindromic.
+ * @see LongestPalindromicSubseq we need to get length of LPS and deduct from string to find deletion required
  */
 public class MinimumDeletionsLPS {
 

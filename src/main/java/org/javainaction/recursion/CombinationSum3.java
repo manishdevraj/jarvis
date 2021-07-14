@@ -8,7 +8,8 @@ import java.util.List;
  *
  * Only numbers 1 through 9 are used.
  * Each number is used at most once.
- * Return a list of all possible valid combinations. The list must not contain the same combination twice, and the combinations may be returned in any order.
+ * Return a list of all possible valid combinations. The list must not contain the same combination twice,
+ * and the combinations may be returned in any order.
  *
  *
  *
@@ -47,6 +48,7 @@ import java.util.List;
  * 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 = 45
  * There are no other valid combinations.
  * @see Combinations
+ * @see CombinationSum4
  */
 public class CombinationSum3 {
     public List<List<Integer>> combinationSum3(int k, int n) {
@@ -64,6 +66,9 @@ public class CombinationSum3 {
                 combos.add(i);
                 findAllCombinations(combinations, combos, i + 1, kCombosAllowed,targetSum - i);
                 //remove element as we are done with its combination
+                //we are removing trailing elements from array
+                //[1, 2, 3] sum does not add up to 7 then we remove 3 and add 4
+                //[1, 2, 4] when sum matches we add it to result
                 combos.remove(combos.size() - 1);
             }
         }

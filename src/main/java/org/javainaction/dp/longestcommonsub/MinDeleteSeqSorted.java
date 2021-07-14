@@ -22,9 +22,13 @@ import java.util.Arrays;
  * Output: 3
  * Explanation: Since the elements are in reverse order, we have to delete all except one to get a
  * sorted sequence. Sorted sequences are {3}, {2}, {1}, and {0}
+ * @see LongestIncreasingSubseqArray
+ * @see LongestIncreasingSubsequence
  */
 public class MinDeleteSeqSorted {
     private int findMinimumDeletions(int[] nums) {
+        //find how long we have longest increasing sequence and deduct from total array to know
+        //all possible delete needed to make array sorted in ascending order
         return nums.length - findLISLength(nums);
     }
 
@@ -38,6 +42,7 @@ public class MinDeleteSeqSorted {
                 //compute LIS in bottom up fashion
                 if (nums[i] > nums[j] && dp[j] + 1 > dp[i]) {
                     dp[i] = dp[j] + 1;
+                    //find if longest increasing sequence at i is maximum
                     maxLength = Math.max(maxLength, dp[i]);
                 }
             }

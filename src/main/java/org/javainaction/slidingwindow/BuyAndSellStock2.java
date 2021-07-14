@@ -10,7 +10,6 @@ package org.javainaction.slidingwindow;
  * (i.e., you must sell the stock before you buy again).
  *
  *
- *
  * Example 1:
  *
  * Input: prices = [7,1,5,3,6,4]
@@ -32,14 +31,18 @@ package org.javainaction.slidingwindow;
  */
 public class BuyAndSellStock2 {
     private static int maxProfit(int[] stockPrices) {
-        int i = 0;
         int profit = 0;
-        while(i < stockPrices.length - 1) {
+        for (int i = 0; i < stockPrices.length - 1; i++) {
+            //reset buy and sell at every iteration of buy sell cycle
             int buy = -1, sell=-1;
+            //find best buy
             while(i < stockPrices.length - 1 && stockPrices[i + 1] <= stockPrices[i]) i++;
             buy = i;
+
+            //find best sell
             while(i < stockPrices.length - 1 && stockPrices[i + 1] > stockPrices[i]) i++;
             sell = i;
+            //get profit only if it is positive and add it to max profit
             profit += Math.max(0, stockPrices[sell] - stockPrices[buy]);
         }
         return profit;

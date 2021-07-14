@@ -1,10 +1,11 @@
-package org.javainaction.dp;
+package org.javainaction.recursion;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Given an array of distinct integers nums and a target integer target, return the number of possible combinations that add up to target.
+ * Given an array of distinct integers nums and a target integer target,
+ * return the number of possible combinations that add up to target.
  *
  * The answer is guaranteed to fit in a 32-bit integer.
  *
@@ -28,6 +29,8 @@ import java.util.Map;
  *
  * Input: nums = [9], target = 3
  * Output: 0
+ * @see CombinationSum3
+ * @see Combinations
  */
 public class CombinationSum4 {
     public int combinationSum4(int[] nums, int target) {

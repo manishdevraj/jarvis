@@ -18,6 +18,7 @@ package org.javainaction.dp.fibonacci;
  */
 public class ExpressNumber {
 
+    //O(n) time | O(n) space
     private int countWaysMemoize(int n) {
         int[] dp = new int[n + 1];
         return countWaysMemoizeRecursive(dp, n);
@@ -34,6 +35,7 @@ public class ExpressNumber {
         return dp[n];
     }
 
+    //O(n) time | O(n)
     private int bottomUpCountWays(int n) {
         int[] dp = new int[n + 1];
         dp[0] = 1;
@@ -45,6 +47,7 @@ public class ExpressNumber {
         }
         return dp[n];
     }
+
 
     public static void main(String[] args) {
         ExpressNumber en = new ExpressNumber();

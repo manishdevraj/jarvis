@@ -14,6 +14,7 @@ import java.util.List;
  *
  * Input: [1, 5, 3]
  * Output: [], [1], [5], [3], [1,5], [1,3], [5,3], [1,5,3]
+ * @see PowerSet
  */
 public class Subsets {
     public static List<List<Integer>> findSubsets(int[] nums) {

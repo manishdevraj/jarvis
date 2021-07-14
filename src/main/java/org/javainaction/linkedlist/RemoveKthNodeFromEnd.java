@@ -9,8 +9,6 @@ import java.util.List;
  *
  * Follow up: Could you do this in one pass?
  *
- *
- *
  * Example 1:
  *
  *
@@ -26,6 +24,54 @@ import java.util.List;
  * Output: [1]
  */
 public class RemoveKthNodeFromEnd {
+    public static void removeKthNodeFromEndV2(LinkedList head, int k) {
+        LinkedList start = new LinkedList(-1);
+        start.next = head;
+        LinkedList slow = start;
+        LinkedList fast = start;
+
+        for(int i = 1 ; i <= k + 1; i++) {
+            fast = fast.next;
+        }
+
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        //if we are removing head element
+        if(slow == start) {
+            head.value = head.next.value;
+            head.next = head.next.next;
+        } else {
+            slow.next = slow.next.next;
+        }
+    }
+
+    public static void removeKthNodeFromEnd(LinkedList head, int k) {
+        LinkedList first = head;
+        LinkedList second = head;
+        int count = 1;
+        while (second != null && count <=k) {
+            second = second.next;
+            count++;
+        }
+
+        //we are removing head element
+        if(second == null) {
+            head.value = head.next.value;
+            head.next = head.next.next;
+            return;
+        }
+
+        while (second.next != null ){
+            second = second.next;
+            first = first.next;
+        }
+
+        first.next = first.next.next;
+    }
+
     public static void main(String[] args) {
         LinkedList list = createLinkedList(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
         LinkedList list2 = createLinkedList(new int[]{1, 2, 3, 4, 5});
@@ -45,53 +91,6 @@ public class RemoveKthNodeFromEnd {
         list2 = createLinkedList(new int[]{1, 2, 3, 4, 5});
         removeKthNodeFromEndV2(list2, 2);
         System.out.println("{1, 2, 3, 4, 5} after removal of 2nd node " + list2);
-    }
-
-    public static void removeKthNodeFromEndV2(LinkedList head, int k) {
-        LinkedList start = new LinkedList(-1);
-        start.next = head;
-        LinkedList slow = start;
-        LinkedList fast = start;
-
-        for(int i = 1 ; i <= k + 1; i++) {
-            fast = fast.next;
-        }
-
-        while (fast != null) {
-            fast = fast.next;
-            slow = slow.next;
-        }
-
-
-        if(slow == start) {
-            head.value = head.next.value;
-            head.next = head.next.next;
-            return;
-        } else {
-            slow.next = slow.next.next;
-        }
-    }
-
-    public static void removeKthNodeFromEnd(LinkedList head, int k) {
-        LinkedList first = head;
-        LinkedList second = head;
-        int count = 1;
-        while (second != null && count <=k) {
-            second = second.next;
-            count++;
-        }
-
-        if(second == null) {
-            head.value = head.next.value;
-            head.next = head.next.next;
-            return;
-        }
-
-        while (second.next != null ){
-            second = second.next;
-            first = first.next;
-        }
-        first.next = first.next.next;
     }
 
     static class LinkedList {

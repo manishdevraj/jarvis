@@ -23,6 +23,7 @@ package org.javainaction.binarysearch;
  *
  * Input: [10, 6, 4], key = 4
  * Output: 2
+ * @see SearchBitonicArray
  */
 public class OrderAgnosticBinarySearch {
     public static int search(int[] arr, int key) {
@@ -35,7 +36,6 @@ public class OrderAgnosticBinarySearch {
         int right = arr.length - 1;
         boolean isAscending = arr[left] < arr[right];
         while (left <= right) {
-            if (left > right) return -1;
             int middle = (left + right) / 2;
             if (arr[middle] == key) return middle;
             else {

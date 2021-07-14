@@ -21,32 +21,33 @@ package org.javainaction.dp.palindromsubseq;
  * Explanation: LPS could be "p", "q" or "r".
  */
 public class LongestPalindromicSubstring {
-
-
     public int findLPSLength(String str) {
         Integer[][] dp = new Integer[str.length()][str.length()];
         return findLPSLengthRecursive(dp, str, 0, str.length() - 1);
     }
 
     private int findLPSLengthRecursive(Integer[][] dp, String str, int startIdx, int endIdx) {
+        //if both pointers are out of bounds return 0
         if (startIdx > endIdx) return 0;
 
+        //if both are at same point return 1
         if (startIdx == endIdx) return 1;
 
-        if (dp[startIdx][endIdx] == null) {
-            // case 1: elements at the beginning and the end are the same
-            if (str.charAt(startIdx) == str.charAt(endIdx)) {
-                int remainingLength = endIdx - startIdx - 1;
-                if (remainingLength == findLPSLengthRecursive(dp, str, startIdx + 1, endIdx - 1)) {
-                    dp[startIdx][endIdx] = remainingLength + 2;
-                    return dp[startIdx][endIdx];
-                }
+        //return computed solution if any
+        if (dp[startIdx][endIdx] != null) return dp[startIdx][endIdx];
+        // case 1: elements at the beginning and the end are the same
+        if (str.charAt(startIdx) == str.charAt(endIdx)) {
+            int remainingLength = endIdx - startIdx - 1;
+            if (remainingLength == findLPSLengthRecursive(dp, str, startIdx + 1, endIdx - 1)) {
+                dp[startIdx][endIdx] = remainingLength + 2;
+                return dp[startIdx][endIdx];
             }
-            // case 2: skip one character either from the beginning or the end
-            int bottomPalindrome = findLPSLengthRecursive(dp, str, startIdx + 1, endIdx);
-            int leftPalindrome = findLPSLengthRecursive(dp, str, startIdx, endIdx - 1);
-            dp[startIdx][endIdx] = Math.max(bottomPalindrome, leftPalindrome);
         }
+        // case 2: skip one character either from the beginning or the end
+        int bottomPalindrome = findLPSLengthRecursive(dp, str, startIdx + 1, endIdx);
+        int leftPalindrome = findLPSLengthRecursive(dp, str, startIdx, endIdx - 1);
+        dp[startIdx][endIdx] = Math.max(bottomPalindrome, leftPalindrome);
+
         return dp[startIdx][endIdx];
     }
 
@@ -58,6 +59,8 @@ public class LongestPalindromicSubstring {
             dp[i][i] = true;
 
         int maxLength = 1;
+        //assign start to last character in string one
+        //match with every start + 1 character in string two, both string one and two are same in this case
         for (int start = str.length() - 1; start >= 0; start--) {
             for (int end = start + 1; end < str.length(); end++) {
                 if (str.charAt(start) == str.charAt(end)) {

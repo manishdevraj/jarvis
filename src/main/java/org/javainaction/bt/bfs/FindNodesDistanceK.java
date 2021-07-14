@@ -5,8 +5,8 @@ import java.util.*;
 /**
  * We are given a binary tree (with root node root), a target node, and an integer value k.
  *
- * Return a list of the values of all nodes that have a distance k from the target node.  The answer can be returned in any order.
- *
+ * Return a list of the values of all nodes that have a distance k from the target node.
+ * The answer can be returned in any order.
  *
  *
  * Example 1:
@@ -35,14 +35,15 @@ import java.util.*;
 public class FindNodesDistanceK {
 
     public static ArrayList<Integer> findNodesDistanceK(BinaryTree tree, int target, int k) {
-        //if (tree == null) return null;
-
         Map<Integer, BinaryTree> nodeParentMap = new HashMap<>();
-
+        //populate a map of parents where key is node value and value is parent node
         populateParents(tree, nodeParentMap, null);
 
+        //find target node by peeking into parent's of target value
+        //either left or right value will be target
         BinaryTree targetNode = findNode(target, tree, nodeParentMap);
 
+        //noe traverse BFS to find all nodes with K distance
         return bfsNodesDistanceK(targetNode, nodeParentMap, k);
     }
 
@@ -52,6 +53,7 @@ public class FindNodesDistanceK {
         //start with 0 distance
         queue.offer(new Pair<>(targetNode, 0));
 
+        //use this to avoid visiting same node again
         Set<Integer> seen = new HashSet<>();
         seen.add(targetNode.value);
 
@@ -61,7 +63,7 @@ public class FindNodesDistanceK {
             BinaryTree current = pair.first;
             int distance = pair.second;
 
-            if (distance == k) {
+            if (distance == k) { //we have match for k distance now get all values from queue
                 ArrayList<Integer> nodeDistanceK = new ArrayList<>();
                 for (Pair<BinaryTree, Integer> p : queue) {
                     nodeDistanceK.add(p.first.value);
@@ -78,10 +80,12 @@ public class FindNodesDistanceK {
             connectedNodes.add(nodeParentMap.get(current.value));
 
             for (BinaryTree node : connectedNodes) {
-                if (node == null) continue;
+                if (node == null) continue; //if node is null
 
+                //if it is already seen continue
                 if (seen.contains(node.value)) continue;
 
+                //mark seen and add distance + 1
                 seen.add(node.value);
                 queue.add(new Pair<>(node, distance + 1));
             }
@@ -127,9 +131,6 @@ public class FindNodesDistanceK {
             this.value = value;
         }
     }
-
-
-
 
     public static void main(String[] args){
         BinaryTree root = new BinaryTree(1);

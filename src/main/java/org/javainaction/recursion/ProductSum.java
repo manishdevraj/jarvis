@@ -1,6 +1,5 @@
 package org.javainaction.recursion;
 
-import javax.management.ObjectName;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,20 +13,23 @@ import java.util.List;
  * [5, 2, [7, -1], 3, [6, [-13, 8], 4]]
  */
 public class ProductSum {
-    private static int productSum(List<Object> test) {
+    private static int productSum(List<Object> productArray) {
         int multiplier  = 1;
-        return productSumRecursive(test, multiplier);
+        return productSumRecursive(productArray, multiplier);
     }
 
-    private static int productSumRecursive(List<Object> list, int multiplier) {
+    private static int productSumRecursive(List<Object> productArray, int multiplier) {
         int sum = 0;
-        for (Object element : list) {
+        for (Object element : productArray) {
             if (element instanceof Integer) {
                 sum += (Integer) element;
             } else {
+                //as this is list of another integer objects try them recursively
+                //at each sub level increase multiplier by 1
                 sum += productSumRecursive((List<Object>) element, multiplier + 1);
             }
         }
+        //multiply sum with multiplier
         return sum * multiplier;
     }
 

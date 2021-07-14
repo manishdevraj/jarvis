@@ -3,18 +3,9 @@ package org.javainaction.bt.dfs;
 /**
  * Given a binary tree and a number ‘S’, find if the tree has a path from root-to-leaf such that the sum of all the
  * node values of that path equals ‘S’.
+ * @see FindAllTreePaths
  */
 public class TreePathSum {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public static boolean hasPath(TreeNode root, int sum) {
         if (root == null)
             return false;
@@ -37,5 +28,15 @@ public class TreePathSum {
         root.right.right = new TreeNode(5);
         System.out.println("Tree has path: " + TreePathSum.hasPath(root, 23));
         System.out.println("Tree has path: " + TreePathSum.hasPath(root, 16));
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

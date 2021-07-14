@@ -61,6 +61,9 @@ public class FindRange {
             } else if (key > arr[middle]) {
                 left = middle + 1;
             } else {
+                //here we are searching towards either direction and we have captured keyindex
+                //so either this is the leading or trailing index of the range for key or we will move left or right
+                //depending on what rotation we are passed with
                 keyIndex = middle;
                 if (isLeft) {
                     right = middle - 1;

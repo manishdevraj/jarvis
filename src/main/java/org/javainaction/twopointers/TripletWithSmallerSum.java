@@ -36,6 +36,13 @@ public class TripletWithSmallerSum {
             if (arr[left] + arr[right] < targetSum) { // found the triplet
                 // since arr[right] >= arr[left], therefore, we can replace arr[right] by any number between
                 // left and right to get a sum less than the target sum
+                // [-1, 1, 2, 3, 4]
+                // i = 0 and left = 1 and right = 4
+                // -1 + 1 + 4 < 5 so 4 - 1 = 3 triplets < 5 between 0, 1..4
+                // [-1, 1, 2] [-1, 1, 3] and [-1, 1, 4]
+                // i = 0 and left = 2 and right = 3
+                // -1 + 2 + 3 < 5 so 3 - 2 = 1 triplet < 5 between 0, 2..3
+
                 count += right - left;
                 left++;
             } else {

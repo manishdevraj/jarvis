@@ -29,6 +29,7 @@ import java.util.PriorityQueue;
  * Input: points = [[3,3],[5,-1],[-2,4]], K = 2
  * Output: [[3,3],[-2,4]]
  * (The answer [[-2,4],[3,3]] would also be accepted.)
+ * @see KClosestPointOrigin
  */
 public class KClosestPointsToOrigin {
     static class Point {
@@ -40,6 +41,19 @@ public class KClosestPointsToOrigin {
             this.y = y;
         }
 
+        /**
+         * We need to find the distance between two points. The distance between two points on a plane is the Euclidean
+         * distance. The formula to find the distance [x1,y1] and [x2,y2] is
+         * in our case since we are computing distance form origin [x1, y1] always would be (0,0)
+         *
+         * distance = sqrt((y2 — y1) * (y2 — y1) + (x2 — x1) * (x2 — x1))
+         *
+         * distance = sqrt((y2 — 0) * (y2 — 0) + (x2 — 0) * (x2 — 0))
+         * Meaning we are computing sqrt of [y2 * y2] + [X2 * X2]
+         * That means closing point from origin will have smaller square root of [y2 * y2] + [X2 * X2]
+         *
+         * We sort using this fact such that [b2 * b2] + [b1 * b1] - [a2 * a2] + [a1 * a1], as we are using max heap
+         */
         public int distFromOrigin() {
             // ignoring sqrt
             return (x * x) + (y * y);

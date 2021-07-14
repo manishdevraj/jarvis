@@ -1,7 +1,8 @@
 package org.javainaction.dp.palindromsubseq;
 
 /**
- * You are given a string s consisting only of letters 'a' and 'b'. In a single step you can remove one palindromic subsequence from s.
+ * You are given a string s consisting only of letters 'a' and 'b'.
+ * In a single step you can remove one palindromic subsequence from s.
  *
  * Return the minimum number of steps to make the given string empty.
  *
@@ -9,7 +10,6 @@ package org.javainaction.dp.palindromsubseq;
  * changing its order. Note that a subsequence does not necessarily need to be contiguous.
  *
  * A string is called palindrome if is one that reads the same backward as well as forward.
- *
  *
  *
  * Example 1:
@@ -38,24 +38,34 @@ public class RemovePalindromicSubseq {
      * That means, there are 3 situations of this problem:
      * #1. String length equals 0 -> return 0;
      * #2. String itself is a Palindrome -> return 1; (because you can remove them all at once)
-     * #3. Other cases, you can first remove all 'a' and then all 'b' or vice versa (first all 'b' then all 'a') -> return 2;
+     * #3. Other cases, you can first remove all 'a' and then all 'b' or vice versa
+     * (first all 'b' then all 'a') -> return 2;
      */
 
     public static int removePalindromeSub(String s) {
+        // This is the situation #1.
         if (s == null || s.length() == 0) {
-            return 0; // This is the situation #1.
+            return 0;
         }
+
         int i = 0;
         int j = s.length() - 1;
-        while (i < j) { // Checking the input string whether it is a Palindrome or not, by using the two pointers i and j.
+
+        // Checking the input string whether it is a Palindrome or not, by using the two pointers i and j.
+        while (i < j) {
             if (s.charAt(i) == s.charAt(j)) {
                 i++;
                 j--;
             } else {
-                return 2; // The input string cannot pass the while-loop, so it is not a Palindrome. This is the situation #3.
+                // This is the situation #3.
+                // The input string cannot pass the while-loop, so it is not a Palindrome.
+                return 2;
             }
         }
-        return 1; // The input string passes the while-loop, so it is a Palindrome, so we need 1 operation! This is the situation #2.
+
+        // This is the situation #2.
+        // The input string passes the while-loop, so it is a Palindrome, so we need 1 operation!
+        return 1;
     }
 
     public static void main(String[] args) {

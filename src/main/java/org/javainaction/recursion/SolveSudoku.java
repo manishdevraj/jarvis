@@ -2,9 +2,7 @@ package org.javainaction.recursion;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class SolveSudoku {
     //O(n) | O(1) space = 9x9 board

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * Given the root of a binary tree, return the bottom-up level order traversal of its nodes' values. (i.e., from left to right, level by level from leaf to root).
- *
+ * Given the root of a binary tree, return the bottom-up level order traversal of its nodes' values.
+ * (i.e., from left to right, level by level from leaf to root).
  *
  *
  * Example 1:
@@ -25,18 +25,8 @@ import java.util.Queue;
  * Output: []
  */
 public class LevelOrderTraversal2 {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public static List<List<Integer>> traverse(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        var result = new ArrayList<List<Integer>>();
 
         if (root == null) return result;
 
@@ -45,6 +35,7 @@ public class LevelOrderTraversal2 {
 
         while (!queue.isEmpty()) {
             int levelSize = queue.size();
+            //we only need current level list with size of level not more
             List<Integer> currentLevel = new ArrayList<>(levelSize);
 
             for (int i = 0; i < levelSize; i++) {
@@ -52,12 +43,11 @@ public class LevelOrderTraversal2 {
 
                 if (current != null) {
                     currentLevel.add(current.val);
-                    if (current.left != null)
-                        queue.offer(current.left);
-                    if (current.right != null)
-                        queue.offer(current.right);
+                    if (current.left != null) queue.offer(current.left);
+                    if (current.right != null) queue.offer(current.right);
                 }
             }
+            //add at beginning to make sure we have reverse order
             result.add(0, currentLevel);
         }
         return result;
@@ -71,5 +61,15 @@ public class LevelOrderTraversal2 {
         root.right.right = new TreeNode(7);
         List<List<Integer>> result = LevelOrderTraversal2.traverse(root);
         System.out.println("Level order traversal: " + result);
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

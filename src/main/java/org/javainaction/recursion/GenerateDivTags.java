@@ -16,6 +16,8 @@ import java.util.Arrays;
  *     <div></div><div></div>
  *     <div><div></div></div>
  * </quote>
+ *
+ * @see GenerateParenthesesRecursive
  */
 public class GenerateDivTags {
     public ArrayList<String> generateDivTags(int numberOfTags) {
@@ -31,14 +33,12 @@ public class GenerateDivTags {
 
         if (openDiv > 0) {
             String newBuilder = divBuilder + "<div>";
-            generateDivTagsRecursive(openDiv - 1, closeDiv,
-                    newBuilder, result);
+            generateDivTagsRecursive(openDiv - 1, closeDiv, newBuilder, result);
         }
 
         if (openDiv < closeDiv) {
             String newBuilder = divBuilder + "</div>";
-            generateDivTagsRecursive(openDiv, closeDiv - 1,
-                    newBuilder, result);
+            generateDivTagsRecursive(openDiv, closeDiv - 1, newBuilder, result);
         }
 
         if (closeDiv == 0) {
@@ -48,7 +48,7 @@ public class GenerateDivTags {
 
     public static void main(String[] args) {
         int input = 3;
-        ArrayList<String> expected =
+        var expected =
                 new ArrayList<String>(
                         Arrays.asList(
                                 "<div><div><div></div></div></div>",

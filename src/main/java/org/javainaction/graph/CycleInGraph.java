@@ -2,6 +2,16 @@ package org.javainaction.graph;
 
 import java.util.Arrays;
 
+/**
+ * Given unweighted directed graph with at least one node. Find out if graph contains cycle
+ *
+ * For this question cycle is defined as any number of vertices including one vertex that is connected to the chain.
+ *
+ * List input is an adjacency list that represents graph. number of vertices is equal to length of the edges
+ * where at each i contains ith vertices outbound edge. Each edge is a positive number, note that edges are directed
+ * meaning we can only travel in one direction
+ *
+ */
 public class CycleInGraph {
     public static boolean cycleInGraph(int[][] edges) {
         int numberOfNodes = edges.length;
@@ -20,8 +30,8 @@ public class CycleInGraph {
 
     public static boolean isCycleFromNode(int node, int[][] edges, boolean[] visited,
                                    boolean[] currentlyInStack) {
-        visited[node] = true;
-        currentlyInStack[node] = true;
+        visited[node] = true; //to avoid visited vertices
+        currentlyInStack[node] = true; //to maintain if we are still visiting
 
         boolean isCycle = false;
         int[] neighbors = edges[node];
@@ -31,9 +41,9 @@ public class CycleInGraph {
             }
 
             if (isCycle) return true;
-            else if(currentlyInStack[neighbor]) return true;
+            else if(currentlyInStack[neighbor]) return true; //for any visiting vertex we will have cycle
         }
-        currentlyInStack[node] = false;
+        currentlyInStack[node] = false; //remove from visiting veterx information
         return false;
     }
 
@@ -60,6 +70,4 @@ public class CycleInGraph {
         System.out.println(Arrays.deepToString(input)  + " has cycle? : " + actual);
 
     }
-
-
 }

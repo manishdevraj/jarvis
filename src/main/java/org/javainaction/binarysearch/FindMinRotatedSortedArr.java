@@ -37,20 +37,23 @@ public class FindMinRotatedSortedArr {
         int left = 0; int right = arr.length - 1;
 
         //we have sorted array without any rotation
-        if (arr[0] < arr[right]) return arr[0];
+        //also because of this base check we do not need to worry about
+        // middle + 1 or middle - 1 going beyond bounds
+        if (arr[left] < arr[right]) return arr[left];
 
         while (left <= right) {
             int middle = left + (right - left) / 2;
-            //we are at rotation point
+            //we have two rotation scenarios either middle itself is rotation [4, 5, 1, 2, 3]
             if (arr[middle] > arr[middle + 1]) {
                 return arr[middle + 1];
             }
+            //or middle - 1 is rotation [ 6, 5, 1, 2, 3, 4 ]
             if (arr[middle - 1] > arr[middle]) {
                 return arr[middle];
             }
 
             //we need to check which side we need to shift
-            if (arr[0] < arr[middle]) left = middle + 1;
+            if (arr[left] < arr[middle]) left = middle + 1;
             else right = middle - 1;
         }
 
@@ -61,5 +64,7 @@ public class FindMinRotatedSortedArr {
         System.out.println(findMin(new int[] { 3, 4, 5, 1, 2 }));
         System.out.println(findMin(new int[] { 11, 13, 15, 17}));
         System.out.println(findMin(new int[] { 4, 5, 6, 7, 0, 1, 2}));
+        System.out.println(findMin(new int[] { 3, 4, 5, 6, 1 }));
+        System.out.println(findMin(new int[] { 6, 5, 1, 2, 3, 4 }));
     }
 }

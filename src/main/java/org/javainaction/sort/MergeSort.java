@@ -16,6 +16,7 @@ import java.util.Arrays;
  *
  */
 public class MergeSort {
+
     // Best: O(nlog(n)) time | O(nlog(n)) space
     // Average: O(nlog(n)) time | O(nlog(n)) space
     // Worst: O(nlog(n)) time | O(nlog(n)) space

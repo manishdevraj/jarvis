@@ -2,9 +2,12 @@ package org.javainaction.graph;
 
 import java.util.*;
 
+/**
+ *
+ */
 public class AirportConnections {
     // O( a * (a + r) + a + r + alog(a)) time
-    // O(a + r) spacewhere is is number of airports
+    // O(a + r) space where is is number of airports
     // and r is number of routes
     public static int airportConnections(
             List<String> airports, List<List<String>> routes, String startingAirport) {

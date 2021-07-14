@@ -8,7 +8,6 @@ package org.javainaction.dp;
  * Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
  *
  *
- *
  * Example 1:
  *
  * Input: prices = [3,3,5,0,0,3,1,4]
@@ -44,13 +43,14 @@ public class BuyAndSellStock3 {
 
         for (int i = 1; i < k + 1; i++) { //transactions
             int maxProfit = Integer.MIN_VALUE;
-            for (int j = 1; j < prices.length; j++) { //no of days, we need to only worry about profit on second day
-                //earlier day profit is profit of previous day minus cost to buy on day before
+            //no of days, we need to only worry about profit on second day
+            for (int j = 1; j < prices.length; j++) {
+                //earlier day profit is profit of previous day minus cost to buy on that day
                 maxProfit = Math.max(maxProfit, profit[i - 1][j - 1] - prices[j - 1]);
-                profit[i][j] = Math.max(profit[i][j - 1], //previous day profit as we have max profit on previous day
-                        maxProfit + prices[j]); //max profit so far plus price for while selling
+                //previous day profit as we have max profit on previous day
+                //max profit so far plus price for while selling
+                profit[i][j] = Math.max(profit[i][j - 1], maxProfit + prices[j]);
             }
-
         }
 
         return profit[k][prices.length - 1];

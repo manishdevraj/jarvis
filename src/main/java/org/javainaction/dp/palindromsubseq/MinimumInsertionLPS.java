@@ -32,6 +32,7 @@ package org.javainaction.dp.palindromsubseq;
  *
  * Input: s = "no"
  * Output: 1
+ * @see LongestPalindromicSubseq we need to get length of LPS and deduct from string to find insertion required
  */
 public class MinimumInsertionLPS {
 
@@ -54,7 +55,8 @@ public class MinimumInsertionLPS {
                 // case 1: elements at the beginning and the end are the same
                 if (st.charAt(start) == st.charAt(end)) {
                     dp[start][end] = 2 + dp[start + 1][end - 1];
-                } else { // case 2: skip one element either from the beginning or the end
+                } else {
+                    // case 2: skip one element either from the beginning or the end
                     dp[start][end] = Math.max(dp[start + 1][end], dp[start][end - 1]);
                 }
             }

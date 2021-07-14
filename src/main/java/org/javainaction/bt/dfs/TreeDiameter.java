@@ -5,19 +5,9 @@ package org.javainaction.bt.dfs;
  * path between any two leaf nodes. The diameter of a tree may or may not pass through the root.
  *
  * Note: You can always assume that there are at least two leaf nodes in the given tree.
+ * @see BinaryTreeDiameter
  */
 public class TreeDiameter {
-
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     static int treeDiameter = 0;
     public static int findDiameter(TreeNode root) {
         calculateHeight(root);
@@ -59,5 +49,15 @@ public class TreeDiameter {
         root.right.left.right.left = new TreeNode(10);
         root.right.right.left.left = new TreeNode(11);
         System.out.println("Tree Diameter: " + TreeDiameter.findDiameter(root));
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

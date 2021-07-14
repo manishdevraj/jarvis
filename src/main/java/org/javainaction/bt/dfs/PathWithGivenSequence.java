@@ -4,16 +4,6 @@ package org.javainaction.bt.dfs;
  * Given a binary tree and a number sequence, find if the sequence is present as a root-to-leaf path in the given tree.
  */
 public class PathWithGivenSequence {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public static boolean findPath(TreeNode root, int[] sequence) {
         if (root == null)
             return sequence.length == 0;
@@ -42,5 +32,15 @@ public class PathWithGivenSequence {
 
         System.out.println("Tree has path sequence: " + PathWithGivenSequence.findPath(root, new int[] { 1, 0, 7 }));
         System.out.println("Tree has path sequence: " + PathWithGivenSequence.findPath(root, new int[] { 1, 1, 6 }));
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

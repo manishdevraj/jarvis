@@ -14,6 +14,7 @@ package org.javainaction.dp.knapsack;
  * Input: {1, 2, 7, 1, 5}, S=9
  * Output: 3
  * The given set has '3' subsets whose sum is '9': {2, 7}, {1, 7, 1}, {1, 2, 1, 5}
+ * @see SubsetSum
  */
 public class CountSubsetSum {
     public int countSubsets(int[] num, int sum) {
@@ -30,18 +31,18 @@ public class CountSubsetSum {
             return 0;
 
         // check if we have not already processed a similar problem
-        if(dp[currentIndex][sum] == null) {
-            // recursive call after choosing the number at the currentIndex
-            // if the number at currentIndex exceeds the sum, we shouldn't process this
-            int sum1 = 0;
-            if( num[currentIndex] <= sum )
-                sum1 = countSubsetsRecursive(dp, num, sum - num[currentIndex], currentIndex + 1);
+        if(dp[currentIndex][sum] != null) return dp[currentIndex][sum];
 
-            // recursive call after excluding the number at the currentIndex
-            int sum2 = countSubsetsRecursive(dp, num, sum, currentIndex + 1);
+        // recursive call after choosing the number at the currentIndex
+        // if the number at currentIndex exceeds the sum, we shouldn't process this
+        int sum1 = 0;
+        if( num[currentIndex] <= sum )
+            sum1 = countSubsetsRecursive(dp, num, sum - num[currentIndex], currentIndex + 1);
 
-            dp[currentIndex][sum] = sum1 + sum2;
-        }
+        // recursive call after excluding the number at the currentIndex
+        int sum2 = countSubsetsRecursive(dp, num, sum, currentIndex + 1);
+
+        dp[currentIndex][sum] = sum1 + sum2;
 
         return dp[currentIndex][sum];
     }

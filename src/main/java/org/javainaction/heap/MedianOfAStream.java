@@ -1,5 +1,6 @@
 package org.javainaction.heap;
 
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 /**
@@ -51,14 +52,14 @@ public class MedianOfAStream {
     PriorityQueue<Integer> minHeap; //containing second half of numbers
 
     public MedianOfAStream() {
-        maxHeap = new PriorityQueue<>((a, b) -> b - a);
-        minHeap = new PriorityQueue<>((a, b) -> a - b);
+        maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        minHeap = new PriorityQueue<>();
     }
 
     private static double median;
 
     public void insertNum(int num) {
-        if (minHeap.isEmpty() || minHeap.peek() >= num) {
+        if (minHeap.isEmpty() || num <= minHeap.peek()) {
             minHeap.offer(num);
         } else {
             maxHeap.offer(num);

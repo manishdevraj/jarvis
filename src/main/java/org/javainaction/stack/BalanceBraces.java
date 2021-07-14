@@ -37,24 +37,9 @@ import java.util.Stack;
  * Example 4
  * s = )
  * output: false
+ * @see org.javainaction.string.LongestBalancedSubstring
  */
 public class BalanceBraces {
-    public static void main(String[] args){
-        String openingBrackets = "([{";
-        String closingBrackets = "}])";
-
-        Map<Character, Character> matchingBrackets = new HashMap<>();
-        matchingBrackets.put(')', '(');
-        matchingBrackets.put('}', '{');
-        matchingBrackets.put(']', '[');
-
-        System.out.println("([])[]({}) is balanced? :  " + areBracesBalanced("([])[]({})",
-                openingBrackets, closingBrackets, matchingBrackets));
-
-        System.out.println("([)] is balanced? :  " + areBracesBalanced("([)]",
-                openingBrackets, closingBrackets, matchingBrackets));
-    }
-
     public static boolean areBracesBalanced(String input,
                                             String openingBrackets,
                                             String closingBrackets,
@@ -73,5 +58,21 @@ public class BalanceBraces {
             }
         }
         return brackets.isEmpty();
+    }
+
+    public static void main(String[] args){
+        String openingBrackets = "([{";
+        String closingBrackets = "}])";
+
+        Map<Character, Character> matchingBrackets = new HashMap<>();
+        matchingBrackets.put(')', '(');
+        matchingBrackets.put('}', '{');
+        matchingBrackets.put(']', '[');
+
+        System.out.println("([])[]({}) is balanced? :  " + areBracesBalanced("([])[]({})",
+                openingBrackets, closingBrackets, matchingBrackets));
+
+        System.out.println("([)] is balanced? :  " + areBracesBalanced("([)]",
+                openingBrackets, closingBrackets, matchingBrackets));
     }
 }

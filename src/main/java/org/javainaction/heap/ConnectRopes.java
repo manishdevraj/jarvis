@@ -33,8 +33,10 @@ public class ConnectRopes {
         // keep doing this until the heap is left with only one rope
         int costOfConnection = 0;
         while (minHeap.size() > 1) {
+            //connect rope
             int cost = minHeap.poll() + minHeap.poll();
             costOfConnection += cost;
+            //we need to connect this rope to other remaining ropes so add back to heap
             minHeap.add(cost);
         }
 

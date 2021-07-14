@@ -1,5 +1,7 @@
 package org.javainaction.dp.knapsack;
 
+import java.util.Arrays;
+
 /**
  * Given a set of positive numbers (non zero) and a target sum ‘S’. Each number should be assigned either a ‘+’ or ‘-’
  * sign. We need to find out total ways to assign symbols to make the sum of numbers equal to target ‘S’.
@@ -14,6 +16,7 @@ package org.javainaction.dp.knapsack;
  * Input: {1, 2, 7, 1}, S=9
  * Output: 2
  * Explanation: The given set has '2' ways to make a sum of '9': {+1+2+7-1} & {-1+2+7+1}
+ * @see SubsetSum
  */
 public class TargetSum {
     /**
@@ -82,11 +85,47 @@ public class TargetSum {
         return dp[num.length-1][sum];
     }
 
+    public int findTargetSubsetsTopdown(int[] num, int s) {
+        int totalSum = Arrays.stream(num).sum();
+
+        // if 's + totalSum' is odd, we can't find a subset with sum equal to '(s + totalSum) / 2'
+        if(totalSum < s || (s + totalSum) % 2 == 1)
+            return 0;
+
+        int sum = (s + totalSum) / 2;
+        Integer[][] dp = new Integer[num.length][sum + 1];
+        return countSubsetsRecursive(num, sum, dp, 0);
+    }
+
+    private int countSubsetsRecursive(int[] num, int target, Integer[][] dp, int current) {
+        if (target == 0) return 1;
+
+        if (num.length <= current || target < 0) return 0;
+
+        if (dp[current][target] != null)
+            return dp[current][target];
+
+        int countInc = 0;
+        if (num[current] <= target) {
+            countInc = countSubsetsRecursive(num, target - num[current], dp, current + 1);
+        }
+
+        int countExcl = countSubsetsRecursive(num, target, dp, current + 1);
+
+        dp[current][target] = countInc + countExcl;
+        return dp[current][target];
+    }
+
     public static void main(String[] args) {
         TargetSum ts = new TargetSum();
         int[] num = {1, 1, 2, 3};
         System.out.println(ts.findTargetSubsets(num, 1));
         num = new int[]{1, 2, 7, 1};
         System.out.println(ts.findTargetSubsets(num, 9));
+
+        num = new int[]{1, 1, 2, 3};
+        System.out.println(ts.findTargetSubsetsTopdown(num, 1));
+        num = new int[]{1, 2, 7, 1};
+        System.out.println(ts.findTargetSubsetsTopdown(num, 9));
     }
 }

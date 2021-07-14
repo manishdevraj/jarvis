@@ -19,24 +19,30 @@ public class LargestRange {
         int[] bestRange = new int[2];
         int longest = 0;
         Map<Integer, Boolean> rangeMap = new HashMap<>();
-        int min = array[0];
+        //use frequency map to store expected range in an give array
         for (int num : array) {
             rangeMap.put(num, true);
         }
 
         for (int num : array) {
+            //avoid visited elements
             if (!rangeMap.get(num)) {
                 continue;
             }
             rangeMap.put(num, false);
+
             int current = 1;
             int left = num - 1;
             int right = num + 1;
+
+            //search range to the left
             while (rangeMap.containsKey(left)) {
                 rangeMap.put(left, false);
                 left--;
                 current++;
             }
+
+            //search range to the right
             while (rangeMap.containsKey(right)) {
                 rangeMap.put(right, false);
                 right++;
@@ -49,5 +55,10 @@ public class LargestRange {
             }
         }
         return bestRange;
+    }
+
+    public static void main(String[] args) {
+        int[] expected = {0, 7};
+        largestRange(new int[] {1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6});
     }
 }

@@ -10,7 +10,6 @@ import java.util.Arrays;
  * Return the minimum number of boats to carry every given person.
  *
  *
- *
  * Example 1:
  *
  * Input: people = [1,2], limit = 3
@@ -28,24 +27,12 @@ import java.util.Arrays;
  * Explanation: 4 boats (3), (3), (4), (5)
  */
 public class BoatToSavePeople {
-    public static void main(String[] arg) {
-        System.out.println("{1, 2} with 3 limit needs these many boats: "
-                + numRescueBoats(new int[] {1, 2}, 3));
-        System.out.println("{3,2,2,1} with 3 limit needs these many boats: "
-                + numRescueBoats(new int[] {3,2,2,1}, 3));
-        System.out.println("{3,5,3,4} with 5 limit needs these many boats: "
-                + numRescueBoats(new int[] {3,5,3,4}, 3));
-    }
-
     /**
      * If the heaviest person can share a boat with the lightest person, then do so.
      * Otherwise, the heaviest person can't pair with anyone, so they get their own boat.
      *
      * The reason this works is because if the lightest person can pair with anyone,
      * they might as well pair with the heaviest person.
-     * @param people
-     * @param limit
-     * @return
      */
     public static int numRescueBoats(int[] people, int limit) {
         if (people == null || people.length == 0) return 0;
@@ -61,5 +48,14 @@ public class BoatToSavePeople {
             right--;
         }
         return boat;
+    }
+
+    public static void main(String[] arg) {
+        System.out.println("{1, 2} with 3 limit needs these many boats: "
+                + numRescueBoats(new int[] {1, 2}, 3));
+        System.out.println("{3,2,2,1} with 3 limit needs these many boats: "
+                + numRescueBoats(new int[] {3,2,2,1}, 3));
+        System.out.println("{3,5,3,4} with 5 limit needs these many boats: "
+                + numRescueBoats(new int[] {3,5,3,4}, 3));
     }
 }

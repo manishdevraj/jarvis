@@ -1,6 +1,7 @@
 package org.javainaction.array;
 
 public class Fibonacci {
+
     //O(n) time | O(1) space
     public static int getNthFib(int n) {
         int[] result = {0 , 1};

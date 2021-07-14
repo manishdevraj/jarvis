@@ -27,6 +27,16 @@ public class LinkedListCycleStart {
             }
         }
 
+        //we could iterate and find the start without worrying about length as blew
+        /**
+         *         slow = head;
+         *         while (slow != fast) {
+         *             slow = slow.next;
+         *             fast = fast.next;
+         *         }
+         *         return slow;
+         */
+
         return findStart(head, cycleLength);
     }
 

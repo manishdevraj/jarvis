@@ -34,6 +34,7 @@ public class ReverseLinkedList {
 
         ListNode result = ReverseLinkedList.reverse(head);
         System.out.print("Nodes of the reversed LinkedList are: ");
+
         while (result != null) {
             System.out.print(result.value + " ");
             result = result.next;

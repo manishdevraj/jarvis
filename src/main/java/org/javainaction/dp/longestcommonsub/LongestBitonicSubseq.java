@@ -53,6 +53,7 @@ public class LongestBitonicSubseq {
 		*/
         int maxLength = 0;
         for (int i = 0; i < nums.length; i++) {
+            // - 1 to accommodate peak of the mountain
             maxLength = Math.max(maxLength, longIncSubseq[i] + longDecSubseq[i] - 1);
         }
 
@@ -61,7 +62,7 @@ public class LongestBitonicSubseq {
 
     public static void main(String[] args) {
         LongestBitonicSubseq lbs = new LongestBitonicSubseq();
-        int[] nums = {4,2,3,6,10,1,12};
+        int[] nums = new int[]{4,2,3,6,10,1,12};
         System.out.println(lbs.findLBSLength(nums));
         nums = new int[]{4,2,5,9,7,6,10,3,1};
         System.out.println(lbs.findLBSLength(nums));

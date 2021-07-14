@@ -25,6 +25,7 @@ import java.util.*;
  * Explanation: Maximum CPU load will be 8 as all jobs overlap during the time interval [3,4].
  *
  * @see org.javainaction.interval.MinimumMeetingRooms
+ * @see org.javainaction.interval.LaptopRentals
  */
 public class MaximumCPULoad {
     static class Job {
@@ -41,20 +42,24 @@ public class MaximumCPULoad {
 
     public static int findMaxCPULoad(List<Job> jobs) {
         if (jobs == null || jobs.size() == 0) return 0;
+        //sort them by job start times
+        jobs.sort((a, b) -> Integer.compare(a.start, b.start));
 
-        Collections.sort(jobs,
-                (a, b) -> Integer.compare(a.start, b.start));
-
-        PriorityQueue<Job> heap = new PriorityQueue<>(jobs.size(),
-                (a, b) -> Integer.compare(a.end, b.end));
+        PriorityQueue<Job> minheap = new PriorityQueue<>(jobs.size(),
+                Comparator.comparingInt(a -> a.end));
 
         int maxCPULoad = 0;
         int currentCPULoad = 0;
         for (Job job : jobs) {
-            while (!heap.isEmpty() && job.start >= heap.peek().end) {
-                currentCPULoad -= heap.poll().cpuLoad;
+            //when current job needs to execute no earlier than previous job end then we can remove
+            //previous job load from total CPU load
+            //[0, 2] by previous job and [2, 4] by current job then we can give consider only current job load
+            //and remove prev load
+            while (!minheap.isEmpty() && job.start >= minheap.peek().end) {
+                currentCPULoad -= minheap.poll().cpuLoad;
             }
-            heap.offer(job);
+            minheap.offer(job);
+            //add load to total load on CPU
             currentCPULoad += job.cpuLoad;
             maxCPULoad = Math.max(maxCPULoad, currentCPULoad);
         }

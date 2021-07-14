@@ -6,9 +6,8 @@ import java.util.Queue;
 /**
  * Given the root of a binary tree, return its maximum depth.
  *
- * A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
- *
- *
+ * A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the
+ * farthest leaf node.
  *
  * Example 1:
  *
@@ -30,16 +29,6 @@ import java.util.Queue;
  *
  */
 public class MaxBinaryTreeDepth {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public static int maxDepth(TreeNode root) {
         if (root == null) return 0;
 
@@ -55,6 +44,7 @@ public class MaxBinaryTreeDepth {
             for (int i = 0; i < levelSize; i++) {
                 TreeNode current = queue.poll();
                 if (current != null) {
+                    //for each leaf node store the max depth
                     if (current.left == null && current.right == null) {
                         max = Math.max(maxDepth, max);
                     }
@@ -72,9 +62,19 @@ public class MaxBinaryTreeDepth {
         root.right = new TreeNode(20);
         root.right.left = new TreeNode(15);
         root.right.right = new TreeNode(7);
-        System.out.println("Tree Minimum Depth: " + maxDepth(root));
+        System.out.println("Tree maximum Depth: " + maxDepth(root));
         root.left.left = new TreeNode(19);
         root.right.left.left = new TreeNode(11);
-        System.out.println("Tree Minimum Depth: " + maxDepth(root));
+        System.out.println("Tree maximum Depth: " + maxDepth(root));
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

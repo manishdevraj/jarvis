@@ -16,7 +16,9 @@ public class ThreeLargestNumbers {
         int thirdLargest = Integer.MIN_VALUE;
         int secondLargest = Integer.MIN_VALUE;
         int firstLargest = Integer.MIN_VALUE;
-        for(int i=0; i < array.length; i++)	{
+        //user three pointers to maintain the largest element
+        //every time a new largest is found, cascade the change down
+        for (int i=0; i < array.length; i++)	{
             if(array[i] >= thirdLargest) {
                 firstLargest = secondLargest;
                 secondLargest = thirdLargest;

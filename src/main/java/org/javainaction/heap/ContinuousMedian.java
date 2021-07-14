@@ -1,6 +1,7 @@
 package org.javainaction.heap;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
 
@@ -43,8 +44,12 @@ import java.util.function.BiFunction;
 public class ContinuousMedian {
 
     static class ContinuousMedianHandler {
-        Heap lower = new Heap(ContinuousMedian::MAX_HEAP_FUNC, new ArrayList<>());
-        Heap greater = new Heap(ContinuousMedian::MIN_HEAP_FUNC, new ArrayList<>());
+        BiFunction<Integer, Integer, Boolean> MAX_HEAP_FUNC = (a, b) -> a.compareTo(b) > 0;
+        BiFunction<Integer, Integer, Boolean> MIN_HEAP_FUNC = (a, b) -> a.compareTo(b) < 0;
+        //lower is max heap such that we get trailing end of the item form heap
+        //greater is min heap such that we get min items that is >= lower trailing end
+        Heap lower = new Heap(MAX_HEAP_FUNC, new ArrayList<>());
+        Heap greater = new Heap(MIN_HEAP_FUNC, new ArrayList<>());
         double median = 0;
 
         // O(log(n)) time | O(n) space
@@ -64,7 +69,7 @@ public class ContinuousMedian {
 
         private void updateMedian() {
             if (lower.length == greater.length) {
-                median =  (double) lower.peek() + (double)greater.peek() / 2;
+                median =  ((double) lower.peek() + (double)greater.peek()) / 2;
             } else if (greater.length > lower.length){
                 median = greater.peek();
             } else {
@@ -79,15 +84,6 @@ public class ContinuousMedian {
                 lower.insert(greater.remove());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        ContinuousMedianHandler handler = new ContinuousMedianHandler();
-        handler.insert(5);
-        handler.insert(10);
-        assert  handler.getMedian() == 7.5;
-        handler.insert(100);
-        assert  handler.getMedian() == 10;
     }
 
     static class Heap {
@@ -176,11 +172,14 @@ public class ContinuousMedian {
         }
     }
 
-    public static Boolean MAX_HEAP_FUNC(Integer a, Integer b) {
-        return a > b;
-    }
-
-    public static Boolean MIN_HEAP_FUNC(Integer a, Integer b) {
-        return a < b;
+    public static void main(String[] args) {
+        ContinuousMedianHandler handler = new ContinuousMedianHandler();
+        handler.insert(5);
+        handler.insert(10);
+        //== 7.5
+        System.out.println(handler.getMedian());
+        handler.insert(100);
+        //10
+        System.out.println(handler.getMedian());
     }
 }

@@ -1,7 +1,11 @@
 package org.javainaction.bt.dfs;
 
+import java.util.ArrayDeque;
+
 /**
- * A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root.
+ * A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge
+ * connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass
+ * through the root.
  *
  * The path sum of a path is the sum of the node's values in the path.
  *
@@ -24,16 +28,6 @@ package org.javainaction.bt.dfs;
  *
  */
 public class MaximumPathSum {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     private static int globalMaximumSum;
 
     public static int findMaximumPathSum(TreeNode root) {
@@ -67,22 +61,48 @@ public class MaximumPathSum {
     }
 
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(1);
-        root.left = new TreeNode(2);
-        root.right = new TreeNode(3);
-        System.out.println("Maximum Path Sum: " + MaximumPathSum.findMaximumPathSum(root));
+        TreeNode tree = new TreeNode(1);
+        tree.insert(new int[] {2, 3, 4, 5, 6, 7}, 0);
+        System.out.println("Maximum Path Sum: " + MaximumPathSum.findMaximumPathSum(tree));
 
-        root.left.left = new TreeNode(1);
-        root.left.right = new TreeNode(3);
-        root.right.left = new TreeNode(5);
-        root.right.right = new TreeNode(6);
-        root.right.left.left = new TreeNode(7);
-        root.right.left.right = new TreeNode(8);
-        root.right.right.left = new TreeNode(9);
-        System.out.println("Maximum Path Sum: " + MaximumPathSum.findMaximumPathSum(root));
+        tree = new TreeNode(-1);
+        tree.insert(new int[] {-3}, 0);
+        System.out.println("Maximum Path Sum: " + MaximumPathSum.findMaximumPathSum(tree));
 
-        root = new TreeNode(-1);
-        root.left = new TreeNode(-3);
-        System.out.println("Maximum Path Sum: " + MaximumPathSum.findMaximumPathSum(root));
+        tree = new TreeNode(1);
+        tree.insert(new int[] {2, 3}, 0);
+        System.out.println("Maximum Path Sum: " + MaximumPathSum.findMaximumPathSum(tree));
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+
+        public void insert(int[] values, int i) {
+            if (i >= values.length) {
+                return;
+            }
+            ArrayDeque<TreeNode> queue = new ArrayDeque<TreeNode>();
+            queue.addLast(this);
+            while (queue.size() > 0) {
+                TreeNode current = queue.pollFirst();
+                if (current.left == null) {
+                    current.left = new TreeNode(values[i]);
+                    break;
+                }
+                queue.addLast(current.left);
+                if (current.right == null) {
+                    current.right = new TreeNode(values[i]);
+                    break;
+                }
+                queue.addLast(current.right);
+            }
+            insert(values, i + 1);
+        }
     }
 }

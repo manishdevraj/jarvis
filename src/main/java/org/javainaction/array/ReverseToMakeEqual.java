@@ -30,11 +30,10 @@ public class ReverseToMakeEqual {
             //if we have new number then there is no way they can ever be equal no matter how much we flip the array
             if (!frequency.containsKey(b)) return false;
 
-            int freq = frequency.get(b);
-            if (freq == 1) {
+            frequency.put(b, frequency.get(b) - 1);
+            //remove when last element frequency
+            if (frequency.get(b) == 0) {
                 frequency.remove(b);
-            } else{
-                frequency.put(b, --freq);
             }
         }
 

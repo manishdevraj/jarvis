@@ -39,16 +39,20 @@ import java.util.Arrays;
  *
  * Input: grid = [[1,1,1,1,1,1],[-1,-1,-1,-1,-1,-1],[1,1,1,1,1,1],[-1,-1,-1,-1,-1,-1]]
  * Output: [0,1,2,3,4,-1]
+ * @see WaterfallStreams
  */
 public class WhereWillBallFall {
     // O(grid.length * grid[0].length) time, because for every column we iterate at most all rows (top to bottom).
     // O(1) additional space. O(grid[0].length) space to store the result.
     public int[] findBall(int[][] grid) {
         if (grid == null || grid.length == 0) return new int[0];
+        //ball is dropped at each index and we need to each row bottom value if they have the ball
         int[] result = new int[grid[0].length];
         // Each loop computes the result for when be drop a ball in column i.
         for (int i = 0; i < grid[0].length; ++i) {
             int currRow = 0, currCol = i;
+
+            //at each fall make sure we are within grid
             while (currRow < grid.length) {
                 // We go to the right if the current value and the value to the right are both equal to 1.
                 if (grid[currRow][currCol] == 1 && currCol + 1 < grid[0].length
@@ -66,6 +70,8 @@ public class WhereWillBallFall {
                     break;
                 }
             }
+            //if our row reached the current row then that means we could reach at the bottom
+            //use column value to indicate position of ball
             result[i] = currRow == grid.length ? currCol : -1;
         }
         return result;

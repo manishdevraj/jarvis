@@ -11,17 +11,21 @@ import java.util.HashMap;
  * Document "AlgoExpert is the Best!"
  *
  * Output true
- *
+ * @see FirstNonRepeatingCharacter
+ * @see RansomNote
  */
 public class GenerateDocument {
     public boolean generateDocument(String characters, String document) {
         var frequencies = new HashMap<Character, Integer>();
 
+        //keep frequencies from characters
         for (char c : characters.toCharArray()) {
             frequencies.put(c, frequencies.getOrDefault(c, 0) + 1);
         }
 
+        //if document is not found in characters frequencies meaning we cannot make document from characters
         for (char c : document.toCharArray()) {
+            //as we are updating frequencies our check will be also to confirm we have lost the count of frequencies
             if (!frequencies.containsKey(c) || frequencies.get(c) == 0) return false;
 
             frequencies.put(c, frequencies.get(c) - 1);

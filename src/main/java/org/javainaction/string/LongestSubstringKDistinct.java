@@ -8,6 +8,7 @@ package org.javainaction.string;
  * Input: String="araaci", K=2
  * Output: 4
  * Explanation: The longest substring with no more than '2' distinct characters is "araa".
+ * @see org.javainaction.slidingwindow.LongestSubstringKDistinct
  */
 public class LongestSubstringKDistinct {
 
@@ -15,22 +16,26 @@ public class LongestSubstringKDistinct {
         if (str == null || str.length() == 0 || str.length() < k)
             throw new IllegalArgumentException();
 
+        //user hashmap if we have more variants of letters such as capital letters, symbols, numbers
         int[] alphabets = new int[26];
         char[] chars = str.toCharArray();
-        int count = 0, maxLength = 0, start = 0;
-        for (int end = 0; end < chars.length; end++) {
-            char c = chars[end];
-            if (alphabets[c - 'a'] == 0) {
+        int count = 0, maxLength = 0, left = 0;
+        for (int right = 0; right < chars.length; right++) {
+            char rightChar = chars[right];
+            if (alphabets[rightChar - 'a'] == 0) {
                 count += 1;
             }
-            alphabets[c - 'a']++;
+            alphabets[rightChar - 'a']++;
+            //shrink window from left character as we got more than k distinct characters
             while (count > k) {
-                char s = chars[start];
-                alphabets[s - 'a']--;
+                char leftChar = chars[left];
+                //decrement count of leaving window
+                alphabets[leftChar - 'a']--;
+                //change duplicate element count
                 count--;
-                start++;
+                left++;
             }
-            maxLength = Math.max(maxLength, end - start + 1);
+            maxLength = Math.max(maxLength, right - left + 1);
         }
         return maxLength;
     }

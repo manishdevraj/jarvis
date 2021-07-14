@@ -1,6 +1,7 @@
 package org.javainaction.heap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -52,22 +53,18 @@ public class KthSmallestInMSortedArrays {
                 (n1, n2) -> lists.get(n1.arrayIndex)[n1.elementIndex] - lists.get(n2.arrayIndex)[n2.elementIndex]);
 
         // put the 1st element of each array in the min heap
-        for (int i = 0; i < lists.size(); i++)
-            if (lists.get(i) != null)
-                minHeap.add(new Node(0, i));
+        for (int i = 0; i < lists.size(); i++) {
+            minHeap.add(new Node(0, i));
+        }
 
         // take the smallest (top) element form the min heap, if the running count is equal to k return the number
         // if the array of the top element has more elements, add the next element to the heap
-        int numberCount = 0, result = 0;
-        while (!minHeap.isEmpty()) {
+        int result = -1;
+        for (; k > 0; --k) {
             Node node = minHeap.poll();
             result = lists.get(node.arrayIndex)[node.elementIndex];
-            if (++numberCount == k) {
-                break;
-            }
-            node.elementIndex++;
-            if (lists.get(node.arrayIndex).length > node.elementIndex) {
-                minHeap.add(node);
+            if (++node.elementIndex < lists.get(node.arrayIndex).length) {
+                minHeap.offer(node);
             }
         }
 
@@ -83,6 +80,13 @@ public class KthSmallestInMSortedArrays {
         lists.add(l2);
         lists.add(l3);
         int result = KthSmallestInMSortedArrays.findKthSmallest(lists, 5);
-        System.out.print("Kth smallest number is: " + result);
+        System.out.println("Kth smallest number is: " + result);
+
+        lists = new ArrayList<>();
+        lists.add(new Integer[]{1, 2, 3});
+        lists.add(new Integer[]{1, 2, 4});
+        lists.add(new Integer[]{1, 2, 5});
+        result = KthSmallestInMSortedArrays.findKthSmallest(lists, 5);
+        System.out.println("Kth smallest number is: " + result);
     }
 }

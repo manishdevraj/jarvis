@@ -1,8 +1,6 @@
 package org.javainaction.trie;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Given a dictionary of words and a string made up of those words (no spaces), return the original sentence in a list.
@@ -20,7 +18,7 @@ import java.util.stream.Stream;
 public class WordBreakTrie {
 
     private static List<String> wordBreak(String[] words, String str) {
-        SuffixTrie root = new SuffixTrie();
+        Trie root = new Trie();
         for (String word : words) {
             root.insert(word);
         }
@@ -28,25 +26,24 @@ public class WordBreakTrie {
         Set<String> foundMatch = new HashSet<>();
 
         findBigStringInSuffixTrie(str, root, foundMatch);
-        List<String> output = new ArrayList<>(foundMatch);
-        return output;
+        return new ArrayList<>(foundMatch);
     }
 
-    private static void findBigStringInSuffixTrie(String bigString, SuffixTrie root, Set<String> solution) {
+    private static void findBigStringInSuffixTrie(String bigString, Trie root, Set<String> solution) {
         for (int i = 0; i < bigString.length(); i++) {
             findInSuffixTrie(bigString, i, root, solution);
         }
     }
 
-    private static void findInSuffixTrie(String bigString, int startIdx, SuffixTrie suffixTrie, Set<String> solution) {
+    private static void findInSuffixTrie(String bigString, int startIdx, Trie trie, Set<String> solution) {
         char[] charArray = bigString.toCharArray();
-        TrieNode node = suffixTrie.root;
+        TrieNode node = trie.root;
         for (int i = startIdx; i < charArray.length; i++) {
             char letter = charArray[i];
             if (!node.children.containsKey(letter)) break;
 
             node = node.children.get(letter);
-            if (node.children.containsKey(suffixTrie.endSymbol)) {
+            if (node.children.containsKey(trie.endSymbol)) {
                 solution.add(node.word);
             }
         }
@@ -57,15 +54,14 @@ public class WordBreakTrie {
         String word;
     }
 
-    static class SuffixTrie {
+    static class Trie {
         TrieNode root = new TrieNode();
         char endSymbol = '*';
 
         public void insert(String str) {
             TrieNode node = root;
             char[] charArray = str.toCharArray();
-            for (int i = 0; i < charArray.length ; i++) {
-                char c = charArray[i];
+            for (char c : charArray) {
                 if (!node.children.containsKey(c)) {
                     TrieNode children = new TrieNode();
                     node.children.put(c, children);

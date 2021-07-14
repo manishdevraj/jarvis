@@ -1,7 +1,5 @@
 package org.javainaction.array;
 
-import java.util.Arrays;
-
 /**
  * Given a sorted array nums, remove the duplicates in-place such that each element appears only once and returns
  * the new length.
@@ -18,23 +16,27 @@ import java.util.Arrays;
  * Output: 5, nums = [0,1,2,3,4]
  * Explanation: Your function should return length = 5, with the first five elements of nums being modified to
  * 0, 1, 2, 3, and 4 respectively. It doesn't matter what values are set beyond the returned length.
+ * @see MoveElemToRight
  */
 public class RemoveDuplicatesFromSortedArray {
+    private static int removeDuplicates(int[] nums) {
+        int left = 0;
+        for (int right = 0; right < nums.length; right++){
+            //this has no effect if we are having unique value
+            //at left and right = 0; it will compute once before starting to find duplicate
+            nums[left++] = nums[right];
+            //until we have duplicate, slide the window, up to next unique element and place at next iteration
+            while (right != nums.length - 1 && nums[right] == nums[right + 1]) {
+                right++;
+            }
+        }
+        return left;
+    }
+
     public static void main(String[] args) {
         int length = RemoveDuplicatesFromSortedArray.removeDuplicates(new int[] { 0,0,1,1,1,2,2,3,3,4 });
         System.out.println(" {0,0,1,1,1,2,2,3,3,4} : length after removing duplicates: " + length);
         length = RemoveDuplicatesFromSortedArray.removeDuplicates(new int[] { 1, 1, 2 });
         System.out.println(" {1,1,2} : length after removing duplicates: " + length);
-    }
-
-    private static int removeDuplicates(int[] nums) {
-        int start = 0;
-        for (int end = 0; end < nums.length; end++){
-            nums[start++] = nums[end];
-            while (end != nums.length - 1 && nums[end] == nums[end + 1]) {
-                end++;
-            }
-        }
-        return start;
     }
 }

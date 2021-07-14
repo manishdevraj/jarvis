@@ -1,54 +1,20 @@
 package org.javainaction.interval;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoField;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.BitSet;
 import java.util.List;
 
-import static java.time.temporal.ChronoUnit.MINUTES;
-
+/**
+ * Find all available time slots between two given calendar for a given duration
+ */
 class CalendarMatching2 {
     public static String pattern = "k:m";
-    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-    public static NumberFormat numberFormat = new DecimalFormat("00");
-
-    public static void main(String[] args) throws ParseException {
-        List<StringMeeting> calendar1 = Arrays.asList(new StringMeeting("9:00", "10:30"),
-                new StringMeeting("12:00", "13:00"), new StringMeeting("16:00", "18:00"));
-
-        List<StringMeeting> calendar2 = Arrays.asList(new StringMeeting("10:00", "11:30"),
-                new StringMeeting("12:30", "14:30"), new StringMeeting("14:30", "15:00"),
-                new StringMeeting("16:00", "17:00"));
-        StringMeeting dailyBounds1 = new StringMeeting("9:00", "20:00");
-
-        StringMeeting dailyBounds2 = new StringMeeting("10:30", "18:30");
-
-        int meetingDuration = 30;
-
-        List<StringMeeting> output = calendarMatching(calendar1, dailyBounds1, calendar2, dailyBounds2, meetingDuration);
-
-        //11:30 12:00 & 15:00 16:00 18:00 & 18:30
-
-        for (StringMeeting meeting : output) {
-            System.out.println("[ " + meeting.start + " , " + meeting.end + " ]");
-        }
-
-
-    }
-
-
     public static List<StringMeeting> calendarMatching(
             List<StringMeeting> calendar1,
             StringMeeting dailyBounds1,
             List<StringMeeting> calendar2,
             StringMeeting dailyBounds2,
             int meetingDuration) {
+
         List<Meeting> updateCalendar1 = updateCalendar(calendar1, dailyBounds1);
         List<Meeting> updateCalendar2 = updateCalendar(calendar2, dailyBounds2);
         //merge
@@ -60,18 +26,22 @@ class CalendarMatching2 {
         return getAvailabilities(flattenedCalendar, meetingDuration);
     }
 
+    //this finds availability based on flattened calendar
     public static List<StringMeeting> getAvailabilities(
             List<Meeting> calendar,int meetingDuration) {
         List<Meeting> matchingAvailabilities = new ArrayList<>();
         for (int i = 1; i < calendar.size(); i++) {
             int start = calendar.get(i - 1).end;
             int end = calendar.get(i).start;
+            //availability is gap between two meetings
             int availabilityDuration = end - start;
+            //see if gap is of enough duration
             if (availabilityDuration >= meetingDuration) {
                 matchingAvailabilities.add(new Meeting(start, end));
             }
         }
 
+        //convert all available time into string meeting object back
         List<StringMeeting> matchingInHours = new ArrayList<>();
         for (int i = 0; i < matchingAvailabilities.size(); i++) {
             matchingInHours.add(new StringMeeting(
@@ -82,23 +52,29 @@ class CalendarMatching2 {
     }
 
 
+    //this allows flattening overalapping calendars
     public static List<Meeting> flattenCalendar(List<Meeting> calendar) {
         List<Meeting> flattened = new ArrayList<>();
         flattened.add(calendar.get(0));
         for (int i = 1; i < calendar.size(); i++) {
             Meeting currentMeeting = calendar.get(i);
             Meeting previousMeeting = flattened.get(flattened.size() - 1);
+            //we found overlap between previous and current meeting
+            //as previous is earlier so start has to be from previous
+            //for end time take maximum end time between current and previous
             if (previousMeeting.end >=  currentMeeting.start) {
                 Meeting newPrevMeeting = new Meeting(previousMeeting.start,
                         Math.max(previousMeeting.end, currentMeeting.end));
                 flattened.set(flattened.size() - 1, newPrevMeeting);
             } else {
+                //distinct meeting
                 flattened.add(currentMeeting);
             }
         }
         return flattened;
     }
 
+    //merge all calendars such that we can iterate them together
     public static List<Meeting> mergeCalendars(List<Meeting> calendar1,
                                                List<Meeting> calendar2) {
         List<Meeting> merged = new ArrayList<>();
@@ -121,6 +97,7 @@ class CalendarMatching2 {
         return merged;
     }
 
+    //Create calendar with daily bounds
     public static List<Meeting> updateCalendar(List<StringMeeting> calendar,
                                                StringMeeting dailyBounds) {
 
@@ -131,6 +108,7 @@ class CalendarMatching2 {
         updateCalendar.add(new StringMeeting(dailyBounds.end, "23:59"));
         List<Meeting> calendarInMinutes = new ArrayList<>();
         for (int i = 0; i < updateCalendar.size(); i++) {
+            //create meeting object from string meeting object
             calendarInMinutes.add(new Meeting(
                     timeToMinutes(updateCalendar.get(i).start),
                     timeToMinutes(updateCalendar.get(i).end)));
@@ -189,6 +167,49 @@ class CalendarMatching2 {
                     ", end=" + end +
                     '}';
         }
+    }
+
+    public boolean arraysEqual(List<StringMeeting> arr1, List<StringMeeting> arr2) {
+        if (arr1.size() != arr2.size()) return false;
+
+        for (int i = 0; i < arr1.size(); i++) {
+            if (!arr1.get(i).start.equals(arr2.get(i).start)
+                    || !arr1.get(i).end.equals(arr2.get(i).end)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        var calendar1 = new ArrayList<StringMeeting>();
+        calendar1.add(new StringMeeting("9:00", "10:30"));
+        calendar1.add(new StringMeeting("12:00", "13:00"));
+        calendar1.add(new StringMeeting("16:00", "18:00"));
+
+        var dailyBounds1 = new StringMeeting("9:00", "20:00");
+
+        List<StringMeeting> calendar2 = new ArrayList<StringMeeting>();
+        calendar2.add(new StringMeeting("10:00", "11:30"));
+        calendar2.add(new StringMeeting("12:30", "14:30"));
+        calendar2.add(new StringMeeting("14:30", "15:00"));
+        calendar2.add(new StringMeeting("16:00", "17:00"));
+
+        var dailyBounds2 = new StringMeeting("10:00", "18:30");
+
+        int meetingDuration = 30;
+
+        var expected = new ArrayList<StringMeeting>();
+        expected.add(new StringMeeting("11:30", "12:00"));
+        expected.add(new StringMeeting("15:00", "16:00"));
+        expected.add(new StringMeeting("18:00", "18:30"));
+
+        var actual =
+                calendarMatching(calendar1, dailyBounds1, calendar2, dailyBounds2, meetingDuration);
+        System.out.println("Available meeting slots " + actual);
+        actual.forEach(meeting -> {
+            System.out.println("[ " + meeting.start + " , " + meeting.end + " ]");
+        });
     }
 
 }

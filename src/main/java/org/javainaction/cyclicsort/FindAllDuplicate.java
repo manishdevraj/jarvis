@@ -28,6 +28,8 @@ public class FindAllDuplicate {
 
         List<Integer> duplicateNumbers = new ArrayList<>();
         for (i = 0; i < nums.length; i++) {
+            //nums[i] not being at desired index makes it a duplicate
+            //i + 1 th number not present after above cyclic sor means that is missing value
             if (nums[i] != i + 1)
                 duplicateNumbers.add(nums[i]);
         }

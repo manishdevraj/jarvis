@@ -20,6 +20,7 @@ package org.javainaction.dp.longestcommonsub;
  *
  * Input: str = "axxxy"
  * Output: 2
+ * @see LongestCommonSubsequence
  */
 public class LongestRepeatingSubsequence {
     public int findLongRepeatingTopDown(String str) {
@@ -34,6 +35,7 @@ public class LongestRepeatingSubsequence {
         if(i != j && str.charAt(i) == str.charAt(j))
             return 1 + findLRSLengthRecursive(str, i + 1, j + 1);
 
+        //or we have counts from starting from different length
         int c1 = findLRSLengthRecursive(str, i, j + 1);
         int c2 = findLRSLengthRecursive(str, i + 1, j);
 
@@ -45,11 +47,13 @@ public class LongestRepeatingSubsequence {
         int maxLength = 0;
         for (int i = 1; i <= s.length(); i++) {
             for (int j = 1; j <= s.length(); j++) {
+                //Unlike LCS we make sure the characters that are equal are not from same inject
                 if (i != j & s.charAt(i - 1) == s.charAt(j - 1)) {
                     dp[i][j] = 1 + dp[i - 1][j - 1];
                 } else {
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
                 }
+                /// store the value of LRS
                 maxLength = Math.max(maxLength, dp[i][j]);
             }
         }

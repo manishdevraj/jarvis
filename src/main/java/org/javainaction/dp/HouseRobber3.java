@@ -1,14 +1,14 @@
 package org.javainaction.dp;
 
-import org.javainaction.bt.bfs.ConnectAllSiblings;
 
 /**
  * The thief has found himself a new place for his thievery again. There is only one entrance to this area, called root.
  *
- * Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that all houses in this place form a binary tree. It will automatically contact the police if two directly-linked houses were broken into on the same night.
+ * Besides the root, each house has one and only one parent house.
+ * After a tour, the smart thief realized that all houses in this place form a binary tree.
+ * It will automatically contact the police if two directly-linked houses were broken into on the same night.
  *
  * Given the root of the binary tree, return the maximum amount of money the thief can rob without alerting the police.
- *
  *
  *
  * Example 1:
@@ -35,11 +35,10 @@ public class HouseRobber3 {
 
         int[] stealFromLeft = findMaxSteal(node.left);
         int[] stealFromRight = findMaxSteal(node.right);
-        //if we rob current house then we cannot rob other houses
+        //if we rob current house then we cannot rob other houses, but their child houses if any
         int rob = node.val + stealFromLeft[1] + stealFromRight[1];
-        //we are free to choose from either of it's childrens each sub tree
-        int notRob = Math.max(stealFromLeft[0], stealFromLeft[1]) +
-                Math.max(stealFromRight[0], stealFromRight[1]);
+        //we are free to choose from either of it's children's sub tree recursively applying same rule
+        int notRob = Math.max(stealFromLeft[0], stealFromLeft[1]) + Math.max(stealFromRight[0], stealFromRight[1]);
 
         return new int[]{rob, notRob};
     }

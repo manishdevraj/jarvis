@@ -39,7 +39,7 @@ public class BattleshipsBoard {
                 // x
                 // x
                 // x
-                // .
+                // x
                 if (i > 0 && board[i - 1][j] == 'X') continue;
 
                 //if battleship cannot be in adjacent cell
@@ -47,7 +47,7 @@ public class BattleshipsBoard {
                 //we have already counted ship such as in certain column
                 //when we were at j = 1 we counted them so skip j = 2 for 'X'
                 //by checking left of board
-                // . x x x .
+                // . x x x x
                 if (j > 0 && board[i][j - 1] == 'X') continue;
 
                 //we don't care of total size of ship but just the count so
@@ -72,5 +72,15 @@ public class BattleshipsBoard {
         output = countBattleships(input);
         System.out.println(Arrays.deepToString(input));
         System.out.println("Battleships on board : " + output);
+
+        input = new char[][]{
+                {'X','X','X','.'},
+                {'X','.','.','.'},
+                {'X','.','.','.'}};
+        //int expected = 2;
+        output = countBattleships(input);
+        System.out.println(Arrays.deepToString(input));
+        System.out.println("Battleships on board : " + output);
+
     }
 }

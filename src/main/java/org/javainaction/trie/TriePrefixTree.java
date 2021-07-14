@@ -39,12 +39,10 @@ public class TriePrefixTree {
         public Map<Character, TrieNode> children = new HashMap<>();
     }
 
-    /** Initialize your data structure here. */
     public TriePrefixTree() {
         this.root = new TrieNode();
     }
 
-    /** Inserts a word into the trie. */
     public void insert(String word) {
         TrieNode node = root;
         for (char letter : word.toCharArray()) {
@@ -54,7 +52,6 @@ public class TriePrefixTree {
         node.children.put(endSymbol, null);
     }
 
-    /** Returns if the word is in the trie. */
     public boolean search(String word) {
         TrieNode node = searchPrefix(word);
         return node != null && node.children.containsKey(endSymbol);
@@ -73,7 +70,6 @@ public class TriePrefixTree {
         return node;
     }
 
-    /** Returns if there is any word in the trie that starts with the given prefix. */
     public boolean startsWith(String prefix) {
         TrieNode node = searchPrefix(prefix);
         return node != null;

@@ -41,14 +41,26 @@ public class HouseRobber2 {
     //Iterative + memo (bottom-up)
     //O(n) time | O(1) space
     private int findMaxSteal(int[] wealth, int start, int end) {
-        int prevMax = 0, currMax = 0;
+        //as we just need to exclude adjacent house
+        //two pointers prev steal and current steal allows us to track which we need to pick
+        //[2, 5, 1, 3, 6, 2, 4] with previous and current steal both pointing at 0
+        //[n - 2] = previous steal, [n - 1] = last steal, [n] is current steal
+        //i=0 lastMaxSteal = 2 as there was nothing stole previously and previous max is still 0
+        //i=1 lastMaxSteal = 5, we either keep previous steal + curr wealth or pick last steal
+        // [n - 2] steal + [n] steal or [n - 1] steal
+        //i=2 current steal = 5
+        //i=3 we can steal 5 + 3 = 8
+        //i=4 we can steal previous and current 5 + 6 = 11
+        //i=5 current steal = 11
+        //i=6 current steal = 11 + 4 = 15
+        int prevMaxSteal = 0, lastMaxSteal = 0;
         while (start < end) {
-            int temp = currMax;
-            currMax = Math.max(wealth[start] + prevMax, currMax);
-            prevMax = temp;
+            int temp = lastMaxSteal;
+            lastMaxSteal = Math.max(wealth[start] + prevMaxSteal, lastMaxSteal);
+            prevMaxSteal = temp;
             start++;
         }
-        return currMax;
+        return lastMaxSteal;
     }
 
     public static void main(String[] args) {

@@ -73,7 +73,8 @@ public class HappyNumber {
             slow = findSquareSum(slow);
             fast = findSquareSum(findSquareSum(fast));
         } while (slow != fast);
-
+        //For happy number the slow and fast will become 1
+        //For not a happy number say (12) the slow and fast will become 20
         return slow == 1;
     }
 

@@ -28,6 +28,9 @@ package org.javainaction.array;
  */
 public class CountGoodTriplets {
     public static int countGoodTriplets(int[] arr, int a, int b, int c) {
+        //idea is to minimize 3rd inner loop by limited our search to see if we have good first condition met
+        //|arr[i] - arr[j]| <= a
+        //then only find if we have other two conditions valid |arr[j] - arr[k]| <= b and |arr[i] - arr[k]| <= c
         int goodTripletCount = 0;
         for (int i = 0; i < arr.length - 2; i++) {
             for (int j = i + 1; j < arr.length - 1; j++) {

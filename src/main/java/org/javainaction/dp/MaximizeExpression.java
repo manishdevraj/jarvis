@@ -23,11 +23,13 @@ public class MaximizeExpression {
 
         maxOfA[0] = array[0];
 
+        //max of a
         for (int i = 1; i < array.length; i++) {
             int max = Math.max(maxOfA[i - 1], array[i]);
             maxOfA[i] = max;
         }
 
+        //max a - b
         int[] maxOfB = new int[array.length];
         maxOfB[0] = Integer.MIN_VALUE;
 
@@ -36,6 +38,7 @@ public class MaximizeExpression {
             maxOfB[i] = max;
         }
 
+        //max a - b + c
         int[] maxOfC = new int[array.length];
         maxOfC[0] = maxOfC[1] = Integer.MIN_VALUE;
 
@@ -44,6 +47,7 @@ public class MaximizeExpression {
             maxOfC[i] = max;
         }
 
+        //max a- b + c - d
         int[] maxOfD = new int[array.length];
         maxOfD[0] = maxOfD[1] = maxOfD[2] = Integer.MIN_VALUE;
 

@@ -6,7 +6,8 @@ import java.util.PriorityQueue;
 /**
  * Given an array of events where events[i] = [startDayi, endDayi]. Every event i starts at startDayi and ends at endDayi.
  *
- * You can attend an event i at any day d where startTimei <= d <= endTimei. Notice that you can only attend one event at any time d.
+ * You can attend an event i at any day d where startTimei <= d <= endTimei.
+ * Notice that you can only attend one event at any time d.
  *
  * Return the maximum number of events you can attend.
  *
@@ -71,8 +72,6 @@ public class MaxEventsPossible {
      * #4. There is one more house cleaning step, the event whose ending time is in the past, we no longer can attend
      * those event
      * #5. Last but very important step, Let's attend the event if any event to attend in the heap.
-     * @param events
-     * @return
      */
     public static int maxEvents(int[][] events) {
         if (events == null || events.length == 0) return 0;

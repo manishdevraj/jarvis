@@ -3,8 +3,8 @@ package org.javainaction.dp.knapsack;
 import java.util.Arrays;
 
 /**
- * Given a non-empty array nums containing only positive integers, find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.
- *
+ * Given a non-empty array nums containing only positive integers, find if the array can be partitioned into two s
+ * ubsets such that the sum of elements in both subsets is equal.
  *
  *
  * Example 1:
@@ -23,11 +23,15 @@ import java.util.Arrays;
  *
  * 1 <= nums.length <= 200
  * 1 <= nums[i] <= 100
+ * @see SubsetSum
+ * @see TargetSum
  */
 public class PartitionEqualSubsetSum {
     public boolean canPartition(int[] nums) {
           int sum = Arrays.stream(nums).sum();
+          //we cannot make equal partition using odd elements
           if (sum % 2 != 0) return false;
+          //we need to find target such that target * 2 makes sum
           int target = sum / 2;
           Boolean[][] dp = new Boolean[nums.length][target + 1];
           return canPartitionRecursive(dp, nums, target, 0);
@@ -39,6 +43,7 @@ public class PartitionEqualSubsetSum {
 
         if (dp[current][target] != null) return dp[current][target];
         boolean partitionOne = false;
+
         if (nums[current] <= target)
             partitionOne = canPartitionRecursive(dp, nums, target - nums[current], current + 1);
 

@@ -42,24 +42,26 @@ public class CeilingOfANumber {
     }
 
     public static int binarySearchCeiling(int[] arr, int key) {
-        if (key > arr[arr.length - 1]) // if the 'key' is bigger than the biggest element
+        // if the 'key' is bigger than the biggest element
+        if (key > arr[arr.length - 1])
             return -1;
 
         int left = 0;
         int right = arr.length - 1;
         while (left <= right) {
-            int middle = (left + right) / 2;
-            if (key < arr[middle]) {
+            int middle = left + (right - left) / 2;
+            if (key == arr[middle]) {
+                return middle;
+            } else if (key < arr[middle]) {
                 right = middle - 1;
             } else if (key > arr[middle]) {
                 left = middle + 1;
-            } else {
-                return middle;
             }
         }
-        if (key < arr[0]) // if the 'key' is smaller than the smallest element
+        // if the 'key' is smaller than the smallest element
+        if (key < arr[0])
             return -1;
-
+        //if there is no direct match, left will always point to ceiling of the number
         return left;
     }
     public static void main(String[] args) {
@@ -67,5 +69,6 @@ public class CeilingOfANumber {
         System.out.println(searchCeilingOfANumber(new int[] { 1, 3, 8, 10, 15 }, 12));
         System.out.println(searchCeilingOfANumber(new int[] { 4, 6, 10 }, 17));
         System.out.println(searchCeilingOfANumber(new int[] { 4, 6, 10 }, -1));
+        System.out.println(searchCeilingOfANumber(new int[] { 1, 3, 8, 10, 15 }, 4));
     }
 }

@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Given an unsorted array containing numbers and a number ‘k’, find the first ‘k’ missing positive numbers in the array.
+ * Given an unsorted array containing numbers and a number ‘k’, find the first ‘k’ missing positive numbers in
+ * the array.
  *
  * Example 1:
  *
@@ -23,11 +24,14 @@ import java.util.Set;
  * Input: [-2, -3, 4], k=2
  * Output: [1, 2]
  * Explanation: The smallest missing positive numbers are 1 and 2.
+ * @see AllMissingNumbers
  */
 public class FirstKMissingPositive {
     public static List<Integer> findNumbers(int[] nums, int k) {
         int i = 0;
         while (i < nums.length) {
+            //since we have -ve numbers we need add two more checks
+            //number needs to be greater than 0 and less than length
             if (nums[i] > 0 && nums[i] <= nums.length && nums[i] != nums[nums[i] - 1])
                 swap(nums, i, nums[i] - 1);
             else
@@ -35,20 +39,24 @@ public class FirstKMissingPositive {
         }
 
         List<Integer> missingNumbers = new ArrayList<>();
-        Set<Integer> extraNumbers = new HashSet<>();
+        Set<Integer> duplicateNumbers = new HashSet<>();
         // find the first number missing from its index, that will be our required number
+        // notice we are only finding k missing numbers
         for (i = 0; i < nums.length && missingNumbers.size() < k; i++) {
             if (nums[i] != i + 1) {
                 missingNumbers.add(i + 1);
-                extraNumbers.add(nums[i]);
+                duplicateNumbers.add(nums[i]);
             }
         }
 
         // add the remaining missing numbers
+        // if we did not get k total missing then find extra possible missing numbers
+        // by adding them to length of array as we already got missing within array range
+        // make sure they are not already considered as duplicate values
         for (i = 1; missingNumbers.size() < k; i++) {
             int candidateNumber = i + nums.length;
             // ignore if the array contains the candidate number
-            if (!extraNumbers.contains(candidateNumber)) {
+            if (!duplicateNumbers.contains(candidateNumber)) {
                 missingNumbers.add(candidateNumber);
             }
         }

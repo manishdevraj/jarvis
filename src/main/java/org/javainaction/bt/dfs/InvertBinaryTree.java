@@ -1,7 +1,5 @@
 package org.javainaction.bt.dfs;
 
-import org.javainaction.bt.RightSiblingTree;
-import org.javainaction.bt.bfs.ConnectLevelOrderSiblings;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -32,7 +30,8 @@ public class InvertBinaryTree {
     public static void invertBinaryTreeRoot(BinaryTree root) {
         if (null == root) return;
 
-        swap(root);
+        swap(root); //swap both children
+        //now invert subtree on each sides
         invertBinaryTreeRoot(root.left);
         invertBinaryTreeRoot(root.right);
     }

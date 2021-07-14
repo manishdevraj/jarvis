@@ -3,8 +3,12 @@ package org.javainaction.heap;
 import java.util.PriorityQueue;
 
 /**
- * You're given a list of n integers arr[0..(n-1)]. You must compute a list output[0..(n-1)] such that, for each index i (between 0 and n-1, inclusive), output[i] is equal to the product of the three largest elements out of arr[0..i] (or equal to -1 if i < 2, as arr[0..i] then includes fewer than three elements).
- * Note that the three largest elements used to form any product may have the same values as one another, but they must be at different indices in arr.
+ * You're given a list of n integers arr[0..(n-1)]. You must compute a list output[0..(n-1)] such that,
+ * for each index i (between 0 and n-1, inclusive), output[i] is equal to the product of the three largest elements
+ * out of arr[0..i] (or equal to -1 if i < 2, as arr[0..i] then includes fewer than three elements).
+ * Note that the three largest elements used to form any product may have the same values as one another,
+ * but they must be at different indices in arr.
+ *
  * Signature
  * int[] findMaxProduct(int[] arr)
  * Input
@@ -26,21 +30,28 @@ import java.util.PriorityQueue;
 public class LargestTripleProducts {
     int[] findMaxProduct(int[] arr) {
         if (arr == null || arr.length < 3) return new int[]{};
+
         PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
         int[] result = new int[arr.length];
-        int lastMinimum = Integer.MIN_VALUE;
+        int prevMinValue = Integer.MIN_VALUE;
         int product = 1;
+        int K = 3;
+
         for (int i = 0; i < arr.length; i++) {
-            if (minHeap.size() == 2) {
-                if (arr[i] > lastMinimum) {
-                    lastMinimum = minHeap.poll();
-                    product = arr[i] * lastMinimum * minHeap.peek();
+            if (minHeap.size() == K - 1) {
+                if (arr[i] > prevMinValue) {
+                    //store this for future comparison, if we find any element smallest that K smallest then we use
+                    //same product
+                    prevMinValue = minHeap.poll();
+                    product = arr[i] * prevMinValue * minHeap.peek();
                     minHeap.offer(arr[i]);
                 }
                 result[i] = product;
             } else {
-                result[i] = product * -1;
+                //add until we have K elements
                 minHeap.offer(arr[i]);
+                result[i] = product * -1;
             }
           }
         return result;

@@ -15,6 +15,8 @@ package org.javainaction.cyclicsort;
  * Input: [3, 1, 2, 3, 6, 4]
  * Output: [3, 5]
  * Explanation: '3' is duplicated and '5' is missing.
+ * @see FindAllDuplicate
+ * @see AllMissingNumbers
  */
 public class FindCorruptNums {
     public static int[] findNumbers(int[] nums) {

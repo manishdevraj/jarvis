@@ -9,9 +9,11 @@ package org.javainaction.sort;
  * left = start + 1
  * right = end - 1
  *
- * if both left is smaller than pivot and right is greater than pivot then swap both left and right moving them inwards
+ * if left is greater than pivot and right is smaller than pivot then swap both left and right moving them inwards
+ * We are okay with rest of the pivot's position
  * if left is smaller than or equal to pivot move left pointer
  * if right is greater than or equal to pivot move right pointer
+ *
  * At the end of first iteration swap pivot and right
  *
  * Now pivot is at correct position:
@@ -42,10 +44,15 @@ public class QuickSort {
                 left++;
                 right--;
             }
+            //we are okay with pivot's position
             if (array[left] <= array[pivot]) left++;
             if (array[right] >= array[pivot]) right--;
         }
+        //swap pivot with right
         swap(pivot, right, array);
+
+        //quick sort between start and right - 1
+        //and right + 1 and end
 
         boolean leftSubarraySmaller = right - 1 - start <
                 end - (right + 1);

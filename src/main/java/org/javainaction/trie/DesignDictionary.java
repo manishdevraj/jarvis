@@ -40,7 +40,6 @@ public class DesignDictionary {
     TrieNode root = new TrieNode();
     char skipLetter = '.';
 
-    /** Initialize your data structure here. */
     public DesignDictionary() {
     }
 
@@ -53,6 +52,7 @@ public class DesignDictionary {
             }
             node = node.children.get(letter);
         }
+        //add word at the end
         node.word = word;
     }
 
@@ -61,13 +61,22 @@ public class DesignDictionary {
     }
 
     public boolean searchRecursive(String word, int index, TrieNode node) {
+        // when we have reached at the end make sure word at end of trie node is not empty, which means
+        // we reached end of trie prematurely
         if (word.length() == index) return !node.word.equals("");
+
         if (word.charAt(index) != skipLetter) {
+            //make sure current character is in trie
+            // and recursively find next character from search pattern
             return node.children.containsKey(word.charAt(index))
                     && searchRecursive(word, index + 1, node.children.get(word.charAt(index)));
         } else {
-            for (Map.Entry<Character, TrieNode> nextChild : node.children.entrySet())
+            //if we have skip letter then escape check if node contains character
+            //simply forward to child of node and recursively find next character from search pattern
+            for (Map.Entry<Character, TrieNode> nextChild : node.children.entrySet()) {
                 if (searchRecursive(word, index + 1, nextChild.getValue())) return true;
+            }
+
         }
         return false;
     }

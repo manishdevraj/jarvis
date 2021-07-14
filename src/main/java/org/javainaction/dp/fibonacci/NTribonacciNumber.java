@@ -26,6 +26,10 @@ package org.javainaction.dp.fibonacci;
 public class NTribonacciNumber {
     public int tribonacci(int n) {
         int[] dp = {0, 1, 1};
+        //as Tn+3 = Tn + Tn+1 + Tn+2
+        // we are only storing up to n, n + 1 and n + 2
+        // when we % with 3 from 3 to n we are storing nth tribonacci for N integers
+        //dp[0] = Tn, dp[1]= Tn+1 and dp[2] = Tn+2
         for (int i = 3; i <= n; ++i)
             dp[i % 3] = dp[0] + dp[1] + dp[2];
         return dp[n % 3];

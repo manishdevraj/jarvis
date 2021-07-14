@@ -1,15 +1,14 @@
 package org.javainaction.bt.dfs;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
- * Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values along the path equals targetSum.
+ * Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values
+ * along the path equals targetSum.
  *
- * The path does not need to start or end at the root or a leaf, but it must go downwards (i.e., traveling only from parent nodes to child nodes).
- *
+ * The path does not need to start or end at the root or a leaf, but it must go downwards
+ * (i.e., traveling only from parent nodes to child nodes).
  *
  *
  * Example 1:
@@ -22,6 +21,7 @@ import java.util.Map;
  *
  * Input: root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22
  * Output: 3
+ * @see CountAllPathSum
  */
 public class PathSum3 {
     public static int pathSum(TreeNode root, int targetSum) {
@@ -62,7 +62,7 @@ public class PathSum3 {
      */
     public static int pathSumDFS(TreeNode root, int targetSum) {
         if (root == null) return 0;
-        //ass path sum can start from non root too, we nee to make sure
+        //add path sum can start from non root too, we nee to make sure
         //root with its both child are processed into recursive excluding root
         return pathSumRecursive(root, targetSum)
                 + pathSumRecursive(root.left, targetSum)

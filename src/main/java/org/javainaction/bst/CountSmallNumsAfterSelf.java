@@ -153,7 +153,7 @@ public class CountSmallNumsAfterSelf {
                 if(node.left == null) node.left = new Node(num);
                 node.leftTreeSum++;
                 node = node.left;
-            }else{
+            } else {
                 sum += node.leftTreeSum + node.count;
                 if(node.right == null) node.right = new Node(num);
                 node = node.right;
@@ -162,6 +162,7 @@ public class CountSmallNumsAfterSelf {
         node.count++;
         return sum + node.leftTreeSum;
     }
+
     // Average case : when the created BST is balanced
     // O(nlog(n)) time | O(n) space
     // Worse case : when the created BST is like a linked list

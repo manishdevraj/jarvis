@@ -39,6 +39,25 @@ public class MinDistanceBST {
         }
         return min;
     }
+
+    public int minDifference = Integer.MAX_VALUE;
+    public BST prev = null;
+    public int getMinDistanceBST(BST root) {
+        getMinDiffInOrder(root);
+        return minDifference;
+    }
+
+    public void getMinDiffInOrder(BST root) {
+        if (root == null) return;
+
+        getMinDiffInOrder(root.left);
+
+        if (prev != null) minDifference = Math.min(minDifference, root.value - prev.value);
+
+        prev = root;
+        getMinDiffInOrder(root.right);
+
+    }
     
     public static void main(String[] args) {
         var root = new BST(1);
@@ -47,8 +66,11 @@ public class MinDistanceBST {
         root.right.left = new BST(12);
         root.right.right = new BST(49);
 
-        var expected = 13;
+        var expected = 1;
         var actual = new MinDistanceBST().minDiffInBST(root);
+        System.out.println("Min distance in BST  " + actual);
+
+        actual = new MinDistanceBST().getMinDistanceBST(root);
         System.out.println("Min distance in BST  " + actual);
     }
 

@@ -11,10 +11,11 @@ import java.util.List;
  *
  * Choose an integer k where 1 <= k <= arr.length.
  * Reverse the sub-array arr[0...k-1] (0-indexed).
- * For example, if arr = [3,2,1,4] and we performed a pancake flip choosing k = 3, we reverse the sub-array [3,2,1], so arr = [1,2,3,4] after the pancake flip at k = 3.
+ * For example, if arr = [3,2,1,4] and we performed a pancake flip choosing k = 3, we reverse the sub-array [3,2,1],
+ * so arr = [1,2,3,4] after the pancake flip at k = 3.
  *
- * Return an array of the k-values corresponding to a sequence of pancake flips that sort arr. Any valid answer that sorts the array within 10 * arr.length flips will be judged as correct.
- *
+ * Return an array of the k-values corresponding to a sequence of pancake flips that sort arr.
+ * Any valid answer that sorts the array within 10 * arr.length flips will be judged as correct.
  *
  *
  * Example 1:
@@ -55,10 +56,10 @@ public class PancakeSorting {
          * Repeat this process N times.
          */
         for (int x = arr.length, i; x > 0; x--) {
-            for (i = 0; arr[i] != x; i++);
-            flip(arr, i + 1);
-            flip(arr, x);
-            result.add(i+1);
+            for (i = 0; arr[i] != x; i++); //locate the largest number
+            flip(arr, i + 1); //flip all elements from 0 to i + 1
+            flip(arr, x); //flip all elements from 0 to x
+            result.add(i + 1);
             result.add(x);
         }
 

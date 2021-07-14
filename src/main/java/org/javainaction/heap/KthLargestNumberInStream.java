@@ -19,7 +19,7 @@ import java.util.PriorityQueue;
  */
 public class KthLargestNumberInStream {
     private PriorityQueue<Integer> minHeap;
-    private int kthLargestNumber = 0;
+    private int k = 0;
 
     public KthLargestNumberInStream(int[] nums, int k) {
         this.minHeap = new PriorityQueue<>((a, b) -> (a - b));
@@ -27,12 +27,14 @@ public class KthLargestNumberInStream {
             minHeap.add(n);
             if (minHeap.size() > k) minHeap.poll();
         }
-        this.kthLargestNumber = k;
+        //store this for future add operations
+        this.k = k;
     }
 
+    //In this case even on add make sure out minHeap is inside K bound
     public int add(int num) {
         minHeap.add(num);
-        if (minHeap.size() > kthLargestNumber) minHeap.poll();
+        if (minHeap.size() > k) minHeap.poll();
         return minHeap.isEmpty() ? -1 : minHeap.peek();
     }
 

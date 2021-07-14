@@ -26,6 +26,7 @@ import java.util.Arrays;
  * Input: = "pp"
  * Output: 0
  * Explanation: We do not need to cut, as "pp" is a palindrome.
+ * @see LongestPalindromicSubstring
  */
 public class PalindromePartitioningMinCuts {
 
@@ -58,6 +59,7 @@ public class PalindromePartitioningMinCuts {
                 if (isPalindrome[start][end]) {
                     // we can cut here as we got a palindrome
                     // also we dont need any cut if the whole substring is a palindrome
+
                     minCuts = (end == st.length() - 1) ? 0 : Math.min(minCuts, 1 + cuts[end + 1]);
                 }
             }

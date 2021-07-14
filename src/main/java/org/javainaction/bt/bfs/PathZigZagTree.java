@@ -10,11 +10,8 @@ import java.util.List;
  * numbered rows (second, fourth, sixth,...), the labelling is right to left.
  *
  *
- *
  * Given the label of a node in this tree, return the labels in the path from the root of the tree to the node
  * with that label.
- *
- *
  *
  * Example 1:
  *
@@ -42,8 +39,6 @@ public class PathZigZagTree {
      * 14 is depth=3 and pos=6. We deduct 7 get 7. The next thing is to find the position of its parent,
      * which is pos / 2. For example, 14 position is 6, the position of its parent (4) is 3.
      * In this way, we get all the numbers. The time complexity is O(lgn)
-     * @param label
-     * @return
      */
     public static List<Integer> pathInZigZagTree(int label) {
         List<Integer> result = new ArrayList<>();

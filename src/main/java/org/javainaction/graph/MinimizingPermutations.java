@@ -20,6 +20,7 @@ import java.util.*;
  * Select (3, 2, 1) and reverse it: P = (1, 2, 3).
  * output = 2
  */
+
 public class MinimizingPermutations {
     static int minOperations(int[] arr) {
         Set<String> seen = new HashSet<>();

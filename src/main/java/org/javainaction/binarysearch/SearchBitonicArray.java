@@ -1,11 +1,32 @@
 package org.javainaction.binarysearch;
-
+/**
+ *
+ * An array is considered bitonic if it is monotonically increasing
+ * and then monotonically decreasing. Monotonically increasing or decreasing means that for any index i in the array
+ * arr[i] != arr[i+1].
+ *
+ * Given a Bitonic array and target find the target in Bitonic array
+ *
+ * Example 1:
+ *
+ * Input: array = [1,2,3,4,5,3,1], target = 3
+ * Output: 2
+ * Explanation: 3 exists in the array, at index=2 and index=5. Return the minimum index, which is 2.
+ * Example 2:
+ *
+ * Input: array = [0,1,2,4,2,1], target = 3
+ * Output: -1
+ * Explanation: 3 does not exist in the array, so we return -1.
+ *
+ */
 public class SearchBitonicArray {
     public static int search(int[] arr, int key) {
         int maxIndex = findMax(arr);
+        //search on left side of the array
         int keyIndex = binarySearch(arr, key, 0, maxIndex);
         if (keyIndex != -1)
             return keyIndex;
+        //search on right side of the array
         return binarySearch(arr, key, maxIndex + 1, arr.length - 1);
     }
 
@@ -20,7 +41,6 @@ public class SearchBitonicArray {
                 start = mid + 1;
             }
         }
-
         // at the end of the while loop, 'start == end'
         return start;
     }
@@ -33,6 +53,7 @@ public class SearchBitonicArray {
             if (key == arr[mid])
                 return mid;
 
+            //check if we are searching in ascending array or descending array
             if (arr[start] < arr[end]) { // ascending order
                 if (key < arr[mid]) {
                     end = mid - 1;

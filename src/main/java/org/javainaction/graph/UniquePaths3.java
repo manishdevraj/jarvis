@@ -1,7 +1,5 @@
 package org.javainaction.graph;
 
-import org.javainaction.dp.UniquePaths2;
-
 /**
  * On a 2-dimensional grid, there are 4 types of squares:
  *
@@ -9,8 +7,8 @@ import org.javainaction.dp.UniquePaths2;
  * 2 represents the ending square.  There is exactly one ending square.
  * 0 represents empty squares we can walk over.
  * -1 represents obstacles that we cannot walk over.
- * Return the number of 4-directional walks from the starting square to the ending square, that walk over every non-obstacle square exactly once.
- *
+ * Return the number of 4-directional walks from the starting square to the ending square,
+ * that walk over every non-obstacle square exactly once.
  *
  *
  * Example 1:
@@ -36,7 +34,8 @@ import org.javainaction.dp.UniquePaths2;
  * Explanation:
  * There is no path that walks over every empty square exactly once.
  * Note that the starting and ending square can be anywhere in the grid.
- *
+ * @see org.javainaction.dp.UniquePaths
+ * @see org.javainaction.dp.UniquePaths2
  */
 public class UniquePaths3 {
 
@@ -59,6 +58,7 @@ public class UniquePaths3 {
             }
         }
 
+        //count is -1 because we need to exclude starting point, as we cannot set visited[x][y] = true here
         return uniquePathDfs(grid, visited, x,  y, -1, empty);
     }
 
@@ -68,6 +68,7 @@ public class UniquePaths3 {
         if (i < 0 || i >= grid.length || j < 0 || j >= grid[i].length || visited[i][j] || grid[i][j] == -1) return 0;
 
         if (grid[i][j] == 2) {
+            //that walk over every non-obstacle square exactly once, meaning we need to visit all of them
             if (need == count) return 1;
             return 0;
         }

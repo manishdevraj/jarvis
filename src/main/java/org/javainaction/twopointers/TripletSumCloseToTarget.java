@@ -39,6 +39,9 @@ public class TripletSumCloseToTarget {
                 if (targetDiff == 0) //  we've found a triplet with an exact sum
                     return targetSum - targetDiff; // return sum of all the numbers
 
+                //either we have smallest absolute difference or
+                //when we have similar difference, meaning more than on solution check which one is maximum and close to
+                //target
                 // the second part of the above 'if' is to handle the smallest sum when we have more than one solution
                 if (Math.abs(targetDiff) < Math.abs(smallestDifference)
                         || (Math.abs(targetDiff) == Math.abs(smallestDifference) && targetDiff > smallestDifference))
@@ -54,11 +57,11 @@ public class TripletSumCloseToTarget {
     }
 
     public static void main(String[] args) {
-        System.out.println(TripletSumCloseToTarget.searchTriplet(new int[] { 0,1,2}, 3));
-        System.out.println(TripletSumCloseToTarget.searchTriplet(new int[] { 0,5,-1,-2,4,-1,0,-3,4,-5}, 1));
-        System.out.println(TripletSumCloseToTarget.searchTriplet(new int[] { 0, 2, 1, -3 }, 1));
-        System.out.println(TripletSumCloseToTarget.searchTriplet(new int[] { -2, 0, 1, 2 }, 2));
-        System.out.println(TripletSumCloseToTarget.searchTriplet(new int[] { -3, -1, 1, 2 }, 1));
-        System.out.println(TripletSumCloseToTarget.searchTriplet(new int[] { 1, 0, 1, 1 }, 100));
+        System.out.println(searchTriplet(new int[] { 0,1,2}, 3));
+        System.out.println(searchTriplet(new int[] { 0,5,-1,-2,4,-1,0,-3,4,-5}, 1));
+        System.out.println(searchTriplet(new int[] { 0, 2, 1, -3 }, 1));
+        System.out.println(searchTriplet(new int[] { -2, 0, 1, 2 }, 2));
+        System.out.println(searchTriplet(new int[] { -3, -1, 1, 2 }, 1));
+        System.out.println(searchTriplet(new int[] { 1, 0, 1, 1 }, 100));
     }
 }

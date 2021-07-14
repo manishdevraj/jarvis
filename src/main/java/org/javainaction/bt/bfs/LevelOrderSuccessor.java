@@ -9,25 +9,6 @@ import java.util.Queue;
  *
  */
 public class LevelOrderSuccessor {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-
-        @Override
-        public String toString() {
-            return "TreeNode{" +
-                    "val=" + val +
-                    ", left=" + left +
-                    ", right=" + right +
-                    '}';
-        }
-    }
-
     public static TreeNode findSuccessor(TreeNode root, int key) {
         if (root == null)
             return null;
@@ -35,13 +16,15 @@ public class LevelOrderSuccessor {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         TreeNode result = null;
+
         while (!queue.isEmpty()) {
             int levelSize = queue.size();
+
             for (int i = 0; i < levelSize; i++) {
                 TreeNode currentNode = queue.poll();
                 if (currentNode != null) {
                     if (currentNode.val == key) {
-                        result = queue.peek() ;
+                        result = queue.peek(); //this will be next node in level order either null or next sibiling
                         break;
                     }
                     if (currentNode.left != null) queue.offer(currentNode.left);
@@ -63,5 +46,24 @@ public class LevelOrderSuccessor {
         System.out.println("Level order successor : " + findSuccessor(root, 12));
 
         System.out.println("Level order successor : " + findSuccessor(root, 9));
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+
+        @Override
+        public String toString() {
+            return "TreeNode{" +
+                    "val=" + val +
+                    ", left=" + left +
+                    ", right=" + right +
+                    '}';
+        }
     }
 }

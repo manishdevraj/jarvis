@@ -3,7 +3,8 @@ package org.javainaction.sort;
 import java.util.Arrays;
 
 /**
- * Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it. That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
+ * Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it.
+ * That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
  *
  * Return the answer in an array.
  *
@@ -45,6 +46,7 @@ public class HowManySmallThanCurrent {
         }
 
         for (int i = 0; i < arr.length; i++) {
+            //we do not have any number less than current number
             if (arr[i] == 0) result[i] = 0;
             //take running sum count before current number to know smallest before x
             else result[i] = count[arr[i] - 1];

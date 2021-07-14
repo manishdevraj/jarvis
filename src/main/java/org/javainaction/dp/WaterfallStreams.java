@@ -1,5 +1,7 @@
 package org.javainaction.dp;
 
+import java.util.Arrays;
+
 /**
  * Given a 2D array with 1 representing block and 0 with free space, if we put water from a source column at 0th row
  * we need to find percentage of water accumulated at bottom row (imaginary buckets)
@@ -24,7 +26,7 @@ public class WaterfallStreams {
     // O(w^2 * h) time | O(w) space where w and h are width and height of array
     public double[] waterfallStreams(double[][] array, int source) {
         double[] rowAbove = array[0];
-        //we will use -1 to indicate water since we 1 is used for block
+        //we will use -1 to indicate water since the 1 is used for block
         rowAbove[source] = -1;
 
         for (int row = 1; row < array.length; row++) {
@@ -97,8 +99,8 @@ public class WaterfallStreams {
         var source = 3;
         double[] expected = {0.0, 0.0, 0.0, 25.0, 25.0, 0.0, 0.0};
         double[] actual = new WaterfallStreams().waterfallStreams(array, source);
-        assert (expected.length == actual.length);
-        for (int i = 0; i < expected.length; i++)
-            assert (expected[i] == actual[i]);
+        System.out.println(Arrays.deepToString(array));
+        System.out.println("----------------------");
+        System.out.println(Arrays.toString(actual));
     }
 }

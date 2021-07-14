@@ -2,6 +2,9 @@ package org.javainaction.string;
 
 import java.util.Arrays;
 
+/**
+ * @see org.javainaction.dp.palindromsubseq.PalindromePartitioning
+ */
 public class PalindromePartitioningMinCuts {
 
     // O(n^2) time | O(n^2) space

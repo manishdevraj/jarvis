@@ -38,25 +38,22 @@ public class MergeIntervals {
         if (intervals.size() < 2) return intervals;
 
         Collections.sort(intervals, (a, b) -> Integer.compare(a.start, b.start));
-        List<Interval> mergedIntervals = new LinkedList<>();
-        Iterator<Interval> intervalItr = intervals.iterator();
-        Interval interval = intervalItr.next();
-        int start = interval.start;
-        int end = interval.end;
 
-        while (intervalItr.hasNext()) {
-            interval = intervalItr.next();
-            //found an overlapping interval
-            if (interval.start <= end) {
-                end = Math.max(end, interval.end);
+        List<Interval> mergedIntervals = new LinkedList<>();
+        Interval previous = intervals.get(0);
+
+        for (int i = 1; i < intervals.size(); i++) {
+            Interval current = intervals.get(i);
+            if (current.start <= previous.end) { //found an overlapping interval
+                previous.end = Math.max(previous.end, current.end);
             } else {
-                mergedIntervals.add(new Interval(start, end));
-                start = interval.start;
-                end = interval.end;
+                mergedIntervals.add(previous);
+                previous = current;
             }
         }
 
-        mergedIntervals.add(new Interval(start, end));
+        //merge last remaining
+        mergedIntervals.add(new Interval(previous.start, previous.end));
 
         return mergedIntervals;
     }

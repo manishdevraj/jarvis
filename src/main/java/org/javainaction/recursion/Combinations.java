@@ -9,7 +9,6 @@ import java.util.List;
  * You may return the answer in any order.
  *
  *
- *
  * Example 1:
  *
  * Input: n = 4, k = 2
@@ -27,6 +26,7 @@ import java.util.List;
  * Input: n = 1, k = 1
  * Output: [[1]]
  * @see CombinationSum3
+ * @see CombinationSum4
  */
 public class Combinations {
 
@@ -45,6 +45,10 @@ public class Combinations {
                 combos.add(i);
                 findAllCombinations(combinations, combos, i + 1, end, k - 1);
                 //remove element as we are done with its combination
+                //we we would be removing trailing elements
+                //[1, 2] remove 2 so we can add 3, [1, 3]
+                //[1, 3] remove 3 so we can add 4, [1, 4]
+                //[1] remove 1 so combos is empty and we can start at i = 2
                 combos.remove(combos.size() - 1);
             }
         }

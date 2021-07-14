@@ -24,6 +24,7 @@ import java.util.*;
  * Input: "aappa", K=3
  * Output: ""
  * Explanation: We cannot find an arrangement of the string where any two 'a' are 3 distance apart.
+ * @see RearrangeString
  */
 public class RearrangeStringKDistanceApart {
     public static String reorganizeString(String str, int k) {
@@ -40,7 +41,9 @@ public class RearrangeStringKDistanceApart {
         // add all characters to the max heap
         maxHeap.addAll(charFrequencyMap.entrySet());
 
+        //queue acts as a previous pointers with their order retained
         Queue<Map.Entry<Character, Integer>> queue = new LinkedList<>();
+
         StringBuilder resultString = new StringBuilder(str.length());
         while (!maxHeap.isEmpty()) {
             Map.Entry<Character, Integer> currentEntry = maxHeap.poll();
@@ -48,6 +51,13 @@ public class RearrangeStringKDistanceApart {
             resultString.append(currentEntry.getKey());
             currentEntry.setValue(currentEntry.getValue() - 1);
             queue.offer(currentEntry);
+
+            //when we reach comfortable distance then we poll one element of queue and add back to heap to keep
+            //distance
+            //[M:2][P:2] so we add say M to result now [M:1][P:2]
+            //we do not add M to heap yet as we need to reach k distances before we can add
+            //when P is appended our string becomes MP and now can add M back to heap as we reached K distance from
+            //first occurrence
             if (queue.size() == k) {
                 Map.Entry<Character, Integer> entry = queue.poll();
                 if (entry.getValue() > 0)

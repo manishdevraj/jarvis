@@ -8,7 +8,7 @@ import java.util.List;
  * Write a program that takes in head of singly linked list and an integer k and rearranges linked list in place
  * such that all values with less than K to the left of K and all values greater than K to the right of K value.
  *
- * {3, 0, 5, 2, 1, 4} with K = 3 would yeild
+ * {3, 0, 5, 2, 1, 4} with K = 3 would yield
  *
  * {0, 2, 1, 3, 5, 4}
  */
@@ -39,7 +39,7 @@ public class RearrangeLinkedList {
             }
             LinkedList prev = node;
             node = node.next;
-            prev.next = null;
+            prev.next = null; //break link of the node we found out
         }
 
         NodePair firstPair = connectLinkedList(smallHead, smallTail, middleHead, middleTail);
@@ -54,6 +54,10 @@ public class RearrangeLinkedList {
 
 
         if (tailOne != null) {
+            //this is to make sure we traverse to end of second list when merge happened in previous iteration
+            //when we connected 0 -> 2 -> 1 to 3 -> null we got tail still pointing to 1 -> 3
+            //for mid to high merge we need to go up to 3 to make new trailing tail and then point 3 to
+            //new head 5 -> 4
             while (tailOne.next != null) tailOne = tailOne.next;
             tailOne.next = headTwo;
         }
@@ -63,12 +67,11 @@ public class RearrangeLinkedList {
     public static NodePair growLinkedList(
             LinkedList head, LinkedList tail, LinkedList node){
         LinkedList newHead = head;
-        LinkedList newTail = node;
 
         if (newHead == null) newHead = node;
         if (tail != null) tail.next = node;
 
-        return new NodePair(newHead, newTail);
+        return new NodePair(newHead, node);
     }
 
     static class NodePair {

@@ -1,9 +1,7 @@
 package org.javainaction.heap;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * You are given two integer arrays nums1 and nums2 sorted in ascending order and an integer k.
@@ -11,7 +9,6 @@ import java.util.PriorityQueue;
  * Define a pair (u, v) which consists of one element from the first array and one element from the second array.
  *
  * Return the k pairs (u1, v1), (u2, v2), ..., (uk, vk) with the smallest sums.
- *
  *
  *
  * Example 1:
@@ -41,12 +38,12 @@ public class KPairswithSmallestSums {
         PriorityQueue<Integer[]> priorityQueue =
                 new PriorityQueue<>((a, b) -> (a[0] + a[1]) - (b[0] + b[1]));
 
-        if (nums1 == null && nums1.length == 0 && nums2 == null && nums2.length == 0) return result;
+        if (nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0) return result;
 
-        int l1 = nums1.length;
-        int l2 = nums2.length;
+        int n1 = nums1.length;
+        int n2 = nums2.length;
 
-        for (int i = 0; i < l1 && i < k; i++) {
+        for (int i = 0; i < n1 && i < k; i++) {
             priorityQueue.offer(new Integer[]{nums1[i], nums2[0], 0});
         }
 
@@ -54,12 +51,37 @@ public class KPairswithSmallestSums {
             Integer[] tuple = priorityQueue.poll();
             result.add(Arrays.asList(tuple[0], tuple[1]));
 
-            if (tuple[2] == l2 - 1) continue;
+            if (tuple[2] == n2 - 1) continue;
             int num2Index = tuple[2] + 1;
             priorityQueue.offer(new Integer[]{tuple[0], nums2[num2Index], num2Index});
         }
 
         return result;
+    }
+
+    public static List<List<Integer>> findKSmallestPairs(int[] nums1, int[] nums2, int k) {
+        var maxHeap = new PriorityQueue<Integer[]>((p1, p2) -> (p2[0] + p2[1]) - (p1[0] + p1[1]));
+        for (int i = 0; i < nums1.length && i < k; i++) {
+            for (int j = 0; j < nums2.length && j < k; j++) {
+                if (maxHeap.size() < k) {
+                    maxHeap.add(new Integer[] { nums1[i], nums2[j] });
+                } else {
+                    // if the sum of the two numbers from the two arrays is greater than the largest (top) element of
+                    // the heap, we can 'break' here. Since the arrays are sorted in the descending order, we'll not be
+                    // able to find a pair with a higher sum moving forward.
+                    if (nums1[i] + nums2[j] > maxHeap.peek()[0] + maxHeap.peek()[1]) {
+                        break;
+                    } else { // else: we have a pair with a larger sum, remove top and insert this pair in the heap
+                        maxHeap.poll();
+                        maxHeap.add(new Integer[] { nums1[i], nums2[j] });
+                    }
+                }
+            }
+        }
+        return maxHeap
+                .stream()
+                .map(pair -> new ArrayList<>(Arrays.asList(pair)))
+                .collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
@@ -68,5 +90,8 @@ public class KPairswithSmallestSums {
         //expected [[1,2],[1,4],[1,6]]
         System.out.println("{ 1, 7, 11 } & { 2, 4, 6 } k = 3 smallest pairs: "
                 + kSmallestPairs(array1, array2, 3));
+
+        System.out.println("{ 1, 7, 11 } & { 2, 4, 6 } k = 3 smallest pairs: "
+                + findKSmallestPairs(array1, array2, 3));
     }
 }

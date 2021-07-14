@@ -5,12 +5,16 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Serialization is converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or another computer environment.
+ * Serialization is converting a data structure or object into a sequence of bits so that it can be stored in a file
+ * or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or
+ * another computer environment.
  *
- * Design an algorithm to serialize and deserialize a binary search tree. There is no restriction on how your serialization/deserialization algorithm should work. You need to ensure that a binary search tree can be serialized to a string, and this string can be deserialized to the original tree structure.
+ * Design an algorithm to serialize and deserialize a binary search tree.
+ * There is no restriction on how your serialization/deserialization algorithm should work.
+ * You need to ensure that a binary search tree can be serialized to a string,
+ * and this string can be deserialized to the original tree structure.
  *
  * The encoded string should be as compact as possible.
- *
  *
  *
  * Example 1:
@@ -21,9 +25,11 @@ import java.util.Queue;
  *
  * Input: root = []
  * Output: []
+ * @see org.javainaction.bt.dfs.SerializeDeserializeBinaryTree where we use NULL operator, in case of BST we can use
+ * values to determine left or right child
  */
 public class SerializeDeserializeBST {
-    private static String SEPERATOR = ",";
+    private static final String SEPERATOR = ",";
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
         StringBuilder sb = new StringBuilder();
@@ -32,6 +38,8 @@ public class SerializeDeserializeBST {
     }
 
     public void serializeDfs(TreeNode root, StringBuilder sb) {
+        //The encoded string should be as compact as possible.
+        //we avoid placeholders for null values
         if (root == null) return;
 
         sb.append(root.val).append(SEPERATOR);
@@ -50,11 +58,18 @@ public class SerializeDeserializeBST {
 
     public TreeNode deserializeDfs(Queue<String> queue, int minValue, int maxValue){
         if (queue.isEmpty()) return null;
+        //this is guaranteed to work as we are not storing "NULL" strings for null node
         int value = Integer.parseInt(queue.peek());
 
+        //if bounds fail then return null value
+        //The encoded string should be as compact as possible.
         if (value < minValue || value > maxValue) return null;
+
+        //poll later as we may have matching node in another iteration
         queue.poll();
+
         TreeNode current = new TreeNode(value);
+        //user BST property to build the tree and
         current.left = deserializeDfs(queue, minValue, value);
         current.right = deserializeDfs(queue, value, maxValue);
         return current;

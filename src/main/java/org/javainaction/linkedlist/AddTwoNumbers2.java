@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * You are given two non-empty linked lists representing two non-negative integers. The most significant digit comes first and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+ * You are given two non-empty linked lists representing two non-negative integers.
+ * The most significant digit comes first and each of their nodes contains a single digit.
+ * Add the two numbers and return the sum as a linked list.
  *
  * You may assume the two numbers do not contain any leading zero, except the number 0 itself.
- *
- *
  *
  * Example 1:
  *
@@ -32,7 +32,8 @@ public class AddTwoNumbers2 {
     public static LinkedList addTwoNumbers(LinkedList linkedListOne, LinkedList linkedListTwo) {
         Stack<Integer> s1 = new Stack<>();
         Stack<Integer> s2 = new Stack<>();
-
+        //other approach could have been to reverse linked list but challenge there is to find longest linked list
+        //instead if we use stack then we can keep on popping until one of the list is available to add number
         while (linkedListOne != null) {
             s1.push(linkedListOne.value);
             linkedListOne = linkedListOne.next;
@@ -43,20 +44,18 @@ public class AddTwoNumbers2 {
             linkedListTwo = linkedListTwo.next;
         }
 
-        int sum = 0;
-
+        //head with dummy value of 0 so same can be used as a placeholder for remainder values, if any
         LinkedList head = new LinkedList(0);
         while (!s1.isEmpty() || !s2.isEmpty()) {
             int digitOne = s1.isEmpty() ? 0 : s1.pop();
             int digitTwo = s2.isEmpty() ? 0 : s2.pop();
-            sum += digitOne + digitTwo;
+            int sum = head.value + digitOne + digitTwo;
             head.value = sum % 10;
             LinkedList remainder = new LinkedList(sum / 10);
             remainder.next = head;
             head = remainder;
-            sum /= 10;
-
         }
+
         return head.value == 0 ? head.next : head;
     }
     public static class LinkedList {

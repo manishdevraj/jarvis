@@ -25,15 +25,19 @@ public class SubarrayProductLessThanK {
         int product = 1, left = 0;
         for (int right = 0; right < arr.length; right++) {
             product *= arr[right];
-            while (product >= target && left <= right) // left <= right is faster than lef < arr.length
+            //slide window when we have product more than target
+            while (product >= target && left <= right) // left <= right is faster than left < arr.length
                 product /= arr[left++];
             // since the product of all numbers from left to right is less than the target therefore,
             // all subarrays from lef to right will have a product less than the target too; to avoid
             // duplicates, we will start with a subarray containing only arr[right] and then extend it
             /**
-             * If we are not fiding actual subarray but just count of them then instead of looping from right to left
+             * If we are not finding actual subarray but just count of them then instead of looping from right to left
              * total += right - left + 1;
              */
+            //this makes sure that we get both individual element from right and its sibling whose product <= target
+            //when right = 1, left = 0
+            // we add [5] and we also use same templist to add 2 to make it as [5, 2]
             List<Integer> tempList = new LinkedList<>();
             for (int i = right; i >= left; i--) {
                 tempList.add(0, arr[i]);

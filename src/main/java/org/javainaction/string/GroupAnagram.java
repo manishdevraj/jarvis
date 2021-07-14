@@ -16,13 +16,16 @@ public class GroupAnagram {
 
         for(String word : words) {
             char[] charArray = word.toCharArray();
+            //sort the word to know anagram
             Arrays.sort(charArray);
             String key = new String(charArray);
 
+            //find the key if we have keys already then we found anagram for it
             if (anagramMap.containsKey(key)) {
                 anagramMap.get(key).add(word);
             } else {
-                anagramMap.put(key, new ArrayList<String>(Arrays.asList(word)));
+                //this may be the first of its occurrence but we still need to resend result for not anagrams too
+                anagramMap.put(key, new ArrayList<>(Collections.singletonList(word)));
             }
         }
 

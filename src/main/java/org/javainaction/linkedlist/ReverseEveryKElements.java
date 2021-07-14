@@ -18,35 +18,34 @@ public class ReverseEveryKElements {
     public static ListNode reverse(ListNode head, int k) {
         if (k < 1 || head == null) return head;
         ListNode current = head, previous = null;
-        while (true) {
-            if (current == null) break;
-            ListNode lastNodeOfFirstPart = previous;
-            ListNode lastNodeOfSubList = current;
+        while (current != null) {
+            ListNode lastPrevious = previous;
+            ListNode lastCurrent = current;
             ListNode next = null;
+            //reverse linked list for k nodes
             for (int i = 0; current != null && i < k; i++) {
                 next = current.next;
                 current.next = previous;
                 previous = current;
                 current = next;
             }
-            if (lastNodeOfFirstPart != null) lastNodeOfFirstPart.next = previous;
-            else head = previous;
+
+            if (lastPrevious != null) lastPrevious.next = previous;  //previous is new sub head connect with last prev
+            else head = previous; //reversed item where in previous becomes head
 
             // connect with the next part
-            lastNodeOfSubList.next = current;
-
-            previous = lastNodeOfSubList;
+            lastCurrent.next = current;
+            //assign previous to last current
+            previous = lastCurrent;
         }
         return head;
     }
 
     public static void main(String[] args) {
         ListNode head = createLinkedList(new int[]{1, 2, 3, 4, 5});
-
         System.out.println("{1, 2, 3, 4, 5} reverse every K=3 elements : " + reverse(head, 3));
         
         head = createLinkedList(new int[]{1, 2, 3, 4, 5, 6, 7, 8});
-
         System.out.print("{1, 2, 3, 4, 5, 6, 7, 8} reverse every K=3 elements : " + reverse(head, 3));
     }
 

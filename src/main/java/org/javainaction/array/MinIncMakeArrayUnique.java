@@ -8,7 +8,6 @@ import java.util.Arrays;
  * Return the least number of moves to make every value in nums unique.
  *
  *
- *
  * Example 1:
  *
  * Input: nums = [1,2,2]

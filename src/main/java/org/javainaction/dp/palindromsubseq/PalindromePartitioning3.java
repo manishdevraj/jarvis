@@ -39,6 +39,7 @@ public class PalindromePartitioning3 {
         if (dp.containsKey(key)) return dp.get(key);
 
         //Case2: base case that each substring just have one character
+        //there is no cost for single string as long as we have available K partition for it
         if (s.length() - start == k) return 0;
 
         //Case3: base case that need to transfer whole substring into palindrome
@@ -47,8 +48,12 @@ public class PalindromePartitioning3 {
 
         int cost = Integer.MAX_VALUE;
         //keep making next part of substring into palindrome
+        //split string into k parts
         for (int i = start + 1; i <= s.length() - k + 1; i++) {
             //compare different sides to get the minimum cost
+            //either last cost or
+            //cost to convert string from i to len with k - 1 splits
+            //and cost to to convert string between start and i - 1
             cost = Math.min(cost, palindromePartitionDfs(s, k - 1, i, dp) + cost(s, start, i - 1));
         }
         dp.put(key, cost);

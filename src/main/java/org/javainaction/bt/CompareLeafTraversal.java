@@ -40,7 +40,7 @@ public class CompareLeafTraversal {
         BinaryTree current = stack.pop();
         while (!(current.left == null && current.right == null)) {
             if (current.right != null) stack.push(current.right);
-            //purposely add left first so it gets pulled out of the stack first from left to right order
+            //purposely add left last so it gets pulled out of the stack first from left to right order
             if (current.left != null) stack.push(current.left);
             current = stack.pop();
         }

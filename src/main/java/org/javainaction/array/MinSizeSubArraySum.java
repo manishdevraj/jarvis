@@ -14,14 +14,21 @@ public class MinSizeSubArraySum {
     public static int findMinSubArray(int S, int[] arr) {
         //if (arr == null || arr.length == 0) return -1;
         int minLength = Integer.MAX_VALUE;
-        int start = 0;
+        int left = 0;
         int sum = 0;
-        for(int end = 0; end < arr.length; end++) {
-            sum += arr[end];
+        for(int right = 0; right < arr.length; right++) {
+            //slide window until we have sum <= S
+            sum += arr[right];
+            //if we hit our desired sum value then shrink window
+            //while because we might still have smaller window
+            //[1, 2, 2, 1, 2...] with S = 7
+            // at right = 4 we have sum of value 8 when we shrink left we still have sum == S
+            // so we shrink more and get new min window of 4
             while (sum >= S) {
-                minLength = Math.min(minLength, end - start + 1);
-                sum -= arr[start];
-                start++;
+                //calculate min window length
+                minLength = Math.min(minLength, right - left + 1);
+                sum -= arr[left];
+                left++;
             }
         }
         return minLength == Integer.MAX_VALUE ? 0 : minLength;

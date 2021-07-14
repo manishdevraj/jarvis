@@ -54,14 +54,20 @@ public class MaximumDistinctElements {
         while (k > 0 && !minHeap.isEmpty()) {
             Map.Entry<Integer, Integer> entry = minHeap.poll();
             // to make an element distinct, we need to remove all of its occurrences except one
+            // if we remove move then K would be negative indicating we could not make number distinct in that iteration
+            // - 1 below indicates apply k - 1 deletion to number in an attempt to try and make it unique
+
+            // [7, 3, 5, 8, 5, 3, 3], and K=2
+            // [5: 2] will make K = 2 - (2 - 1) = 1, so we count that as distinct because we could keep K above 0
+            // [3 : 3] will make K = 1 - (3 - 1) = -1, we cannot count this distinct because
+            // we cannot replace 3 freq in this attempt to
             k -= entry.getValue() - 1;
             if (k >= 0)
                 distinctElementsCount++;
         }
 
         // if k > 0, this means we have to remove some distinct numbers
-        if (k > 0)
-            distinctElementsCount -= k;
+        if (k > 0) distinctElementsCount -= k;
 
         return distinctElementsCount;
     }

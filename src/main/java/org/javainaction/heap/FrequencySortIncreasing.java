@@ -3,7 +3,8 @@ package org.javainaction.heap;
 import java.util.*;
 
 /**
- * Given an array of integers nums, sort the array in increasing order based on the frequency of the values. If multiple values have the same frequency, sort them in decreasing order.
+ * Given an array of integers nums, sort the array in increasing order based on the frequency of the values.
+ * If multiple values have the same frequency, sort them in decreasing order.
  *
  * Return the sorted array.
  *
@@ -33,9 +34,9 @@ public class FrequencySortIncreasing {
 
         PriorityQueue<Map.Entry<Integer, Integer>> minHeap
                 = new PriorityQueue<>(
-                        (a, b) -> a.getValue().equals(b.getValue()) ?
-                                b.getKey().compareTo(a.getKey()) :
-                                a.getValue() - b.getValue()
+                        (a, b) -> a.getValue().equals(b.getValue()) //for same frequency
+                                ? b.getKey().compareTo(a.getKey()) //sort by descending order
+                                : a.getValue() - b.getValue() //or sort by lower frequency
         );
 
         //add all from frequency map
@@ -48,9 +49,8 @@ public class FrequencySortIncreasing {
             int e = entry.getKey();
             int count = entry.getValue();
             while (count != 0 && i < result.length) {
-                result[i] = e;
+                result[i++] = e;
                 count--;
-                i++;
             }
         }
         return result;
@@ -62,11 +62,11 @@ public class FrequencySortIncreasing {
         Arrays.stream(nums).forEach(i -> frequencyMap.put(i, frequencyMap.getOrDefault(i, 0) + 1));
 
         return Arrays.stream(nums).boxed()
-                //if frequency of two numbers are not the same, sort by ascending frequency.
+                // if frequency of two numbers are not the same, sort by ascending frequency.
                 // If frequencies are the same, sort by descending numeric value
-                .sorted((a, b) -> !frequencyMap.get(a).equals(frequencyMap.get(b))
-                        ? frequencyMap.get(a) - frequencyMap.get(b) :
-                        b - a)
+                .sorted((a, b) -> frequencyMap.get(a).equals(frequencyMap.get(b))  //for same frequency
+                        ? b - a : //sort by descending order
+                        frequencyMap.get(a) - frequencyMap.get(b)) //or sort by lower frequency
                 .mapToInt(n -> n)
                 .toArray();
     }
@@ -76,5 +76,11 @@ public class FrequencySortIncreasing {
                 + Arrays.toString(frequencySort(new int[]{1, 1, 2, 2, 2, 3})));
         System.out.println("{ -1,1,-6,4,5,-6,1,4,1 } frequency sort increasing : "
                 + Arrays.toString(frequencySort(new int[]{-1,1,-6,4,5,-6,1,4,1})));
+
+
+        System.out.println("{ 1,1,2,2,2,3 } frequency sort without heap increasing : "
+                + Arrays.toString(frequencySortWithoutHeap(new int[]{1, 1, 2, 2, 2, 3})));
+        System.out.println("{ -1,1,-6,4,5,-6,1,4,1 } frequency sort without heap increasing : "
+                + Arrays.toString(frequencySortWithoutHeap(new int[]{-1,1,-6,4,5,-6,1,4,1})));
     }
 }

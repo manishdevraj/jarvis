@@ -36,12 +36,17 @@ import java.util.Arrays;
  * Output: 0
  *
  * @see ReplacingOnes
+ * @see MaxConsecutiveOnes3
  */
 public class LongestSubarrayof1WithOneDel {
     public static int longestSubarray(int[] arr) {
         int i = 0, j = 0, k = 1;
         //sliding window technique
         for(; i < arr.length && j < arr.length; ++j) {
+            //we keep on iterating j, we see every iteration i and j is added by 1
+            //which makes the distance between j and i same.
+            //The distance between j and i would change again if there is a longer subarray exist.
+
             //if we find 0's then we found our replacement
             if (arr[j] == 0) k--;
             //if we find we ran out of replacement and we got new possible 0's replacement

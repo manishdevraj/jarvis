@@ -19,6 +19,7 @@ package org.javainaction.dp.palindromsubseq;
  * Input: = "pqr"
  * Output: 3
  * Explanation: Here are the palindromic substrings,"p", "q", "r".
+ * @see LongestPalindromicSubstring
  */
 public class CountLongestPalindromicSubstring {
     public static int findCPS(String st) {
@@ -30,6 +31,7 @@ public class CountLongestPalindromicSubstring {
         // every string with one character is a palindrome
         for (int i = 0; i < st.length(); i++) {
             dp[i][i] = true;
+            //we count even single letter strings too
             count++;
         }
 
@@ -38,6 +40,9 @@ public class CountLongestPalindromicSubstring {
                 if (st.charAt(startIndex) == st.charAt(endIndex)) {
                     // if it's a two character string or if the remaining string is a palindrome too
                     if (endIndex - startIndex == 1 || dp[startIndex + 1][endIndex - 1]) {
+                        //we have some form of palindrome, just count that too, this is similar as
+                        //find length of longest palindrome substring, we are just counting them
+                        //here over end - start + 1
                         dp[startIndex][endIndex] = true;
                         count++;
                     }

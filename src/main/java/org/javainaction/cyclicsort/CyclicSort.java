@@ -21,8 +21,12 @@ package org.javainaction.cyclicsort;
  *
  * Input: [1, 5, 6, 4, 3, 2]
  * Output: [1, 2, 3, 4, 5, 6]
+ * @see AllMissingNumbers
  */
 public class CyclicSort {
+    //Idea is to swap value at its value - 1 th index until we are done computing all values in array
+    //Each time value is not at correct space we swap and move only when we got them sorted
+    //this is possible because we have values in range 1...n
     public static void sort(int[] nums) {
         int i = 0;
         while ( i < nums.length) {
@@ -43,19 +47,19 @@ public class CyclicSort {
 
     public static void main(String[] args) {
         int[] arr = new int[] { 3, 1, 5, 4, 2 };
-        CyclicSort.sort(arr);
+        sort(arr);
         for (int num : arr)
             System.out.print(num + " ");
         System.out.println();
 
         arr = new int[] { 2, 6, 4, 3, 1, 5 };
-        CyclicSort.sort(arr);
+        sort(arr);
         for (int num : arr)
             System.out.print(num + " ");
         System.out.println();
 
         arr = new int[] { 1, 5, 6, 4, 3, 2 };
-        CyclicSort.sort(arr);
+        sort(arr);
         for (int num : arr)
             System.out.print(num + " ");
         System.out.println();

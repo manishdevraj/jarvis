@@ -1,6 +1,5 @@
 package org.javainaction.slidingwindow;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +16,7 @@ import java.util.Map;
  * Input: String="abbbb"
  * Output: 2
  * Explanation: The longest substring without any repeating characters is "ab".
+ * @see LongestSubstrNoRepeatChars
  */
 public class NoRepeatSubstring {
 
@@ -31,6 +31,10 @@ public class NoRepeatSubstring {
             if (charIndexMap.containsKey(rightChar)) {
                 // this is tricky; in the current window, we will not have any 'rightChar' after its previous index
                 // and if 'windowStart' is already ahead of the last index of 'rightChar', we'll keep 'windowStart'
+                // shrink window to last seen plus one or left pointer
+                // for example if we have bcaa... then at 3rd index it does not make sense to shrink from 0 to 1
+                // but shrink from 2 (which is last known location of duplicate a) to 3
+                // as max length previous of index 3 cannot be more than 3 (bca)
                 windowStart = Math.max(windowStart, charIndexMap.get(rightChar) + 1);
             }
             charIndexMap.put(rightChar, windowEnd); // insert the 'rightChar' into the map

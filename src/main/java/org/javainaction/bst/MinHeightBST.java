@@ -24,10 +24,10 @@ public class MinHeightBST {
         return buildMinHeightBst(0, array.size() - 1, array, null);
     }
 
-    public static BST buildMinHeightBst(int i, int j, List<Integer> array, BST root) {
-        if (j < i) return null;
+    public static BST buildMinHeightBst(int left, int right, List<Integer> array, BST root) {
+        if (right < left) return null;
 
-        int middle = (i + j) / 2;
+        int middle = left + (right - left) / 2;
         int valueToInsert = array.get(middle);
 
         if (root == null) {
@@ -36,8 +36,8 @@ public class MinHeightBST {
             root.insert(valueToInsert);
 
         }
-        buildMinHeightBst(i, middle - 1, array, root);
-        buildMinHeightBst(middle + 1, j, array, root);
+        buildMinHeightBst(left, middle - 1, array, root);
+        buildMinHeightBst(middle + 1, right, array, root);
         return root;
     }
 

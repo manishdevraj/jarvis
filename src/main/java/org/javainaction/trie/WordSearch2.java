@@ -22,20 +22,21 @@ import java.util.*;
  *
  * Input: board = [["a","b"],["c","d"]], words = ["abcb"]
  * Output: []
+ * @see BoggleBoard
  */
 public class WordSearch2 {
     // O(nm*8^s + ws) time | O(nm+ ws) space
     public static List<String> findWords(char[][] board, String[] words) {
-        SuffixTrie suffixTrie = new SuffixTrie();
+        Trie trie = new Trie();
         for (String word : words) {
-            suffixTrie.insert(word);
+            trie.insert(word);
         }
 
         Set<String> finalWords = new HashSet<>();
         boolean[][] visited = new boolean[board.length][board[0].length];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                exploreBoard(board, i, j, visited, finalWords, suffixTrie.root);
+                exploreBoard(board, i, j, visited, finalWords, trie.root);
             }
         }
         return List.copyOf(finalWords);
@@ -82,7 +83,7 @@ public class WordSearch2 {
         String word;
     }
 
-    static class SuffixTrie {
+    static class Trie {
         TrieNode root = new TrieNode();
         char endSymbol = '*';
 

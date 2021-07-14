@@ -40,10 +40,12 @@ public class StringInterweaving {
     public static boolean isInterleavingStrings(String s1, String s2, String s3,
                                                 int i, int j, int k,
                                                 Boolean[][] cache) {
+        //if first string is at end we need to check if remaining s2 and s3 are match
         if (i == s1.length()) {
             return s2.substring(j).equals(s3.substring(k));
         }
 
+        //if second string is at end we need to check if remaining s1 and s3 are match
         if (j == s2.length()) {
             return s1.substring(i).equals(s3.substring(k));
         }
@@ -52,14 +54,19 @@ public class StringInterweaving {
 
         if (k == s3.length()) return true;
 
+        //when s1 and s3 characters are same, try for i + 1 and k + 1 th character
         Supplier<Boolean> supplierOne = () ->
-                i < s1.length() && s1.charAt(i) == s3.charAt(k)
-                        && isInterleavingStrings(s1, s2, s3, i + 1, j, k + 1, cache);
+                i < s1.length()  //is within bound
+                        && s1.charAt(i) == s3.charAt(k) //character is match
+                        && isInterleavingStrings(s1, s2, s3, i + 1, j, k + 1, cache);  //try more
 
+        //when s1 and s3 characters are same, try for j + 1 and k + 1 th character
         Supplier<Boolean> supplierTwo = () ->
-                j < s2.length() && s2.charAt(j) == s3.charAt(k)
-                        && isInterleavingStrings(s1, s2, s3, i, j + 1, k + 1, cache);
+                j < s2.length() //is within bound
+                        && s2.charAt(j) == s3.charAt(k) //character is match
+                        && isInterleavingStrings(s1, s2, s3, i, j + 1, k + 1, cache); //try more
 
+        //if either of the result matched then we consider it match
         cache[i][j] = supplierOne.get() || supplierTwo.get();
 
         return cache[i][j];

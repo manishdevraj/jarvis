@@ -20,6 +20,8 @@ import java.util.Map;
  *     },
  *     "a": {"b": {"c": {"*", true}}}
  * }
+ *
+ * Node this is different than Prefix Trie
  */
 public class SuffixTrieConstruction {
     static class TrieNode {

@@ -65,9 +65,12 @@ public class HouseThief {
     private int findMaxStealOptimized(int[] wealth) {
         if (wealth.length == 0) return 0;
         else if (wealth.length == 1) return wealth[0];
+        //previous stolen
         int p1 = wealth[0];
+        //last max stolen
         int p2 = Math.max(wealth[1], p1);
         for (int i = 2; i < wealth.length; i++) {
+            //we either steal current and (n - 2) stolen or we last stolen max
             int maxSteal = Math.max(wealth[i] + p1, p2);
             p1 = p2;
             p2 = maxSteal;
@@ -80,6 +83,18 @@ public class HouseThief {
     private int findMaxStealIterativeBottomup(int[] wealth) {
         int start = 0; int end = wealth.length - 1;
         int preStolen = 0, curStolen = 0;
+        //as we just need to exclude adjacent house
+        //two pointers prev steal and current steal allows us to track which we need to pick
+        //[2, 5, 1, 3, 6, 2, 4] with previous and current steal both pointing at 0
+        //[n - 2] = prev stolen, [n - 1] = cur stolen, [n] is current steal
+        //i=0 curStolen = 2 as there was nothing stolen previously and previous max is still 0
+        //i=1 curStolen = 5, we either keep previous steal + curr wealth or pick last steal
+        // [n - 2] steal + [n] steal or [n - 1] steal
+        //i=2 current steal = 5
+        //i=3 we can steal 5 + 3 = 8
+        //i=4 we can steal previous and current 5 + 6 = 11
+        //i=5 current steal = 11
+        //i=6 current steal = 11 + 4 = 15
         while (start <= end) {
             int holdWealth = curStolen;
             curStolen = Math.max(wealth[start] + preStolen, curStolen);

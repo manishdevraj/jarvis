@@ -26,7 +26,9 @@ public class MinimumDifference {
     public static int searchMinDiffElement(int[] arr, int key) {
         if (arr == null || arr.length == 0) return -1;
         int n = arr.length;
+        //if number is less than smallest element then that is minimum difference number
         if (key < arr[0]) return arr[0];
+        //if number is greater than biggest element then that is the minimum difference number
         if (key > arr[n - 1]) return arr[n - 1];
 
         int left = 0; int right = n - 1;
@@ -36,14 +38,15 @@ public class MinimumDifference {
             else if (key < arr[middle]) right = middle - 1;
             else if (key > arr[middle]) left = middle + 1;
         }
+        //check which is smallest ceiling or floor number
         if ((arr[left] - key) < (arr[right] - key)) return arr[left];
         return arr[right];
     }
 
     public static void main(String[] args) {
-        System.out.println(MinimumDifference.searchMinDiffElement(new int[] { 4, 6, 10 }, 7));
-        System.out.println(MinimumDifference.searchMinDiffElement(new int[] { 4, 6, 10 }, 4));
-        System.out.println(MinimumDifference.searchMinDiffElement(new int[] { 1, 3, 8, 10, 15 }, 12));
-        System.out.println(MinimumDifference.searchMinDiffElement(new int[] { 4, 6, 10 }, 17));
+        System.out.println(searchMinDiffElement(new int[] { 4, 6, 10 }, 7));
+        System.out.println(searchMinDiffElement(new int[] { 4, 6, 10 }, 4));
+        System.out.println(searchMinDiffElement(new int[] { 1, 3, 8, 10, 15 }, 12));
+        System.out.println(searchMinDiffElement(new int[] { 4, 6, 10 }, 17));
     }
 }
