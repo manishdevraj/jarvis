@@ -1,9 +1,5 @@
 package org.javainaction.fastslow;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Given the head of a Singly LinkedList, write a method to modify the LinkedList such that the nodes from the second
  * half of the LinkedList are inserted alternately to the nodes from the first half in reverse order. So if the

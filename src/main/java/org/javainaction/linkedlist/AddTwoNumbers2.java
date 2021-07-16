@@ -51,6 +51,7 @@ public class AddTwoNumbers2 {
             int digitTwo = s2.isEmpty() ? 0 : s2.pop();
             int sum = head.value + digitOne + digitTwo;
             head.value = sum % 10;
+            //put remainder in new node and connect that to head and then make it new head to use as previous node
             LinkedList remainder = new LinkedList(sum / 10);
             remainder.next = head;
             head = remainder;

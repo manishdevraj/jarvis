@@ -50,7 +50,7 @@ public class PathSum3 {
         int totalCount = countPath + findPathSum(node.left, sum, targetSum, map)
                 + findPathSum(node.right, sum, targetSum, map);
 
-        //reset at the end of resursive stack
+        //reset at the end of recursive stack
         map.put(sum, map.get(sum) - 1);
 
         return totalCount;

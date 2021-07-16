@@ -9,7 +9,8 @@ package org.javainaction.twopointers;
  *
  * Example: [2, 3, 3, 3, 6, 9, 9 ]
  * Output: 4
- *
+ * @see org.javainaction.array.MoveElemToRight
+ * @see org.javainaction.array.MoveZeroToLeft
  */
 public class RemoveDuplicates {
 

@@ -1,8 +1,5 @@
 package org.javainaction.linkedlist;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Given the head of a linked list, rotate the list to the right by k places.

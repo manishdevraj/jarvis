@@ -64,9 +64,9 @@ public class MaxPointsFromCards {
         //and add nth element from the end of the deck going backwards up to k
         // [x, y, z, ..... a, b, c]
         // we are max of ( x + y + z)
-        // total += (z) - (c)
-        // total += (y) - (b)
-        // total += (x) - (a)
+        // total += (c) - (z)
+        // total += (b) - (y)
+        // total += (a) - (x)
         // we either found new max from right to left or we retain the max from left to right
         for (int i = 0; i < k; i++) {
             totalPoints += cardPoints[N - 1 - i] - cardPoints[k - 1 - i];

@@ -3,9 +3,8 @@ package org.javainaction.bst;
 import java.util.Stack;
 
 /**
- * Given the root of a Binary Search Tree (BST), return the minimum absolute difference between the values of any two different nodes in the tree.
- *
- *
+ * Given the root of a Binary Search Tree (BST), return the minimum absolute difference between the values of any two
+ * different nodes in the tree.
  *
  * Example 1:
  *
