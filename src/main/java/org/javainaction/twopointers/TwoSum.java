@@ -24,6 +24,8 @@ import java.util.HashMap;
  *
  * Input: nums = [3,3], target = 6
  * Output: [0,1]
+ * @see PairSumsWithDuplicates where we might have duplicate elements
+ * @see PairWithTargetSum give indices
  */
 public class TwoSum {
     // O(n) with Map space
@@ -58,18 +60,18 @@ public class TwoSum {
     }
 
     public static void main(String[] args) {
-        int[] result = TwoSum.twoSum(new int[] { 2,7,11,15 }, 9);
+        int[] result = twoSum(new int[] { 2,7,11,15 }, 9);
         System.out.println("{2,7,11,15} with target sum of 9 at: " + Arrays.toString(result));
-        result = TwoSum.twoSum(new int[] { 3,2,4 }, 6);
+        result = twoSum(new int[] { 3,2,4 }, 6);
         System.out.println("{3,2,4} with target sum of 6 at: " + Arrays.toString(result));
-        result = TwoSum.twoSum(new int[] { 3,2,0,3 }, 6);
+        result = twoSum(new int[] { 3,2,0,3 }, 6);
         System.out.println("{3,2,0,3} with target sum of 6 at: " + Arrays.toString(result));
 
-        result = TwoSum.twoSumByDivideAndConcur(new int[] { 2,7,11,15 }, 9);
+        result = twoSumByDivideAndConcur(new int[] { 2,7,11,15 }, 9);
         System.out.println(" twoSumByDivdeAndConcur {2,7,11,15} with target sum of 9 at: " + Arrays.toString(result));
-        result = TwoSum.twoSumByDivideAndConcur(new int[] { 3,2,4 }, 6);
+        result = twoSumByDivideAndConcur(new int[] { 3,2,4 }, 6);
         System.out.println(" twoSumByDivdeAndConcur {3,2,4} with target sum of 6 at: " + Arrays.toString(result));
-        result = TwoSum.twoSumByDivideAndConcur(new int[] { 3,2,0,3 }, 6);
+        result = twoSumByDivideAndConcur(new int[] { 3,2,0,3 }, 6);
         System.out.println(" twoSumByDivdeAndConcur {3,2,0,3} with target sum of 6 at: " + Arrays.toString(result));
 
     }

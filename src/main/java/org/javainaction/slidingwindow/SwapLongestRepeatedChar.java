@@ -47,7 +47,6 @@ public class SwapLongestRepeatedChar {
             frequencies.put(s.charAt(i), value);
         }
 
-
         int longest = 1;
         for (List<Integer> indices : frequencies.values()) {
             int maxLength = 1;

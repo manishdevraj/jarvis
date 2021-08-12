@@ -14,21 +14,21 @@ public class MoveZeroToLeft {
     private static int[] moveZeros(int[] array) {
         if (array == null || array.length == 0) return array;
 
-        int read = array.length - 1;
-        int write = array.length - 1;
+        int left = array.length - 1;
+        int right = array.length - 1;
         //while we traverse from right to left
-        while(read >= 0) {
-            //swap all non zero at write index
-            if(array[read] != 0) {
-                array[write] = array[read];
-                write--;
+        while (left >= 0) {
+            //swap all non zero at right index because we plan to move all zero's at start
+            if(array[left] != 0) {
+                array[right] = array[left];
+                right--;
             }
-            read--;
+            left--;
         }
 
-        //mark remaining of write index to 0 to delete remaining swaps
-        while(write >= 0) {
-            array[write--] = 0;
+        //mark remaining of right index to 0 to delete remaining swaps
+        while (right >= 0) {
+            array[right--] = 0;
         }
 
         return array;

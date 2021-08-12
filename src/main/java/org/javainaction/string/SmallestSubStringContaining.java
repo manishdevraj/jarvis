@@ -1,7 +1,6 @@
 package org.javainaction.string;
 
-import org.javainaction.slidingwindow.MinWindowSubString;
-import org.javainaction.slidingwindow.StringAnagrams;
+import org.javainaction.slidingwindow.MinWindowSubStringWithDuplicateChars;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +25,7 @@ import java.util.Map;
  * Input: String="adcad", Pattern="abc"
  * Output: ""
  * Explanation: No substring in the given string has all characters of the pattern.
- * @see org.javainaction.slidingwindow.MinWindowSubString with duplicate characters
+ * @see MinWindowSubStringWithDuplicateChars with duplicate characters
  * @see org.javainaction.slidingwindow.StringAnagrams where we are essentially finding min window substring
  * @see org.javainaction.slidingwindow.MinimumWindowSubstring with unique characters
  */

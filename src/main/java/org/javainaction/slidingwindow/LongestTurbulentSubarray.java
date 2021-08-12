@@ -49,16 +49,17 @@ public class LongestTurbulentSubarray {
             //if they are not below 0 it means it is either matching = 0
             //or are not flipping comparisons -1 * -1 or 1 * 1
             //else flipping comparison so increment the turbulent array by 1
-            if (prev_comparison * (Integer.compare(arr[i-1], arr[i])) < 0) {
+            int current_comparison = Integer.compare(arr[i - 1], arr[i]);
+            if (prev_comparison * current_comparison < 0) {
                 count++;
             } else {
                 //we came here because we did either are at starting or we lost flipping sequence and need to reset
                 //reset based on result of two integers at current index
                 //either they are same so reset to 1 or increasing
                 //or decreasing sequence so reset to to 2
-                count = Integer.compare(arr[i-1], arr[i]) != 0 ? 2 : 1;
+                count = current_comparison != 0 ? 2 : 1;
             }
-            prev_comparison = Integer.compare(arr[i-1], arr[i]);
+            prev_comparison = current_comparison;
             max = Math.max(max, count);
         }
         return max;

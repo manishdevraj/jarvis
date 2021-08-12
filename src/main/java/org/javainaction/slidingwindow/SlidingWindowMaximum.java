@@ -3,7 +3,6 @@ package org.javainaction.slidingwindow;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
-import java.util.Objects;
 
 /**
  * You are given an array of integers nums, there is a sliding window of size k which is moving from the very
@@ -56,7 +55,7 @@ public class SlidingWindowMaximum {
             //add index
             queue.offer(i);
 
-            if (i - k + 1 >= 0 ) result[i - k + 1] = nums[queue.peek()];
+            if (i - k + 1 >= 0 && !queue.isEmpty()) result[i - k + 1] = nums[queue.peek()];
         }
         return result;
     }

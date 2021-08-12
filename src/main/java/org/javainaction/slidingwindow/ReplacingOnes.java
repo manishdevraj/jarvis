@@ -32,7 +32,7 @@ public class ReplacingOnes {
         return j - i;
     }
 
-    public static int _findLength(int[] arr, int k) {
+    public static int replaceOneUsingCounterSlidingWindow(int[] arr, int k) {
         int windowStart = 0, maxLength = 0, maxOnesCount = 0;
         // try to extend the range [windowStart, windowEnd]
         for (int windowEnd = 0; windowEnd < arr.length; windowEnd++) {
@@ -60,8 +60,8 @@ public class ReplacingOnes {
                 + findLength(new int[]{0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1}, 3));
 
         System.out.println(Arrays.toString(new int[]{0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1}) + " : "
-                + _findLength(new int[]{0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1}, 2));
+                + replaceOneUsingCounterSlidingWindow(new int[]{0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1}, 2));
         System.out.println(Arrays.toString(new int[]{0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1}) + " : "
-                + _findLength(new int[]{0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1}, 3));
+                + replaceOneUsingCounterSlidingWindow(new int[]{0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1}, 3));
     }
 }

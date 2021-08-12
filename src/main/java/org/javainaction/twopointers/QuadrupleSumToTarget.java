@@ -17,6 +17,7 @@ import java.util.*;
  * Output: [-2, 0, 2, 2], [-1, 0, 1, 2]
  * Explanation: Both the quadruplets add up to the target.
  * @see FourNumSum
+ * @see TripletSumToZeroUnique where we have unique triplet instead of unique quadruplet
  */
 public class QuadrupleSumToTarget {
 

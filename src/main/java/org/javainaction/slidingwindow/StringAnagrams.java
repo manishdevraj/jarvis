@@ -28,7 +28,9 @@ import java.util.Map;
  * Input: String="abbcabc", Pattern="abc"
  * Output: [2, 3, 4]
  * Explanation: The three anagrams of the pattern in the given string are "bca", "cab", and "abc".
- * @see MinimumWindowSubstring where are are finding patter in substring
+ * @see MinimumWindowSubstring where are are finding patter in substring vs here we are storing all such indices without
+ * worrying which one has smallest length
+ * @see FindAllAnagrams where we are using distinct counter vs here we find matched counter
  */
 public class StringAnagrams {
     public static List<Integer> findStringAnagrams(String str, String pattern) {
@@ -50,9 +52,14 @@ public class StringAnagrams {
                 if (charFrequencyMap.get(rightChar) == 0) matched++; // character is completely matched
             }
 
-            //store start of the solution
+            //store start of the solution as we want all solutions
             if (matched == charFrequencyMap.size()) resultIndices.add(windowStart);
 
+            //we need some way to know when to shrink, the best place is to shrink when we have enough right pointer
+            //going beyond pattern length, this will always executed once reached
+            //For example : 'ppqp' and pattern 'pq'
+            //windowEnd from index 1 will always be >= to pattern length 2, meaning we try all tuples from each index
+            //of the pattern length
             if (windowEnd >= pattern.length() - 1) { // shrink the window by one character
                 char leftChar = str.charAt(windowStart++);
                 if (charFrequencyMap.containsKey(leftChar)) {

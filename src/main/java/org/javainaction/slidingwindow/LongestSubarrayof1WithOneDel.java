@@ -37,6 +37,7 @@ import java.util.Arrays;
  *
  * @see ReplacingOnes
  * @see MaxConsecutiveOnes3
+ * @see CharacterReplacement
  */
 public class LongestSubarrayof1WithOneDel {
     public static int longestSubarray(int[] arr) {

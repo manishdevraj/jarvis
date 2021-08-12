@@ -24,8 +24,9 @@ import java.util.Map;
  * Input: String="adcad", Pattern="abc"
  * Output: ""
  * Explanation: No substring in the given string has all characters of the pattern.
- * @see MinWindowSubString with duplicate characters
+ * @see MinWindowSubStringWithDuplicateChars with duplicate characters
  * @see StringAnagrams where we are essentially finding min window substring
+ * @see FindAllAnagrams where are are checking all characters from anagram pattern
  */
 public class MinimumWindowSubstring {
     public static String findSubstring(String str, String pattern) {
@@ -48,6 +49,8 @@ public class MinimumWindowSubstring {
             }
 
             while (matched == charFrequencyMap.size()) {
+                //store solution start only if this is smallest of last know length
+                //otherwise this would have been, minLength = Math.min(minLength, windowEnd - windowStart + 1);
                 if ((windowEnd - windowStart) + 1 < minLength) {
                     minLength = (windowEnd - windowStart) + 1;
                     solutionStart = windowStart;

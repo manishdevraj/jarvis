@@ -11,12 +11,12 @@ package org.javainaction.twopointers;
  * @see DutchNationalFlagProblem
  */
 public class RearrangeString {
-    public String rerrangeWord(String word) {
-        return new String(rerrangeWord(word.toCharArray()));
+    public String rearrangeWord(String word) {
+        return new String(rearrangeWord(word.toCharArray()));
     }
 
     // This runs in O(n) with O(1) space
-    public char[] rerrangeWord(char[] word) {
+    public char[] rearrangeWord(char[] word) {
         int low = 0;
         int high = word.length-1;
         int mid = 0;
@@ -46,7 +46,7 @@ public class RearrangeString {
     }
 
     public static void main(String[] args) {
-        System.out.println(new RearrangeString().rerrangeWord("cdBnC52c"));
-        System.out.println(new RearrangeString().rerrangeWord("123abA"));
+        System.out.println(new RearrangeString().rearrangeWord("cdBnC52c"));
+        System.out.println(new RearrangeString().rearrangeWord("123abA"));
     }
 }

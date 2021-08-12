@@ -3,7 +3,7 @@ package org.javainaction.twopointers;
 import java.util.HashMap;
 
 /**
- * Fid a pair matching a target sum in a given array. Return indices of such a pair
+ * Find a pair matching a target sum in a given array. Return indices of such a pair
  * If no pair matches given sum then return [-1, -1]
  *
  * Example: [1, 2, 3, 4, 6], target = 6

@@ -33,7 +33,7 @@ import java.util.Map;
  * arr = [1, 5, 3, 3, 3]
  * output = 4
  */
-public class PairSums {
+public class PairSumsWithDuplicates {
     //O(n) time and O(n) space
     int numberOfWays(int[] arr, int k) {
         if (arr  == null || arr.length == 0) return 0;
@@ -109,6 +109,6 @@ public class PairSums {
 
     }
     public static void main(String[] args) {
-        new PairSums().run();
+        new PairSumsWithDuplicates().run();
     }
 }

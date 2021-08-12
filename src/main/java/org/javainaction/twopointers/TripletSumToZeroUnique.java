@@ -17,6 +17,7 @@ import java.util.List;
  * Input: [-5, 2, -1, -2, 3]
  * Output: [[-5, 2, 3], [-2, -1, 3]]
  * Explanation: There are two unique triplets whose sum is equal to zero.
+ * @see QuadrupleSumToTarget
  */
 public class TripletSumToZeroUnique {
     private static List<List<Integer>> searchUniqueTriplet(int[] arr) {

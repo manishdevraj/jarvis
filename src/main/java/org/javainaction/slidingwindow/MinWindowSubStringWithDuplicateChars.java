@@ -22,7 +22,7 @@ import java.util.Map;
  * @see MinimumWindowSubstring where pattern has unique characters vs pattern here can have duplicate character
  * @see org.javainaction.string.SmallestSubStringContaining
  */
-public class MinWindowSubString {
+public class MinWindowSubStringWithDuplicateChars {
     public static String minWindow(String s, String t) {
         // corner case
         if(s == null || t == null || s.length() == 0 || t.length() == 0 || s.length() < t.length()) return "";
@@ -31,7 +31,6 @@ public class MinWindowSubString {
         int minLeft = 0;
         int minRight = 0;
         int min = s.length() + 1;
-        boolean flag = false;
 
         Map<Character, Integer> map = new HashMap<>();
         int count = t.length(); // the number of characters that I need to match

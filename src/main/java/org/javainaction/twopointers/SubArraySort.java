@@ -25,14 +25,12 @@ public class SubArraySort {
         if(leftOutOfOrder == Integer.MAX_VALUE) return new int[]{-1, -1};
 
         int leftIndex = 0;
-        while (leftIndex < array.length
-                && array[leftIndex] <= leftOutOfOrder ) {
+        while (leftIndex < array.length && array[leftIndex] <= leftOutOfOrder ) {
             leftIndex++;
         }
 
         int rightIndex = array.length - 1;
-        while (rightIndex >= 0
-                && rightOutOfOrder <= array[rightIndex]) {
+        while (rightIndex >= 0 && rightOutOfOrder <= array[rightIndex]) {
             rightIndex--;
         }
 
@@ -46,7 +44,7 @@ public class SubArraySort {
         if (i == array.length - 1) {
             return num < array[i-1];
         }
-        return array[i + 1] < num || num < array[i-1];
+        return array[i + 1] < num || num < array[i - 1];
     }
 
     public static void main(String[] args) {

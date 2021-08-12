@@ -9,16 +9,20 @@ import java.util.List;
  */
 public class MoveElemToRight {
     public static List<Integer> moveElementToEnd(List<Integer> array, int toMove) {
-        int left = 0;
         int right = 0;
-        while (left < array.size()) {
-            if (array.get(left) != toMove) {
-                array.set(right, array.get(left));
-                right++;
+        int left = 0;
+        while (right < array.size()) {
+            //move all non matching element to left
+            //where left represents location to copy element that is not 'toMove'
+            if (array.get(right) != toMove) {
+                array.set(left, array.get(right));
+                left++;
             }
-            left++;
+            //write always move ahead irrespective of match
+            right++;
         }
-        while(right < array.size()) array.set(right++, toMove);
+        //if we have spaces left, convert all elements between left to end to 'toMove' to mimic that we moved them to end
+        while(left < array.size()) array.set(left++, toMove);
         return array;
     }
 
