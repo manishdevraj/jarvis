@@ -39,7 +39,7 @@ public class MinimumDifference {
             else if (key > arr[middle]) left = middle + 1;
         }
         //check which is smallest ceiling or floor number
-        if ((arr[left] - key) < (arr[right] - key)) return arr[left];
+        if (Math.abs(arr[left] - key) < Math.abs(arr[right] - key)) return arr[left];
         return arr[right];
     }
 
@@ -47,6 +47,7 @@ public class MinimumDifference {
         System.out.println(searchMinDiffElement(new int[] { 4, 6, 10 }, 7));
         System.out.println(searchMinDiffElement(new int[] { 4, 6, 10 }, 4));
         System.out.println(searchMinDiffElement(new int[] { 1, 3, 8, 10, 15 }, 12));
+        System.out.println(searchMinDiffElement(new int[] { 1, 3, 5, 8, 10, 15 }, 7));
         System.out.println(searchMinDiffElement(new int[] { 4, 6, 10 }, 17));
     }
 }

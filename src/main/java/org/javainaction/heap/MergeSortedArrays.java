@@ -17,6 +17,8 @@ import java.util.PriorityQueue;
  *
  *
  *    OUTPUT {-124, -1, 0, 1, 3, 5, 6, 9, 12, 20, 21, 81, 121, 150}
+ *
+ * @see SortKSortedArray K sorted array is partially sorted array where elements are at most k positions away from sorted positions
  */
 public class MergeSortedArrays {
     // O(nlog(k) + k) time | O(n + k) space where n is the total number of

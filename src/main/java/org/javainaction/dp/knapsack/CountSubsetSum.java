@@ -15,6 +15,7 @@ package org.javainaction.dp.knapsack;
  * Output: 3
  * The given set has '3' subsets whose sum is '9': {2, 7}, {1, 7, 1}, {1, 2, 1, 5}
  * @see SubsetSum
+ * @see CoinChange
  */
 public class CountSubsetSum {
     public int countSubsets(int[] num, int sum) {

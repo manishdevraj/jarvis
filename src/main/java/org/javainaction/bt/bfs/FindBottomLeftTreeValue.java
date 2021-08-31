@@ -22,6 +22,8 @@ public class FindBottomLeftTreeValue {
     /**
      * One solution is to find height and go towards largest subtree from right to left in BFS
      * Instead try and flip the traverse from right to left in BFS traversal
+     *
+     *
      */
     public static int findBottomLeftValue(TreeNode root) {
         if (root == null) return -1;
@@ -32,7 +34,7 @@ public class FindBottomLeftTreeValue {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(currentNode);
 
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             currentNode = queue.poll();
             if (currentNode.right != null)
                 queue.add(currentNode.right);
@@ -40,6 +42,8 @@ public class FindBottomLeftTreeValue {
                 queue.add(currentNode.left);
         }
 
+        // Because we are using going right to left in our BFS traversal
+        // our current is pointing to left most value at the bottom
         return currentNode.val;
     }
 

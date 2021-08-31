@@ -59,9 +59,9 @@ public class NodesInSubtree {
     private Map<Character, Integer> dfsBuildSubtreeMap(Node node, String s, Map<Integer,
             Map<Character, Integer>> nodeMap) {
         Map<Character, Integer> charCountMap = new HashMap<>();
-        //u which corresponds to a lowercase character
+        // u which corresponds to a lowercase character
         // c in the string s using 1-based indexing, that is why -1 from nod val
-        //initialize char with frequency with 1
+        // initialize char with frequency with 1
         charCountMap.put(s.charAt(node.val - 1), 1);
 
         for (Node child : node.children) {

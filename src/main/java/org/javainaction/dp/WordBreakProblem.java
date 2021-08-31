@@ -16,6 +16,7 @@ import java.util.stream.Stream;
  *
  * Given the set of words 'bed', 'bath', 'bedbath', 'and', 'beyond', and the string "bedbathandbeyond",
  * return either ['bed', 'bath', 'and', 'beyond] or ['bedbath', 'and', 'beyond'].
+ * @see WordBreak
  */
 public class WordBreakProblem {
 

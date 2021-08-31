@@ -28,24 +28,6 @@ import java.util.List;
 
 public class InsertInterval {
 
-    static class Interval {
-        int start;
-        int end;
-
-        public Interval(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-
-        @Override
-        public String toString() {
-            return "[" +
-                    "start=" + start +
-                    ", end=" + end +
-                    ']';
-        }
-    }
-
     public static List<Interval> insert(List<Interval> intervals, Interval newInterval) {
         List<Interval> mergedIntervals = new ArrayList<>();
 
@@ -92,6 +74,24 @@ public class InsertInterval {
 
         return result.toArray(new int[result.size()][]);
 
+    }
+
+    static class Interval {
+        int start;
+        int end;
+
+        public Interval(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
+
+        @Override
+        public String toString() {
+            return "[" +
+                    "start=" + start +
+                    ", end=" + end +
+                    ']';
+        }
     }
 
     public static void main(String[] args) {

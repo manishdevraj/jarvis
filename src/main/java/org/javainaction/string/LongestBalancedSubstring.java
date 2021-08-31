@@ -8,7 +8,8 @@ import java.util.Stack;
  * Input: "(()))("
  * Output: 4 as (())
  *
- * Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.
+ * Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed)
+ * parentheses substring.
  *
  *
  *

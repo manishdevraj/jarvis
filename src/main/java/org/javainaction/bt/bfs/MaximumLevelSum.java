@@ -23,7 +23,7 @@ import java.util.Queue;
  *
  * Input: root = [989,null,10250,98693,-89388,null,null,null,-32127]
  * Output: 2
- *
+ * @see MaxBinaryTreeDepth Where we are counting depth by incrementing level at each iteration
  */
 public class MaximumLevelSum {
     public static int maxLevelSum(TreeNode root) {
@@ -34,8 +34,9 @@ public class MaximumLevelSum {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
 
-        int level = 1;
+        int level = 0;
         while(!queue.isEmpty()) {
+            level++;
             int levelSum = 0; //reset the level sum
             int queueSize = queue.size();
             for (int i = 0; i < queueSize; i++) {
@@ -51,7 +52,7 @@ public class MaximumLevelSum {
                 maxLevelSum = levelSum;
                 maxLevel = level;
             }
-            level++;
+
         }
         return maxLevel;
     }

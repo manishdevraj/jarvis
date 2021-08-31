@@ -30,6 +30,7 @@ import java.util.PriorityQueue;
  * @see KthSmallestInMSortedArrays in this case we created element with array and element index
  * @see KthSmallestInSortedMatrix in this case we create element with row and col value
  * Here we create Tuple (i, j) such that i < j < arr.length
+ * @see KPairswithSmallestSums Where we take sum between two array elements vs single array elements
  */
 public class KthSmallestPairDistance {
     /**

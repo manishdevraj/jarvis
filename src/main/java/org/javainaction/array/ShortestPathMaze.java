@@ -22,6 +22,7 @@ import java.util.Queue;
  * and start = (3, 0) (bottom left) and end = (0, 0) (top left), the minimum number of steps required to reach the
  * end is 7, since we would need to go through (1, 2) because there is a wall everywhere else on the second row.
  * @see org.javainaction.graph.ShortestPathGridObstaclesElimination
+ * @see org.javainaction.graph.MaxDistanceRobotFloorPlan
  */
 
 public class ShortestPathMaze {
@@ -44,12 +45,14 @@ public class ShortestPathMaze {
             int i = point[0];
             int j = point[1];
 
+            //are we at the destination
             if (isAtDestination(node, end)) {
                 minDistance = Math.min(node.distance, minDistance);
             }
 
             if(visited[i][j]) continue;
 
+            //did we hit the wall
             if (isWall(i, j, maze)) continue;
 
             visited[i][j] = true;

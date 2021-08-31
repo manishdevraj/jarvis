@@ -19,6 +19,8 @@ import java.util.List;
  *
  * Input: head = [1,1,1,2,3]
  * Output: [2,3]
+ * @see RemoveDuplicateFromLinkedList
+ * @see org.javainaction.twopointers.RemoveAllAdjDuplicate
  */
 public class RemoveDuplicateFromLinkedList2 {
 

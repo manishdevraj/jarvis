@@ -1,5 +1,16 @@
 package org.javainaction.binarysearch;
 
+/**
+ * Given a sorted array but rotated by some positions count the rotation of the array
+ *
+ * Example: [10, 15, 1, 3, 8]
+ * Output rotation at 2
+ *
+ * Example: [4, 5, 7, 9, 10, -1, 2]
+ * Output rotation at 5
+ * @see FindMinRotatedSortedArr
+ * @see FindMinRotatedSortedArr2 Where we have duplicate elements
+ */
 public class RotationCountOfRotatedArray {
     public static int countRotations(int[] arr) {
         if (arr == null || arr.length == 0) return 0;

@@ -24,6 +24,7 @@ package org.javainaction.dp.longestcommonsub;
  * Explanation: We need to delete {'a', 'o', 'r'} and insert {'p'} to s1 to transform it into s2.
  * @see LongestCommonSubsequence
  * @see DeleteOpTwoStrings
+ * @see MinASCIIDeleteSumStrings
  */
 public class MinDeleteInsert {
     private int findLCSLength(String s1, String s2) {
@@ -34,7 +35,7 @@ public class MinDeleteInsert {
                 if(s1.charAt(i-1) == s2.charAt(j-1))
                     dp[i][j] = 1 + dp[i - 1][j - 1];
                 else
-                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]); //insert or delete
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]); //insert or delete
             }
         }
         return dp[s1.length()][s2.length()];

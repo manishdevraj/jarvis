@@ -7,6 +7,8 @@ package org.javainaction.string;
  *
  * Implement run-length encoding and decoding. You can assume the string to be encoded have no digits and consists
  * solely of alphabetic characters. You can assume the string to be decoded is valid.
+ * @see RunLengthEncoding2 Where we limit digit to 0...9
+ * @see RunLengthEncoding3 Where we need to replace output with char array
  */
 public class RunLengthEncoding {
 
@@ -43,6 +45,7 @@ public class RunLengthEncoding {
                 int count = Integer.parseInt(String.valueOf(chars[i - 1]));
                 while (count-- != 0) decoded.append(chars[i]);
             }
+            //we are jumping by two positions : one for digit and one for character
             i += 2;
         }
 

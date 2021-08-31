@@ -63,7 +63,7 @@ public class SearchInfiniteSortedArray {
             int potentialMatch = reader.get(middle);
             if (key == potentialMatch) return middle;
             else if (key < potentialMatch) right = middle - 1;
-            else if (key > potentialMatch) left = middle + 1;
+            else left = middle + 1;
         }
         return -1;
     }

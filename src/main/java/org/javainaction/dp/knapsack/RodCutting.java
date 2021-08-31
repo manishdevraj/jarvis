@@ -23,7 +23,9 @@ package org.javainaction.dp.knapsack;
  * This shows that we get the maximum price (14) by cutting the rod into two pieces of length ‘2’
  * and one piece of length ‘1’.
  *
- * @see CoinChange
+ * @see CoinChange Where denominations are weights and value is capacity
+ * @see KnapsackProblem where when we include or exclude items we do not worry about uniqueness
+ * @see MaxProfitFruitBasket where when we include or exclude items we need worry about uniqueness
  */
 public class RodCutting {
     public int solveRodCuttingTopDown(int[] lengths, int[] prices, int rodLen) {

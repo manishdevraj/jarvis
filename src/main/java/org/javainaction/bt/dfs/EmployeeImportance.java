@@ -44,6 +44,9 @@ public class EmployeeImportance {
         return findCollectiveImportance(id, employeeMap);
     }
 
+    /**
+     * Find importance by traversing DFS for each of employee's subordinates and adding their importance collectively
+     */
     public static int findCollectiveImportance(int empId, Map<Integer, Employee> employeeMap) {
         Employee e = employeeMap.get(empId);
         int importance = e.importance;

@@ -46,7 +46,7 @@ public class RotateList {
 
     public static void main(String[] args) {
         ListNode head = createLinkedList(new int[]{1, 2, 3, 4, 5, 6});
-        System.out.println("1, 2, 3, 4, 5, 6 after rotating by 3 : " + RotateList.rotate(head, 3));
+        System.out.println("1, 2, 3, 4, 5, 6 after rotating by 3 head with value : " + RotateList.rotate(head, 3).value);
     }
 
     public static ListNode createLinkedList(int[] array) {

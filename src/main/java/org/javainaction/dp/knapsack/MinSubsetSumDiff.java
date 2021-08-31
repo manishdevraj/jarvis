@@ -23,6 +23,7 @@ package org.javainaction.dp.knapsack;
  * Explanation: We can partition the given set into two subsets where minimum absolute difference
  * between the sum of numbers is '92'. Here are the two subsets: {1, 3, 4} & {100}.
  * @see PartitionEqualSubsetSum where we find two equal partition, here we are finding close to equal partitions
+ * @see PartitionKEqualSumSubsets where we need to partition into k subsets
  */
 public class MinSubsetSumDiff {
     public int canPartition(int[] nums) {

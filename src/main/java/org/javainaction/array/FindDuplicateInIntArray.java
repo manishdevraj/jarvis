@@ -6,6 +6,7 @@ import java.util.Set;
 /**
  * Find duplicate value in an array where integers are between 1...N
  * You can manipulate original array if needed
+ * @see org.javainaction.cyclicsort.FindDuplicate
  */
 public class FindDuplicateInIntArray {
     // O(n) time | O(1) space

@@ -8,7 +8,7 @@ package org.javainaction.dp.fibonacci;
  *
  * n : 4
  * Number of ways = 4
- * Explanation: Following are the four ways we can exoress 'n' : {1,1,1,1}, {1,3}, {3,1}, {4}
+ * Explanation: Following are the four ways we can express 'n' : {1,1,1,1}, {1,3}, {3,1}, {4}
  * Example 2:
  *
  * n : 5

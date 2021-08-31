@@ -16,6 +16,7 @@ import java.util.PriorityQueue;
  * 1. Calling add(6) should return '5'.
  * 2. Calling add(13) should return '6'.
  * 2. Calling add(4) should still return '6'.
+ * @see KLargestNumbers
  */
 public class KthLargestNumberInStream {
     private PriorityQueue<Integer> minHeap;

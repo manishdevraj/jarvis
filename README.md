@@ -287,6 +287,24 @@ In some situation weight in implicit and w need to create on out of given proble
 * Find minimum cost while cutting rod with given cutting price
 * Find partition set with given value of equal partitions or K equal partitions
 * Find minimum cost to cut a stick
+* Problems that deals with Subset sum either to count subset sum or find subset sum
+
+```
+//global
+Integer[][] dp = new Integer[profits.length][capacity + 1];
+
+//recursive
+int profitIncl = 0;
+if (weights[currentIndex] <= capacity) {
+    profitIncl = profits[currentIndex] + knapsackRecursive(dp, profits, weights,
+            capacity - weights[currentIndex],
+            currentIndex + 1);
+}
+// recursive call after excluding the element at the currentIndex
+int profitExcl = knapsackRecursive(dp, profits, weights, capacity, currentIndex + 1);
+
+dp[currentIndex][capacity] = Math.max(profitIncl, profitExcl)
+```
 
 ### [[⬆]](#toc) <a name='fibonacci'>Fibonacci problem</a>
 

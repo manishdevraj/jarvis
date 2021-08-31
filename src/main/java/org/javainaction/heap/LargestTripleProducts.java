@@ -39,18 +39,20 @@ public class LargestTripleProducts {
         int K = 3;
 
         for (int i = 0; i < arr.length; i++) {
+            var current = arr[i];
             if (minHeap.size() == K - 1) {
-                if (arr[i] > prevMinValue) {
+                //compute new product only if current is larger than previous min
+                if (current > prevMinValue) {
                     //store this for future comparison, if we find any element smallest that K smallest then we use
                     //same product
                     prevMinValue = minHeap.poll();
-                    product = arr[i] * prevMinValue * minHeap.peek();
-                    minHeap.offer(arr[i]);
+                    product = prevMinValue * current * minHeap.peek();
+                    minHeap.offer(current);
                 }
                 result[i] = product;
             } else {
                 //add until we have K elements
-                minHeap.offer(arr[i]);
+                minHeap.offer(current);
                 result[i] = product * -1;
             }
           }

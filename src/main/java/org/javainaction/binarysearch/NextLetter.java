@@ -30,6 +30,7 @@ package org.javainaction.binarysearch;
  * Input: ['a', 'c', 'f', 'h'], key = 'h'
  * Output: 'a'
  * Explanation: As the array is assumed to be circular, the smallest letter greater than 'h' is 'a'.
+ * @see CeilingOfANumber
  */
 public class NextLetter {
     public static char searchNextLetter(char[] letters, char key) {
@@ -47,7 +48,7 @@ public class NextLetter {
                 left = middle + 1;
             }
         }
-        //because we have circular list and we have not math we can use mod to point at next possible cieling of the
+        //because we have circular list and we now have math, we can use mod to point at next possible cieling of the
         //number
         //For [a, c, f, h] and target b = 98 integer representation, when b is not found in array, left points at 1
         //[ 1 % 4 ] points at 1st index which is c character as expected

@@ -36,6 +36,8 @@ package org.javainaction.string;
  * Output: Return 6, and the first 6 characters of the input array should be: ["a","3","b","2","a","2"].
  * Explanation: The groups are "aaa", "bb", and "aa". This compresses to "a3b2a2". Note that each group is independent
  * even if two groups have the same character.
+ * @see RunLengthEncoding Standard run length
+ * @see RunLengthEncoding2 Where we limit digit to 0...9
  */
 public class RunLengthEncoding3 {
     public static int compress(char[] chars) {

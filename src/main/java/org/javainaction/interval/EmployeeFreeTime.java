@@ -24,45 +24,6 @@ import java.util.*;
  * Explanation: All employees are free between [5,7].
  */
 public class EmployeeFreeTime {
-    static class Interval {
-        int start;
-        int end;
-
-        public Interval(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-
-        @Override
-        public String toString() {
-            return "Interval{" +
-                    "start=" + start +
-                    ", end=" + end +
-                    '}';
-        }
-    }
-
-    static class EmployeeInterval {
-        Interval interval; // interval representing employee's working hours
-        int employeeIndex; // index of the list containing working hours of this employee
-        int intervalIndex; // index of the interval in the employee list
-
-        public EmployeeInterval(Interval interval, int employeeIndex, int intervalIndex) {
-            this.interval = interval;
-            this.employeeIndex = employeeIndex;
-            this.intervalIndex = intervalIndex;
-        }
-
-        @Override
-        public String toString() {
-            return "EmployeeInterval{" +
-                    "interval=" + interval +
-                    ", employeeIndex=" + employeeIndex +
-                    ", intervalIndex=" + intervalIndex +
-                    '}';
-        }
-    }
-
     /**
      * Using priority queue (min heap)
      * @param schedule
@@ -70,6 +31,7 @@ public class EmployeeFreeTime {
      */
     public static List<Interval> findEmployeeFreeTime(List<List<Interval>> schedule) {
         List<Interval> result = new ArrayList<>();
+        //because we need to find empty slots so min heap by end time
         PriorityQueue<EmployeeInterval> minHeap = new PriorityQueue<>(schedule.size(),
                 (a, b) -> Integer.compare(a.interval.end, b.interval.end));
 
@@ -92,6 +54,9 @@ public class EmployeeFreeTime {
                     previousInterval = currentInterval.interval;
                 }
             }
+
+            //notice if either we did not find empty slot or bigger current end interval then we do nothing with current
+            //interval except get new
 
             // if there are more intervals available for the same employee, add their next interval
             List<Interval> employeeSchedule = schedule.get(currentInterval.employeeIndex);
@@ -159,6 +124,45 @@ public class EmployeeFreeTime {
         }
 
         return mergeIntervals;
+    }
+
+    static class Interval {
+        int start;
+        int end;
+
+        public Interval(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
+
+        @Override
+        public String toString() {
+            return "Interval{" +
+                    "start=" + start +
+                    ", end=" + end +
+                    '}';
+        }
+    }
+
+    static class EmployeeInterval {
+        Interval interval; // interval representing employee's working hours
+        int employeeIndex; // index of the list containing working hours of this employee
+        int intervalIndex; // index of the interval in the employee list
+
+        public EmployeeInterval(Interval interval, int employeeIndex, int intervalIndex) {
+            this.interval = interval;
+            this.employeeIndex = employeeIndex;
+            this.intervalIndex = intervalIndex;
+        }
+
+        @Override
+        public String toString() {
+            return "EmployeeInterval{" +
+                    "interval=" + interval +
+                    ", employeeIndex=" + employeeIndex +
+                    ", intervalIndex=" + intervalIndex +
+                    '}';
+        }
     }
 
     public static void main(String[] args) {

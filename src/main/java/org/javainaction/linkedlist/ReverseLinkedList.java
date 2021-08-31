@@ -5,15 +5,6 @@ package org.javainaction.linkedlist;
  * reversed LinkedList.
  */
 public class ReverseLinkedList {
-    static class ListNode {
-        int value = 0;
-        ListNode next;
-
-        ListNode(int value) {
-            this.value = value;
-        }
-    }
-
     public static ListNode reverse(ListNode head) {
         ListNode prev = null;
         while (head != null) {
@@ -23,6 +14,15 @@ public class ReverseLinkedList {
             head = next;
         }
         return prev;
+    }
+
+    static class ListNode {
+        int value = 0;
+        ListNode next;
+
+        ListNode(int value) {
+            this.value = value;
+        }
     }
 
     public static void main(String[] args) {

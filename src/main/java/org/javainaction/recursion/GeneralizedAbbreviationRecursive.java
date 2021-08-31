@@ -20,6 +20,8 @@ import java.util.List;
  * Input: "code"
  * Output: "code", "cod1", "co1e", "co2", "c1de", "c1d1", "c2e", "c3", "1ode", "1od1", "1o1e", "1o2",
  * "2de", "2d1", "3e", "4"
+ * @see GenerateDivTags
+ * @see GenerateParenthesesRecursive
  */
 public class GeneralizedAbbreviationRecursive {
     public static List<String> generateGeneralizedAbbreviation(String word) {

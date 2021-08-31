@@ -87,8 +87,8 @@ public class ReverseNodesInKGroup {
         ListNode head = createLinkedList(new int[]{1, 2, 3, 4, 5});
         System.out.println("{1, 2, 3, 4, 5} reverse every alternate K=3 elements : " + reverseKGroup(head, 3));
 
-        head = createLinkedList(new int[]{1, 2, 3, 4, 5});
-        System.out.println("{1, 2, 3, 4, 5} reverse every alternate K=2 elements : " + reverseKGroup(head, 2));
+        head = createLinkedList(new int[]{1, 2, 3, 4, 5, 6});
+        System.out.println("{1, 2, 3, 4, 5, 6} reverse every alternate K=2 elements : " + reverseKGroup(head, 2));
     }
 
     private static class ListNode {

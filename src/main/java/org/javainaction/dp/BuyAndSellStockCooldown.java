@@ -19,6 +19,8 @@ package org.javainaction.dp;
  *
  * Input: prices = [1]
  * Output: 0
+ * @see BuyAndSellStock3
+ * @see MaxProfitWithKTransactions
  */
 public class BuyAndSellStockCooldown {
 

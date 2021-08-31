@@ -28,18 +28,6 @@ import java.util.*;
  * @see org.javainaction.interval.LaptopRentals
  */
 public class MaximumCPULoad {
-    static class Job {
-        int start;
-        int end;
-        int cpuLoad;
-
-        public Job(int start, int end, int cpuLoad) {
-            this.start = start;
-            this.end = end;
-            this.cpuLoad = cpuLoad;
-        }
-    }
-
     public static int findMaxCPULoad(List<Job> jobs) {
         if (jobs == null || jobs.size() == 0) return 0;
         //sort them by job start times
@@ -64,6 +52,18 @@ public class MaximumCPULoad {
             maxCPULoad = Math.max(maxCPULoad, currentCPULoad);
         }
         return maxCPULoad;
+    }
+
+    static class Job {
+        int start;
+        int end;
+        int cpuLoad;
+
+        public Job(int start, int end, int cpuLoad) {
+            this.start = start;
+            this.end = end;
+            this.cpuLoad = cpuLoad;
+        }
     }
 
     public static void main(String[] args) {

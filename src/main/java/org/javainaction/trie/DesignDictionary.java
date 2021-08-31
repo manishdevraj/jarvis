@@ -46,10 +46,7 @@ public class DesignDictionary {
     public void addWord(String word) {
         TrieNode node = root;
         for (char letter : word.toCharArray()) {
-            if (!node.children.containsKey(letter)) {
-                TrieNode newNode = new TrieNode();
-                node.children.put(letter, newNode);
-            }
+            node.children.putIfAbsent(letter, new TrieNode());
             node = node.children.get(letter);
         }
         //add word at the end

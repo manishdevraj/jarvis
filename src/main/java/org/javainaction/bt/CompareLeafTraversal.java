@@ -38,6 +38,7 @@ public class CompareLeafTraversal {
 
     private BinaryTree getLeafNode(Stack<BinaryTree> stack) {
         BinaryTree current = stack.pop();
+        //until we get a leaf node either left or right
         while (!(current.left == null && current.right == null)) {
             if (current.right != null) stack.push(current.right);
             //purposely add left last so it gets pulled out of the stack first from left to right order

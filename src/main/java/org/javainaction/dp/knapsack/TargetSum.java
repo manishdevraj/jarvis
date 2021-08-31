@@ -17,6 +17,8 @@ import java.util.Arrays;
  * Output: 2
  * Explanation: The given set has '2' ways to make a sum of '9': {+1+2+7-1} & {-1+2+7+1}
  * @see SubsetSum
+ * @see CountSubsetSum
+ * @see CoinChange
  */
 public class TargetSum {
     /**

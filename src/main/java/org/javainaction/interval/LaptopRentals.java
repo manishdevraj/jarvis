@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
  * {0, 2}, {1, 4}, {4, 6}, {0, 4}, {7, 8}, {9, 11}, {3, 10}
  *
  * Sample output: 3
+ * @see org.javainaction.heap.MaximumCPULoad
+ * @see MinimumMeetingRooms
  */
 public class LaptopRentals {
     public int laptopRentals(ArrayList<ArrayList<Integer>> times) {

@@ -88,7 +88,7 @@ public class StringPermutation {
             if (matched == patternFreq.size())
                 return true;
 
-            //if we are going beyong length of the pattern then shrink the window by one character
+            //if we are going beyond length of the pattern then shrink the window by one character
             if (windowEnd >= pattern.length() - 1) {
                 char leftChar = str.charAt(windowStart++);
                 if (patternFreq.containsKey(leftChar)) {

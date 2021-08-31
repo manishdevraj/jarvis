@@ -55,14 +55,18 @@ public class MaxSubsetSumNoAdj {
         if(array.length == 0) return 0;
         else if(array.length == 1) return array[0];
 
-        int previous = array[0];
-        int current = Math.max(array[1], previous);
-        for(int i = 2; i < array.length; i++) {
-            int currentMax = Math.max(current, previous + array[i]);
-            previous = current;
-            current = currentMax;
+        int start = 0;
+        int end = array.length - 1;
+        int previous = 0;
+        int lastMax = 0;
+
+        while (start <= end) {
+            int hold = lastMax;
+            lastMax = Math.max(array[start] + previous, lastMax);
+            previous = hold;
+            start++;
         }
-        return current;
+        return lastMax;
     }
 
     public static void main(String[] args) {

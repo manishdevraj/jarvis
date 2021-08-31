@@ -16,7 +16,8 @@ import java.util.Arrays;
  *
  * Input: nums = [1,2,3,4], k = 3
  * Output: false
- *
+ * @see PartitionEqualSubsetSum where we find two equal partition
+ * @see MinSubsetSumDiff we are finding close to equal partitions
  */
 public class PartitionKEqualSumSubsets {
     /**

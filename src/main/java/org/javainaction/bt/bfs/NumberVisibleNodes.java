@@ -25,6 +25,8 @@ import java.util.Queue;
  *           / \    /
  *          4   7  13
  * output = 4
+ *
+ * @see RightViewTree where we are looking at tree from the right side
  */
 public class NumberVisibleNodes {
 

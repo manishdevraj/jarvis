@@ -32,6 +32,7 @@ package org.javainaction.recursion;
  * Example 4
  * S = "facebook"
  * R = "eafcobok"
+ * @see org.javainaction.string.RotationalCipher
  */
 public class EncryptedWords {
     //O(n) time | O(n) space

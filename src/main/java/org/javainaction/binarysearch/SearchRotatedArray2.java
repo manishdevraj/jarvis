@@ -22,6 +22,8 @@ package org.javainaction.binarysearch;
  * Input: nums = [2,5,6,0,0,1,2], target = 3
  * Output: false
  * @see SearchRotatedArray
+ * @see ShiftedBinarySearch
+ * @see FindMountainArray
  */
 public class SearchRotatedArray2 {
     public static boolean searchRotatedArrayDuplicate(int[] rotatedArr, int target) {

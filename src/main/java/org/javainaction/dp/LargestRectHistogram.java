@@ -14,6 +14,17 @@ import java.util.Stack;
  * Output: 10
  * Explanation: The above is a histogram where width of each bar is 1.
  * The largest rectangle is shown in the red area, which has an area = 10 units.
+ *
+ *
+ *         ______x__
+ *         | x   x |
+ *         | x   x |
+ *         | x   x |      x
+ *  x      | x   x |  x   x
+ *  x   x  | x   x |  x   x
+ *  ------------------------------
+ *  2   1   5   6     2   3
+ *
  * Example 2:
  *
  *
@@ -45,8 +56,9 @@ public class LargestRectHistogram {
                 //pop element
                 topIdx = stack.pop();
                 //width will be index on right - current rectangle index - 1
-                //[2, 1, ....] we haven i = 1 since distance between 2 and 1 is 1 , rectangle height becomes area
-                // area = 2 * (1 - 0 - 1) = 2
+                //[2, 1, ....] we haven i = 1 since distance between 2 and 1 is 1 as stack is empty,
+                // rectangle height becomes area
+                // area = 2 * (1) = 2
                 //[...5, 6, 2, 3 ....] we have i = 4 at first we get area as 6 * (4 - 2 - 1) = 6
                 //then when we know we have more rectangles that are bigger on left than right
                 //area becomes for next element 5, area = 5 * (4 - 1 - 1) = 10
@@ -73,6 +85,5 @@ public class LargestRectHistogram {
         System.out.println("[1, 2, 3, 4, 5, 3, 3, 2] area : " + maxRectAreaInHistogram(new int[]{1, 2, 3, 4, 5, 3, 3, 2}));
         System.out.println("[6, 2, 5, 4, 5, 1, 6] area : " + maxRectAreaInHistogram(new int[]{6, 2, 5, 4, 5, 1, 6}));
         System.out.println("[2, 4] area : " + maxRectAreaInHistogram(new int[]{2, 4}));
-
     }
 }

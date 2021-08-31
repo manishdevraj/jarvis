@@ -8,8 +8,9 @@ import java.util.List;
  * Given a linked list and a integer K reverse every alternate k elements
  *
  * For e.g.
- * {1, 2, 3, 4, 5, 6, 7, 8} linked list with K=2 elements
- * Output : [2, 1, 3, 4, 6, 5, 7, 8]
+ * {1, 2, 3, 4, 5, 6, 7, 8} linked list with K=3 elements
+ * Output : [2, 1, 3, 4, 6, 5, 8, 7]
+ * @see ReverseEveryKElements
  */
 public class ReverseEveryKAlternateElem {
 
@@ -51,6 +52,9 @@ public class ReverseEveryKAlternateElem {
 
         head = createLinkedList(new int[]{1, 2, 3, 4, 5, 6, 7, 8});
         System.out.println("{1, 2, 3, 4, 5, 6, 7, 8} reverse every alternate K=2 elements : " + reverse(head, 2));
+
+        head = createLinkedList(new int[]{1, 2, 3, 4, 5, 6, 7, 8});
+        System.out.println("{1, 2, 3, 4, 5, 6, 7, 8} reverse every alternate K=3 elements : " + reverse(head, 3));
     }
 
     private static class ListNode {

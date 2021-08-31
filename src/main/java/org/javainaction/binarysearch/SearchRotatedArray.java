@@ -22,6 +22,7 @@ package org.javainaction.binarysearch;
  * Input: [4, 5, 7, 9, 10, -1, 2], key = 10
  * Output: 4
  * Explanation: '10' is present in the array at index '4'.
+ * @see ShiftedBinarySearch
  */
 public class SearchRotatedArray {
     public static int search(int[] arr, int key) {

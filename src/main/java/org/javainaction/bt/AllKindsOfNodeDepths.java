@@ -5,7 +5,8 @@ import java.util.Queue;
 
 /**
  * The distance between node in a binary tree and its root call node depth.
- * Given a Binary tree find all kinds of node depth 
+ * Given a Binary tree find all kinds of node depth
+ * @see org.javainaction.bt.dfs.NodeDepth
  */
 public class AllKindsOfNodeDepths {
     //O(nlog(n)) time | O(h) space

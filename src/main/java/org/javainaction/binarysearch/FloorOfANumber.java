@@ -26,7 +26,7 @@ package org.javainaction.binarysearch;
  * Input: [4, 6, 10], key = -1
  * Output: 0
  * Explanation: The smallest number greater than or equal to '-1' is '4' having index '0'.
- * @see CeilingOfANumber
+ * @see CeilingOfANumber if no match are found left crosses right and becomes ceiling
  */
 public class FloorOfANumber {
     public static int searchFloorOfANumber(int[] arr, int key) {

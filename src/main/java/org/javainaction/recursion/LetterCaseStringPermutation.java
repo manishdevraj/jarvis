@@ -40,6 +40,7 @@ import java.util.function.Supplier;
  *
  * Input: s = "0"
  * Output: ["0"]
+ * @see GeneralizedAbbreviationRecursive
  */
 public class LetterCaseStringPermutation {
     public static List<String> findLetterCaseStringPermutations(String str) {

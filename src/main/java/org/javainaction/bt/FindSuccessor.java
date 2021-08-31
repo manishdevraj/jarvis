@@ -37,7 +37,7 @@ public class FindSuccessor {
     }
 
     public static BinaryTree getLeftLeafFromRightSubtree(BinaryTree current) {
-        //if there is not leaf leaf in this tree then current node (right of input) would be successor
+        //if there is no left leaf in this tree then current node (right of input) would be successor
         while (current.left != null) {
             current = current.left;
         }

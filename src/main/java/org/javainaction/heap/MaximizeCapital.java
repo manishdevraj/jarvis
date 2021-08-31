@@ -46,7 +46,8 @@ public class MaximizeCapital {
         int availableCapital = initialCapital;
         //number of projects we can pick
         for (int i = 0; i < numberOfProjects; i++) {
-            //if we have capital then pick them up
+            //if we have capital then pick them ups
+            // as we can see we are not going back to previous project once we have more capital to maximize the profit
             while(!minCapitalHeap.isEmpty() && capital[minCapitalHeap.peek()] <= availableCapital) {
                 maxProfitHeap.add(minCapitalHeap.poll());
             }
@@ -64,6 +65,8 @@ public class MaximizeCapital {
         int result = MaximizeCapital.findMaximumCapital(new int[] { 0, 1, 2 }, new int[] { 1, 2, 3 }, 2, 1);
         System.out.println("Maximum capital: " + result);
         result = MaximizeCapital.findMaximumCapital(new int[] { 0, 1, 2, 3 }, new int[] { 1, 2, 3, 5 }, 3, 0);
+        System.out.println("Maximum capital: " + result);
+        result = MaximizeCapital.findMaximumCapital(new int[] { 2, 1, 0 }, new int[] { 3, 2, 1 }, 2, 1);
         System.out.println("Maximum capital: " + result);
     }
 }

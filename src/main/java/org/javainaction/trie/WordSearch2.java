@@ -90,10 +90,7 @@ public class WordSearch2 {
         public void insert(final String str) {
             TrieNode node = root;
             for (char letter: str.toCharArray()) {
-                if (!node.children.containsKey(letter)) {
-                    TrieNode newNode = new TrieNode();
-                    node.children.put(letter, newNode);
-                }
+                node.children.putIfAbsent(letter, new TrieNode());
                 node = node.children.get(letter);
             }
             node.children.put(endSymbol, null);

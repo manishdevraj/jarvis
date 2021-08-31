@@ -6,6 +6,17 @@ import java.util.Queue;
 /**
  * Given a binary tree, connect each node with its level order successor. The last node of each level should point
  * to a null node.
+ * Tree
+ *
+ *              12
+ *           7     1
+ *        9   10      5
+ *
+ *        Becomes:
+ *
+ *              12 -> null
+ *         7  ->   1 -> null
+ *       9 -> 10  ->  5 -> (null)
  */
 public class ConnectLevelOrderSiblings {
     //O(n) time | O(w) space where w is max width of tree's level order

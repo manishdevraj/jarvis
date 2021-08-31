@@ -26,7 +26,7 @@ public class RemoveDuplicatesFromSortedArray {
             //at left and right = 0; it will compute once before starting to find duplicate
             nums[left++] = nums[right];
             //until we have duplicate, slide the window, up to next unique element and place at next iteration
-            while (right != nums.length - 1 && nums[right] == nums[right + 1]) {
+            while (right < nums.length - 1 && nums[right] == nums[right + 1]) {
                 right++;
             }
         }
@@ -34,9 +34,9 @@ public class RemoveDuplicatesFromSortedArray {
     }
 
     public static void main(String[] args) {
-        int length = RemoveDuplicatesFromSortedArray.removeDuplicates(new int[] { 0,0,1,1,1,2,2,3,3,4 });
+        int length = removeDuplicates(new int[] { 0,0,1,1,1,2,2,3,3,4 });
         System.out.println(" {0,0,1,1,1,2,2,3,3,4} : length after removing duplicates: " + length);
-        length = RemoveDuplicatesFromSortedArray.removeDuplicates(new int[] { 1, 1, 2 });
+        length = removeDuplicates(new int[] { 1, 1, 2 });
         System.out.println(" {1,1,2} : length after removing duplicates: " + length);
     }
 }

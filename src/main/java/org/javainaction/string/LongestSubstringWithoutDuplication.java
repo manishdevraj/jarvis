@@ -9,6 +9,7 @@ import java.util.Map;
  * Example: clementisacap
  * Output: mentisac
  * @see org.javainaction.dp.longestcommonsub.LongestSubstringWithoutDuplication
+ * @see org.javainaction.slidingwindow.LongestSubstrNoRepeatChars
  */
 public class LongestSubstringWithoutDuplication {
     // O(n) time | O(min(n,a)) space  where a is unique alphabets in string
@@ -29,7 +30,7 @@ public class LongestSubstringWithoutDuplication {
 
             //check if window is long enough typically we would always max between last max and (right - left + 1)
             //but since we need to know the actual string we need to store their indices
-            if (longest[1] - longest[0] < right + 1 - left) {
+            if (longest[1] - longest[0] < right - left + 1) {
                 longest = new int[] {left, right + 1};
             }
             lastSeen.put(rightChar, right);

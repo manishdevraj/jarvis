@@ -18,6 +18,9 @@ package org.javainaction.dp.knapsack;
  * Input: {1, 3, 4, 8}, S=6
  * Output: False
  * The given set does not have any subset whose sum is equal to '6'.
+ * @see CountSubsetSum
+ * @see CoinChange
+ * @see TargetSum
  */
 public class SubsetSum {
     public boolean canPartitionTopDown(int[] nums, int target) {

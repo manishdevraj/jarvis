@@ -41,7 +41,7 @@ public class SumOfPathNumbers {
     private static int findRootToLeafPathNumbers(TreeNode currentNode, int pathSum) {
         if (currentNode == null) return 0;
 
-        //at each level the the number increases digit
+        // at each level the the number increases digit
         // path sum with 1 with current val 2 becomes 12 = 1 * 10 + 2
         pathSum = 10 * pathSum + currentNode.val;
 

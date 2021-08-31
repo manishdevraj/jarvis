@@ -52,6 +52,7 @@ public class RemoveIslands {
         return matrix;
     }
 
+    //Having 1 at the border does not make it part of the island so we make sure to mark them and use later not to replace
     public static void findOnesToBorder(int[][] matrix, int i, int j,
                                  boolean[][] onesToBorder) {
         if (i >=0 && i < matrix.length

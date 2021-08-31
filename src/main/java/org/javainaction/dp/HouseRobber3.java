@@ -23,6 +23,8 @@ package org.javainaction.dp;
  * Input: root = [3,4,5,1,3,null,1]
  * Output: 9
  * Explanation: Maximum amount of money the thief can rob = 4 + 5 = 9.
+ * @see org.javainaction.dp.fibonacci.HouseThief
+ * @see org.javainaction.dp.fibonacci.HouseRobber2
  */
 public class HouseRobber3 {
     public int rob(TreeNode root) {
@@ -31,6 +33,7 @@ public class HouseRobber3 {
     }
 
     public int[] findMaxSteal(TreeNode node) {
+        //{rob, notRob}
         if (node == null) return new int[]{0, 0};
 
         int[] stealFromLeft = findMaxSteal(node.left);

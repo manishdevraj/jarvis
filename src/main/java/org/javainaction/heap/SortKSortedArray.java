@@ -5,6 +5,7 @@ import java.util.PriorityQueue;
 
 /**
  * K sorted array is partially sorted array where elements are at most k positions away from sorted positions
+ * @see MergeSortedArrays
  */
 public class SortKSortedArray {
     /// O(nlog(k)) time | O(k) space where n is the number of elements in array
@@ -16,7 +17,7 @@ public class SortKSortedArray {
         for(int i = 0; i < Math.min(k + 1, array.length); i++)  minHeap.offer(array[i]);
 
         int newIndex = 0;
-        //we not have temporary storage for each 0 to K + 1 elements so we can do in-place replacement using index
+        //we now have temporary storage for each 0 to K + 1 elements so we can do in-place replacement using index
         //every time we add sorted element to address, also add k + 1 th item min heap for next iteration
         // we sort all elements up to K + 1
         //note take K + 1 items so that when array is K = array.length / 2, then we miss kth element

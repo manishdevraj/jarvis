@@ -15,6 +15,8 @@ import java.util.List;
  *
  * Solution: We need to find the path with the maximum sum. As we traverse all paths, we can keep track of the path
  * with the maximum sum.
+ * @see CountAllPathSum
+ * @see PathSum3
  */
 public class FindAllTreePaths {
     public static List<List<Integer>> findPaths(TreeNode root, int sum) {

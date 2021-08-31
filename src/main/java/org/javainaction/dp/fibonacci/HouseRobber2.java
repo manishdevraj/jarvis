@@ -26,6 +26,8 @@ package org.javainaction.dp.fibonacci;
  *
  * Input: nums = [0]
  * Output: 0
+ * @see org.javainaction.dp.HouseRobber3
+ * @see HouseThief
  */
 public class HouseRobber2 {
     /**

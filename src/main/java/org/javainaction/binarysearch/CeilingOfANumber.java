@@ -34,6 +34,9 @@ package org.javainaction.binarysearch;
  * will be the biggest element in the given array smaller than or equal to the ‘key’
  *
  * Write a function to return the index of the floor of the ‘key’. If there isn’t a floor, return -1.
+ * @see FloorOfANumber if no match are found right crosses left and becomes floor
+ * @see FirstBadVersion where we need to find bad version in version control
+ * @see NextLetter where lowest closest letter
  */
 public class CeilingOfANumber {
     public static int searchCeilingOfANumber(int[] arr, int key) {

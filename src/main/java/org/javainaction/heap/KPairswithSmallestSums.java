@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
  * Input: nums1 = [1,2], nums2 = [3], k = 3
  * Output: [[1,3],[2,3]]
  * Explanation: All possible pairs are returned from the sequence: [1,3],[2,3]
+ * @see LargestPairs
  */
 public class KPairswithSmallestSums {
 
@@ -40,20 +41,23 @@ public class KPairswithSmallestSums {
 
         if (nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0) return result;
 
-        int n1 = nums1.length;
-        int n2 = nums2.length;
+        int len1 = nums1.length;
+        int len2 = nums2.length;
 
-        for (int i = 0; i < n1 && i < k; i++) {
-            priorityQueue.offer(new Integer[]{nums1[i], nums2[0], 0});
+        //pair all elements from array 1 up to k with first element from array 2
+        for (int i = 0; i < len1 && i < k; i++) {
+            priorityQueue.offer(new Integer[]{nums1[i] , nums2[0], 0});
         }
 
+        //if we found any pair and we have to still find k more pairs then continue
         while (k-- > 0 && !priorityQueue.isEmpty()) {
             Integer[] tuple = priorityQueue.poll();
             result.add(Arrays.asList(tuple[0], tuple[1]));
 
-            if (tuple[2] == n2 - 1) continue;
-            int num2Index = tuple[2] + 1;
-            priorityQueue.offer(new Integer[]{tuple[0], nums2[num2Index], num2Index});
+            if (tuple[2] == len2 - 1) continue;
+
+            int nextIndex = tuple[2] + 1;
+            priorityQueue.offer(new Integer[]{tuple[0], nums2[nextIndex], nextIndex});
         }
 
         return result;
@@ -64,7 +68,7 @@ public class KPairswithSmallestSums {
         for (int i = 0; i < nums1.length && i < k; i++) {
             for (int j = 0; j < nums2.length && j < k; j++) {
                 if (maxHeap.size() < k) {
-                    maxHeap.add(new Integer[] { nums1[i], nums2[j] });
+                    maxHeap.add(new Integer[]{nums1[i], nums2[j]});
                 } else {
                     // if the sum of the two numbers from the two arrays is greater than the largest (top) element of
                     // the heap, we can 'break' here. Since the arrays are sorted in the descending order, we'll not be
@@ -73,7 +77,7 @@ public class KPairswithSmallestSums {
                         break;
                     } else { // else: we have a pair with a larger sum, remove top and insert this pair in the heap
                         maxHeap.poll();
-                        maxHeap.add(new Integer[] { nums1[i], nums2[j] });
+                        maxHeap.add(new Integer[]{nums1[i], nums2[j]});
                     }
                 }
             }

@@ -38,12 +38,13 @@ public class MaxSumIncreasingSubsequence {
                 // we replace 1 with num[i] and sum array becomes memoized information
                 // we need to check if sum[i] which is memo is smaller than sum[j] + num[i], when nums[i] > nums[j]
                 //if so store that value as that will be maximum
-                if (nums[i] > nums[j] && sums[j] + nums[i] > sums[i]) {
-                    sums[i] = sums[j] + nums[i];
+                if (nums[i] > nums[j]) {
+                    sums[i] = Math.max(sums[i], sums[j] + nums[i]);
+                    //store maximum sum
+                    max = Math.max(sums[i], max);
                 }
             }
-            //store maximum sum
-            max = Math.max(sums[i], max);
+
         }
         return max;
     }

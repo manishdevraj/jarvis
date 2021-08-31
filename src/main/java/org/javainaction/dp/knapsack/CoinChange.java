@@ -16,6 +16,8 @@ package org.javainaction.dp.knapsack;
  *   4. {1,1,3}
  *   5. {2,3}
  *
+ * @see CountSubsetSum
+ * @see SubsetSum
  */
 public class CoinChange {
     public int countChange(int[] denominations, int total) {

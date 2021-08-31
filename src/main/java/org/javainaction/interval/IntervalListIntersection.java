@@ -39,6 +39,8 @@ public class IntervalListIntersection {
             int startMax = Math.max(A[i][0], B[j][0]);
             int endMin = Math.min(A[i][1], B[j][1]);
             //this insures that there was an intersection
+            //for [13, 23] and [8, 12] combination we would have [13, 12] which is incorrect interval
+            //avoid [13, 12]
             if (startMax <= endMin) {
                 intervals.add(new int[]{startMax, endMin});
             }

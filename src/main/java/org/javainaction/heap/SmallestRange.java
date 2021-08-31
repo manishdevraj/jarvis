@@ -68,7 +68,7 @@ public class SmallestRange {
         // that is having  single elements from each array
         for (int i = 0; i < lists.size(); i++) {
             minHeap.add(new Node(0, i));
-            //max number helps us know possible range ending element from the begining
+            //max number helps us know possible range ending element from the beginning
             currentMaxNumber = Math.max(currentMaxNumber, lists.get(i)[0]);
         }
 

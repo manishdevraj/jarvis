@@ -21,6 +21,8 @@ package org.javainaction.binarysearch;
  *
  * Input: nums = [2,2,2,0,1]
  * Output: 0
+ * @see FindMinRotatedSortedArr Where we do not have duplicate elements
+ * @see RotationCountOfRotatedArray
  */
 public class FindMinRotatedSortedArr2 {
     /**

@@ -1,5 +1,6 @@
 package org.javainaction.array;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,9 @@ import java.util.Map;
  * It is not needed for a range to be sorted in an array.
  *
  * {2, 6} for a range of {2, 3, 4, 5, 6} but not necessarily in a sorted way
+ *
+ * Input: [1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6]
+ * Output: [0, 7]
  *
  */
 public class LargestRange {
@@ -59,6 +63,6 @@ public class LargestRange {
 
     public static void main(String[] args) {
         int[] expected = {0, 7};
-        largestRange(new int[] {1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6});
+        System.out.println(Arrays.toString(largestRange(new int[] {1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6})));
     }
 }

@@ -32,6 +32,9 @@ import java.util.List;
  *
  * Input: grid = [[0,0,0,0,0,0,0,0]]
  * Output: 0
+ * @see IslandPerimeter where we need area of the island as 4 so we had to cut off neighbours value by 2
+ * @see RiverSizes where we are finding all areas
+ *
  */
 public class MaxAreaIsland {
     public static int maxAreaOfIsland(int[][] grid) {

@@ -6,7 +6,7 @@ import java.util.function.BiFunction;
  * Given a non empty string and key, write  function that returns new string obtained by shifting letters
  * by key positions. The letters needs to wrap around like z shifted one key would be a
  *
- *
+ * @see RotationalCipher
  */
 public class CaesarCypherEncryptor {
     // O(n) time | O(1) space
@@ -23,6 +23,6 @@ public class CaesarCypherEncryptor {
     }
 
     public static void main(String[] args) {
-        System.out.println(CaesarCypherEncryptor.caesarCypherEncryptor("xyz", 2).equals("zab"));
+        System.out.println(caesarCypherEncryptor("xyz", 2).equals("zab"));
     }
 }

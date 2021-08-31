@@ -15,40 +15,15 @@ import java.util.Objects;
  * Do this in O(M + N) time (where M and N are the lengths of the lists) and constant space.
  */
 public class LinkedListIntersection {
-    static class LinkedList {
-        int value;
-        LinkedList next;
 
-        LinkedList(int value) {
-            this.value = value;
-        }
-
-        @Override
-        public String toString() {
-            List<Integer> result = new ArrayList<>();
-            result.add(value);
-            LinkedList node = next;
-            while (node != null) {
-                result.add(node.value);
-                node = node.next;
-            }
-            return Arrays.toString(result.toArray());
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            LinkedList that = (LinkedList) o;
-            return value == that.value;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(value);
-        }
-    }
-
+    /**
+     * ( a + b ) == ( b + a )
+     * if there is an intersection possible then at some point a and b will be equal
+     * if not then both will still reach end of each other making it come out of iteration
+     * @param headA
+     * @param headB
+     * @return
+     */
     public static LinkedList findIntersectionWithoutLeg(LinkedList headA, LinkedList headB) {
         if (headA == null || headB == null) return null;
         LinkedList nodeA = headA;
@@ -115,6 +90,11 @@ public class LinkedListIntersection {
         output = result != null ? result.value : null;
         System.out.println("List {1} and {1} are intersecting at -> " + output);
 
+        result = findIntersectionWithoutLeg(createLinkedList(new int[]{1, 2, 3, 4}),
+                createLinkedList(new int[]{5, 6, 7}));
+        output = result != null ? result.value : null;
+        System.out.println("List {1, 2, 3, 4} and {5, 6, 7} are intersecting at -> " + output);
+
         result = findIntersection(createLinkedList(new int[]{3, 7, 8, 10}),
                 createLinkedList(new int[]{99, 1, 2, 8, 10}));
         output = result != null ? result.value : null;
@@ -123,6 +103,40 @@ public class LinkedListIntersection {
         result = findIntersection(createLinkedList(new int[]{1}), createLinkedList(new int[]{1}));
         output = result != null ? result.value : null;
         System.out.println("List {1} and {1} are intersecting at -> " + output);
+    }
+
+    static class LinkedList {
+        int value;
+        LinkedList next;
+
+        LinkedList(int value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            List<Integer> result = new ArrayList<>();
+            result.add(value);
+            LinkedList node = next;
+            while (node != null) {
+                result.add(node.value);
+                node = node.next;
+            }
+            return Arrays.toString(result.toArray());
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            LinkedList that = (LinkedList) o;
+            return value == that.value;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(value);
+        }
     }
 
     public static LinkedList createLinkedList(int[] array) {

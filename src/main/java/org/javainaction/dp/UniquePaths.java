@@ -45,8 +45,9 @@ package org.javainaction.dp;
  *
  * Input: m = 3, n = 3
  * Output: 6
- * @see UniquePaths2
- * @see org.javainaction.graph.UniquePaths3
+ * @see UniquePaths2 With some obstacles
+ * @see org.javainaction.graph.UniquePaths3 With some spaces that needs to be walked over exactly once
+ *
  */
 public class UniquePaths {
     public int uniquePaths(int m, int n) {

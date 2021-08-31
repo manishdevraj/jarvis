@@ -31,7 +31,9 @@ package org.javainaction.binarysearch;
  * Input: array = [0,1,2,4,2,1], target = 3
  * Output: -1
  * Explanation: 3 does not exist in the array, so we return -1.
- *
+ * @see FindPeakElement
+ * @see FirstBadVersion
+ * @see MaxInBitonicArray
  */
 public class FindMountainArray {
     public int findInMountainArray(int target, MountainArray mountainArr) {

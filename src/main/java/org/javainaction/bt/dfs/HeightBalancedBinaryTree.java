@@ -28,7 +28,7 @@ public class HeightBalancedBinaryTree {
                 && rightTreeInfo.isBalanced
                 && Math.abs(leftTreeInfo.height - rightTreeInfo.height) <= 1;
 
-        return new TreeInfo(1+ Math.max(leftTreeInfo.height, rightTreeInfo.height), isBalanced);
+        return new TreeInfo(1 + Math.max(leftTreeInfo.height, rightTreeInfo.height), isBalanced);
     }
 
     static class TreeInfo {

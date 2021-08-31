@@ -2,6 +2,7 @@ package org.javainaction.bt.dfs;
 
 /**
  * Given a binary tree and a number sequence, find if the sequence is present as a root-to-leaf path in the given tree.
+ * @see TreePathSum
  */
 public class PathWithGivenSequence {
     public static boolean findPath(TreeNode root, int[] sequence) {

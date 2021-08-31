@@ -34,12 +34,14 @@ public class FindKClosestElements {
         while (left < right) {
             int mid = (left + right) / 2;
             //check elements absolute difference and accordingly shift binary search
-            //if we have X - arr[mid] bigger difference that means we might have smaller K range on right so move left
+
             if (X - arr[mid] > arr[mid + K] - X) {
                 left = mid + 1;
-
-            //if we have arr[mid + K] - X bigger difference then we need to move right as we have smaller K range to left
+                //if we have X - arr[mid] bigger difference that means we might have smaller K range on
+                // right so move left pointer
             } else {
+                //if we have arr[mid + K] - X bigger difference then we need to move right pointer
+                // as we have smaller K range to left
                 right = mid;
             }
         }

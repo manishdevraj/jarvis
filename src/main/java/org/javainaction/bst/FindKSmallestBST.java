@@ -20,22 +20,26 @@ package org.javainaction.bst;
 public class FindKSmallestBST {
 
     /**
-     * Approach is  to perform in order traversal and get the kth value from in order traversed list
+     * One of the approach could be to perform in order traversal and get the kth value from in order traversed list
+     * But to achieve same thing in O(h) space we do in order traversal and use a auxilliary class to keep track of
+     * value and count of nodes visited
+     *
+     * O(h + k) time and O(h) space we need to at most traverse height of BST
      */
     public int findKthLargestValueInBst(BST tree, int k) {
         TreeInfo nodeInfo = new TreeInfo(0, -1);
-        reverseInOrder(tree, nodeInfo, k);
+        inOrder(tree, nodeInfo, k);
         return nodeInfo.visitedValue;
     }
 
-    public void reverseInOrder(BST node, TreeInfo nodeInfo, int k) {
+    public void inOrder(BST node, TreeInfo nodeInfo, int k) {
         if (node == null || nodeInfo.visitedCount >= k) return;
 
-        reverseInOrder(node.left, nodeInfo, k);
+        inOrder(node.left, nodeInfo, k);
         if (nodeInfo.visitedCount < k) {
             nodeInfo.visitedCount++;
             nodeInfo.visitedValue = node.value;
-            reverseInOrder(node.right, nodeInfo, k);
+            inOrder(node.right, nodeInfo, k);
         }
     }
 

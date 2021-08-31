@@ -25,7 +25,6 @@ public class SumOfLinkedList {
         int sum = 0;
 
         while (linkedListOne != null || linkedListTwo != null || sum != 0) {
-
             int digitOne = linkedListOne != null ? linkedListOne.value : 0;
             int digitTwo = linkedListTwo != null ? linkedListTwo.value : 0;
 
@@ -39,8 +38,6 @@ public class SumOfLinkedList {
             linkedListOne = (linkedListOne != null) ? linkedListOne.next : null;
             linkedListTwo = (linkedListTwo != null) ? linkedListTwo.next : null;
         }
-
-
         return head.next;
     }
 

@@ -24,6 +24,7 @@ import java.util.Queue;
  *
  * Input: root = []
  * Output: []
+ * @see NumberVisibleNodes where we are looking at tree from the left side
  */
 public class RightViewTree {
     //BFS traversal

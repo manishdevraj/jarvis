@@ -25,6 +25,8 @@ import java.util.Arrays;
  * 1 <= nums[i] <= 100
  * @see SubsetSum
  * @see TargetSum
+ * @see MinSubsetSumDiff where we are finding close to equal partitions, here we find two equal partition
+ * @see PartitionKEqualSumSubsets where we need to partition into k subsets
  */
 public class PartitionEqualSubsetSum {
     public boolean canPartition(int[] nums) {
@@ -37,20 +39,20 @@ public class PartitionEqualSubsetSum {
           return canPartitionRecursive(dp, nums, target, 0);
     }
 
-    private boolean canPartitionRecursive(Boolean[][] dp, int[] nums, int target, int current) {
+    private boolean canPartitionRecursive(Boolean[][] dp, int[] nums, int target, int index) {
         if (target == 0) return true;
-        if (nums.length <= current || target < 0) return false;
+        if (nums.length <= index || target < 0) return false;
 
-        if (dp[current][target] != null) return dp[current][target];
+        if (dp[index][target] != null) return dp[index][target];
         boolean partitionOne = false;
 
-        if (nums[current] <= target)
-            partitionOne = canPartitionRecursive(dp, nums, target - nums[current], current + 1);
+        if (nums[index] <= target)
+            partitionOne = canPartitionRecursive(dp, nums, target - nums[index], index + 1);
 
-        boolean partitionTwo = canPartitionRecursive(dp, nums, target, current + 1);
+        boolean partitionTwo = canPartitionRecursive(dp, nums, target, index + 1);
 
-        dp[current][target] = partitionOne || partitionTwo;
-        return dp[current][target];
+        dp[index][target] = partitionOne || partitionTwo;
+        return dp[index][target];
     }
 
     public static void main(String[] args) {

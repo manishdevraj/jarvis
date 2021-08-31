@@ -22,6 +22,7 @@ import java.util.Map;
  * Input: root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22
  * Output: 3
  * @see CountAllPathSum
+ * @see FindAllTreePaths
  */
 public class PathSum3 {
     public static int pathSum(TreeNode root, int targetSum) {
@@ -45,6 +46,7 @@ public class PathSum3 {
         //valid paths ending at current node
         int countPath = map.getOrDefault( sum - targetSum, 0);
 
+        //set at this point
         map.put(sum, map.getOrDefault(sum, 0) + 1);
 
         int totalCount = countPath + findPathSum(node.left, sum, targetSum, map)
@@ -72,7 +74,8 @@ public class PathSum3 {
     public static  int pathSumRecursive(TreeNode node, int targetSum) {
         if (node == null) return 0;
         //either we found match at current node or with current value if it same as total target sum
-        //as we are trying to find all path sums, we need to make sure we substracted current value from target expected to keep up with comparison
+        //as we are trying to find all path sums, we need to make sure we subtracted current value from target
+        // expected to keep up with comparison
         return (targetSum == node.val ? 1 : 0)
                 + pathSumRecursive(node.left, targetSum - node.val)
                 + pathSumRecursive(node.right, targetSum - node.val);

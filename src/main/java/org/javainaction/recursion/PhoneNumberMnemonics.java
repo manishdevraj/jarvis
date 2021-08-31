@@ -33,6 +33,8 @@ import java.util.*;
  *
  * Input: digits = "2"
  * Output: ["a","b","c"]
+ * @see GeneralizedAbbreviationRecursive
+ * @see LetterCaseStringPermutation
  */
 public class PhoneNumberMnemonics {
     public static Map<Character, String> mnemonicsMap = new HashMap<>();

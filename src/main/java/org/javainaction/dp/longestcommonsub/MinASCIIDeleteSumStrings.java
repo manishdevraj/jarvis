@@ -22,6 +22,9 @@ package org.javainaction.dp.longestcommonsub;
  * Deleting "e" from "leet" adds 101[e] to the sum.
  * At the end, both strings are equal to "let", and the answer is 100+101+101+101 = 403.
  * If instead we turned both strings into "lee" or "eet", we would get answers of 433 or 417, which are higher.
+ * @see EditDistance
+ * @see LevenshteinDistance
+ * @see MinDeleteInsert
  */
 public class MinASCIIDeleteSumStrings {
     //O(m * n) time | O(m * n) space
@@ -52,8 +55,6 @@ public class MinASCIIDeleteSumStrings {
         }
         return asciiDp[0][0];
     }
-
-
 
     public static void main(String[] args){
         System.out.println("Min ASCII delete sum for 'sea' and 'eat' : " + minimumDeleteSum("sea", "eat"));

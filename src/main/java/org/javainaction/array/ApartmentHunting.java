@@ -6,7 +6,7 @@ import java.util.*;
  * Find apartment closest with min distance from amenities
  */
 public class ApartmentHunting {
-    // O(b^2*r) time | O(b) where b is the number of blokcs and r is the
+    // O(b^2*r) time | O(b) where b is the number of blocks and r is the
     // number of requirements
     public static int apartmentHunting(List<Map<String, Boolean>> blocks, String[] reqs) {
         int[] maxDistancesAtBlocks = new int[blocks.size()];

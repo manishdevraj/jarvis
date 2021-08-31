@@ -40,8 +40,8 @@ public class MinDeleteSeqSorted {
         for (int i = 0; i < nums.length; i++) {
             for (int j = 0; j < i; j++) {
                 //compute LIS in bottom up fashion
-                if (nums[i] > nums[j] && dp[j] + 1 > dp[i]) {
-                    dp[i] = dp[j] + 1;
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[j] + 1, dp[i]);
                     //find if longest increasing sequence at i is maximum
                     maxLength = Math.max(maxLength, dp[i]);
                 }

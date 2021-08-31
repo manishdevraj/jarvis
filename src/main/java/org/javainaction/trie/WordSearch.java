@@ -43,15 +43,15 @@ public class WordSearch {
     private static boolean exploreBoard(char[][] board, int i, int j,
                                         char[] words,
                                         boolean[][] visited,
-                                        int start) {
+                                        int index) {
 
         //if we are at end of thr word search
-        if (start == words.length) return true;
+        if (index == words.length) return true;
 
         //check bounds
         if (i < 0 || j < 0 || i == board.length || j == board[i].length) return false;
         //check if characters match
-        if (words[start] != board[i][j]) return false;
+        if (words[index] != board[i][j]) return false;
 
         //check if unvisited
         if (visited[i][j]) return false;
@@ -59,10 +59,10 @@ public class WordSearch {
         visited[i][j] = true;
 
         //try all neighbours
-        boolean found = exploreBoard(board, i - 1, j, words, visited, start + 1)
-                || exploreBoard(board, i + 1, j, words, visited, start + 1)
-                || exploreBoard(board, i, j - 1, words, visited, start + 1)
-                || exploreBoard(board, i, j + 1, words, visited, start + 1);
+        boolean found = exploreBoard(board, i - 1, j, words, visited, index + 1)
+                || exploreBoard(board, i + 1, j, words, visited, index + 1)
+                || exploreBoard(board, i, j - 1, words, visited, index + 1)
+                || exploreBoard(board, i, j + 1, words, visited, index + 1);
 
         visited[i][j] = false;
 

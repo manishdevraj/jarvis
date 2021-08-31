@@ -108,25 +108,25 @@ public class ContinuousMedian {
         }
 
         public void siftDown(int currentIdx, int endIdx, List<Integer> heap){
-            int childOneIdx = currentIdx * 2 + 1;
-            while (childOneIdx <= endIdx) {
-                int childTwoIdx = currentIdx * 2 + 2 <= endIdx ?
+            int leftIndex = currentIdx * 2 + 1;
+            while (leftIndex <= endIdx) {
+                int rightIndex = currentIdx * 2 + 2 <= endIdx ?
                         currentIdx * 2 + 2 : -1;
                 int indexToSwap;
-                if (childTwoIdx != -1) {
-                    if (comparisonFunc.apply(heap.get(childTwoIdx), heap.get(childOneIdx))) {
-                        indexToSwap = childTwoIdx;
+                if (rightIndex != -1) {
+                    if (comparisonFunc.apply(heap.get(rightIndex), heap.get(leftIndex))) {
+                        indexToSwap = rightIndex;
                     } else {
-                        indexToSwap = childOneIdx;
+                        indexToSwap = leftIndex;
                     }
                 } else {
-                    indexToSwap = childOneIdx;
+                    indexToSwap = leftIndex;
                 }
 
                 if (comparisonFunc.apply(heap.get(indexToSwap), heap.get(currentIdx))) {
                     swap(currentIdx, indexToSwap, heap);
                     currentIdx = indexToSwap;
-                    childOneIdx = currentIdx * 2 + 1;
+                    leftIndex = currentIdx * 2 + 1;
                 } else {
                     return;
                 }

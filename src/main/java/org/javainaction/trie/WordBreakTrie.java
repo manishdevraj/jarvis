@@ -62,10 +62,7 @@ public class WordBreakTrie {
             TrieNode node = root;
             char[] charArray = str.toCharArray();
             for (char c : charArray) {
-                if (!node.children.containsKey(c)) {
-                    TrieNode children = new TrieNode();
-                    node.children.put(c, children);
-                }
+                node.children.putIfAbsent(c, new TrieNode());
                 node = node.children.get(c);
             }
             node.children.put(endSymbol, null);

@@ -77,7 +77,7 @@ public class KClosestPointsToOrigin {
 
     public static void main(String[] args) {
         Point[] points = new Point[] { new Point(1, 3), new Point(3, 4), new Point(2, -1) };
-        List<Point> result = KClosestPointsToOrigin.findClosestPoints(points, 2);
+        List<Point> result = findClosestPoints(points, 2);
         System.out.print("Here are the k points closest the origin: ");
         for (Point p : result)
             System.out.print("[" + p.x + " , " + p.y + "] ");

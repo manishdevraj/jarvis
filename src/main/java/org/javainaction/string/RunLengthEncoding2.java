@@ -14,6 +14,8 @@ package org.javainaction.string;
  *
  * Input: AAAAAAAAAAAAABBCCCCDD
  * Output:  9A4A2B4C2D
+ * @see RunLengthEncoding Standard run length
+ * @see RunLengthEncoding3 Where we need to replace output with char array
  */
 public class RunLengthEncoding2 {
     public static String runLengthEncoding(String string) {

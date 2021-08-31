@@ -49,6 +49,7 @@ public class SurroundedRegions {
         }
     }
 
+    //Having O at the border does not make it part of the island so we make sure to mark them and use later not to replace
     public static void findRegionsOnBorder(char[][] board, int i, int j, boolean[][] zeroesToBorder) {
         if (i >=0 && i < board.length
                 && j >=0 && j < board[i].length

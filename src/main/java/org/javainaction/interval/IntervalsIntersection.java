@@ -20,16 +20,6 @@ import java.util.List;
  * @see IntervalListIntersection
  */
 public class IntervalsIntersection {
-    static class Interval {
-        int start;
-        int end;
-
-        public Interval(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-    }
-
     public static Interval[] merge(Interval[] arr1, Interval[] arr2) {
         List<Interval> intervalsIntersection = new ArrayList<>();
         int i = 0;
@@ -47,6 +37,16 @@ public class IntervalsIntersection {
             else j++;
         }
         return intervalsIntersection.toArray(new Interval[intervalsIntersection.size()]);
+    }
+
+    static class Interval {
+        int start;
+        int end;
+
+        public Interval(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
     }
 
     public static void main(String[] args) {

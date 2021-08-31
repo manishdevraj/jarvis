@@ -74,7 +74,7 @@ public class MinCostCutStick {
     /**
      * To make it simpler, we add two sentinel values to cuts - left and right edges of the stick.
      * Then, we sort the cuts so we can easily identify all cuts between two points. DFS can help us find the most
-     * efficient sequence of cuts. To avoid recomputation, we memoise the best answer for stick between cuts[i]
+     * efficient sequence of cuts. To avoid re-computation, we memoise the best answer for stick between cuts[i]
      * and cuts[j] in dp[i][j].
      *
      * You can see the first cut at points 1 (or 4) results in total cost of 13 (5 + 0 + 8).

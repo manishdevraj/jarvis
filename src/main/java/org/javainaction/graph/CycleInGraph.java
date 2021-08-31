@@ -10,7 +10,7 @@ import java.util.Arrays;
  * List input is an adjacency list that represents graph. number of vertices is equal to length of the edges
  * where at each i contains ith vertices outbound edge. Each edge is a positive number, note that edges are directed
  * meaning we can only travel in one direction
- *
+ * @see DetectCycles2DGrid
  */
 public class CycleInGraph {
     public static boolean cycleInGraph(int[][] edges) {

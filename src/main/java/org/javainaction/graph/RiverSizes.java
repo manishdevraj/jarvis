@@ -11,6 +11,7 @@ import java.util.List;
  * Find all river sizes in the matrix
  *
  * @see MaxAreaIsland where we find maximum of all islands, vs in this case we are finding all areas
+ * @see IslandPerimeter where we need area of the island as 4 so we had to cut off neighbours value by 2
  */
 public class RiverSizes {
     //O(wh) time | O(wh) space

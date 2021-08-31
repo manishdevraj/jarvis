@@ -29,6 +29,8 @@ package org.javainaction.binarysearch;
  * Input: nums = [11,13,15,17]
  * Output: 11
  * Explanation: The original array was [11,13,15,17] and it was rotated 4 times.
+ * @see FindMinRotatedSortedArr2 Where we have duplicate elements
+ * @see RotationCountOfRotatedArray
  */
 public class FindMinRotatedSortedArr {
     public static int findMin(int[] arr) {
@@ -39,6 +41,7 @@ public class FindMinRotatedSortedArr {
         //we have sorted array without any rotation
         //also because of this base check we do not need to worry about
         // middle + 1 or middle - 1 going beyond bounds
+        //array is not rotated
         if (arr[left] < arr[right]) return arr[left];
 
         while (left <= right) {

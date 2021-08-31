@@ -25,6 +25,7 @@ import java.util.PriorityQueue;
  * Input: [5, 12, 11, -1, 12], K = 3
  * Output: 11
  * Explanation: The 3rd smallest number is '11', as the first two small numbers are [5, -1].
+ * @see KLargestNumbers
  */
 public class KthSmallestNumber {
     public static int findKthSmallestNumber(int[] nums, int k) {

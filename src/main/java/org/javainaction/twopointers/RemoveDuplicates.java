@@ -12,6 +12,7 @@ package org.javainaction.twopointers;
  * @see org.javainaction.array.MoveElemToRight
  * @see org.javainaction.array.MoveZeroToLeft
  * @see RemoveAllAdjDuplicate where we remove all duplicates vs just duplicate occurrence
+ * @see org.javainaction.linkedlist.RemoveDuplicateFromLinkedList
  */
 public class RemoveDuplicates {
 

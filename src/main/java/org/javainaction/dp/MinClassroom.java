@@ -1,5 +1,7 @@
 package org.javainaction.dp;
 
+import org.javainaction.interval.LaptopRentals;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -10,6 +12,9 @@ import java.util.stream.IntStream;
  * find the minimum number of rooms required.
  *
  * For example, given [(30, 75), (0, 50), (60, 150)], you should return 2.
+ * @see org.javainaction.interval.MinimumMeetingRooms
+ * @see org.javainaction.heap.MaximumCPULoad
+ * @see LaptopRentals
  */
 public class MinClassroom {
      public static int minClassroomRequired(int[][] lectures){

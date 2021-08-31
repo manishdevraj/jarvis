@@ -9,6 +9,8 @@ import java.util.Map;
  *
  * Example: clementisacap
  * Output: mentisac
+ * @see org.javainaction.string.LongestSubstringWithoutDuplication
+ * @see org.javainaction.slidingwindow.LongestSubstrNoRepeatChars
  */
 public class LongestSubstringWithoutDuplication {
     // O(n) time | O(min(n,a)) space  where a is unique alphabets in string

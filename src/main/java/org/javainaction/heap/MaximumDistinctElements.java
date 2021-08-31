@@ -1,8 +1,6 @@
 package org.javainaction.heap;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * Given an array of numbers and a number ‘K’, we need to remove ‘K’ numbers from the array such that we are left with
@@ -27,6 +25,7 @@ import java.util.PriorityQueue;
  * Input: [1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5], and K=2
  * Output: 3
  * Explanation: We can remove one occurrence of '4' to get three distinct numbers.
+ * @see MinimumDistinctElements
  */
 public class MaximumDistinctElements {
     public static int findMaximumDistinctElements(int[] nums, int k) {
@@ -39,7 +38,7 @@ public class MaximumDistinctElements {
         for (int i : nums)
             numFrequencyMap.put(i, numFrequencyMap.getOrDefault(i, 0) + 1);
 
-        PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<Map.Entry<Integer, Integer>>(
+        PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<>(
                 (e1, e2) -> e1.getValue() - e2.getValue());
 
         // insert all numbers with frequency greater than '1' into the min-heap

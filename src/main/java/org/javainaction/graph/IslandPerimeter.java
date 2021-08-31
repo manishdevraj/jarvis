@@ -29,6 +29,8 @@ import java.util.Arrays;
  *
  * Input: grid = [[1,0]]
  * Output: 4
+ * @see MaxAreaIsland Where each island is value 1 so we just need to sum them up
+ * @see RiverSizes where we are finding all areas
  */
 public class IslandPerimeter {
     public static int islandPerimeter(int[][] grid) {

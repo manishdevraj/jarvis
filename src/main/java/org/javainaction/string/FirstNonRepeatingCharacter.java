@@ -23,6 +23,7 @@ import java.util.HashMap;
  * Output: -1
  *
  * @see GenerateDocument
+ * @see RansomNote
  */
 public class FirstNonRepeatingCharacter {
     public int firstNonRepeatingCharacter(String string) {

@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
  *
  * Input: [5, 12, 11, -1, 12], K = 3
  * Output: [12, 11, 12]
+ * @see KthSmallestNumber
+ * @see KthLargestNumberInStream
  */
 public class KLargestNumbers {
     public static List<Integer> findKLargestNumbers(int[] nums, int k) {

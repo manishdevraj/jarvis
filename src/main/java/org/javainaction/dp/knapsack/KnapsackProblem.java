@@ -15,8 +15,44 @@ import java.util.stream.Stream;
  * capacity : 10
  *
  * Sample output : [10, [1, 3]] // items [4, 3] and [6, 7]
+ * @see MaxProfitFruitBasket where when we include or exclude items we need worry about uniqueness
+ * @see RodCutting
  */
 public class KnapsackProblem {
+
+    public static int solveKnapsack(int[][] items, int capacity) {
+        int[] profits = Stream.of(items).mapToInt(a -> a[0]).toArray();
+        int[] weights = Stream.of(items).mapToInt(a -> a[1]).toArray();
+        Integer[][] dp = new Integer[profits.length][capacity + 1];
+        return knapsackRecursive(dp, profits, weights, capacity, 0);
+    }
+
+    private static int knapsackRecursive(Integer[][] dp, int[] profits, int[] weights, int capacity,
+                                  int currentIndex) {
+        if (currentIndex >= profits.length || capacity <= 0) {
+            return 0;
+        }
+
+        if (dp[currentIndex][capacity] != null)
+            return dp[currentIndex][capacity];
+
+        // recursive call after choosing the element at the currentIndex
+        // if the weight of the element at currentIndex exceeds the capacity, we shouldn't process this
+        int profitIncl = 0;
+        if (weights[currentIndex] <= capacity) {
+            profitIncl = profits[currentIndex] + knapsackRecursive(dp, profits, weights,
+                    capacity - weights[currentIndex],
+                    currentIndex + 1);
+        }
+
+        // recursive call after excluding the element at the currentIndex
+        int profitExcl = knapsackRecursive(dp, profits, weights, capacity, currentIndex + 1);
+
+        dp[currentIndex][capacity] = Math.max(profitIncl, profitExcl);
+
+        return dp[currentIndex][capacity];
+    }
+
     // O(nc) time | O(nc) space
     // if w <= capacity
     // values[i][j] = max (values[i-1][j], values [i-1][j-w] + v)
@@ -64,44 +100,13 @@ public class KnapsackProblem {
         return sequence;
     }
 
-    public int solveKnapsack(int[][] items, int capacity) {
-        int[] profits = Stream.of(items).mapToInt(a -> a[0]).toArray();
-        int[] weights = Stream.of(items).mapToInt(a -> a[1]).toArray();
-        Integer[][] dp = new Integer[profits.length][capacity + 1];
-        return this.knapsackRecursive(dp, profits, weights, capacity, 0);
-    }
 
-    private int knapsackRecursive(Integer[][] dp, int[] profits, int[] weights, int capacity,
-                                  int currentIndex) {
-        if (currentIndex >= profits.length || capacity <= 0) {
-            return 0;
-        }
-
-        if (dp[currentIndex][capacity] != null)
-            return dp[currentIndex][capacity];
-
-        // recursive call after choosing the element at the currentIndex
-        // if the weight of the element at currentIndex exceeds the capacity, we shouldn't process this
-        int profitIncl = 0;
-        if (weights[currentIndex] <= capacity) {
-            profitIncl = profits[currentIndex] + knapsackRecursive(dp, profits, weights,
-                    capacity - weights[currentIndex],
-                    currentIndex + 1);
-        }
-
-        // recursive call after excluding the element at the currentIndex
-        int profitExcl = knapsackRecursive(dp, profits, weights, capacity, currentIndex + 1);
-
-        dp[currentIndex][capacity] = Math.max(profitIncl, profitExcl);
-
-        return dp[currentIndex][capacity];
-    }
 
     public static void main(String[] args) {
         int[][] input = {{1, 2}, {4, 3}, {5, 6}, {6, 7}};
         int[][] expected = {{10}, {1, 3}};
         System.out.println("Input : " + Arrays.deepToString(input));
-        System.out.println("Output " + new KnapsackProblem().knapsackProblem(input, 10));
-        System.out.println("Output " + new KnapsackProblem().solveKnapsack(input, 10));
+        System.out.println("Output " + knapsackProblem(input, 10));
+        System.out.println("Output " + solveKnapsack(input, 10));
     }
 }

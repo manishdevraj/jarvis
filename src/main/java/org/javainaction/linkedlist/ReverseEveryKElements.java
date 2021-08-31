@@ -12,6 +12,7 @@ import java.util.List;
  *
  * Output: [3, 2, 1, 6, 5, 4, 8, 7]
  * @see ReverseSubList
+ * @see ReverseEveryKAlternateElem
  */
 public class ReverseEveryKElements {
 
@@ -43,7 +44,7 @@ public class ReverseEveryKElements {
 
     public static void main(String[] args) {
         ListNode head = createLinkedList(new int[]{1, 2, 3, 4, 5});
-        System.out.println("{1, 2, 3, 4, 5} reverse every K=3 elements : " + reverse(head, 3));
+        System.out.println("{1, 2, 3, 4, 5} reverse every K=2 elements : " + reverse(head, 2));
         
         head = createLinkedList(new int[]{1, 2, 3, 4, 5, 6, 7, 8});
         System.out.print("{1, 2, 3, 4, 5, 6, 7, 8} reverse every K=3 elements : " + reverse(head, 3));

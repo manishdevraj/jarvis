@@ -24,7 +24,7 @@ package org.javainaction.binarysearch;
  *
  * Input: n = 1, bad = 1
  * Output: 1
- * @see CeilingOfANumber
+ * @see CeilingOfANumber Where we are finding ceiling of the number
  */
 
 class VersionControl {

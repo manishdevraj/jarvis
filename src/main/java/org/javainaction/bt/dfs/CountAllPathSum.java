@@ -25,6 +25,7 @@ public class CountAllPathSum {
 
         // add the current node to the path
         currentPath.add(currentNode.val);
+
         int pathCount = 0, pathSum = 0;
         // find the sums of all sub-paths in the current path list
         ListIterator<Integer> pathIterator = currentPath.listIterator(currentPath.size());

@@ -14,6 +14,7 @@ package org.javainaction.linkedlist;
  *
  * Input: head = [1,1,1,2,3]
  * Output: [1, 2, 3]
+ * @see org.javainaction.twopointers.RemoveDuplicates
  */
 public class RemoveDuplicateFromLinkedList {
 

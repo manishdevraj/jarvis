@@ -20,7 +20,8 @@ import java.util.*;
  * Output: [[0, 4], [2, 4], [3, 3]]
  *
  * These are farthest from the robot
- *
+ * @see ShortestPathGridObstaclesElimination Where we used 3rd dimension to keep obstacle elimination count
+ * @see org.javainaction.array.ShortestPathMaze Where we are not allowed to remove elimination
  */
 public class MaxDistanceRobotFloorPlan {
     private static final int[][] dirs = new int[][]{{0,1},{0,-1},{1,0},{-1,0}};

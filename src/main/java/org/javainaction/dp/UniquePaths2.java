@@ -25,8 +25,9 @@ package org.javainaction.dp;
  *
  * Input: obstacleGrid = [[0,1],[0,0]]
  * Output: 1
- * @see UniquePaths
- * @see org.javainaction.graph.UniquePaths3
+ * @see UniquePaths No obstacles just walk
+ * @see org.javainaction.graph.UniquePaths3 With some spaces that needs to be walked over exactly once
+ *
  */
 public class UniquePaths2 {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {

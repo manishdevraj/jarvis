@@ -32,18 +32,9 @@ import java.util.*;
  * Here is a visual representation of Example 4:
  * @see org.javainaction.heap.MaximumCPULoad
  * @see LaptopRentals
+ * @see org.javainaction.dp.MinClassroom
  */
 public class MinimumMeetingRooms {
-    static class Meeting {
-        int start;
-        int end;
-
-        public Meeting(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-    }
-
     public static int findMinimumMeetingRooms(List<Meeting> meetings) {
         if (meetings == null || meetings.size() == 0) return 0;
 
@@ -67,6 +58,16 @@ public class MinimumMeetingRooms {
             minRooms = Math.max(minRooms, heap.size());
         }
         return minRooms;
+    }
+
+    static class Meeting {
+        int start;
+        int end;
+
+        public Meeting(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
     }
 
     public static void main(String[] args) {

@@ -26,7 +26,7 @@ import java.util.Queue;
  *
  * Input: root = [2,null,3,null,4,null,5,null,6]
  * Output: 5
- *
+ * @see MaxBinaryTreeDepth
  */
 public class MinimumBinaryTreeDepth {
     public static int findDepth(TreeNode root) {

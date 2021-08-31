@@ -40,11 +40,13 @@ import java.util.Queue;
  * Output: -1
  * Explanation:
  * We need to eliminate at least two obstacles to find such a walk.
- * @see org.javainaction.array.ShortestPathMaze
+ * @see org.javainaction.array.ShortestPathMaze Where we are not allowed to remove elimination
+ * @see MaxDistanceRobotFloorPlan Where we use 3rd dimention to maintain max distance from source
  */
 public class ShortestPathGridObstaclesElimination {
     private static final int[][] dirs = new int[][]{{0,1},{0,-1},{1,0},{-1,0}};
     public int shortestPath(int[][] grid, int k) {
+        //3rd dimension is to keep obstacle elimination count
         boolean[][][] visited = new boolean[grid.length][grid[0].length][k + 1];
         Queue<int[]> cellToExplore = new LinkedList<>();
         int m = grid.length;
@@ -63,6 +65,7 @@ public class ShortestPathGridObstaclesElimination {
                 if (currentCell != null) {
                     int i = currentCell[0];
                     int j = currentCell[1];
+                    //reached at bottom right which is destination
                     if (i == m - 1 && j == n - 1) {
                         minDistance = Math.min(minDistance, distance);
                     }

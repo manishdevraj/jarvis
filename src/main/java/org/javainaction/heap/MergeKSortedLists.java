@@ -16,14 +16,7 @@ import java.util.*;
  */
 
 public class MergeKSortedLists {
-    static class ListNode {
-        int value;
-        ListNode next;
 
-        ListNode(int value) {
-            this.value = value;
-        }
-    }
 
     public static ListNode merge(ListNode[] lists) {
         PriorityQueue<ListNode> minHeap = new PriorityQueue<>((n1, n2) -> n1.value - n2.value);
@@ -73,6 +66,15 @@ public class MergeKSortedLists {
         while (result != null) {
             System.out.print(result.value + " ");
             result = result.next;
+        }
+    }
+
+    static class ListNode {
+        int value;
+        ListNode next;
+
+        ListNode(int value) {
+            this.value = value;
         }
     }
 }

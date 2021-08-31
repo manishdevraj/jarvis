@@ -22,17 +22,6 @@ import java.util.*;
  * Explanation: Intervals [1,4] and [2,5] overlap
  */
 public class MergeIntervals {
-
-    static  class Interval {
-        int start;
-        int end;
-
-        public Interval(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-    }
-
     public static List<Interval> merge(List<Interval> intervals) {
 
         if (intervals.size() < 2) return intervals;
@@ -56,6 +45,16 @@ public class MergeIntervals {
         mergedIntervals.add(new Interval(previous.start, previous.end));
 
         return mergedIntervals;
+    }
+
+    static  class Interval {
+        int start;
+        int end;
+
+        public Interval(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
     }
 
     public static void main(String[] args) {

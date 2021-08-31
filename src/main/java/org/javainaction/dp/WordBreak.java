@@ -30,6 +30,7 @@ import java.util.stream.Stream;
  *
  * Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
  * Output: false
+ * @see WordBreakProblem
  */
 public class WordBreak {
     private static boolean wordBreak(String[] dict, String str) {

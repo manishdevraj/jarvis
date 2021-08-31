@@ -20,10 +20,7 @@ import java.util.Arrays;
  * Explanation: The longest substring is "ababb", as 'a' is repeated 2 times and 'b' is repeated 3 times.
  */
 public class LongSubWithAtKRepeatingChar {
-    public static void main(String[] args){
-        System.out.println("'aaabb' The longest substring is: " + longestSubstring("aaabb", 3));
-        System.out.println("'ababbc' The longest substring is: " + longestSubstring("ababbc", 2));
-    }
+
     public static int longestSubstring(String s, int k) {
         boolean[] freq = new boolean[26];
         int[] freqMap = new int[26];
@@ -76,5 +73,10 @@ public class LongSubWithAtKRepeatingChar {
         }
 
         return max;
+    }
+
+    public static void main(String[] args){
+        System.out.println("'aaabb' The longest substring is: " + longestSubstring("aaabb", 3));
+        System.out.println("'ababbc' The longest substring is: " + longestSubstring("ababbc", 2));
     }
 }

@@ -13,7 +13,7 @@ package org.javainaction.dp.longestcommonsub;
  *
  * Input: nums1 = [0,0,0,0,0], nums2 = [0,0,0,0,0]
  * Output: 5
- * @see LongestCommonSubstring
+ * @see LongestCommonSubsequence
  */
 public class MaxLengthRepeatedSubarray {
     public int findLength(int[] nums1, int[] nums2) {
@@ -38,5 +38,8 @@ public class MaxLengthRepeatedSubarray {
     public static void main(String[] args) {
         System.out.println("[1,2,3,2,1], and [3,2,1,4,7] max length repeating sub array " +
                 new MaxLengthRepeatedSubarray().findLength(new int[]{1,2,3,2,1}, new int[]{3,2,1,4,7}));
+
+        System.out.println("[1,2,3,2,1], and [3,2,4,7,1] max length repeating sub array " +
+                new MaxLengthRepeatedSubarray().findLength(new int[]{1,2,3,2,1}, new int[]{3,2,4,7,1}));
     }
 }

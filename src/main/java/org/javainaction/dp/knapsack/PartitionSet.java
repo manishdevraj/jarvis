@@ -22,6 +22,10 @@ import java.util.stream.IntStream;
  * Output: False
  * Explanation: The given set cannot be partitioned into two subsets with equal sum.
  *
+ * @see SubsetSum
+ * @see TargetSum
+ * @see MinSubsetSumDiff where we are finding close to equal partitions, here we find two equal partition
+ * @see PartitionKEqualSumSubsets where we need to partition into k subsets
  * @see PartitionEqualSubsetSum
  */
 public class PartitionSet {

@@ -34,6 +34,8 @@ public class OrderAgnosticBinarySearch {
     public static int binarySearch(int[] arr, int key) {
         int left = 0;
         int right = arr.length - 1;
+        //we checking ascending or descending based on first and last element, even if they are found to be same
+        //means entire array is duplicate, it will work for default use case
         boolean isAscending = arr[left] < arr[right];
         while (left <= right) {
             int middle = (left + right) / 2;
