@@ -19,6 +19,8 @@ package org.javainaction.dp.palindromsubseq;
  * Input: = "pqr"
  * Output: 1
  * Explanation: LPS could be "p", "q" or "r".
+ *
+ * @see CountLongestPalindromicSubstring
  */
 public class LongestPalindromicSubstring {
     public int findLPSLength(String str) {

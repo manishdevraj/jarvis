@@ -45,7 +45,6 @@ public class PalindromePartitioning {
         for (int end = start; end < str.length(); end++) {
             //if we have palindrome and we have palindrome for previous letters too
             if (str.charAt(start) == str.charAt(end)  && (end - start <= 2 || dp[start + 1][end - 1])) {
-
                 //store result so that we can use that to find if we have already computed this
                 dp[start][end] = true;
                 currentList.add(str.substring(start, end + 1));

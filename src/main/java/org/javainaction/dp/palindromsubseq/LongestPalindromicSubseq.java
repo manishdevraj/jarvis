@@ -23,6 +23,8 @@ package org.javainaction.dp.palindromsubseq;
  * Input: = "pqr"
  * Output: 1
  * Explanation: LPS could be "p", "q" or "r".
+ * @see MinimumDeletionsLPS we need to get length of LPS and deduct from string to find deletion required
+ * @see MinimumInsertionLPS we need to get length of LPS and deduct from string to find insertion required
  */
 public class LongestPalindromicSubseq {
     public int findLPSLength(String st) {
