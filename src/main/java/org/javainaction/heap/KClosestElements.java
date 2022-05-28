@@ -77,15 +77,15 @@ public class KClosestElements {
         low = Math.max(low, 0); // 'low' should not be less than zero
         high = Math.min(high, arr.length - 1); // 'high' should not be greater the size of the array
 
-        PriorityQueue<Entry> minHeap = new PriorityQueue<>((n1, n2) -> Math.abs(n1.key - X) - Math.abs(n2.key - X));
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>((a, b) -> Math.abs(a - X) - Math.abs(b - X));
         // add all candidate elements to the min heap, sorted by their absolute difference from 'X'
         for (int i = low; i <= high; i++)
-            minHeap.add(new Entry(arr[i], i));
+            minHeap.add(arr[i]);
 
         // we need the top 'K' elements having smallest difference from 'X'
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < K && !minHeap.isEmpty(); i++)
-            result.add(arr[minHeap.poll().value]);
+            result.add(minHeap.poll());
 
         Collections.sort(result);
         return result;

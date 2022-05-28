@@ -11,7 +11,7 @@ public class IndexEqualsValue {
     //O(log(n)) time | O(1) space
     /**
      * Key is if middleValue < middle then there is no way min matching index is in left subarray
-     * if middle > middle then there is not way min matching index is in right subarray
+     * if middleValue > middle then there is no way min matching index is in right subarray
      * When in case of match we need to make sure we check previous element for possibility to go towards left of array
      */
     public static int indexEqualsValue(int[] array) {

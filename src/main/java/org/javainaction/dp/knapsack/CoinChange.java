@@ -75,8 +75,12 @@ public class CoinChange {
         System.out.println(cc.countChange(denominations, 5));
         System.out.println(numberOfWaysToMakeChange(5, denominations));
 
-        int[] input = {1, 5};
+        int[] input = new int[]{1, 5};
         System.out.println(cc.countChange(input, 6));
         System.out.println(numberOfWaysToMakeChange(6, input));
+
+        input = new int[]{1, 2, 5};
+        System.out.println(cc.countChange(input, 11));
+        System.out.println(numberOfWaysToMakeChange(11, input));
     }
 }

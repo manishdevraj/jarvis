@@ -55,6 +55,8 @@ public class MaxFruitCountOf2Types {
                 MaxFruitCountOf2Types.findLength(new char[] { 'A', 'B', 'C', 'B', 'B', 'C' }));
         System.out.println("Maximum number of fruits: " +
                 MaxFruitCountOf2Types.findLength(new char[] { 'A', 'B', 'C', 'A', 'B', 'C' }));
+        System.out.println("Maximum number of fruits: " +
+                MaxFruitCountOf2Types.findLength(new char[] { '1', '2', '3', '2', '2'}));
 
     }
 }

@@ -36,7 +36,7 @@ public class JumpGame {
             if (farthest < i) return false;
             farthest = Math.max(i + array[i], farthest);
         }
-        //because we did not have any hurdles means we reached at end
+        //because we did not have any hurdles' means we reached at end
         return true;
     }
 

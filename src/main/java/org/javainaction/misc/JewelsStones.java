@@ -1,4 +1,4 @@
-package org.javainaction.string;
+package org.javainaction.misc;
 
 /**
  * You're given strings J representing the types of stones that are jewels, and S representing the stones you have.
@@ -19,8 +19,8 @@ package org.javainaction.string;
  *
  * S and J will consist of letters and have length at most 50.
  * The characters in J are distinct.
- * @see GenerateDocument
- * @see RansomNote
+ * @see org.javainaction.string.GenerateDocument
+ * @see org.javainaction.string.RansomNote
  */
 public class JewelsStones {
     //O(max (J, S)) time | O(1) space

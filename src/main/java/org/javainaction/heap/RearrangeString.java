@@ -82,6 +82,7 @@ public class RearrangeString {
             currentEntry.setValue(currentEntry.getValue() - 1);
             queue.offer(currentEntry);
 
+
             //when we reach comfortable distance then we poll one element of queue and add back to heap to keep 
             //distance 
             //[M:2][P:2] so we add say M to result now [M:1][P:2]
@@ -89,8 +90,8 @@ public class RearrangeString {
             //when P is appended our string becomes MP and now can add M back to heap as we reached K distance from
             //first occurrence
             if (queue.size() == K) {
-                Map.Entry<Character, Integer> entry = queue.poll();
-                if (entry.getValue() > 0) maxHeap.add(entry);
+                Map.Entry<Character, Integer> prevEntry = queue.poll();
+                if (prevEntry.getValue() > 0) maxHeap.add(prevEntry);
             }
         }
 

@@ -29,7 +29,7 @@ package org.javainaction.binarysearch;
  *
  * Input: nums1 = [2], nums2 = []
  * Output: 2.00000
- *
+ * @see org.javainaction.heap.MedianTwoSortedArrays
  */
 public class MedianTwoSortedArrays {
     /**

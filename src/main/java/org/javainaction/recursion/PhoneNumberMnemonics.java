@@ -82,6 +82,36 @@ public class PhoneNumberMnemonics {
         }
     }
 
+    public static ArrayList<String> phoneNumberMnemonicsList(String phoneNumber) {
+        ArrayList<String> mnemonicsResult = new ArrayList<>();
+        List<String> currentPhoneNumber = new ArrayList<>();
+        phoneNumberMnemonicsRecursive(0, phoneNumber, currentPhoneNumber, mnemonicsResult);
+        return mnemonicsResult;
+    }
+
+    public static void phoneNumberMnemonicsRecursive(int position, String phoneNumber,
+                                                     List<String> currentPhoneNumber,
+                                                     ArrayList<String> mnemonicsResult) {
+        if (position == phoneNumber.length()) {
+            String mnemonic = String.join("", currentPhoneNumber);
+            mnemonicsResult.add(mnemonic);
+        } else {
+            char digit = phoneNumber.charAt(position);
+            //for every digit we need to try combinations
+            //recursive call stack with pos = 0 we put all characters for 2 in call stack
+            // [a, null],  [b, null],  [c, null]
+            //in stack for a when pos = 1 we try letters for 3 and for first result
+            //we get "ad", "ae", "af"
+            String letters = mnemonicsMap.get(digit);
+            for(char c : letters.toCharArray()) {
+                currentPhoneNumber.add(String.valueOf(c));
+                phoneNumberMnemonicsRecursive(position + 1, phoneNumber,
+                        currentPhoneNumber, mnemonicsResult);
+                currentPhoneNumber.remove(currentPhoneNumber.size() - 1);
+            }
+        }
+    }
+
     public static List<String> letterCombinations(String phoneNumber) {
         LinkedList<String> queue = new LinkedList<>();
         if(phoneNumber.isEmpty()) return queue;;
@@ -107,8 +137,11 @@ public class PhoneNumberMnemonics {
                 };
         System.out.println("Mnemonics for 1905 are  " + phoneNumberMnemonics(phoneNumber));
         System.out.println("Mnemonics for 1905 are  " + letterCombinations(phoneNumber));
+        System.out.println("Mnemonics for 1905 are  " + phoneNumberMnemonicsList(phoneNumber));
+
 
         System.out.println("Mnemonics for 23 are  " + phoneNumberMnemonics("23"));
         System.out.println("Mnemonics for 23 are  " + letterCombinations("23"));
+        System.out.println("Mnemonics for 23 are  " + phoneNumberMnemonicsList("23"));
     }
 }

@@ -41,8 +41,10 @@ public class RemoveKthNodeFromEnd {
 
         //if we are removing head element
         if(slow == start) {
-            head.value = head.next.value;
-            head.next = head.next.next;
+            if (head.next != null) {
+                head.value = head.next.value;
+                head.next = head.next.next;
+            }
         } else {
             slow.next = slow.next.next;
         }

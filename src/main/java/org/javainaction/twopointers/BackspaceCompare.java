@@ -67,5 +67,6 @@ public class BackspaceCompare {
         System.out.println(BackspaceCompare.compare("xy#z", "xyz#"));
         System.out.println(BackspaceCompare.compare("xp#", "xyz##"));
         System.out.println(BackspaceCompare.compare("xywrrmp", "xywrrmu#p"));
+        System.out.println(BackspaceCompare.compare("bbbextm","bbb#extm"));
     }
 }

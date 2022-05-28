@@ -1,4 +1,4 @@
-package org.javainaction.array;
+package org.javainaction.misc;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
@@ -15,6 +15,7 @@ import java.util.stream.IntStream;
  *
  * Output: 25
  * [4, 3, 2, 1, 2, 3, 4, 5, 1]
+ * @see Candy
  */
 public class MinRewards {
     public static int minRewards(int[] scores) {

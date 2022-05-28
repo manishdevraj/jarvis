@@ -78,5 +78,10 @@ public class KthSmallestSumMatrixSortedRows {
         result = new KthSmallestSumMatrixSortedRows().kthSmallest(matrix, 9);
         System.out.println(Arrays.deepToString(matrix));
         System.out.println(" K=9 smallest number is: " + result);
+
+        matrix = new int[][]{ { 1, 1, 10 }, { 2, 2, 9 }};
+        result = new KthSmallestSumMatrixSortedRows().kthSmallest(matrix, 7);
+        System.out.println(Arrays.deepToString(matrix));
+        System.out.println("K=7 smallest number is: " + result);
     }
 }

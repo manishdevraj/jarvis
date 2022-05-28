@@ -41,21 +41,23 @@ public class KthSmallestPairDistance {
     public static int smallestDistancePairHeap(int[] nums, int k) {
         Arrays.sort(nums);
 
-        PriorityQueue<Tuple> priorityQueue =
+        PriorityQueue<Tuple> maxHeap =
                 new PriorityQueue<>(nums.length, Comparator.comparingInt(tuple -> nums[tuple.j] - nums[tuple.i]));
 
         //store a all initial combinations of (i, j) such that i < j < arr.length
-        for (int i = 0; i + 1 < nums.length; i++) {
-            priorityQueue.offer(new Tuple(i, i + 1));
+        for (int i = 1; i <= nums.length - 1; i++) {
+            maxHeap.offer(new Tuple(i - 1, i));
         }
 
         Tuple result = null;
         for (; k > 0; --k) {
-            Tuple current = priorityQueue.poll();
+            Tuple current = maxHeap.poll();
             result = current;
-            if (current.j + 1 < nums.length) {
-                priorityQueue.offer(new Tuple(current.i, current.j + 1));
-            }
+
+            if (current.j  == nums.length - 1) continue;
+
+            maxHeap.offer(new Tuple(current.i, current.j + 1));
+
         }
 
         if (result != null) return nums[result.j] - nums[result.i];
