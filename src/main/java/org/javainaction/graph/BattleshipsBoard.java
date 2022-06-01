@@ -57,6 +57,32 @@ public class BattleshipsBoard {
         return count;
     }
 
+    private static int[][] directions = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    public static int countBattleshipsDfs(char[][] board) {
+        int count = 0;
+        boolean[][] visited = new boolean[board.length][board[0].length];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                //if board is '.' we don't have a battleship
+                if (board[i][j] == '.') continue;
+                count += traverseBoard(board, i, j, visited);
+            }
+        }
+        return count;
+    }
+    private static int traverseBoard(char[][] board, int i, int j, boolean[][] visited) {
+        if (i >= 0 && j >= 0 && i < board.length && j < board[0].length && !visited[i][j] && board[i][j] == 'X') {
+            visited[i][j] = true;
+            for (int[] dir: directions) {
+                int x = i + dir[0];
+                int y = j + dir[1];
+                traverseBoard(board, x, y, visited);
+            }
+            return 1;
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         char [][] input = {
                 {'X','.','.','X'},
@@ -66,12 +92,14 @@ public class BattleshipsBoard {
         int output = countBattleships(input);
         System.out.println(Arrays.deepToString(input));
         System.out.println("Battleships on board : " + output);
+        System.out.println("Battleships on board DFS : " + countBattleshipsDfs(input));
 
         input = new char[][]{{'.'}};
         //int expected = 0;
         output = countBattleships(input);
         System.out.println(Arrays.deepToString(input));
         System.out.println("Battleships on board : " + output);
+        System.out.println("Battleships on board DFS : " + countBattleshipsDfs(input));
 
         input = new char[][]{
                 {'X','X','X','.'},
@@ -81,6 +109,7 @@ public class BattleshipsBoard {
         output = countBattleships(input);
         System.out.println(Arrays.deepToString(input));
         System.out.println("Battleships on board : " + output);
+        System.out.println("Battleships on board DFS : " + countBattleshipsDfs(input));
 
     }
 }

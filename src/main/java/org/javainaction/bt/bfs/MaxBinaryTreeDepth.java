@@ -35,7 +35,6 @@ public class MaxBinaryTreeDepth {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
 
-        int max = Integer.MIN_VALUE;
         int maxDepth = 0;
 
         while (!queue.isEmpty()) {
@@ -44,16 +43,12 @@ public class MaxBinaryTreeDepth {
             for (int i = 0; i < levelSize; i++) {
                 TreeNode current = queue.poll();
                 if (current != null) {
-                    //for each leaf node store the max depth
-                    if (current.left == null && current.right == null) {
-                        max = Math.max(maxDepth, max);
-                    }
                     if (current.left != null) queue.offer(current.left);
                     if (current.right != null) queue.offer(current.right);
                 }
             }
         }
-        return max;
+        return maxDepth;
     }
 
     public static void main(String[] args) {
