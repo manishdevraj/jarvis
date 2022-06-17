@@ -36,14 +36,14 @@ public class CountSubsetSum {
 
         // recursive call after choosing the number at the currentIndex
         // if the number at currentIndex exceeds the sum, we shouldn't process this
-        int sum1 = 0;
+        int subsetCountInc = 0;
         if( num[currentIndex] <= sum )
-            sum1 = countSubsetsRecursive(dp, num, sum - num[currentIndex], currentIndex + 1);
+            subsetCountInc = countSubsetsRecursive(dp, num, sum - num[currentIndex], currentIndex + 1);
 
         // recursive call after excluding the number at the currentIndex
-        int sum2 = countSubsetsRecursive(dp, num, sum, currentIndex + 1);
+        int subsetCountExcl = countSubsetsRecursive(dp, num, sum, currentIndex + 1);
 
-        dp[currentIndex][sum] = sum1 + sum2;
+        dp[currentIndex][sum] = subsetCountInc + subsetCountExcl;
 
         return dp[currentIndex][sum];
     }
